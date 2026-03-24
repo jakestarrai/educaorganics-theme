@@ -23,49 +23,49 @@
         "fff38beb-3e7c-482a-b66f-96a39d3caad9": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Mission-01.jpg"
+            "image": ""
           }
         },
         "e7fd9ee2-ae82-417d-a11d-42f882230bba": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Mission-02.jpg"
+            "image": ""
           }
         },
         "dcd03e30-6901-495d-adbf-55b2c88a8cee": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Mission-03.jpg"
+            "image": ""
           }
         },
         "5bd87ea4-5412-4c3f-8e7b-6dd7425f7b7e": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Mission-04.jpg"
+            "image": ""
           }
         },
         "2a0d0f84-9066-4a32-9aec-a2aad02c246c": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Mission-05.jpg"
+            "image": ""
           }
         },
         "475d2272-33fc-4a1e-8312-726399f7ee77": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Mission-06.jpg"
+            "image": ""
           }
         },
         "5f3da4b3-0704-456b-8596-f107e8a4c1c8": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Mission-07.jpg"
+            "image": ""
           }
         },
         "156f126f-2a9e-48ab-aaa6-7399e66d1a4d": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Mission-08.jpg"
+            "image": ""
           }
         },
         "0640bc89-db02-4ffa-86ad-136bd0e9cb7b": {
@@ -90,8 +90,8 @@
       "settings": {
         "heading": "Our mission",
         "enable_lazyload": false,
-        "image_mobile": "shopify://shop_images/What_June_Means.jpg",
-        "image": "shopify://shop_images/What_June_Means.jpg",
+        "image_mobile": "",
+        "image": "",
         "layout": "md:flex-row",
         "subheading": "The benefits",
         "title": "What June means for you",
@@ -113,7 +113,7 @@
         "aa963019-c7e9-4b46-b757-14d7b1d0faed": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/our_values_1.png",
+            "image": "",
             "title": "Quality and Efficacy",
             "richtext": "<p>We prioritize quality and efficacy in every product we create.</p>",
             "bg_color": "item-yellow"
@@ -122,7 +122,7 @@
         "140a9472-b1e7-448a-a007-539462e1c4d9": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/our_values_2.png",
+            "image": "",
             "title": "Scientifically Backed Formulas",
             "richtext": "<p>Our infant formula formulas are backed by scientific research and expertise.</p>",
             "bg_color": "item-dark"
@@ -131,7 +131,7 @@
         "1665cc95-252d-45e8-b54f-da7b7c942b21": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/our_values_3.png",
+            "image": "",
             "title": "Tailored for Active Lifestyles",
             "richtext": "<p>We understand the unique needs of athletic individuals and design our products accordingly.</p>",
             "bg_color": ""
@@ -154,8 +154,8 @@
     "hero_with_parallax_markup_pTHCyW": {
       "type": "hero-with-parallax--markup",
       "settings": {
-        "image_mobile": "shopify://shop_images/hero-parallax-mobile.png",
-        "image": "shopify://shop_images/hero-parallax-desktop.png",
+        "image_mobile": "",
+        "image": "",
         "enable_lazyload": true,
         "enable_full_width": true,
         "section_padding_top": 0,

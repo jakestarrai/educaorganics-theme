@@ -71,7 +71,7 @@
     "google_integration": "https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&amp;display=swap",
     "hardcoded_body_weight": 300,
     "hardcoded_heading_weight": 500,
-    "share_image": "shopify://shop_images/Social_Sharing.png",
+    "share_image": "",
     "social_sharing_blog": true,
     "share_facebook": false,
     "share_twitter": false,
@@ -94,9 +94,9 @@
       "balance-relief-infant formula-fastmelts-test",
       "fitness-recovery-infant formula-fastmelts-test"
     ],
-    "empty_cart_drawer_image": "shopify://shop_images/cart.png",
+    "empty_cart_drawer_image": "",
     "limit": 16,
-    "favicon": "shopify://shop_images/JS_Favicon.png",
+    "favicon": "",
     "checkout_header_image": "",
     "checkout_logo_image": "",
     "checkout_logo_position": "left",
@@ -135,7 +135,7 @@
       "1589984445229": {
         "type": "home-hero",
         "settings": {
-          "image": "shopify://shop_images/Untitled_design.png",
+          "image": "",
           "alignment": "justify-start items-center",
           "alignment_text": "text-center",
           "color": "#000000",
@@ -145,14 +145,14 @@
       "1589985337197": {
         "type": "home-image-with-text",
         "settings": {
-          "image": "shopify://shop_images/working-at-night.jpg",
+          "image": "",
           "layout": ""
         }
       },
       "1589985461361": {
         "type": "home-image-with-text",
         "settings": {
-          "image": "shopify://shop_images/woman-works-on-computer-at-home.jpg",
+          "image": "",
           "layout": "flex-md-row-reverse"
         }
       },
@@ -266,28 +266,28 @@
           "1601544214239-0": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "image": "",
               "url": "shopify://collections/all"
             }
           },
           "1601544214239-1": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "image": "",
               "url": "shopify://collections/all"
             }
           },
           "1601544214239-2": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "image": "",
               "url": "shopify://collections/all"
             }
           },
           "1601544214239-3": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "image": "",
               "url": "shopify://collections/all"
             }
           }
@@ -312,35 +312,35 @@
           "1601544716980-0": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "image": "",
               "title": "Ultra-speed Connection"
             }
           },
           "1601544716980-1": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "image": "",
               "title": "Ultra-speed Connection"
             }
           },
           "1601544716980-2": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "image": "",
               "title": "Ultra-speed Connection"
             }
           },
           "1601544716980-3": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "image": "",
               "title": "Ultra-speed Connection"
             }
           },
           "1601544716980-4": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "image": "",
               "title": "Ultra-speed Connection"
             }
           }
@@ -360,7 +360,7 @@
           "1601545071577-0": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "image": "",
               "title": "Heading",
               "subtitle": "Internet",
               "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
@@ -373,7 +373,7 @@
           "1601545071577-1": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "image": "",
               "title": "Heading",
               "subtitle": "Internet",
               "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
@@ -386,7 +386,7 @@
           "1601545071577-2": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "image": "",
               "title": "Heading",
               "subtitle": "Internet",
               "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",

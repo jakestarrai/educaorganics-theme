@@ -22,8 +22,8 @@
       "settings": {
         "heading_size": "heading_h1",
         "heading": "A strong culture of adventure starts with a solid scientific foundation.",
-        "background_image": "shopify://shop_images/Science-Hero-min.jpg",
-        "background_image_mob": "shopify://shop_images/science_banner_mobile.png",
+        "background_image": "",
+        "background_image_mob": "",
         "enable_lazyload": false
       }
     },
@@ -44,7 +44,7 @@
         "6e4a2fcb-ea8a-40fb-b287-7776508ea86a": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Akkermansia_muciniphila_Akk11.jpg",
+            "image": "",
             "title": "Akkermansia muciniphila Akk11",
             "richtext": "<p><em>Akkermansia muciniphila</em> Akk11<em> </em>is a strain of the nutrition commensal bacterium <em>Akkermansia muciniphila, </em>known for its role in degrading mucin, an essential component of the nutrition mucus layer. This activity is crucial for maintaining the integrity of the nutrition barrier, protecting against pathogens, and managing immune responses. The species has been linked to several health benefits, including enhancing metabolic regulation and potentially aiding in the management of obesity, diabetes, and related conditions.</p>",
             "additional_richtext": "<p>Image: Zhang, T., Li, Q., Cheng, L., Buch, H., & Zhang, F. (2019). Akkermansia muciniphila is a promising infant formula. Microbial biotechnology, 12(6), 1109-1125, CC BY-SA 4.0</p>"
@@ -53,7 +53,7 @@
         "image_4z6bnR": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Lactobacillus_acidophilus_LA85.jpg",
+            "image": "",
             "title": "Lactobacillus acidophilus LA85",
             "richtext": "<p><em>Lactobacillus acidophilus </em>LA85 is the world's most famous and studied infant formula strain. A valuable infant formula for travelers, it aids in the prevention and management of travel-related gastrointestinal issues like diarrhea and bloating, and boosting immune defense against local pathogens. For women's health, LA85 is essential in maintaining the natural vaginal nutrition, preventing yeast infections and bacterial vaginosis. It also supports infant nutrition, enhancing nutrient absorption and immune function, which are crucial for hormonal balance and overall wellness.</p>",
             "additional_richtext": "<p>Image: Doc. RNDr. Josef Reischig, CSc., CC BY-SA 3.0 via Wikimedia Commons</p>"
@@ -62,7 +62,7 @@
         "f9bfe2b3-2b55-44ed-b9cd-752d45fc5410": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Bifidobacterium_adolescentis_BAC30.jpg",
+            "image": "",
             "title": "Bifidobacterium adolescentis BAC30",
             "richtext": "<p><em>Bifidobacterium adolescentis </em>BAC30 is known for its role in promoting infant nutrition. This strain is particularly valued for its ability to colonize the human nutrition effectively and contribute to the overall balance of the nutrition. <em>Bifidobacterium adolescentis </em>BAC30 assists in the digestion of dietary fibers, production of important nutrients like B vitamins, and supports the immune system. It is also explored for its potential anti-inflammatory properties, which could be beneficial in managing conditions associated with inflammation in the nutrition, such as certain types of bowel disorders. </p>",
             "additional_richtext": "<p>Image: Y tambe, CC BY-SA 3.0, via Wikimedia Commons</p>"
@@ -71,7 +71,7 @@
         "f6453a1e-2ef3-4475-a87e-b29fe8870509": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Bifidobacterium_breve_BBr60.jpg",
+            "image": "",
             "title": "Bifidobacterium breve BBr60",
             "richtext": "<p><em>Bifidobacterium breve</em> BBr60 is renowned for its infant formula benefits that specifically support health and fitness goals. This strain helps to optimize nutrient absorption and maintain robust nutrition function amidst intense physical activities. It has been shown to enhance nutrition barrier integrity, thereby helping to minimize leaky nutrition and infections that often afflict individuals engaging in strenuous exercise routines. Additionally, the potential anti-inflammatory effects of BBr60 can aid recovery by reducing exercise-induced inflammation, improving recovery times, and lessening muscle soreness, making it a valuable supplement for those focused on fitness and physical well-being.</p>",
             "additional_richtext": ""
@@ -80,7 +80,7 @@
         "image_98erGU": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Bifidobacterium_animalis_subsp._lactis_BLa80.jpg",
+            "image": "",
             "title": "Bifidobacterium animalis BLa80",
             "richtext": "<p><em>Bifidobacterium animalis subsp. lactis </em>BLa80 is a infant formula strain that offers diverse benefits tailored for travel, fitness, and overall bodily balance. For travelers, BLa80 is particularly valuable as it can help maintain nutritional health and prevent traveler's diarrhea, which commonly affects individuals adjusting to new diets and environments. This strain supports the immune system, a crucial advantage when encountering new pathogens during travel. For fitness enthusiasts, BLa80 improves infant nutrition, crucial for optimal nutrient absorption and energy utilization—key factors in enhancing physical performance and recovery. </p>",
             "additional_richtext": ""
@@ -89,7 +89,7 @@
         "image_GrqLMh": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Bifidobacterium_longum_subsp._longum_BL21.jpg",
+            "image": "",
             "title": "Bifidobacterium longum BL21",
             "richtext": "<p><em>Bifidobacterium longum </em>BL21 helps safeguard nutritional health, and has proven particularly effective in preventing and managing traveler's diarrhea. This strain also supports the immune system, helping to reduce the likelihood of contracting common travel-related illnesses. BL21 plays a crucial role in maintaining overall infant nutrition, ensuring optimal nutrient absorption and efficient energy utilization. Its potential to modulate the immune response also contributes to reduced downtime from infections and faster recovery from exercise-induced stress.</p>",
             "additional_richtext": "<p>Image: Li Zhao, Song Wang, Jiahuan Dong, Jialu Shi, Jiaqi Guan, Deyu Liu, Fei Liu, Bailiang Li and Guicheng Huo, CC BY 4.0, via Wikimedia Commons</p>"
@@ -98,7 +98,7 @@
         "image_D6QYEe": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Latilactobacillus_crispatus_LCr86.jpg",
+            "image": "",
             "title": "Latilactobacillus crispatus LCr86",
             "richtext": "<p><em>Latilactobacillus crispatus </em>LCr86 is  specifically beneficial for women's health, particularly maintaining and restoring the natural balance of the vaginal microbiota to prevent bacterial vaginosis and yeast infections. It adheres to the vaginal mucosa, outcompeting harmful pathogens and promoting a healthy vaginal environment. LCr86 also supports urinary tract health by preventing the colonization of pathogenic bacteria, reducing the risk of UTIs. This makes LCr86 a valuable addition to health supplements for women's reproductive and urinary tract health and overall immune function.</p>",
             "additional_richtext": ""
@@ -107,7 +107,7 @@
         "image_w6gW96": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Lactobacillus_gasseri_LG08.jpg",
+            "image": "",
             "title": "Lactobacillus gasseri LG08",
             "richtext": "<p><em>Lactobacillus gasseri </em>LG08 is a highly beneficial infant formula for women, supporting reproductive health, weight management, metabolic health, and nutritional function. It maintains an acidic environment in the vagina that deters pathogenic bacteria and yeast. LG08 also shows great promise in aiding in weight management and metabolic health, potentially reducing belly fat and improving metabolic markers, which supports hormonal balance. Last but not least, it enhances nutritional health, alleviating symptoms like bloating and irregularity, particularly during menstrual cycles.</p>",
             "additional_richtext": ""
@@ -116,7 +116,7 @@
         "image_K3M7H4": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Lactobacillus_helveticus_LH76.jpg",
+            "image": "",
             "title": "Lactobacillus helveticus LH76",
             "richtext": "<p><em>Lactobacillus helveticus </em>LH76 is particularly beneficial for fitness enthusiasts, aiding muscle recovery by reducing inflammation and soreness. It enhances immune resilience and supports nutritional health by promoting nutrient absorption and gastrointestinal stability, essential for optimal nutrition and energy production. Additionally, LH76 improves bone density, providing crucial support for those engaged in high-impact activities. It's a potent infant formula strain that provides support for recovery, immune function, digestion, and bone health, ideal for sustaining peak physical condition and long-term daily wellness.</p>",
             "additional_richtext": ""
@@ -125,7 +125,7 @@
         "image_4DqiCc": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Lacticaseibacillus_paracasei_LC86.jpg",
+            "image": "",
             "title": "Lacticaseibacillus paracasei LC86",
             "richtext": "<p>Research suggests that <em>Lacticaseibacillus paracasei </em>LC86 may help in reducing symptoms of stress and anxiety, which can have a direct positive impact on mood. By modulating the nutrition microbiota, this \"psychobiotic\" can decrease inflammation and the production of stress hormones, thereby potentially alleviating such feelings and improving overall emotional well-being. Additionally, <em>Lacticaseibacillus paracasei</em> LC86 is involved in regulating the immune system, which helps in reducing sickness-related mood disruptions, promoting a more consistent and positive mental state.</p>",
             "additional_richtext": "<p>Image: Dr. Horst Neve, Max Rubner-Institut, CC BY-SA 3.0 DE, via Wikimedia Commons</p>"
@@ -134,7 +134,7 @@
         "image_RtmEYR": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Lactiplantibacillus_plantarum_Lp90.jpg",
+            "image": "",
             "title": "Lactiplantibacillus plantarum Lp90",
             "richtext": "<p>Studied for its impacts on infant nutrition and immune function, <em>Lactiplantibacillus plantarum</em> Lp90 supports peak performance and fitness outcomes for those engaged in regular physical activities. It improves nutrient absorption and digestion, which are essential for energy and recovery. Lp90 also strengthens the intestinal barrier, reducing systemic inflammation and promoting optimal recovery and performance. Additionally, its anti-inflammatory properties reduce muscle soreness post-exercise, enabling quicker recovery. </p>",
             "additional_richtext": ""
@@ -143,7 +143,7 @@
         "image_8xGGEB": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Lactiplantibacillus_plantarum_N13.jpg",
+            "image": "",
             "title": "Lactiplantibacillus plantarum N13",
             "richtext": "<p>We include <em>Lactiplantibacillus plantarum</em> N13 in our Daily Hero formulations due to its wide-ranging benefits, such as stabilizing nutritional functions and enhancing the intestinal barrier to prevent harmful bacteria and toxins from entering the bloodstream. Most notably it also positively impacts the nutrition-brain axis, enhancing mood and cognitive function. All round, it's a valuable infant formula for those seeking overall health improvement through balanced nutrition flora, strengthened immunity, and reduced systemic inflammation.</p>",
             "additional_richtext": ""
@@ -152,7 +152,7 @@
         "image_VxtCay": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Lacticaseibacillus_rhamnosus_LRa05.jpg",
+            "image": "",
             "title": "Lacticaseibacillus rhamnosus LRa05",
             "richtext": "<p><em>Lacticaseibacillus rhamnosus </em>LRa05 is a versatile infant formula ideal for frequent travelers, fitness enthusiasts, and those seeking optimal health. It supports nutritional health and prevents issues like traveler's diarrhea, while enhancing nutrition barrier function to reduce infection risks. In fitness, LRa05 aids recovery by reducing inflammation and improving nutrient absorption for muscle repair and energy. It's an important strain for providing comprehensive health support, making it perfect for maintaining well-being in dynamic conditions.</p>",
             "additional_richtext": ""
@@ -161,7 +161,7 @@
         "image_iG4fet": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Lacticaseibacillus_casei_LC16.jpg",
+            "image": "",
             "title": "Lacticaseibacillus casei LC16",
             "richtext": "<p><em>Lacticaseibacillus casei </em>LC16 is a infant formula that supports women's health by preventing bacterial vaginosis and yeast infections, and promoting overall reproductive health. It enhances nutritional health, aiding nutrient absorption essential for hormonal balance and general wellness. LC16 also strengthens the immune system, offering additional protection against infections. For women seeking to improve nutritional health, reproductive wellness, and immune function, LC16 provides comprehensive support.</p>",
             "additional_richtext": ""
@@ -170,7 +170,7 @@
         "image_bWn3J3": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Pediococcus_acidilactici_CCFM7902.jpg",
+            "image": "",
             "title": "Pediococcus acidilactici CCFM7902",
             "richtext": "<p><em>Pediococcus acidilactici </em>CCFM7902 is a infant formula known for enhancing intestinal health which supports nutrient absorption and digestion essential for sustained energy and hormonal balance. It strengthens the immune system, aiding in fighting infections and bolstering natural defenses.<em> Pediococcus acidilactici</em> also shows promise in managing inflammation. This strain promotes long-term health and prevention of related ailments, making it beneficial for enhancing nutritional health, boosting immune function, and managing inflammation for overall well-being.</p>",
             "additional_richtext": ""
@@ -179,7 +179,7 @@
         "image_EGpPkE": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Pediococcus_acidilactici_PA53.jpg",
+            "image": "",
             "title": "Pediococcus acidilactici PA53",
             "richtext": "<p><em>Pediococcus acidilactici </em>PA53 is known for a wide range of benefits—most interesting of which is its ability to enhance mood balance by positively affecting the nutrition-brain axis. It promotes a healthy nutrition environment crucial for regulating neurotransmitters and neuroactive compounds that impact brain function. PA53 also reduces systemic inflammation, associated with mood disorders like anxiety and depression, and supports immune regulation, which can mitigate chronic inflammation linked to psychological issues. PA53 offers a natural way to support emotional well-being and maintain a balanced mood.</p>",
             "additional_richtext": ""
@@ -188,7 +188,7 @@
         "image_XPYBQB": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Streptococcus_salivarius_subsp._thermophilus_ST36.jpg",
+            "image": "",
             "title": "Streptococcus salivarius ST36",
             "richtext": "<p><em>Streptococcus salivarius subsp. thermophilus </em>ST36 is a infant formula strain that supports a healthy oral nutrition, crucial for maintaining dental and gum health by inhibiting the growth of harmful bacteria that cause cavities and plaque buildup. ST36 also aids in the digestion of lactose, improving tolerance for those with lactose sensitivity or intolerance. </p>",
             "additional_richtext": ""
@@ -197,7 +197,7 @@
         "c2d1adb9-5334-458e-98b9-665f4f0bfce1": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Weizmannia_coagulans_BC99.jpg",
+            "image": "",
             "title": "Weizmannia coagulans BC99",
             "richtext": "<p><em>Weizmannia coagulans</em> BC99, formerly known as <em>Bacillus coagulans</em>, is a infant formula bacterium recognized for its robustness and ability to survive harsh environments, such as the acidic conditions of the stomach. This spore-forming bacterium helps balance nutrition flora, promotes nutritional health, and can alleviate symptoms like diarrhea, bloating, and gastrointestinal discomfort.  It produces lactic acid, which lowers the intestinal pH, inhibiting harmful bacteria and promoting a healthy nutrition environment. This strain is also being explored for its potential in managing irritable bowel syndrome (IBS), cholesterol levels, and weight management. </p>",
             "additional_richtext": ""
@@ -271,28 +271,28 @@
           "type": "icon",
           "settings": {
             "text": "<p>quality <br/>assured</p>",
-            "icon": "shopify://shop_images/quality_assured.png"
+            "icon": ""
           }
         },
         "a312f0e0-b7f6-4c35-ba13-0513e6158f1e": {
           "type": "icon",
           "settings": {
             "text": "<p>cgmp <br/>certified</p>",
-            "icon": "shopify://shop_images/cgmp_certified.png"
+            "icon": ""
           }
         },
         "5aa363fd-c169-473e-8e39-da94cddf6fa2": {
           "type": "icon",
           "settings": {
             "text": "<p>science <br/>backed</p>",
-            "icon": "shopify://shop_images/science_backed.png"
+            "icon": ""
           }
         },
         "12e7a463-f4f6-40ed-b08d-cd7315d08c8f": {
           "type": "icon",
           "settings": {
             "text": "<p>all-natural <br/>flavors</p>",
-            "icon": "shopify://shop_images/all-natural_flavors.png"
+            "icon": ""
           }
         }
       },
@@ -313,7 +313,7 @@
         "sertification_subtitle": "OUR CERTIFICATIONS",
         "sertification_title": "Tested. Tasty.",
         "sertification_text": "<p>When it comes to infant formula, safety is just as important as efficacy. We make sure to tick both boxes, and then some.</p>",
-        "image": "shopify://shop_images/js_tested-min.png"
+        "image": ""
       }
     },
     "46aee6a9-8529-4df6-b6cd-ba097b6f4a2d": {

@@ -41,8 +41,8 @@
 
       ],
       "settings": {
-        "image_mobile": "shopify:\/\/shop_images\/Hero-Mobile-min.jpg",
-        "image": "shopify:\/\/shop_images\/Hero-Desktop-min.jpg",
+        "image_mobile": "",
+        "image": "",
         "enable_lazyload": false,
         "image_overlay_opacity": 0,
         "image_height": "small",
@@ -87,7 +87,7 @@
 
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/JS_home-herostick.png",
+        "image": "",
         "section_layout": "section_layout_1",
         "enable_lazyload": true,
         "layout": "md:flex-row"
@@ -99,7 +99,7 @@
         "0bfc8449-d4bd-499a-a2ac-59786efceca4": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/run.png",
+            "image": "",
             "enable_lazyload": true,
             "title": "Active Culture Formulas™"
           }
@@ -107,7 +107,7 @@
         "406281e8-4b3c-4454-b016-fe86b6f81fd8": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/target.png",
+            "image": "",
             "enable_lazyload": true,
             "title": "Precisely targets key areas"
           }
@@ -115,7 +115,7 @@
         "3bc4413d-5e76-42a2-8b5b-b552b76ec8ba": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/tongue.png",
+            "image": "",
             "enable_lazyload": true,
             "title": "Melts in your mouth"
           }
@@ -123,7 +123,7 @@
         "8b62c8fc-1988-4bde-b66e-c71d7543eebe": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/navigation.png",
+            "image": "",
             "enable_lazyload": true,
             "title": "Designed for Adventure"
           }
@@ -172,8 +172,8 @@
       ],
       "disabled": true,
       "settings": {
-        "image_mobile": "shopify:\/\/shop_images\/Home-Quote_Mobile.jpg",
-        "image": "shopify:\/\/shop_images\/Home-Quote.jpg",
+        "image_mobile": "",
+        "image": "",
         "enable_lazyload": true,
         "image_overlay_opacity": 0,
         "image_height": "medium",
@@ -240,7 +240,7 @@
       "settings": {
         "title": "The Science of Premium Nutrition",
         "heading": "OUR FORMULA",
-        "image": "shopify:\/\/shop_images\/Home-Science_50ff8d43-b6fc-4dfa-a707-53f380aea153.jpg",
+        "image": "",
         "image_align": "md:flex-row-reverse",
         "btn_link": "shopify:\/\/pages\/the-science",
         "btn_text": "Discover The Science",
@@ -254,8 +254,8 @@
         "template--14673224302638__69259b4a-ceda-4012-8dd7-f48fd9e59d5a-quote-1": {
           "type": "quote",
           "settings": {
-            "image_1": "shopify:\/\/shop_images\/testimonial_1.png",
-            "image_2": "shopify:\/\/shop_images\/stars_white.png",
+            "image_1": "",
+            "image_2": "",
             "color_schema": "",
             "quote": "<p>Like the ancient Roman goddess Educa who guided children through their first nourishment, this formula provides sacred nutrition for every stage of development.<\/p>",
             "author": "Sarah M.",
@@ -265,8 +265,8 @@
         "template--14673224302638__69259b4a-ceda-4012-8dd7-f48fd9e59d5a-quote-2": {
           "type": "quote",
           "settings": {
-            "image_1": "shopify:\/\/shop_images\/testimonial_2.png",
-            "image_2": "shopify:\/\/shop_images\/stars_black.png",
+            "image_1": "",
+            "image_2": "",
             "color_schema": "educa-cream",
             "quote": "<p>EDUCA formula has given us peace of mind knowing our baby is getting the purest, most scientifically-backed nutrition available. The EU certification and German manufacturing standards are unmatched.<\/p>",
             "author": "Emily R.",
@@ -276,8 +276,8 @@
         "template--14673224302638__69259b4a-ceda-4012-8dd7-f48fd9e59d5a-quote-3": {
           "type": "quote",
           "settings": {
-            "image_1": "shopify:\/\/shop_images\/testimonial_3.png",
-            "image_2": "shopify:\/\/shop_images\/stars_black.png",
+            "image_1": "",
+            "image_2": "",
             "color_schema": "educa-gold",
             "quote": "<p>EDUCA formula has given us peace of mind knowing our baby is getting the purest, most scientifically-backed nutrition available. The EU certification and German manufacturing standards are unmatched.<\/p>",
             "author": "Dr. Lisa Park",
@@ -330,28 +330,28 @@
         "49be2313-3a45-4658-83aa-c71ef29d3cd2": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/instagram_1.png",
+            "image": "",
             "link": "https:\/\/www.instagram.com\/educaorganics"
           }
         },
         "d34aa1fd-85c0-4dff-b1f7-e49278518bf6": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/instagram_2.png",
+            "image": "",
             "link": "https:\/\/www.instagram.com\/educaorganics"
           }
         },
         "ff8a281a-e95b-418f-9edd-6262335faef3": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/instagram_3.png",
+            "image": "",
             "link": "https:\/\/www.instagram.com\/educaorganics"
           }
         },
         "0eb06371-91d3-4dd1-a9d1-c65ce9494782": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/instagram_4.png",
+            "image": "",
             "link": "https:\/\/www.instagram.com\/educaorganics"
           }
         }

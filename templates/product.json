@@ -209,7 +209,7 @@
         "d91047c4-9fa7-4050-a2f9-0876c593a5e7": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/01_Tear_it.svg",
+            "image": "",
             "subtitle": "Step 1",
             "title": "Tear it.",
             "richtext": "<p>Rip open an individual packet (make sure to dispose of it responsibly!)<\/p>"
@@ -218,7 +218,7 @@
         "5fc79fc1-b6ba-400f-a338-223d09f49b82": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/02_Pour_It.svg",
+            "image": "",
             "subtitle": "Step 2",
             "title": "Pour it.",
             "richtext": "<p>Tip the powder directly into your mouth – no water required. The good bacteria will get to work straight away.<\/p>"
@@ -227,7 +227,7 @@
         "40573e81-a712-4ea2-88cf-24f15ebca238": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/03_Live_it.svg",
+            "image": "",
             "subtitle": "Step 3",
             "title": "Live it.",
             "richtext": "<p>The day’s yours for the taking. What’s on the cards?<\/p>"
@@ -266,7 +266,7 @@
       ],
       "settings": {
         "title": "We’re  made better.",
-        "image": "shopify:\/\/shop_images\/made_better.jpg",
+        "image": "",
         "enable_lazyload": true,
         "layout": ""
       }
