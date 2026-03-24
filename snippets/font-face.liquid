@@ -1,0 +1,51 @@
+{% style %}
+  {%- if settings.hardcoded_font_swap or settings.custom_font_swap -%}
+    {%- capture font_swap -%}font-display: swap;{%- endcapture -%}
+  {%- endif -%}
+
+  {% if settings.font_library == 'custom' %}
+    @font-face {
+      font-family: '{{ settings.custom_font_heading }}';
+      src: url({{ settings.custom_font_heading | append: '.woff2' | asset_url }}) format('woff2'),
+          url({{ settings.custom_font_heading | append: '.woff' | asset_url }}) format('woff'),
+          url({{ settings.custom_font_heading | append: '.otf' | asset_url }}) format('opentype');
+      font-weight: {{ settings.custom_heading_weight }};
+      font-style: {{ settings.custom_heading_style }};
+      {{ font_swap }}
+    }
+    @font-face {
+      font-family: '{{ settings.custom_font_body }}';
+      src: url({{ settings.custom_font_body | append: '.woff2' | asset_url }}) format('woff2'),
+           url({{ settings.custom_font_body | append: '.woff' | asset_url }}) format('woff'),
+           url({{ settings.custom_font_body | append: '.otf' | asset_url }}) format('opentype');
+      font-weight: {{ settings.custom_body_weight }};
+      font-style: {{ settings.custom_body_style }};
+      {{ font_swap }}
+    }
+  {% endif %}
+
+  {% if settings.font_library == 'hardcoded' %}
+    @font-face {
+      font-family: 'Halyard Display';
+      src: url({{ 'Halyard_Display_Book.otf' | asset_url }}) format('opentype');
+      font-weight: 300;
+      font-style: normal;
+      {{ font_swap }}
+    }
+    @font-face {
+      font-family: 'Halyard Display';
+      src: url({{ 'Halyard_Display_Medium.otf' | asset_url }}) format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      {{ font_swap }}
+    }
+    @font-face {
+      font-family: 'Soulcraft';
+      src: url({{ 'Soulcraft-Regular.woff2' | asset_url }}) format('woff2'),
+           url({{ 'Soulcraft-Regular.woff' | asset_url }}) format('woff');
+      font-weight: 400;
+      font-style: normal;
+      {{ font_swap }}
+    }
+  {% endif %}
+{% endstyle %}

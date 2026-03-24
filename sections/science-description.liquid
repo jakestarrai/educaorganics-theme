@@ -1,0 +1,188 @@
+<section class="overflow-hidden py-10">
+  <div class="container max-w-screen-3xl xl:px-30">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'header' %}
+          <div
+            class="pb-4 md:flex md:gap-10 md:pb-10 xl:gap-20"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.title != blank %}
+              <div class="
+                  font-heading
+                  text-h3
+                  md:w-2/5
+                  md:text-h6
+                  md:uppercase
+                ">
+                {{ block.settings.title }}
+              </div>
+            {% endif %}
+            {% if block.settings.subtitle != blank %}
+              <div class="
+                  hidden
+                  md:block
+                  md:w-3/5
+                  md:font-heading
+                  md:text-h6
+                  md:uppercase
+                ">
+                {{ block.settings.subtitle }}
+              </div>
+            {% endif %}
+          </div>
+      {% endcase %}
+    {% endfor %}
+    <div
+      {% if section.settings.section_layout == 'section_layout_2' %}
+        class="accordion accordion--description js-description-accordion"
+      {% endif %}
+    >
+      {% for block in section.blocks %}
+        {% if block.type == 'header' %}
+          {% assign block_subtitle = block.settings.subtitle %}
+        {% endif %}
+        {% case block.type %}
+          {% when 'richtext' %}
+            {% if block.settings.left_side_content != blank or block.settings.right_side_content != blank %}
+              <div
+                class="
+                  {% if section.settings.section_layout == 'section_layout_2' %} ac{% endif %}
+                  flex
+                  flex-col
+                  !border-t
+                  border-base-body
+                  py-6
+                  max-md:first:!border-0
+                  md:flex-row
+                  md:gap-10
+                  md:py-10
+                  xl:gap-20
+                "
+                {{ block.shopify_attributes }}
+              >
+                <div class="
+                    {% if section.settings.section_layout == 'section_layout_2' %} accordion__opener ac-trigger{% endif %}
+                    !py-0
+                    md:flex
+                    md:w-2/5
+                    md:!cursor-auto
+                    md:gap-10
+                    xl:gap-20
+                  ">
+                  <div class="hidden md:block md:shrink-0 md:pt-1">
+                    {%- render 'icon', icon: 'checkmark-circle', class: 'h-9 w-9' -%}
+                  </div>
+                  {% if block.settings.left_side_content != blank %}
+                    <div class="font-medium">
+                      {{ block.settings.left_side_content }}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="{% if section.settings.section_layout == 'section_layout_2' %}accordion__slide ac-panel {% endif %}md:w-3/5">
+                  <div class="
+                      flex
+                      items-start
+                      gap-6
+                      overflow-hidden
+                      pt-6
+                      md:gap-10
+                      md:pt-0
+                      xl:gap-20
+                    ">
+                    <div class="
+                        flex
+                        max-w-[27%]
+                        shrink-0
+                        items-center
+                        gap-2
+                        md:hidden
+                      ">
+                      {% if block.settings.right_side_content != blank %}
+                        <div class="h-6 w-6 shrink-0">
+                          {%- render 'icon', icon: 'checkmark-circle', class: 'w-full h-full' -%}
+                        </div>
+                      {% endif %}
+                      {% if block_subtitle != blank %}
+                        <div class="text-caps-xs uppercase">{{ block_subtitle }}</div>
+                      {% endif %}
+                    </div>
+                    {% if block.settings.right_side_content != blank %}
+                      <div class="prose max-lg:text-body-xxs">
+                        {{ block.settings.right_side_content }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science description",
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_layout",
+      "label": "Section layout",
+      "default": "section_layout_1",
+      "options": [
+        {
+          "value": "section_layout_1",
+          "label": "Without accordion on mobile"
+        },
+        {
+          "value": "section_layout_2",
+          "label": "With accordion on mobile"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Header",
+      "type": "header",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        }
+      ]
+    },
+    {
+      "name": "Content",
+      "type": "richtext",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "left_side_content",
+          "label": "Left side of content"
+        },
+        {
+          "type": "richtext",
+          "id": "right_side_content",
+          "label": "Right  side of content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science description",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

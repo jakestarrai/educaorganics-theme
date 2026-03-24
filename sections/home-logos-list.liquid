@@ -1,0 +1,124 @@
+<section class="py-10">
+  <div class="container max-w-screen-3xl overflow-hidden">
+    <h2 class="mb-4 text-center font-heading text-h2 lg:text-h2-desktop">{{ section.settings.title }}</h2>
+    <div class="
+        -mx-4
+        -mb-7
+        flex
+        flex-wrap
+        items-center
+        justify-center
+      ">
+      {% for block in section.blocks %}
+        {% capture logo_image %}
+          {% if block.settings.image != blank %}
+            {% liquid
+              if block.settings.enable_lazyload
+                assign enable_lazyload = true
+                assign fetchpriority_value = 'low'
+              else
+                assign enable_lazyload = false
+                assign fetchpriority_value = 'high'
+              endif
+            %}
+            {%
+              render 'image',
+              class: 'absolute left-1/2 top-1/2 max-h-full w-auto max-w-full -translate-x-1/2 -translate-y-1/2',
+              src: block.settings.image,
+              m: '150x', d: '300x',
+              alt: block.settings.image.alt,
+              lazyload: enable_lazyload,
+              fetchpriority: fetchpriority_value
+            %}
+          {% else %}
+            {% liquid
+              assign modulo = forloop.index0 | modulo: 4 | plus: 1
+
+              assign placeholder = 'product-apparel-' | append: modulo
+            %}
+            {% echo placeholder | placeholder_svg_tag: "placeholder-svg" %}
+          {% endif %}
+        {% endcapture %}
+        <div
+          class="mb-7 w-1/2 px-4 md:w-4/12 lg:w-3/12"
+          {{ block.shopify_attributes }}
+        >
+          <div class="
+              relative
+              flex
+              aspect-[4/3]
+              items-center
+              justify-center
+              xl:aspect-[4/2]
+            ">
+            {% if block.settings.url %}
+              <a href="{{ block.settings.url }}">
+                {{ logo_image }}
+              </a>
+            {% else %}
+              {{ logo_image }}
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Logo list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Logo list"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_lazyload",
+          "label": "Enable lazyload",
+          "default": true
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo list",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

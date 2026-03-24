@@ -1,0 +1,126 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-template",
+      "disabled": true,
+      "settings": {
+        "show_title": true,
+        "show_breadcrumbs": true
+      }
+    },
+    "b427602e-f9c2-4817-b0b0-38d95271be88": {
+      "type": "product-collapsible-section",
+      "blocks": {
+        "template--14682154336302__b427602e-f9c2-4817-b0b0-38d95271be88-text-1": {
+          "type": "text",
+          "settings": {
+            "heading": "Are there any side effects?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "1b8a3b69-5ba6-4ae1-9af0-95bc7c6b635d": {
+          "type": "text",
+          "settings": {
+            "heading": "Are infant formula safe to take?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "2d163421-60b0-46c8-946f-8abf50a9703c": {
+          "type": "text",
+          "settings": {
+            "heading": "How is EDUCA Organics different?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "cce5342d-626a-45a2-ba7f-f4e287337c03": {
+          "type": "text",
+          "settings": {
+            "heading": "Are these only for athletes?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "6948a83b-2980-4d35-a888-3de53e288370": {
+          "type": "text",
+          "settings": {
+            "heading": "How should I take infant formula?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "773189c3-450c-4449-a826-f7ee1c3acd7c": {
+          "type": "text",
+          "settings": {
+            "heading": "What are the benefits?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "b6a20788-5c7e-4977-b4ac-a58ce3b38bca": {
+          "type": "text",
+          "settings": {
+            "heading": "How long before I see results?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "43874809-542b-4445-a992-482cc9c9ea0f": {
+          "type": "text",
+          "settings": {
+            "heading": "How do I cancel my subscription?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "f53c1a22-7714-4009-bc9a-ceba95beadb5": {
+          "type": "text",
+          "settings": {
+            "heading": "What payment methods do you take?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "ee25ac66-faae-4e41-a2ff-50d314cfba09": {
+          "type": "text",
+          "settings": {
+            "heading": "I need to edit my order, how do I change it?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "3e074bd7-aaf0-4d1d-9066-abd8e3a01532": {
+          "type": "text",
+          "settings": {
+            "heading": "What’s your return policy?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        },
+        "b76b52d1-b07b-4306-914b-c4c45f344d4f": {
+          "type": "text",
+          "settings": {
+            "heading": "What’s your return policy?",
+            "richtext": "<p>Our infant formula are specially formulated to support digestion, enhance nutrient absorption, and boost immune function for active people—just like you.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14682154336302__b427602e-f9c2-4817-b0b0-38d95271be88-text-1",
+        "1b8a3b69-5ba6-4ae1-9af0-95bc7c6b635d",
+        "2d163421-60b0-46c8-946f-8abf50a9703c",
+        "cce5342d-626a-45a2-ba7f-f4e287337c03",
+        "6948a83b-2980-4d35-a888-3de53e288370",
+        "773189c3-450c-4449-a826-f7ee1c3acd7c",
+        "b6a20788-5c7e-4977-b4ac-a58ce3b38bca",
+        "43874809-542b-4445-a992-482cc9c9ea0f",
+        "f53c1a22-7714-4009-bc9a-ceba95beadb5",
+        "ee25ac66-faae-4e41-a2ff-50d314cfba09",
+        "3e074bd7-aaf0-4d1d-9066-abd8e3a01532",
+        "b76b52d1-b07b-4306-914b-c4c45f344d4f"
+      ],
+      "custom_css": [
+        ".container {padding-bottom: 2rem;}"
+      ],
+      "settings": {
+        "title": "frequently\u2028asked",
+        "enable_padding": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "b427602e-f9c2-4817-b0b0-38d95271be88"
+  ]
+}

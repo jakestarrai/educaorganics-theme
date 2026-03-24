@@ -1,0 +1,63 @@
+{% liquid
+  if section.settings.blog_hero_layout == 'image'
+    assign blog_hero_image = true
+  endif
+%}
+
+<div class="
+    blog-hero
+    relative
+    overflow-hidden
+    bg-base-background
+    after:pointer-events-none
+    after:absolute
+    after:inset-0
+    after:z-2
+    after:content-['']
+  ">
+  <div class="container relative z-3 max-w-screen-3xl">
+    <div class="
+        flex
+        min-h-[250px]
+        items-center
+        py-18
+        text-center
+        md:min-h-[280px]
+        md:py-22
+        lg:min-h-[326px]
+        lg:py-29
+        {% if blog_hero_image %}
+        text-customizable-base
+        {% endif %}
+      ">
+      <div class="prose w-full">
+        <h1 class="font-heading text-h2 lg:text-h2-desktop">
+          {{ blog.title }}
+        </h1>
+        {% if section.settings.blog_hero_display_description and section.settings.blog_hero_description != blank %}
+          {{ section.settings.blog_hero_description }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if blog_hero_image %}
+    <div class="absolute left-0 top-0 z-1 h-full w-full">
+      {% if section.settings.blog_hero_image != blank %}
+        {%
+          render 'image',
+          src: section.settings.blog_hero_image,
+          m: '375x344',
+          src_d: section.settings.blog_hero_image,
+          d: '1440x335',
+          class: 'w-full h-full object-cover',
+          crop: 'center',
+          alt: section.settings.blog_hero_image.alt,
+          lazyload: enable_lazyload,
+          fetchpriority: fetchpriority_value
+        %}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

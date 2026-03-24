@@ -1,0 +1,127 @@
+<div
+  class="
+    pickup-availability-drawer
+    pointer-events-none
+    fixed
+    right-0
+    top-0
+    z-1003
+    box-border
+    flex
+    h-full
+    w-full
+    flex-col
+    overflow-y-auto
+    overflow-x-hidden
+    overscroll-contain
+    border-l
+    border-base-border
+    bg-base-body-background
+    p-8
+    opacity-0
+    duration-300
+    ease-in-out
+    group-[.pickup-availability-active]/html:pointer-events-auto
+    group-[.pickup-availability-active]/html:opacity-100
+    motion-safe:transition-all
+    md:w-[400px]
+    md:translate-x-full
+    md:group-[.pickup-availability-active]/html:translate-x-0
+  "
+  tabindex="-1"
+  role="dialog"
+  aria-label="Pickup availability drawer"
+>
+  {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+  <div>
+    <div class="mb-5 flex items-start justify-between">
+      <div class="mt-2 font-heading text-h6 md:mt-1">
+        {{ product.title }}
+      </div>
+      <button
+        type="button"
+        class="
+          btn-closer
+          page-wrapper__opener
+          relative
+          ml-1
+          flex
+          min-h-[44px]
+          min-w-[44px]
+          shrink-0
+          items-center
+          before:absolute
+          before:left-1/2
+          before:top-1/2
+          before:h-[2px]
+          before:w-[57%]
+          before:-translate-x-1/2
+          before:-translate-y-1/2
+          before:-rotate-45
+          before:bg-current
+          before:content-['']
+          after:absolute
+          after:left-1/2
+          after:top-1/2
+          after:h-[2px]
+          after:w-[57%]
+          after:-translate-x-1/2
+          after:-translate-y-1/2
+          after:rotate-45
+          after:bg-current
+          after:content-['']
+        "
+        aria-label="Close pickup availability"
+      ></button>
+    </div>
+    {% for value in product.options_with_values %}
+      <div class="mb-5 text-body-small capitalize text-base-secondary">
+        {{ value.name }} : {{ value.selected_value }}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="
+      shrink-1
+      w-full
+      grow
+      basis-auto
+      overflow-y-auto
+      overflow-x-hidden
+    ">
+    <ul class="pr-3">
+      {%- for availability in pick_up_availabilities -%}
+        <li class="border-b border-base-border py-8 first:border-t">
+          <div class="mb-3 text-title last:mb-0 lg:text-title-desktop">{{ availability.location.name }}</div>
+          <div class="mb-3 flex last:mb-0">
+            {%- if availability.available -%}
+              <div class="mr-2 shrink-0">
+                {%- render 'icon', icon: 'tick', class: 'w-5 mt-[2px] text-messages-success' -%}
+              </div>
+              <div>
+                {{ 'products.product.pick_up_available' | t }}
+                {{ availability.pick_up_time | downcase }}
+              </div>
+            {%- else -%}
+              <div class="mr-2 shrink-0">
+                {%- render 'icon', icon: 'unavailable', class: 'w-5 mt-[2px] text-message-error' -%}
+              </div>
+              <div>
+                {{ 'products.product.pick_up_currently_unavailable' | t }}
+              </div>
+            {%- endif -%}
+          </div>
+          {%- assign address = availability.location.address -%}
+          <address class="prose mb-3 not-italic last:mb-0">
+            {{ address | format_address }}
+          </address>
+          {%- if address.phone.size > 0 -%}
+            <p class="mb-3 last:mb-0">
+              <a href="{{ address.phone | prepend: 'tel:' }}">{{ address.phone }}</a>
+              <br>
+            </p>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>

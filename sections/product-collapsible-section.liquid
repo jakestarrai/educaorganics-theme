@@ -1,0 +1,117 @@
+<section class="overflow-hidden {% if section.settings.enable_padding %} py-10 {% endif %}">
+  <div class="container max-w-screen-3xl max-lg:px-3">
+    {%- if section.blocks.size > 0 -%}
+      <div class="relative rounded-2xl bg-base-accent px-6 py-9 xl:p-20">
+        {% if section.settings.title != blank %}
+          <h2 class="
+              mb-4
+              break-words
+              font-custom-heading
+              text-d2
+              uppercase
+              last:mb-0
+              md:mb-9
+              lg:text-[180px]
+              xl:mb-20
+              2xl:!text-[224px]
+              2xl:text-d1-desktop
+            ">
+            {{ section.settings.title }}
+          </h2>
+        {% endif %}
+
+        <ul class="accordion js-accordion">
+          {% for block in section.blocks %}
+            <li
+              class="ac"
+              {{ block.shopify_attributes }}
+            >
+              {% if block.settings.heading != blank %}
+                <div class="font-heading text-h4 lg:text-h4-desktop">
+                  <button
+                    type="button"
+                    class="accordion__opener ac-trigger w-full"
+                  >
+                    {{ block.settings.heading }}
+                  </button>
+                </div>
+              {% endif %}
+              {% if block.settings.richtext != blank %}
+                <div class="accordion__slide ac-panel">
+                  <div class="prose overflow-hidden pt-4 text-body-xs lg:pt-6 lg:text-body-small">
+                    {{ block.settings.richtext }}
+                  </div>
+                </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+
+        {%- comment -%}Corner element{%- endcomment -%}
+        <div class="pointer-events-none absolute right-0 top-0 z-4">
+          <div class="-ml-[1px] -mt-[1px] xl:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" width="126" height="128" viewBox="0 0 126 128" fill="none">
+              <path d="M126.134 -0.000222087L126.134 128L126.134 97.6649C126.134 87.732 122.03 78.2404 114.793 71.4366L49.204 9.77141C42.5275 3.49441 33.7086 -0.000238247 24.5448 -0.000239849L0 -0.000244141L126.134 -0.000222087Z" fill="white"/>
+            </svg>
+          </div>
+          <div class="hidden xl:-ml-[1px] xl:-mt-[1px] xl:block">
+            <svg xmlns="http://www.w3.org/2000/svg" width="338" height="343" viewBox="0 0 338 343" fill="none">
+              <path d="M338 0V343V240.755C338 227.511 332.528 214.855 322.879 205.784L117.858 13.0289C108.956 4.65954 97.1975 0 84.9791 0H0L338 0Z" fill="white"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product collapsible",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_padding",
+      "label": "Enable section paddings",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Collapsible row heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Collapsible row heading",
+          "label": "Row title"
+        },
+        {
+          "type": "richtext",
+          "id": "richtext",
+          "default": "<p>Text</p>",
+          "label": "Row content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product collapsible",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,388 @@
+<link
+  rel="stylesheet"
+  href="{{ 'splide-gallery.css' | asset_url }}"
+  media="all"
+  {% if section.settings.enable_lazyload %}
+    fetchpriority="low"
+  {% else %}
+    fetchpriority="high"
+  {% endif %}
+>
+
+{% if section.settings.enable_lazyload == false %}
+  <link
+    rel="preload"
+    href="{{ section.settings.background_image | img_url: 'master' }}"
+    as="image"
+    fetchpriority="high"
+  >
+{% endif %}
+
+<section
+  id="our-mission-{{ section.id }}"
+  data-section-type="our-mission"
+  data-section-id="{{ section.id }}"
+>
+  <div class="container max-w-screen-3xl max-lg:px-3">
+    <div class="
+        section-frame
+        relative
+        rounded-2xl
+        bg-june-dark
+        pb-6
+        pt-9
+        lg:pb-0
+        lg:pt-10
+      ">
+      {% if section.settings.heading != blank %}
+        <div class="
+            mb-10
+            px-6
+            text-left
+            last:mb-0
+            sm:text-center
+            md:px-8
+            lg:mb-0
+            lg:px-15
+            lg:py-10
+            xl:px-20
+          ">
+          <h1 class="
+              mb-6
+              break-words
+              font-custom-heading
+              text-d1
+              uppercase
+              text-base-accent
+              last:mb-0
+              sm:text-[18vw]
+              lg:text-[16vw]
+              2xl:!text-[254px]
+              2xl:text-d1-desktop
+            ">
+            {{ section.settings.heading }}
+          </h1>
+        </div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div class="mb-10 px-6 text-white last:mb-0 lg:px-0">
+          <div
+            class="splide image-carousel"
+            role="group"
+            aria-label="Our mission image carousel"
+          >
+            <div class="splide__track">
+              <ul class="splide__list flex">
+                {% for block in section.blocks %}
+                  {% case block.type %}
+                    {% when "image" %}
+                      {% if block.settings.image != blank %}
+                        <li
+                          class="splide__slide"
+                          {{ block.shopify_attributes }}
+                        >
+                          <div class="
+                              relative
+                              aspect-portrait
+                              w-35
+                              overflow-hidden
+                              rounded-md
+                              md:w-65
+                              md:rounded-xl
+                              lg:w-90
+                              lg:rounded-2xl
+                            ">
+                            {%
+                              render 'image',
+                              class: 'w-full h-full object-cover',
+                              src: block.settings.image,
+                              m: '138x184',
+                              d: '360x480',
+                              crop: 'center',
+                              lazyload: true,
+                              fetchpriority: 'low',
+                            %}
+                          </div>
+                        </li>
+                      {% endif %}
+                  {% endcase %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when "text" %}
+            <div
+              class="
+                mb-10
+                px-6
+                last:mb-0
+                md:px-10
+                lg:px-15
+                xl:px-20
+              "
+              {{ block.shopify_attributes }}
+            >
+              <div class="
+                  flex
+                  flex-col
+                  gap-6
+                  border-b-2
+                  border-white
+                  pb-10
+                  lg:flex-row
+                  lg:gap-10
+                  lg:py-20
+                  xl:gap-20
+                ">
+                <div class="
+                    flex
+                    flex-col
+                    gap-6
+                    lg:w-1/2
+                    lg:flex-row
+                    lg:gap-10
+                  ">
+                  <div class="shrink-0">
+                    {%
+                      render 'icon',
+                      icon: 'arrow-right-circle',
+                      class: 'h-12 w-12 text-base-accent lg:mt-2 lg:h-15 lg:w-15',
+                    %}
+                  </div>
+                  {% if block.settings.title != blank %}
+                    <div>
+                      <h2 class="font-heading text-h2 text-base-accent lg:text-h2-desktop">
+                        {{ block.settings.title }}
+                      </h2>
+                    </div>
+                  {% endif %}
+                </div>
+                {% if block.settings.richtext != blank %}
+                  <div class="lg:w-1/2">
+                    <div class="prose text-body-xs text-white lg:text-body-small lg:[&>p:first-child]:text-body-large">
+                      {{ block.settings.richtext }}
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+
+      <div class="
+          flex
+          flex-col-reverse
+          gap-6
+          px-6
+          {{ section.settings.layout }}
+          md:items-center
+          md:gap-14
+          md:p-10
+          lg:gap-20
+          lg:px-20
+          lg:pb-20
+        ">
+        <div class="overflow-hidden rounded-lg md:w-6/12 md:rounded-xl lg:rounded-2xl">
+          {%- if section.settings.image_mobile != blank -%}
+            {%
+              render 'image',
+              src: section.settings.image_mobile,
+              m: "318x",
+              src_d: section.settings.image,
+              d: "560x",
+              alt: section.settings.image_mobile.alt,
+              lazyload: true,
+              fetchpriority: "low"
+            %}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+          {%- endif -%}
+        </div>
+        <div class="text-white md:w-6/12 xl:py-20">
+          {%- if section.settings.subheading != blank -%}
+            <div class="
+                mb-4
+                text-caps-s
+                uppercase
+                text-base-accent
+                last:mb-0
+                md:mb-6
+                lg:font-heading
+                lg:text-h6
+              ">
+              {{ section.settings.subheading }}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.title != blank -%}
+            <h2 class="
+                mb-6
+                font-heading
+                text-h2
+                last:mb-0
+                md:mb-9
+                lg:text-h2-desktop
+              ">
+              {{ section.settings.title }}
+            </h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <div class="
+                prose
+                mb-6
+                text-body-xs
+                last:mb-0
+                md:mb-9
+                lg:text-body-small
+              ">
+              {{ section.settings.text }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%}Corner element{%- endcomment -%}
+      <div class="pointer-events-none absolute bottom-0 right-0 z-4">
+        <div class="-mb-[1px] -mr-[1px] xl:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" width="142" height="144" viewBox="0 0 142 144" fill="none">
+            <path d="M142 144V0V41.2562C142 47.881 139.262 54.2113 134.433 58.7475L50.62 137.491C46.1697 141.672 40.293 144 34.1867 144H0L142 144Z" fill="white"/>
+          </svg>
+        </div>
+        <div class="hidden xl:-mb-[1px] xl:-mr-[1px] xl:block">
+          <svg xmlns="http://www.w3.org/2000/svg" width="338" height="343" viewBox="0 0 338 343" fill="none">
+            <path d="M338 343V0V102.245C338 115.489 332.528 128.145 322.879 137.216L117.858 329.971C108.956 338.34 97.1975 343 84.9791 343H0L338 343Z" fill="white"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.background_image != blank -%}
+  <style>
+    [id="our-mission-{{ section.id }}"] .section-frame {
+      background-image: url("{{ section.settings.background_image | img_url: 'master' }}");
+      background-repeat: repeat;
+    }
+  </style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Our mission",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section general"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our mission"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Image with text block"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile",
+      "info": "This field is required to fullfill to display image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "md:flex-row",
+      "options": [
+        {
+          "value": "md:flex-row",
+          "label": "Image on the left"
+        },
+        {
+          "value": "md:flex-row-reverse",
+          "label": "Image on the right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Section subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Section Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "name": "Text block",
+      "type": "text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "richtext",
+          "label": "Richtext",
+          "default": "<p> Around here, June isn’t just a month; it's a mindset. A state of being where the the spirit is alive </p>"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Next-generation infant formulas to empower your active lifestyle."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our mission",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

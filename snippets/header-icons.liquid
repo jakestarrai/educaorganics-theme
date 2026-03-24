@@ -1,0 +1,85 @@
+<ul class="flex items-center justify-center xl:gap-x-2">
+  {% if section.settings.search_enable %}
+    <li>
+      {% render 'predictive-search' %}
+    </li>
+  {% endif %}
+  {% if shop.customer_accounts_enabled and section.settings.enable_account_icon %}
+    {% liquid
+      if customer
+        assign link = routes.account_url
+      else
+        assign link = routes.account_login_url
+      endif
+    %}
+    <li class="hidden xl:block">
+      <a
+        href="{{ link }}"
+        class="
+          relative
+          flex
+          h-11
+          w-11
+          items-center
+          justify-center
+          text-inherit
+          hover:opacity-80
+          focus:opacity-80
+        "
+      >
+        <span class="sr-only">Go to account page</span>
+        {%- render 'icon', icon: 'account', class: 'text-current' -%}
+      </a>
+    </li>
+  {% endif %}
+  {% if section.settings.cart_enable %}
+    <li data-cart-count>
+      <a
+        href="{{ routes.cart_url }}"
+        class="
+          group/cart-icon
+          relative
+          flex
+          h-11
+          w-11
+          items-center
+          justify-center
+          text-inherit
+          hover:opacity-80
+          focus:opacity-80
+        "
+      >
+        {%- render 'icon', icon: 'cart', class: 'text-current' -%}
+        {% if cart.item_count > 0 %}
+          <span class="
+              absolute
+              right-0
+              top-[1px]
+              flex
+              h-[18px]
+              min-w-[18px]
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-customizable-base
+              bg-base-body
+              px-[5px]
+              py-[2px]
+              text-center
+              text-[12px]
+              font-semibold
+              leading-none
+              text-customizable-base
+              group-hover/cart-icon:bg-base-accent
+              lg:transition-colors
+              lg:duration-300
+              lg:ease-in-out
+            ">
+            {{- cart.item_count -}}
+          </span>
+        {% endif %}
+      </a>
+    </li>
+  {% endif %}
+</ul>

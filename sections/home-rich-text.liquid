@@ -1,0 +1,130 @@
+{% if section.blocks.size > 0 %}
+  <section class="py-10">
+    <div class="container max-w-screen-3xl">
+      <div class="text-center md:mx-auto md:w-8/12">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'title' %}
+              <h2 class="
+                  mb-5
+                  font-heading
+                  {% if block.settings.heading_text_size == "small" %}
+                  text-h4
+                  lg:text-h4-desktop
+                  {% elsif block.settings.heading_text_size == "large" %}
+                  text-h2
+                  lg:text-h2-desktop
+                  {% else %}
+                  text-h3
+                  lg:text-h3-desktop
+                  {% endif %}
+                ">
+                {{ block.settings.title }}
+              </h2>
+            {% when 'copy' %}
+              <div class="
+                  {% if block.settings.text_size == "small" %}
+                  prose-sm
+                  lg:prose
+                  {% elsif block.settings.text_size == "large" %}
+                  prose-lg
+                  lg:prose-xl
+                  {% else %}
+                  prose
+                  lg:prose-lg
+                  {% endif %}
+                ">
+                {{ block.settings.copy }}
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Rich text",
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Talk about your brand"
+        },
+        {
+          "type": "select",
+          "id": "heading_text_size",
+          "label": "Heading size",
+          "default": "medium",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "copy",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "copy",
+          "label": "Richtext",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Text size",
+          "default": "medium",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Richtext",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "copy"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

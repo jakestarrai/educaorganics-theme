@@ -1,0 +1,212 @@
+{% render 'breadcrumbs' %}
+
+<div class="section--without-padding-top py-10">
+  <div class="container max-w-screen-3xl">
+    <article>
+      {% if article.image.src != blank %}
+        <div class="mb-5 h-[266px] max-2xl:-mx-[calc(var(--grid-gutter-width)/2)] md:mb-4 md:h-[326px]">
+          {% liquid
+            if section.settings.enable_lazyload
+              assign enable_lazyload = true
+              assign fetchpriority_value = 'low'
+            else
+              assign enable_lazyload = false
+              assign fetchpriority_value = 'high'
+            endif
+          %}
+          {%
+            render 'image',
+            class: 'h-full object-cover object-center',
+            src: article.image.src,
+            m: '360x',
+            src_d: article.image.src,
+            d: '1440x',
+            alt: article.image.alt,
+            lazyload: enable_lazyload,
+            fetchpriority: fetchpriority_value
+          %}
+        </div>
+      {% endif %}
+      <div class="md:flex">
+        <div class="md:mx-auto md:w-8/12">
+          <header class="mb-3">
+            <div class="mb-4 text-body-small last:mb-0 md:mb-3">
+              {{ article.published_at | time_tag: format: 'month_day_year' }}
+            </div>
+            <h1 class="mb-3 text-h4 last:mb-0 lg:text-h4-desktop">{{ article.title }}</h1>
+            {% if blog.comments_enabled? %}
+              <a
+                href="#comments"
+                class="mb-3 inline-block text-body-small last:mb-0"
+              >
+                {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+              </a>
+            {% endif %}
+          </header>
+          {% if article.content != blank %}
+            <div class="prose mb-7">
+              {{ article.content }}
+            </div>
+          {% endif %}
+          {% if settings.social_sharing_blog %}
+            {%
+              render 'social-sharing',
+              share_title: article.title,
+              share_permalink: article.url,
+              share_image: article.image
+            %}
+          {% endif %}
+          {% if article.comments_enabled? %}
+            <div
+              id="comments"
+              class="mb-10 border-t border-base-border pt-8 last:mb-0"
+            >
+              <h2 class="mb-3 font-heading text-h4 lg:text-h4-desktop">{{ 'blogs.comments.block_title' | t }}</h2>
+              <ul class="grid gap-6">
+                {% for comment in article.comments %}
+                  <li>
+                    <div class="prose">
+                      <div class="mb-3">
+                        <strong>{{ comment.author }}</strong>
+                        <div>
+                          {{ comment.created_at | time_tag: format: 'month_day_year_time' }}
+                        </div>
+                      </div>
+                      {{ comment.content }}
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% form 'new_comment', article, class: 'mb-10 border-t border-base-border pt-8 last:mb-0' %}
+              <h2 class="mb-3 font-heading text-h4 lg:text-h4-desktop">{{ 'blogs.comments.title' | t }}</h2>
+              {{ form.errors | default_errors }}
+              {% if comment and comment.status and comment.id != blank %}
+                <div class="form-success mb-6 text-messages-success">
+                  {% if blog.moderated? and comment.status != 'published' %}
+                    {{ 'blogs.comments.success_moderated' | t }}
+                  {% else %}
+                    {{ 'blogs.comments.success' | t }}
+                  {% endif %}
+                </div>
+              {% endif %}
+              <div class="sm:grid sm:grid-cols-2 sm:gap-x-8">
+                <div class="mb-5">
+                  <label
+                    for="CommentAuthor"
+                    class="mb-1 inline-block"
+                  >
+                    {{ 'blogs.comments.name' | t }}
+                  </label>
+                  <input
+                    type="text"
+                    id="CommentAuthor"
+                    class="
+                      {% if form.errors contains 'author' %}input-error{% endif %}
+                      form-input
+                      h-form-element
+                      w-full
+                      rounded-form-element
+                      border-base-border
+                      bg-base-body-background
+                      text-body-medium
+                      placeholder:text-base-secondary
+                      autofill:shadow-inset-white
+                      focus:border-base-body
+                    "
+                    name="comment[author]"
+                    placeholder="{{ 'blogs.comments.name' | t }}"
+                    value="{{ form.author }}"
+                    autocapitalize="words"
+                  >
+                </div>
+                <div class="mb-5">
+                  <label
+                    for="CommentEmail"
+                    class="mb-1 inline-block"
+                  >
+                    {{ 'blogs.comments.email' | t }}
+                  </label>
+                  <input
+                    type="email"
+                    id="CommentEmail"
+                    class="
+                      {% if form.errors contains 'email' %}input-error{% endif %}
+                      form-input
+                      h-form-element
+                      w-full
+                      rounded-form-element
+                      border-base-border
+                      bg-base-body-background
+                      text-body-medium
+                      placeholder:text-base-secondary
+                      autofill:shadow-inset-white
+                      focus:border-base-body
+                    "
+                    name="comment[email]"
+                    placeholder="{{ 'blogs.comments.email' | t }}"
+                    value="{{ form.email }}"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
+                  >
+                </div>
+              </div>
+              <div class="mb-5">
+                <label
+                  for="CommentBody"
+                  class="mb-1 inline-block"
+                >
+                  {{ 'blogs.comments.message' | t }}
+                </label>
+                <textarea
+                  id="CommentBody"
+                  class="
+                    {% if form.errors contains 'body' %}input-error{% endif %}
+                    form-textarea
+                    max-h-[300px]
+                    min-h-[88px]
+                    w-full
+                    rounded-form-element
+                    border-base-border
+                    bg-base-body-background
+                    text-body-medium
+                  "
+                  name="comment[body]"
+                  placeholder="{{ 'blogs.comments.message' | t }}"
+                >
+                  {{- form.body -}}
+                </textarea>
+              </div>
+              {% if blog.moderated? %}
+                <p>{{ 'blogs.comments.moderated' | t }}</p>
+              {% endif %}
+              {%
+                render 'button',
+                element: 'input',
+                type: 'submit',
+                color: 'primary',
+                size: 'md',
+                locales_text: 'blogs.comments.post'
+              %}
+            {% endform %}
+          {% endif %}
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

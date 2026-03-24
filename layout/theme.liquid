@@ -1,0 +1,172 @@
+<!doctype html>
+<html
+  class="
+    group/html
+    no-js
+    supports-no-cookies
+    scroll-auto
+    motion-safe:scroll-smooth
+    xl:!overflow-visible
+    [&.scroll-fix]:!pb-0
+  "
+  lang="{{ request.locale.iso_code }}"
+>
+  <head>
+    <script>
+      window.performance.mark('parse_head_start')
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.shopify-policy__container')?.classList.add('prose','!max-w-5xl','!px-6','pb-16','pt-9','text-body-xs','lg:prose-lg','lg:!px-8','lg:py-30','lg:text-body-small');
+      });
+    </script>
+
+    {% comment %}Performance code{% endcomment %}
+    {% render 'performance-functions' %}
+    {% render 'performance-init' %}
+    {% comment %}End performance code{% endcomment %}
+    {% if template == 'search' or collection.handle == 'vendors' %}
+      <meta
+        name="robots"
+        content="noindex,nofollow"
+      >
+    {% endif %}
+    {%- if settings.font_library == 'shopify' and settings.font_heading.system? == false or settings.font_body.system? == false -%}
+      <link
+        rel="preconnect"
+        href="https://cdn.shopify.com"
+        crossorigin
+      >
+      <link
+        rel="preconnect"
+        href="https://fonts.shopifycdn.com"
+        crossorigin
+      >
+      {% # theme-check-disable AssetPreload %}
+      {% unless settings.font_heading.system? %}
+        <link
+          rel="preload"
+          as="font"
+          href="{{ settings.font_heading | font_url }}"
+          type="font/woff2"
+          crossorigin
+        >
+      {% endunless %}
+      {% unless settings.font_body.system? %}
+        <link
+          rel="preload"
+          as="font"
+          href="{{ settings.font_body | font_url }}"
+          type="font/woff2"
+          crossorigin
+        >
+      {% endunless %}
+      {% # theme-check-enable AssetPreload %}
+    {%- endif -%}
+    {% liquid
+      render 'theme-meta'
+      render 'theme-seo'
+      render 'theme-head-styles'
+
+      render 'theme-locales'
+      render 'theme-head-scripts'
+      render 'head-third-party-scripts'
+    %}
+
+    {{ content_for_header }}
+
+    <script>
+      window.performance.mark(window.markNames.head.end)
+    </script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16811848157">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-16811848157');
+</script>
+  </head>
+
+  <body
+    id="{{ page_title | handle }}"
+    class="
+      template-{{ template.name | handle }}
+      group/body
+      bg-base-body-background
+      font-body
+      text-body-xs
+      text-base-body
+      group-[.pickup-availability-active]/html:!relative
+      group-[.pickup-availability-active]/html:!overflow-hidden
+      max-xl:group-[.scroll-fix]/html:!relative
+      max-xl:group-[.scroll-fix]/html:!overflow-hidden
+      lg:text-body-small
+      xl:!overflow-visible
+      xl:group-[.predictive-search-open]/html:!relative
+      xl:group-[.predictive-search-open]/html:!overflow-hidden
+      [&.scroll-lock]:!relative
+      [&.scroll-lock]:!overflow-hidden
+    "
+  >
+    {%
+      render 'button',
+      element: 'a',
+      href: '#main',
+      class: 'sr-only focus:not-sr-only',
+      color: 'primary',
+      size: 'md',
+      text: 'Skip to content',
+    %}
+
+    <script>
+      window.performance.mark(window.markNames.body.start)
+    </script>
+    <script>
+      window.performance.mark(window.markNames.bodyLayout.start)
+    </script>
+
+    {% section 'popup' %}
+
+    <div class="page-wrapper relative xl:!top-auto">
+      {% if settings.header_type_desktop == 'draft' %}
+        {% section 'header' %}
+      {% elsif settings.header_type_desktop == 'general' %}
+        {% section 'header-general' %}
+      {% endif %}
+
+      <main
+        role="main"
+        id="main"
+        class="group-[.predictive-search-open]/html:pointer-events-none group-[.predictive-search-open]/html:cursor-default"
+      >
+        {{ content_for_layout }}
+      </main>
+      {% liquid
+        if template.name == 'product' or template.name == 'index' or template.name == 'collection'
+          render 'cart-popup'
+        endif
+        section 'footer'
+        section 'cart-drawer'
+      %}
+    </div>
+
+    <script>
+      window.performance.mark(window.markNames.bodyLayout.end)
+    </script>
+    <script>
+      window.performance.mark(window.markNames.bodyEndScripts.start)
+    </script>
+
+    {% render 'theme-body-scripts' %}
+    {% render 'body-third-party-scripts' %}
+
+    {% comment %}Show performance measure{% endcomment %}
+    {% liquid
+      render 'performance-measure'
+      if template.name == 'product'
+        section 'product-recommendations-json'
+      endif
+    %}
+    {% render 'schema' %}
+  </body>
+</html>

@@ -1,0 +1,494 @@
+<style>
+  [id="footer"] {
+    background: var(--base-footer-background) url({{'footer-bg.jpg' | asset_url}}) repeat;
+  }
+</style>
+
+<footer
+  id="footer"
+  class="
+    relative
+    overflow-hidden
+    bg-base-footer-background
+    pb-6
+    pt-16
+    text-white
+    lg:py-10
+  "
+>
+  <div class="container max-w-screen-3xl">
+    <div class="flex flex-col lg:flex-row-reverse lg:gap-20 2xl:pr-20">
+      <div class="flex flex-col lg:w-full">
+        <div class="flex flex-col lg:flex-row-reverse lg:pb-45 lg:pt-10">
+          <div class="
+              border-b-2
+              border-base-accent
+              pb-12
+              lg:w-[58.5%]
+              lg:border-none
+              lg:pb-0
+            ">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when "newsletter" %}
+                  <div
+                    class="mb-7 text-base-accent"
+                    {{ block.shopify_attributes }}
+                  >
+                    {% if block.settings.title != blank %}
+                      <h3 class="mb-3 font-heading text-h1 lg:mb-4 lg:text-h2-desktop">{{ block.settings.title }}</h3>
+                    {% endif %}
+                    {% if block.settings.first_part_text != blank or block.settings.second_part_text != blank %}
+                      <div class="prose text-body-xs text-base-accent lg:text-body-medium [&_a]:text-inherit">
+                        <p>
+                          {{ block.settings.first_part_text }}
+                          <a href="{{ block.settings.second_part_link }}">{{ block.settings.second_part_text }}</a>
+                        </p>
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  {% form 'customer', novalidate: 'novalidate', class: 'mb-9' %}
+                    <fieldset>
+                      <legend class="sr-only">Join form</legend>
+                      {% unless form.posted_successfully? %}
+                        <input
+                          type="hidden"
+                          name="contact[tags]"
+                          value="newsletter"
+                        >
+                        <label
+                          for="newsletter-form-email-field"
+                          class="sr-only"
+                        >
+                          {{ 'general.newsletter_form.please_enter_your_email' | t }}
+                        </label>
+
+                        <div class="relative flex items-center gap-4">
+                          <input
+                            type="email"
+                            id="newsletter-form-email-field"
+                            class="
+                              placeholder:text-base-body/[0.5]
+                              form-input
+                              h-12
+                              w-full
+                              rounded-xl
+                              border-white
+                              bg-white
+                              px-4
+                              text-body-xs
+                              text-base-body
+                              autofill:shadow-inset-white
+                              focus:border-base-accent
+                              lg:h-16
+                              lg:px-6
+                              lg:text-body-small
+                            "
+                            name="contact[email]"
+                            inputmode="email"
+                            placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                          >
+                          <button
+                            type="submit"
+                            class="
+                              group
+                              relative
+                              flex
+                              h-12
+                              w-12
+                              shrink-0
+                              items-center
+                              justify-center
+                              rounded-full
+                              text-base-accent
+                              outline-none
+                              lg:h-16
+                              lg:w-16
+                            "
+                          >
+                            <span class="sr-only">{{ 'general.newsletter_form.button_submit' | t }}</span>
+                            {%-
+                              render 'icon',
+                              icon: 'arrow-right-circle',
+                              class: '
+                              w-12
+                              h-12
+                              group-hover:opacity-0
+                              group-focus:opacity-0
+                              lg:w-16
+                              lg:h-16
+                              lg:duration-300
+                              lg:transition-opacity
+                              lg:ease-in-out'
+                            -%}
+                            {%-
+                              render 'icon',
+                              icon: 'arrow-right-circle-filled',
+                              class: '
+                              absolute
+                              left-1/2
+                              top-1/2
+                              h-full
+                              w-full
+                              -translate-x-[50%]
+                              -translate-y-[50%]
+                              opacity-0
+                              group-hover:opacity-100
+                              group-focus:opacity-100
+                              lg:duration-300
+                              lg:transition-opacity
+                              lg:ease-in-out'
+                            -%}
+                          </button>
+                        </div>
+                      {% else %}
+                        <div
+                          class="relative flex items-center gap-4 text-base-accent"
+                          data-form-status
+                        >
+                          <div class="
+                              min-h-12
+                              w-full
+                              rounded-xl
+                              border-2
+                              border-base-accent
+                              px-4
+                              py-3
+                              font-heading
+                              md:text-h4
+                              lg:min-h-16
+                              lg:p-4
+                              lg:text-h4-desktop
+                            ">
+                            {{ 'general.newsletter_form.confirmation' | t }}
+                          </div>
+                          <div>
+                            {%- render 'icon', icon: 'form-success', class: 'h-12 w-12 lg:h-16 lg:w-16' -%}
+                          </div>
+                        </div>
+                      {% endunless %}
+                    </fieldset>
+                  {% endform %}
+                {% when "social_link" %}
+                  <div class="flex flex-wrap gap-6 text-base-accent">
+                    <ul class="footer-social-list flex flex-wrap gap-4">
+                      {% for social_item in (1..4) %}
+                        {% liquid
+                          assign social_name_index = 'social_name_' | append: forloop.index
+                          assign social_link = 'social_link_' | append: forloop.index
+                          assign social_name = block.settings[social_name_index] | downcase
+                        %}
+                        {% if social_name != blank %}
+                          <li>
+                            {% if block.settings[social_link] != blank %}
+                              <a href="{{ block.settings[social_link_test] }}">
+                                {%- render 'icon', icon: social_name, class: 'h-6 w-6' -%}
+                              </a>
+                            {% else %}
+                              {%- render 'icon', icon: social_name, class: 'h-6 w-6' -%}
+                            {% endif %}
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                    {% if block.settings.email != blank %}
+                      <div class="[&_a:focus]:underline [&_a:hover]:underline">
+                        <a href="mailto:{{ block.settings.email }}">{{ block.settings.email }}</a>
+                      </div>
+                    {% endif %}
+                  </div>
+              {% endcase %}
+            {% endfor %}
+          </div>
+          <div class="flex gap-12 py-12 lg:w-[41.5%] lg:py-0">
+            <div class="w-28 md:w-24 lg:hidden">
+              {% render 'footer-logo' %}
+            </div>
+
+            <div class="flex flex-col gap-9 md:flex-row">
+              {% for block in section.blocks %}
+                {% case block.type %}
+                  {% when "link_list" %}
+                    <div
+                      class="
+                        flex
+                        flex-col
+                        gap-10
+                        md:flex-row
+                        md:flex-wrap
+                        lg:max-w-[140px]
+                        lg:flex-col
+                      "
+                      {{ block.shopify_attributes }}
+                    >
+                      {% for link_list in (1..4) %}
+                        {% liquid
+                          assign title_list = 'menu_title_' |  append: forloop.index
+                          assign footer_linklist = 'menu_' |  append: forloop.index
+                        %}
+                        {% if block.settings[footer_linklist] != blank or block.settings[title_list] != blank %}
+                          <div>
+                            {% if block.settings[title_list] != blank %}
+                              <div class="
+                                  mb-6
+                                  font-heading
+                                  uppercase
+                                  text-base-accent
+                                  lg:text-caps-xs
+                                ">
+                                {{ block.settings[title_list] }}
+                              </div>
+                            {% endif %}
+                            {% if block.settings[footer_linklist] != blank %}
+                              <nav aria-label="Learn navigation">
+                                <ul class="grid gap-[2px] [&_a:focus]:underline [&_a:hover]:underline">
+                                  {% for link in linklists[block.settings[footer_linklist]].links %}
+                                    {% if link.url != blank %}
+                                      <li>
+                                        <a href="{{ link.url }}">{{ link.title }}</a>
+                                      </li>
+                                    {% endif %}
+                                  {% endfor %}
+                                </ul>
+                              </nav>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                {% endcase %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col lg:w-full lg:flex-col-reverse lg:gap-10">
+          {% capture shop_name %}
+            &copy; {{ shop.name | link_to: routes.root_url | lstrip }}
+            {{ 'now' | date: "%Y" }}.
+          {% endcapture %}
+          <div class="
+              border-t-2
+              border-base-accent
+              py-6
+              text-body-xxs
+              text-base-accent
+              lg:pb-0
+              lg:text-body-xs
+            ">
+            <div class="
+                flex
+                items-center
+                justify-between
+                [&_a:focus]:underline
+                [&_a:hover]:underline
+              ">
+              <div class="max-w-1/2">{{ shop_name }}</div>
+              {% if section.settings.site_by != blank %}
+                <div class="max-w-1/2 [&_a:focus]:no-underline [&_a:hover]:no-underline [&_a]:underline">
+                  {{ section.settings.site_by }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          {% if section.settings.info != blank %}
+            <div class="text-body-xxs opacity-50 lg:ml-auto lg:w-[58.5%]">
+              {{ section.settings.info }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="hidden lg:flex lg:w-[132px] lg:shrink-0 lg:items-end">
+        {% render 'footer-logo' %}
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}Corner element{%- endcomment -%}
+  {% unless template contains 'about' %}
+    {% assign footer_corner_color = '#fff' %}
+
+    {% if template.name == 'index' or template contains 'contact' %}
+      {% assign footer_corner_color = 'var(--base-accent)' %}
+    {% endif %}
+
+    <div class="
+        pointer-events-none
+        absolute
+        right-0
+        top-0
+        z-4
+      ">
+      <div class="-mr-[2px] -mt-[2px] 2xl:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="128" height="129" viewBox="0 0 128 129" fill="none">
+          <path d="M128 0.175781V128.176V97.9977C128 87.973 123.82 78.4024 116.466 71.5894L49.7376 9.76751C43.0822 3.60148 34.344 0.175781 25.2713 0.175781H0L128 0.175781Z" fill="{{ footer_corner_color }}"/>
+        </svg>
+      </div>
+      <div class="hidden 2xl:-mr-[1px] 2xl:-mt-[1px] 2xl:block">
+        <svg xmlns="http://www.w3.org/2000/svg" width="338" height="343" viewBox="0 0 338 343" fill="none">
+          <path d="M338 0V343V240.755C338 227.511 332.528 214.855 322.879 205.784L117.858 13.0289C108.956 4.65954 97.1975 0 84.9791 0H0L338 0Z" fill="{{ footer_corner_color }}"/>
+        </svg>
+      </div>
+    </div>
+  {% endunless %}
+</footer>
+
+{% schema %}
+{
+  "name": "Footer NEW",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_svg",
+      "label": "SVG logo",
+      "default": "footer-logo.svg",
+      "info": "Grabs image from assets example (logo.svg including file extension)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "Draft"
+    },
+    {
+      "type": "richtext",
+      "id": "info",
+      "default": "<p>* These statements have not been evaluated by the Food and Drug Administration. Our products are not intended to diagnose, treat, cure, or prevent any disease.</p>",
+      "label": "Info"
+    },
+    {
+      "type": "richtext",
+      "id": "site_by",
+      "default": "<p>Site by ONBOX</p>",
+      "label": "Site by"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "newsletter",
+      "limit": 1,
+      "name": "Newsletter signup",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Join the club.",
+          "label": "Block title"
+        },
+        {
+          "type": "text",
+          "id": "first_part_text",
+          "default": "Get 10% off when you sign up for our newsletter.",
+          "label": "First part text"
+        },
+        {
+          "type": "text",
+          "id": "second_part_text",
+          "default": "Boom",
+          "label": "Second part text"
+        },
+        {
+          "type": "url",
+          "id": "second_part_link",
+          "label": "Link for text"
+        }
+      ]
+    },
+    {
+      "type": "social_link",
+      "name": "Social link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "social_name_1",
+          "label": "Name"
+        },
+        {
+          "type": "url",
+          "id": "social_link_1",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "social_name_2",
+          "label": "Name"
+        },
+        {
+          "type": "url",
+          "id": "social_link_2",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "social_name_3",
+          "label": "Name"
+        },
+        {
+          "type": "url",
+          "id": "social_link_3",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email"
+        }
+      ]
+    },
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_title_1",
+          "label": "Menu title"
+        },
+        {
+          "type": "link_list",
+          "id": "menu_1",
+          "label": "Menu"
+        },
+        {
+          "type": "text",
+          "id": "menu_title_2",
+          "label": "Menu title"
+        },
+        {
+          "type": "link_list",
+          "id": "menu_2",
+          "label": "Menu"
+        },
+        {
+          "type": "text",
+          "id": "menu_title_3",
+          "label": "Menu title"
+        },
+        {
+          "type": "link_list",
+          "id": "menu_3",
+          "label": "Menu"
+        },
+        {
+          "type": "text",
+          "id": "menu_title_4",
+          "label": "Menu title"
+        },
+        {
+          "type": "link_list",
+          "id": "menu_4",
+          "label": "Menu"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

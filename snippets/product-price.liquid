@@ -1,0 +1,56 @@
+{%- liquid
+  if product
+    if product.title
+      assign compare_at_price = product.compare_at_price
+      assign price = product.price
+      assign variant_min_price = product.selected_or_first_available_variant.price | money
+    else
+      assign compare_at_price = 2999
+      assign price = 1999
+    endif
+
+    assign money_price = price | money
+  elsif current_variant
+    if current_variant.title
+      assign compare_at_price = current_variant.compare_at_price
+      assign price = current_variant.price
+    else
+      assign compare_at_price = 2999
+      assign price = 1999
+    endif
+
+    assign money_price = price | money
+  endif
+-%}
+
+<div class="
+    product-item__price
+    grid
+    gap-2
+    text-body-small
+    font-normal
+    lg:gap-3
+    lg:text-body-medium
+  ">
+  {% if product.price_varies %}
+    {{ 'products.product.starting_at' | t }}
+    {% if product.price_min > 0 %}
+      {{ product.price_min | money }}
+    {% else %}
+      {{ variant_min_price }}
+    {% endif %}
+  {% else %}
+    {% unless section.settings.hide_compared_price %}
+      {%- if compare_at_price > price -%}
+        <ins class="no-underline">{{ money_price }}</ins>
+        <del class="text-body-xxs font-light text-base-sale-price lg:text-body-small">
+          {{ compare_at_price | money }}
+        </del>
+      {%- else -%}
+        <div>{{ money_price }}</div>
+      {%- endif -%}
+    {% else %}
+      <ins class="no-underline">{{ money_price }}</ins>
+    {% endunless %}
+  {% endif %}
+</div>

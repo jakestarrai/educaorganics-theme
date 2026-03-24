@@ -1,0 +1,44 @@
+{% liquid
+  if section.settings.show_breadcrumbs
+    render 'breadcrumbs'
+  endif
+%}
+{% if section.settings.show_title or page.content != blank %}
+  <section class="py-10">
+    <div class="container max-w-screen-3xl">
+      <div class="prose">
+        {% if section.settings.show_title %}
+          <div class="pb-3 pt-5 text-center lg:pb-5 lg:pt-7">
+            <h1 class="last:mb-0">{{ page.title }}</h1>
+          </div>
+        {% endif %}
+
+        {% if page.content != blank %}
+          <div data-table>
+            {{ page.content }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show page title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,163 @@
+<section class="overflow-hidden py-10">
+  <div class="container max-w-screen-3xl">
+    {% if section.settings.title != blank %}
+      <h2 class="mb-4 text-center font-heading text-h2 lg:text-h2-desktop">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+    <div class="grid gap-6 md:grid-cols-3 md:gap-8">
+      {% for article in section.settings.blog.articles limit: section.settings.articles_to_show %}
+        {% if article != blank %}
+          {% liquid
+            if section.settings.enable_lazyload
+              assign enable_lazyload = true
+              assign fetchpriority_value = 'low'
+            else
+              assign enable_lazyload = false
+              assign fetchpriority_value = 'high'
+            endif
+          %}
+          <article>
+            {% if article.image != blank %}
+              <a
+                href="{{ article.url }}"
+                class="
+                  relative
+                  z-1
+                  mb-2
+                  block
+                  w-full
+                  overflow-hidden
+                  pt-[100%]
+                "
+              >
+                {%
+                  render 'image',
+                  class: 'absolute top-0 left-0 w-full h-full object-cover',
+                  src: article.image,
+                  m: '345x345',
+                  src_d: article.image,
+                  d: '448x448',
+                  alt: article.image.alt,
+                  crop: 'center',
+                  lazyload: enable_lazyload,
+                  fetchpriority: fetchpriority_value
+                %}
+              </a>
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'w-full object-cover bg-gray-100' }}
+            {% endif %}
+            <h3 class="font-heading text-h3 lg:text-h3-desktop">
+              <a href="{{ article.url }}">
+                {{ article.title }}
+              </a>
+            </h3>
+            {% if section.settings.show_date %}
+              <div class="mb-3">
+                <time datetime="{{ article.published_at | date: "%Y-%m-%d" }}">
+                  {{ article.published_at | date: "%b %d %Y" }}
+                </time>
+              </div>
+            {% endif %}
+            {% if section.settings.show_excerpt %}
+              <div class="prose mb-3">
+                {{ article.excerpt_or_content | strip_html | truncate: 150 }}
+              </div>
+            {% endif %}
+            {% if article.tags.size > 0 %}
+              <ul class="mb-3 flex flex-wrap gap-x-3 gap-y-2">
+                {% for tag in article.tags %}
+                  <li>
+                    <a href="/blogs/{{ article.handle | split: '/' | first }}/tagged/{{ tag | handle }}">
+                      {{ tag }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            <div class="flex flex-wrap items-center gap-4">
+              {%
+                render 'button',
+                href: article.url,
+                color: 'primary',
+                size: 'md',
+                locales_text: 'blogs.article.read_more'
+              %}
+              {% if article.comments_enabled? %}
+                <a
+                  href="{{ article.comment_post_url }}"
+                  class="uppercase"
+                >
+                  {% if article.comments_count > 0 and article.comments_count <= 1 %}
+                    {{ article.comments_count | append: ' comment' }}
+                  {% elsif article.comments_count > 0 %}
+                    {{ article.comments_count | append: ' comments' }}
+                  {% endif %}
+                </a>
+              {% endif %}
+            </div>
+          </article>
+        {% endif %}
+      {% else %}
+        {% for i in (1..section.settings.articles_to_show) %}
+          {% liquid
+            assign placeholder_image_index = forloop.index0 | modulo: 3 | plus: 1
+            assign placeholder_image = 'blog-apparel-' | append: placeholder_image_index
+          %}
+          {% render "blog-card--empty", placeholder_image: placeholder_image %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Blog posts"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "range",
+      "id": "articles_to_show",
+      "label": "Articles to show",
+      "min": 3,
+      "max": 9,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Show excerpt",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog posts"
+    }
+  ]
+}
+{% endschema %}

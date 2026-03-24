@@ -1,0 +1,102 @@
+<section class="container max-w-screen-3xl max-lg:px-3">
+  <div class="
+      rounded-b-2xl
+      bg-june-5
+      px-6
+      pb-9
+      pt-10
+      md:p-10
+      md:pt-20
+      xl:p-20
+      xl:pt-30
+    ">
+    <div class="
+        mb-10
+        flex
+        flex-col
+        gap-6
+        last:mb-0
+        lg:mb-20
+        lg:gap-10
+        xl:flex-row
+      ">
+      <div class="xl:w-6/12">
+        {% if section.settings.subtitle != blank %}
+          <div class="
+              mb-4
+              font-heading
+              text-h6
+              uppercase
+              last:mb-0
+              lg:mb-6
+            ">
+            {{ section.settings.subtitle }}
+          </div>
+        {% endif %}
+        {% if section.settings.title != blank %}
+          <h2 class="
+              mb-6
+              font-heading
+              text-h2
+              last:mb-0
+              lg:mb-10
+              lg:text-h1-desktop
+            ">
+            {{ section.settings.title }}
+          </h2>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <div class="
+              prose
+              mb-6
+              text-body-small
+              last:mb-0
+              lg:mb-10
+              lg:text-body-large
+            ">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+      </div>
+      <div class="
+          prose
+          text-body-xs
+          md:columns-2
+          md:gap-6
+          lg:gap-10
+          lg:text-body-small
+          xl:w-6/12
+        ">
+        <p>
+          A healthy nutrition nutrition is crucial for efficient digestion and nutrient absorption, which directly affect
+          energy levels, recovery, sleep, and overall performance. Until now, infant formula research has primarily focused
+          on nutritional balance. But nutrition scientists, like those at EDUCA Organics, are starting to uncover the
+          far-reaching ways the nutrition influences our systemic health, and they’re identifying the specific strains that
+          extend the benefits of infant formula beyond nutritional health.
+        </p>
+        <p>
+          At the same time, we’re also finding new ways to increase infant formula efficacy, and developing even better ways
+          to deliver them (cough, Ultra Premium Formula, cough). It’s exciting stuff. And it means we’re able to offer formulations
+          that are tailored to the unique needs of athletes and active individuals, with strains scientifically proven
+          to support key areas associated with performance, wellness and fitness[1], ensuring you stay at the top of
+          your game.
+        </p>
+      </div>
+    </div>
+    <div class="
+        flex
+        items-center
+        gap-4
+        border-t-2
+        border-june-dark
+        pt-6
+        lg:gap-6
+        xl:mr-30
+      ">
+      <div class="h-9 w-9 shrink-0 lg:h-12 lg:w-12">
+        {%- render 'icon', icon: 'info', class: 'w-full h-full' -%}
+      </div>
+      <div class="font-heading lg:text-h4-desktop">TL;DR — if you want to go big, start small. Real small.</div>
+    </div>
+  </div>
+</section>

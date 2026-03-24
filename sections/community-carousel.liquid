@@ -1,0 +1,161 @@
+<link
+  rel="stylesheet"
+  href="{{ 'splide-gallery.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>
+
+<section
+  id="community-section"
+  class="overflow-hidden bg-base-accent pb-16 lg:pb-20 lg:pt-10"
+  data-section-type="community-section"
+  data-section-id="{{ section.id }}"
+>
+  {% if section.settings.title != blank or section.settings.text != blank %}
+    <div class="container max-w-screen-3xl xl:px-20">
+      <div class="border-t-2 border-june-dark pb-10 pt-16 lg:py-20">
+        <div class="text-center lg:flex lg:items-end lg:justify-between lg:text-left">
+          {% if section.settings.title != blank %}
+            <h2 class="
+                mb-4
+                font-custom-heading
+                text-d1
+                uppercase
+                last:mb-0
+                lg:mb-0
+                lg:text-[180px]
+                2xl:!text-[224px]
+                2xl:text-d1-desktop
+              ">
+              {{ section.settings.title }}
+            </h2>
+          {% endif %}
+          {% if section.settings.text != blank %}
+            <div class="
+                prose
+                px-10
+                text-body-small
+                lg:max-w-[220px]
+                lg:shrink-0
+                lg:px-0
+                lg:pb-10
+                lg:text-body-medium
+              ">
+              {{ section.settings.text }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div class="only:pt-10">
+    <div
+      class="splide community-carousel"
+      role="group"
+      aria-label="Community image carousel"
+    >
+      <div class="splide__track">
+        <ul class="splide__list">
+          {% for block in section.blocks %}
+            <li
+              class="splide__slide"
+              {{ block.shopify_attributes }}
+            >
+              {% capture image_content %}
+                {% if block.settings.image != blank %}
+                  {%
+                    render 'image',
+                    class: 'w-full h-full object-cover',
+                    src: block.settings.image,
+                    m: '200x200',
+                    d: '300x300',
+                    crop: 'center',
+                    lazyload: true,
+                    fetchpriority: 'low',
+                  %}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+                {% endif %}
+              {% endcapture %}
+              {% if block.settings.link != blank %}
+                <a
+                  href="{{ block.settings.link }}"
+                  class="
+                    relative
+                    block
+                    aspect-square
+                    overflow-hidden
+                    rounded-2xl
+                  "
+                >
+                  {{ image_content }}
+                </a>
+              {% else %}
+                {{ image_content }}
+              {% endif %}
+              {% if block.settings.custom_liquid != blank %}
+                {{ block.settings.custom_liquid }}
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Community carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "It’s June all year round"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Hype-worthy moments from the EDUCA Organics community.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Collapsible row heading",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Image link"
+        }
+      ]
+    },
+    {
+      "type": "liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom Liquid",
+          "info": "Add app snippets or other Liquid code to create advanced customizations."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Community carousel",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

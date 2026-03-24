@@ -1,0 +1,210 @@
+<div
+  class="py-10"
+  id="cart"
+  data-note-enable="{{ settings.cart_notes_enable }}"
+>
+  <div class="container max-w-screen-3xl">
+    <div
+      data-has-items
+      {% if cart.item_count == 0 %}
+        class="hidden"
+      {% endif %}
+    >
+      <div class="pb-3 pt-5 text-center lg:pb-5 lg:pt-7">
+        <h1 class="font-heading text-h2 lg:text-h2-desktop">
+          {{ 'cart.general.title' | t }}
+        </h1>
+        {% if cart.item_count != 0 %}
+          <a
+            href="{{ settings.continue_shopping_link }}"
+            class="link"
+          >
+            {{ 'cart.general.continue_shopping_button' | t }}
+          </a>
+        {% endif %}
+      </div>
+
+      <form
+        action="/cart"
+        method="post"
+        novalidate
+      >
+        <table class="mb-5 w-full table-fixed border-collapse md:mb-10">
+          <thead>
+            <tr class="
+                border-b
+                border-base-border
+                align-top
+                text-base-secondary
+                md:align-middle
+              ">
+              <th class="
+                  w-3/5
+                  py-3
+                  text-left
+                  font-normal
+                  md:w-2/5
+                  md:py-4
+                  md:pl-4
+                ">
+                {{ 'cart.label.product' | t }}
+              </th>
+              <th class="
+                  w-[30%]
+                  py-3
+                  text-right
+                  font-normal
+                  md:w-[18%]
+                  md:px-3
+                  md:py-4
+                  md:group-first:pt-10
+                ">
+                {{ 'cart.label.price' | t }}
+              </th>
+              <th class="
+                  hidden
+                  md:table-cell
+                  md:w-1/5
+                  md:px-3
+                  md:py-4
+                  md:text-right
+                  md:font-normal
+                  md:group-first:pt-10
+                ">
+                {{ 'cart.label.quantity' | t }}
+              </th>
+              <th class="
+                  hidden
+                  md:table-cell
+                  md:w-[19%]
+                  md:py-4
+                  md:pr-4
+                  md:text-right
+                  md:font-normal
+                  md:group-first:pt-10
+                ">
+                {{ 'cart.label.total' | t }}
+              </th>
+            </tr>
+          </thead>
+          <tbody data-cart-items>
+            {% render 'cart-items' %}
+          </tbody>
+        </table>
+
+        <div class="md:flex md:justify-between">
+          {% if settings.cart_notes_enable %}
+            <div class="mb-4 px-0 md:mb-0 md:w-5/12 lg:w-4/12">
+              <label
+                for="CartSpecialInstructions"
+                class="mb-2 inline-block"
+              >
+                <strong>
+                  {{ 'cart.general.note' | t }}
+                </strong>
+              </label>
+              <textarea
+                name="note"
+                id="CartSpecialInstructions"
+                class="
+                  form-textarea
+                  max-h-[300px]
+                  min-h-[88px]
+                  w-full
+                  rounded-form-element
+                  border-base-border
+                  bg-base-body-background
+                  text-body-medium
+                "
+              >{{ cart.note }}</textarea>
+            </div>
+          {% endif %}
+
+          <div class="ml-auto px-0 md:w-5/12 lg:w-4/12">
+            <div class="cart-form__total mb-4">
+              <div class="flex">
+                <div class="w-8/12">
+                  <p>{{ 'cart.general.subtotal' | t }}</p>
+                </div>
+                <div class="w-4/12 text-right">
+                  <p data-cart-total>{{ cart.total_price | money }}</p>
+                </div>
+              </div>
+              <div class="cart-form__total__text-box">
+                {% if cart.total_discounts > 0 %}
+                  <p>
+                    {{ 'cart.general.savings' | t }}
+                    {{ cart.total_discounts | money }}
+                  </p>
+                {% endif %}
+                <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
+              </div>
+            </div>
+            <div class="md:text-right">
+              {%
+                render 'button',
+                element: 'input',
+                type: 'submit',
+                class: 'whitespace-normal',
+                color: 'primary',
+                size: 'md',
+                locales_text: 'cart.general.checkout',
+                data_attribute: 'name="checkout"'
+              %}
+            </div>
+            {%- if additional_checkout_buttons -%}
+              <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+                {{ content_for_additional_checkout_buttons }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </form>
+    </div>
+    <div
+      class="{% if cart.item_count != 0 %}hidden{% else %}md:flex{% endif %}"
+      data-no-items
+    >
+      <div class="md:mx-auto md:w-8/12">
+        <div class="text-center">
+          <div class="pb-3 pt-5 lg:pb-5 lg:pt-7">
+            <h1 class="font-heading text-h1 lg:text-h1-desktop">{{ 'cart.general.title' | t }}</h1>
+          </div>
+
+          {% comment %}
+            Cart empty state
+          {% endcomment %}
+          <div class="supports-cookies">
+            <p>
+              {%
+                render 'button',
+                href: '#',
+                color: 'secondary',
+                size: 'md',
+                text: 'Return to shop'
+              %}
+            </p>
+          </div>
+
+          {% comment %}
+            Cart no cookies state
+            ---------------------
+            Browser cookies are required to use the cart. If cookies aren't enabled in the
+            browser a message is displayed prompting the user to enable them.
+          {% endcomment %}
+          <div class="supports-no-cookies">
+            <p>{{ 'cart.general.cookies_required' | t }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="preact-cart"></div>
+
+{% schema %}
+{
+  "name": "Cart"
+}
+{% endschema %}

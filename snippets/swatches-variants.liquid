@@ -1,0 +1,582 @@
+{% liquid
+  assign section_onboarding = false
+  if product == empty
+    assign section_onboarding = true
+  endif
+  assign current_variant = product.selected_or_first_available_variant
+  assign show_size_chart = section.settings.show_size_chart
+  assign size_chart_url = section.settings.size_chart_url
+  assign show_variant_label = section.settings.show_variant_label
+  assign product_form_id = 'product-form-' | append: section.id
+  assign current_variant_rest_options = ''
+  assign first_image_eager = first_image_eager | default: false
+  assign show_following_image = section.settings.show_following_image
+%}
+
+<section
+  data-section-id="{{ section.id }}"
+  class="pb-5 md:pb-7 md:pt-5 lg:pb-10"
+  data-section-type="product-swatches-variants"
+  data-handle="{{ product.handle }}"
+>
+  <div class="container max-w-screen-3xl overflow-hidden md:overflow-visible">
+    <div class="md:flex md:space-x-8">
+      <div class="mb-5 md:mb-0 md:w-6/12">
+        {% unless section_onboarding %}
+          <div class="
+              product-gallery-slider
+              group
+              max-md:flex
+              max-md:snap-x
+              max-md:snap-mandatory
+              max-md:items-center
+              max-md:overflow-x-auto
+              max-md:overflow-y-hidden
+              lg:flex lg:flex-wrap
+              {% if show_following_image and product.media.size > 1 %}
+              product-gallery-slider--alt
+              max-md:-mr-[calc(var(--grid-gutter-width)/2)]
+              {% endif %}
+            ">
+            {% if product.media.size > 0 %}
+              {%
+                render 'product-gallery',
+                product: product,
+                current_variant: current_variant,
+                enable_lazyload: enable_lazyload
+              %}
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endunless %}
+      </div>
+      <div class="md:w-6/12">
+        <div class="md:sticky md:top-[var(--header-sticky-height)]">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when "@app" %}
+                <div class="product__rating mb-5">
+                  {% render block %}
+                </div>
+              {% when "title" %}
+                {% unless section_onboarding %}
+                  <h1
+                    class="mb-1 font-heading text-h5 md:mb-2"
+                    {{ block.shopify_attributes }}
+                  >
+                    {{ product.title }}
+                  </h1>
+                {% else %}
+                  <h1 class="mb-1 font-heading text-h5 md:mb-2">
+                    {{ 'homepage.onboarding.product_title' | t }}
+                  </h1>
+                {% endunless %}
+              {% when "vendor" %}
+                <div
+                  class="text-body-small"
+                  {{ block.shopify_attributes }}
+                >
+                  {{ product.vendor }}
+                </div>
+              {% when "price" %}
+                <div
+                  class="mb-1 overflow-hidden text-product-price-large md:mb-2 lg:text-product-price-large-desktop"
+                  {{ block.shopify_attributes }}
+                >
+                  <div
+                    class="flex flex-wrap items-center gap-1"
+                    data-price-wrapper
+                  >
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                      <ins
+                        class="no-underline"
+                        data-product-price
+                      >
+                        {{ current_variant.price | money }}
+                      </ins>
+                      <span
+                        class="sr-only"
+                        data-compare-text
+                      >
+                        {{ 'products.product.regular_price' | t }}
+                      </span>
+                      <del
+                        class="text-base-sale-price"
+                        data-compare-price
+                      >
+                        {{ current_variant.compare_at_price | money }}
+                      </del>
+                    {% else %}
+                      <div data-product-price>
+                        {{ current_variant.price | money }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="mb-4 text-base-secondary">{{ 'products.product.tax_included' | t }}</div>
+              {% when "buy_buttons" %}
+                {% unless section_onboarding %}
+                  {%
+                    render 'product-form',
+                    id: product_form_id,
+                    product: product,
+                    blocks: section.blocks,
+                    show_variant_label: section.settings.show_variant_label,
+                    show_size_chart: section.settings.show_size_chart,
+                    size_chart_url: section.settings.size_chart_url
+                  %}
+                {% else %}
+                  <form class="mb-4 last:mb-0 md:mb-5">
+                    <div class="mb-1 text-product-price-large md:mb-2 lg:text-product-price-large-desktop">
+                      <div
+                        class="flex flex-wrap items-center gap-1"
+                        data-price-wrapper
+                      >
+                        <div data-product-price>
+                          {{ 1999 | money }}
+                        </div>
+                        <span
+                          class="sr-only"
+                          data-compare-text
+                        >
+                          {{ 'products.product.regular_price' | t }}
+                        </span>
+                        <del
+                          class="text-base-sale-price"
+                          data-compare-price
+                        >
+                          {{ 29999 | money }}
+                        </del>
+                      </div>
+                    </div>
+                    <div class="mb-4 md:mb-5 md:w-10/12 xl:w-6/12">
+                      <div class="mb-4 last:mb-0 md:mb-5">
+                        {%
+                          render 'button',
+                          element: 'button',
+                          type: 'submit',
+                          class: 'w-full disabled',
+                          color: 'primary',
+                          size: 'md',
+                          locales_text: 'products.product.sold_out',
+                          data_attribute: 'data-submit-button',
+                          other: 'name="add" disabled'
+                        %}
+                      </div>
+                    </div>
+                  </form>
+                {% endunless %}
+              {% when "variant_picker" %}
+                {%
+                  render 'swatches-variant-picker',
+                  current_variant: current_variant,
+                  product: product,
+                  show_variant_label: show_variant_label,
+                  show_size_chart: show_size_chart,
+                  size_chart_url: size_chart_url,
+                  product_form_id: product_form_id,
+                  current_variant_rest_options: current_variant_rest_options
+                %}
+              {% when "quantity_selector" %}
+                <div class="mb-4 md:mb-5 md:w-10/12 xl:w-6/12">
+                  <label
+                    for="quantity"
+                    class="mb-1 inline-block text-base-secondary"
+                  >
+                    {{- 'products.product.quantity' | t -}}
+                  </label>
+                  <div class="
+                      jcf-number
+                      relative
+                      flex
+                      w-full
+                      border
+                      border-base-border
+                    ">
+                    <button
+                      class="
+                        jcf-btn-dec
+                        relative
+                        min-h-full
+                        min-w-button-md
+                        shrink-0
+                        bg-transparent
+                        before:absolute
+                        before:left-1/2
+                        before:top-1/2
+                        before:h-[2px]
+                        before:w-3
+                        before:-translate-x-1/2
+                        before:-translate-y-1/2
+                        before:bg-base-body
+                        before:transition-colors
+                        before:duration-300
+                        before:ease-in-out
+                        before:content-['']
+                        hover:before:bg-base-secondary
+                      "
+                      type="button"
+                    >
+                      <span class="sr-only">{{ 'products.product.quantity_decrease' | t }}</span>
+                    </button>
+                    <input
+                      type="number"
+                      id="Quantity"
+                      class="
+                        block
+                        min-h-button-md
+                        w-full
+                        bg-transparent
+                        px-2
+                        py-3
+                        text-center
+                        text-body-small
+                        font-bold
+                        leading-none
+                        [appearance:textfield]
+                        [&::-webkit-inner-spin-button]:appearance-none
+                        [&::-webkit-outer-spin-button]:appearance-none
+                      "
+                      name="quantity"
+                      value="1"
+                      min="1"
+                      aria-label="Quantity"
+                      form="{{ product_form_id }}"
+                    >
+                    <button
+                      class="
+                        jcf-btn-inc
+                        relative
+                        min-h-full
+                        min-w-button-md
+                        shrink-0
+                        bg-transparent
+                        before:absolute
+                        before:left-1/2
+                        before:top-1/2
+                        before:h-[2px]
+                        before:w-3
+                        before:-translate-x-1/2
+                        before:-translate-y-1/2
+                        before:bg-base-body
+                        before:transition-colors
+                        before:duration-300
+                        before:ease-in-out
+                        before:content-['']
+                        after:absolute
+                        after:left-1/2
+                        after:top-1/2
+                        after:h-3
+                        after:w-[2px]
+                        after:-translate-x-1/2
+                        after:-translate-y-1/2
+                        after:bg-base-body
+                        after:transition-colors
+                        after:duration-300
+                        after:ease-in-out
+                        after:content-['']
+                        hover:before:bg-base-secondary
+                        hover:after:bg-base-secondary
+                      "
+                      type="button"
+                    >
+                      <span class="sr-only">{{ 'products.product.quantity_increase' | t }}</span>
+                    </button>
+                  </div>
+                  <div class="product-form__error-message hidden pt-4 text-body-small"></div>
+                </div>
+              {% when "selling_plan" %}
+                {% if product.selling_plan_groups != blank %}
+                  <div class="mb-3 sm:flex">
+                    <div class="w-100 md:w-10/12 xl:w-6/12">
+                      <form action="#">
+                        {% liquid
+                          if current_variant.selected_selling_plan_allocation
+                            assign current_selling_plan_allocation = current_variant.selected_selling_plan_allocation
+                          else
+                            assign current_selling_plan_allocation = current_variant.selling_plan_allocations[0]
+                          endif
+
+                          assign price = current_selling_plan_allocation.price
+                          assign compare_at_price = current_selling_plan_allocation.compare_at_price
+                          assign price_format = price | money
+                          assign compare_at_price_format = compare_at_price | money
+                          assign discount_amount = compare_at_price | minus: price | money_without_currency
+                          assign discount_percentage = discount_amount | times: 10000 | divided_by: compare_at_price | ceil
+                        %}
+                        <fieldset data-selling-plan-fieldset>
+                          <legend class="sr-only">Product options</legend>
+                          <div class="pl-4">
+                            {% for group in product.selling_plan_groups %}
+                              <div class="mb-5">
+                                <div class="relative">
+                                  <input
+                                    type="radio"
+                                    class="
+                                      peer
+                                      absolute
+                                      left-0
+                                      top-0
+                                      -z-1
+                                      opacity-0
+                                    "
+                                    id="purchase_field_{{ forloop.index }}"
+                                    name="purchase_option"
+                                    data-selling-plan-input
+                                    {% if current_variant.selected_selling_plan_allocation %}
+                                      checked
+                                    {% endif %}
+                                  >
+                                  <label
+                                    class="
+                                      relative
+                                      pl-10
+                                      before:absolute
+                                      before:left-0
+                                      before:top-1/2
+                                      before:z-2
+                                      before:h-6
+                                      before:w-6
+                                      before:-translate-y-1/2
+                                      before:rounded-full
+                                      before:border
+                                      before:border-base-body
+                                      before:bg-base-body-background
+                                      before:transition-colors
+                                      before:duration-300
+                                      after:absolute
+                                      after:left-[6px]
+                                      after:top-1/2
+                                      after:z-2
+                                      after:h-3
+                                      after:w-3
+                                      after:-translate-y-1/2
+                                      after:rounded-full
+                                      after:bg-base-body
+                                      after:opacity-0
+                                      after:transition-opacity
+                                      after:duration-300
+                                      after:ease-in-out
+                                      after:content-['']
+                                      peer-checked:after:opacity-100
+                                    "
+                                    for="purchase_field_{{ forloop.index }}"
+                                    data-label-text
+                                  >
+                                    {{ 'products.product.with_subscription' | t }}
+                                    <span data-discount-percentage>{{ discount_percentage }}%</span>
+                                    <span data-price>
+                                      {{ price_format }}
+                                    </span>
+                                  </label>
+                                </div>
+                                <div
+                                  class="pt-3"
+                                  data-select-container
+                                >
+                                  <label
+                                    class="sr-only"
+                                    for="purchase_field_{{ forloop.index }}"
+                                  >
+                                    {{ 'products.product.with_subscription' | t: discount_percentage: discount_percentage, price: price_format }}
+                                  </label>
+                                  <select
+                                    id="purchase_field_{{ forloop.index }}"
+                                    class="
+                                      w-100
+                                      form-select
+                                      rounded-[var(--form-element-border-radius)]
+                                      border-base-border
+                                      bg-base-body-background
+                                      text-body-medium
+                                    "
+                                    data-select
+                                  >
+                                    {% for selling_plan in group.selling_plans %}
+                                      <option
+                                        value="{{ selling_plan.id }}"
+                                        {% if selling_plan.id == current_variant.selected_selling_plan_allocation.selling_plan.id %}
+                                          selected
+                                        {% endif %}
+                                      >
+                                        {{ selling_plan.name }}
+                                      </option>
+                                    {% endfor %}
+                                  </select>
+                                </div>
+                              </div>
+                            {% endfor %}
+                            <div class="mb-5">
+                              <div class="relative">
+                                <input
+                                  type="radio"
+                                  class="
+                                    peer
+                                    absolute
+                                    left-0
+                                    top-0
+                                    -z-1
+                                    opacity-0
+                                  "
+                                  id="without_selling_plan"
+                                  name="purchase_option"
+                                  data-without-selling-plan-input
+                                  {% unless current_variant.selected_selling_plan_allocation %}
+                                    checked
+                                  {% endunless %}
+                                >
+                                <label
+                                  class="
+                                    relative
+                                    pl-10
+                                    before:absolute
+                                    before:left-0
+                                    before:top-1/2
+                                    before:z-2
+                                    before:h-6
+                                    before:w-6
+                                    before:-translate-y-1/2
+                                    before:rounded-full
+                                    before:border
+                                    before:border-base-body
+                                    before:bg-base-body-background
+                                    before:transition-colors
+                                    before:duration-300
+                                    after:absolute
+                                    after:left-[6px]
+                                    after:top-1/2
+                                    after:z-2
+                                    after:h-3
+                                    after:w-3
+                                    after:-translate-y-1/2
+                                    after:rounded-full
+                                    after:bg-base-body
+                                    after:opacity-0
+                                    after:transition-opacity
+                                    after:duration-300
+                                    after:ease-in-out
+                                    after:content-['']
+                                    peer-checked:after:opacity-100
+                                  "
+                                  for="without_selling_plan"
+                                >
+                                  {{ 'products.product.without_subscription' | t }}
+                                  <span data-compare-at-price>
+                                    {{ compare_at_price_format }}
+                                  </span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                          {% if block.settings.subscription_details_text != blank and block.settings.subscription_details_link != blank %}
+                            <a
+                              href="{{ block.settings.subscription_details_link }}"
+                              class="inline-flex items-center no-underline hover:underline"
+                            >
+                              <div class="mr-2 shrink-0">
+                                {%- render 'icon' with 'reload' -%}
+                              </div>
+                              {{ block.settings.subscription_details_text }}
+                            </a>
+                          {% endif %}
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                {% endif %}
+              {% when "collapsible_row" %}
+                {% render 'product-accordion', block: block %}
+              {% when "description" %}
+                {% liquid
+                  assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true
+                  assign closest_location = pick_up_availabilities.first
+                %}
+
+                {%- if pick_up_availabilities.size > 0 -%}
+                  <div
+                    class="mb-4 flex last:mb-0 md:mb-5"
+                    data-store-availability-container
+                    data-test="{{ pick_up_availabilities.size }}"
+                  >
+                    <div class="mr-2 shrink-0">
+                      {% liquid
+                        if closest_location.available
+                          render 'icon', icon: 'tick', class: 'w-5 mt-[2px] text-messages-success'
+                        else
+                          render 'icon', icon: 'unavailable', class: 'w-5 mt-[2px] text-message-error'
+                        endif
+                      %}
+                    </div>
+                    <div>
+                      {%- if closest_location.available -%}
+                        <div>
+                          {{ 'products.product.pick_up_available_at_html' | t: location_name: closest_location.location.name }}
+                        </div>
+                        <div class="mb-3 text-body-small">{{ closest_location.pick_up_time }}</div>
+                        <button
+                          type="button"
+                          class="pickup-availability-button page-wrapper__opener underline hover:no-underline"
+                        >
+                          {%- if pick_up_availabilities.size == 1 -%}
+                            {{ 'products.product.view_store_info' | t }}
+                          {%- else -%}
+                            {{ 'products.product.check_other_stores' | t }}
+                          {%- endif -%}
+                        </button>
+                      {%- else -%}
+                        <div>
+                          {{ 'products.product.pick_up_unavailable_at_html' | t: location_name: closest_location.location.name }}
+                        </div>
+                        {%- if pick_up_availabilities.size > 1 -%}
+                          <button
+                            type="button"
+                            class="pickup-availability-button page-wrapper__opener underline hover:no-underline"
+                          >
+                            {{ 'products.product.check_other_stores' | t }}
+                          </button>
+                        {%- endif -%}
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {% endif %}
+
+                <div class="prose mb-4 last:mb-0 md:mb-5">
+                  {% if product.description %}
+                    {{ product.description }}
+                  {% else %}
+                    {{ 'homepage.onboarding.product_description' | t }}
+                  {% endif %}
+                </div>
+              {% when "share" %}
+                {%
+                  render 'social-sharing',
+                  share_title: product.title,
+                  share_permalink: product.url,
+                  share_image: product
+                %}
+              {% when 'complementary' %}
+                {% render 'product-complementary-products', block: block %}
+              {%- when 'custom_liquid' -%}
+                {{ block.settings.custom_liquid }}
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% render 'pickup-availability-drawer', product: product %}
+  </div>
+
+  <script type="application/json" id="product-json">
+    {% render 'product-json' %}
+  </script>
+</section>
+
+<link
+  rel="stylesheet"
+  href="{{ 'dynamic-button.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>

@@ -1,0 +1,18 @@
+{% liquid
+  render 'css-variables'
+  if settings.font_library == 'custom' or settings.font_library == 'hardcoded'
+    render 'font-face'
+  endif
+  render 'style-tags', layout: 'theme'
+  if settings.enable_custom_theme_css
+    echo 'custom-theme.css' | asset_url | stylesheet_tag
+  endif
+  if settings.font_library == 'google'
+    render 'google-fonts'
+  endif
+  # theme-check-disable AssetUrlFilters, ParserBlockingScriptTag
+  if settings.enable_tailwind_playground
+    echo 'https://cdn.tailwindcss.com' | script_tag
+  endif
+  # theme-check-enable AssetUrlFilters, ParserBlockingScriptTag
+%}

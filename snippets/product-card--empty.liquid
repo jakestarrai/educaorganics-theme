@@ -1,0 +1,33 @@
+{% unless grid_item_width %}
+  {% assign mobile_grid_item_width = 'sm:w-6/12' %}
+  {% assign grid_item_width = 'lg:w-3/12' %}
+{% endunless %}
+
+<div class="{{ grid_item_width }} {{ classes }}">
+  <div class="product-item {{ image_ratio }} group text-center">
+    <div class="
+        relative
+        mb-3
+        group-[.product-item--portrait]:aspect-portrait
+        group-[.product-item--square]:aspect-square
+        group-[.product-item--portrait]:pb-[125%]
+      ">
+      {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+    <div class="[&>*:last-child]:mb-0">
+      <div>
+        <h3 class="
+            mb-2
+            font-heading
+            text-body-small
+            !font-medium
+            last:mb-0
+            lg:text-body-medium
+          ">
+          Your product's name
+        </h3>
+      </div>
+      {% render "product-price", product: product %}
+    </div>
+  </div>
+</div>

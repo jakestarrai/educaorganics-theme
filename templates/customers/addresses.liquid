@@ -1,0 +1,825 @@
+{% # theme-check-disable TemplateLength %}
+<section class="py-10">
+  <div class="container max-w-screen-3xl">
+    <div class="md:mx-auto md:w-10/12 xl:w-8/12">
+      <div class="mb-10 lg:mb-14">
+        <a
+          href="/account"
+          class="
+            relative
+            inline-block
+            pl-3
+            text-base-label
+            no-underline
+            before:absolute
+            before:left-0
+            before:top-1/2
+            before:-mt-1
+            before:h-2
+            before:w-2
+            before:-rotate-45
+            before:border-l-2
+            before:border-t-2
+            before:border-base-body
+            before:content-['']
+            lg:text-base-label-desktop
+          "
+        >
+          {{ 'customer.account.return' | t }}
+        </a>
+      </div>
+      <div class="mb-5 text-center">
+        <h1 class="mb-3 font-heading text-h4 lg:text-h4-desktop">{{ 'customer.account.title' | t }}</h1>
+      </div>
+      {% paginate customer.addresses by 5 %}
+        <div
+          class="pb-12"
+          data-address
+        >
+          <div class="text-center">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'primary',
+              size: 'md',
+              locales_text: 'customer.addresses.add_new',
+              data_attribute: 'data-address-toggle'
+            %}
+          </div>
+          <div
+            class="hidden"
+            data-address-form
+          >
+            {% form 'customer_address', customer.new_address, class: 'account-form text-base-body pt-10 md:py-10 md:border-t md:border-base-border' %}
+              <h2 class="mb-6 font-heading text-h6">{{ 'customer.addresses.add_new' | t }}</h2>
+              <div
+                class="mb-5"
+                data-address-fields
+              >
+                <div class="sm:grid sm:grid-cols-2 sm:space-x-8">
+                  <div class="mb-5">
+                    <label
+                      class="mb-1 inline-block text-base-secondary"
+                      for="address-first-name-new"
+                    >
+                      {{ 'customer.addresses.first_name' | t }}
+                    </label>
+                    <input
+                      type="text"
+                      id="address-first-name-new"
+                      class="
+                        form-input
+                        h-form-element
+                        w-full
+                        rounded-form-element
+                        border-base-border
+                        bg-base-body-background
+                        text-body-medium
+                        placeholder:text-base-secondary
+                        autofill:shadow-inset-white
+                        focus:border-base-body
+                      "
+                      name="address[first_name]"
+                      value="{{ form.first_name }}"
+                      autocapitalize="words"
+                    >
+                  </div>
+                  <div class="mb-5">
+                    <label
+                      class="mb-1 inline-block text-base-secondary"
+                      for="address-last-name-new"
+                    >
+                      {{ 'customer.addresses.last_name' | t }}
+                    </label>
+                    <input
+                      type="text"
+                      id="address-last-name-new"
+                      class="
+                        form-input
+                        h-form-element
+                        w-full
+                        rounded-form-element
+                        border-base-border
+                        bg-base-body-background
+                        text-body-medium
+                        placeholder:text-base-secondary
+                        autofill:shadow-inset-white
+                        focus:border-base-body
+                      "
+                      name="address[last_name]"
+                      value="{{ form.last_name }}"
+                      autocapitalize="words"
+                    >
+                  </div>
+                </div>
+                <div class="mb-5">
+                  <label
+                    class="mb-1 inline-block text-base-secondary"
+                    for="address-company-new"
+                  >
+                    {{ 'customer.addresses.company' | t }}
+                  </label>
+                  <input
+                    type="text"
+                    id="address-company-new"
+                    class="
+                      form-input
+                      h-form-element
+                      w-full
+                      rounded-form-element
+                      border-base-border
+                      bg-base-body-background
+                      text-body-medium
+                      placeholder:text-base-secondary
+                      autofill:shadow-inset-white
+                      focus:border-base-body
+                    "
+                    name="address[company]"
+                    value="{{ form.company }}"
+                    autocapitalize="words"
+                  >
+                </div>
+                <div class="mb-5">
+                  <label
+                    class="mb-1 inline-block text-base-secondary"
+                    for="address-address1-new"
+                  >
+                    {{ 'customer.addresses.address1' | t }}
+                  </label>
+                  <input
+                    type="text"
+                    id="address-address1-new"
+                    class="
+                      form-input
+                      h-form-element
+                      w-full
+                      rounded-form-element
+                      border-base-border
+                      bg-base-body-background
+                      text-body-medium
+                      placeholder:text-base-secondary
+                      autofill:shadow-inset-white
+                      focus:border-base-body
+                    "
+                    name="address[address1]"
+                    value="{{ form.address1 }}"
+                    autocapitalize="words"
+                  >
+                </div>
+                <div class="mb-5">
+                  <label
+                    class="mb-1 inline-block text-base-secondary"
+                    for="address-address2-new"
+                  >
+                    {{ 'customer.addresses.address2' | t }}
+                  </label>
+                  <input
+                    type="text"
+                    id="address-address2-new"
+                    class="
+                      form-input
+                      h-form-element
+                      w-full
+                      rounded-form-element
+                      border-base-border
+                      bg-base-body-background
+                      text-body-medium
+                      placeholder:text-base-secondary
+                      autofill:shadow-inset-white
+                      focus:border-base-body
+                    "
+                    name="address[address2]"
+                    value="{{ form.address2 }}"
+                    autocapitalize="words"
+                  >
+                </div>
+                <div class="sm:grid sm:grid-cols-2 sm:space-x-8">
+                  <div class="mb-5">
+                    <label
+                      class="mb-1 inline-block text-base-secondary"
+                      for="address-city-new"
+                    >
+                      {{ 'customer.addresses.city' | t }}
+                    </label>
+                    <input
+                      type="text"
+                      id="address-city-new"
+                      class="
+                        form-input
+                        h-form-element
+                        w-full
+                        rounded-form-element
+                        border-base-border
+                        bg-base-body-background
+                        text-body-medium
+                        placeholder:text-base-secondary
+                        autofill:shadow-inset-white
+                        focus:border-base-body
+                      "
+                      name="address[city]"
+                      value="{{ form.city }}"
+                      autocapitalize="words"
+                    >
+                  </div>
+                  <div class="mb-5">
+                    <label
+                      class="mb-1 inline-block text-base-secondary"
+                      for="address-country-new"
+                    >
+                      {{ 'customer.addresses.country' | t }}
+                    </label>
+                    <select
+                      id="address-country-new"
+                      class="
+                        form-select
+                        h-form-element
+                        w-full
+                        rounded-form-element
+                        border-base-border
+                        bg-base-body-background
+                        text-body-medium
+                      "
+                      name="address[country]"
+                      data-address-country
+                      data-default="{{ form.country }}"
+                    ></select>
+                  </div>
+                </div>
+                <div
+                  class="mb-5"
+                  data-address-province-wrapper
+                >
+                  <label
+                    class="mb-1 inline-block text-base-secondary"
+                    for="address-province-new"
+                  >
+                    {{ 'customer.addresses.province' | t }}
+                  </label>
+                  <select
+                    id="address-province-new"
+                    class="
+                      form-select
+                      h-form-element
+                      w-full
+                      rounded-form-element
+                      border-base-border
+                      bg-base-body-background
+                      text-body-medium
+                    "
+                    name="address[province]"
+                    data-default="{{ form.province }}"
+                  ></select>
+                </div>
+                <div class="mb-5">
+                  <label
+                    class="mb-1 inline-block text-base-secondary"
+                    for="address-zip-new"
+                  >
+                    {{ 'customer.addresses.zip' | t }}
+                  </label>
+                  <input
+                    type="text"
+                    id="address-zip-new"
+                    class="
+                      form-input
+                      h-form-element
+                      w-full
+                      rounded-form-element
+                      border-base-border
+                      bg-base-body-background
+                      text-body-medium
+                      placeholder:text-base-secondary
+                      autofill:shadow-inset-white
+                      focus:border-base-body
+                    "
+                    name="address[zip]"
+                    value="{{ form.zip }}"
+                    autocapitalize="characters"
+                  >
+                </div>
+                <div class="mb-5">
+                  <label
+                    class="mb-1 inline-block text-base-secondary"
+                    for="address-phone-new"
+                  >
+                    {{ 'customer.addresses.phone' | t }}
+                  </label>
+                  <input
+                    type="tel"
+                    id="address-phone-new"
+                    class="
+                      form-input
+                      h-form-element
+                      w-full
+                      rounded-form-element
+                      border-base-border
+                      bg-base-body-background
+                      text-body-medium
+                      placeholder:text-base-secondary
+                      autofill:shadow-inset-white
+                      focus:border-base-body
+                    "
+                    name="address[phone]"
+                    value="{{ form.phone }}"
+                    pattern="[0-9\-]*"
+                  >
+                </div>
+              </div>
+              <div class="custom-input relative mb-8 md:mb-10 ">
+                {{ form.set_as_default_checkbox }}
+                <label
+                  class="custom-input__label inline-flex items-center"
+                  for="address_default_address_new"
+                >
+                  <span
+                    class="
+                      custom-input__checkbox
+                      relative
+                      mr-2
+                      h-6
+                      w-6
+                      shrink-0
+                      cursor-pointer
+                      rounded-form-element
+                      border
+                      border-base-border
+                      bg-base-body-background
+                      transition-colors
+                      duration-300
+                      after:absolute
+                      after:left-1/2
+                      after:top-1/2
+                      after:z-2
+                      after:-mt-[2px]
+                      after:h-[6px]
+                      after:w-3
+                      after:-translate-x-1/2
+                      after:-translate-y-1/2
+                      after:-rotate-45
+                      after:border
+                      after:border-b-[2px]
+                      after:border-l-[2px]
+                      after:border-r-0
+                      after:border-t-0
+                      after:border-customizable-base
+                      after:opacity-0
+                      after:content-['']
+                    "
+                  ></span>
+                  <span class="custom-input__text">
+                    {{ 'customer.addresses.set_default' | t }}
+                  </span>
+                </label>
+              </div>
+              <div class="-mb-5 sm:mb-0 sm:grid sm:auto-cols-max sm:grid-flow-col sm:gap-8">
+                <div class="mb-5 sm:mb-0">
+                  {%
+                    render 'button',
+                    element: 'button',
+                    type: 'submit',
+                    class: 'w-full sm:w-auto',
+                    color: 'primary',
+                    size: 'md',
+                    locales_text: 'customer.addresses.add'
+                  %}
+                </div>
+                <div class="mb-5 sm:mb-0">
+                  {%
+                    render 'button',
+                    element: 'button',
+                    class: 'w-full sm:w-auto',
+                    color: 'secondary',
+                    size: 'md',
+                    locales_text: 'customer.addresses.cancel',
+                    data_attribute: 'data-address-toggle'
+                  %}
+                </div>
+              </div>
+            {% endform %}
+          </div>
+        </div>
+        <div class="grid gap-10">
+          {% for address in customer.addresses %}
+            <div data-address>
+              {% if address == customer.default_address %}
+                <div class="mb-6 font-heading text-h6">{{ 'customer.addresses.default' | t }}</div>
+              {% endif %}
+              <div class="border-b border-base-border pb-4 md:pb-10">
+                <div class="prose mb-4 md:mb-10">
+                  <div class="[&>p]:first-line:font-semibold xl:[&>p]:first-line:text-[18px]">
+                    {{ address | format_address }}
+                  </div>
+                </div>
+                <div class="grid auto-cols-max grid-flow-col gap-5 md:gap-8">
+                  <div>
+                    {%
+                      render 'button',
+                      element: 'button',
+                      color: 'primary',
+                      size: 'sm',
+                      locales_text: 'customer.addresses.edit',
+                      data_attribute: 'data-address-toggle'
+                    %}
+                  </div>
+                  <div>
+                    <form
+                      data-address-delete-form
+                      method="post"
+                      action="/account/addresses/{{ address.id }}"
+                      data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}"
+                    >
+                      <input
+                        type="hidden"
+                        name="_method"
+                        value="delete"
+                      >
+                      {%
+                        render 'button',
+                        element: 'button',
+                        type: 'submit',
+                        color: 'secondary',
+                        size: 'sm',
+                        locales_text: 'customer.addresses.delete'
+                      %}
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="hidden"
+                data-address-form
+              >
+                {% form 'customer_address', address, class: 'account-form text-base-body pt-10 md:py-10 md:border-t md:border-base-border' %}
+                  <h3 class="mb-6 font-heading text-h6">
+                    {{ 'customer.addresses.edit_address' | t }}
+                  </h3>
+                  <div
+                    data-address-fields
+                    class="mb-5"
+                  >
+                    <div class="sm:grid sm:grid-cols-2 sm:space-x-8">
+                      <div class="mb-5">
+                        <label
+                          class="mb-1 inline-block text-base-secondary"
+                          for="address-first-name-{{ form.id }}"
+                        >
+                          {{ 'customer.addresses.first_name' | t }}
+                        </label>
+                        <input
+                          type="text"
+                          id="address-first-name-{{ form.id }}"
+                          class="
+                            form-input
+                            h-form-element
+                            w-full
+                            rounded-form-element
+                            border-base-border
+                            bg-base-body-background
+                            text-body-medium
+                            placeholder:text-base-secondary
+                            autofill:shadow-inset-white
+                            focus:border-base-body
+                          "
+                          name="address[first_name]"
+                          value="{{ form.first_name }}"
+                          autocapitalize="words"
+                        >
+                      </div>
+                      <div class="mb-5">
+                        <label
+                          class="mb-1 inline-block text-base-secondary"
+                          for="address-last-name-{{ form.id }}"
+                        >
+                          {{ 'customer.addresses.last_name' | t }}
+                        </label>
+                        <input
+                          type="text"
+                          id="address-last-name-{{ form.id }}"
+                          class="
+                            form-input
+                            h-form-element
+                            w-full
+                            rounded-form-element
+                            border-base-border
+                            bg-base-body-background
+                            text-body-medium
+                            placeholder:text-base-secondary
+                            autofill:shadow-inset-white
+                            focus:border-base-body
+                          "
+                          name="address[last_name]"
+                          value="{{ form.last_name }}"
+                          autocapitalize="words"
+                        >
+                      </div>
+                    </div>
+                    <div class="mb-5">
+                      <label
+                        class="mb-1 inline-block text-base-secondary"
+                        for="address-company-{{ form.id }}"
+                      >
+                        {{ 'customer.addresses.company' | t }}
+                      </label>
+                      <input
+                        type="text"
+                        id="address-company-{{ form.id }}"
+                        class="
+                          form-input
+                          h-form-element
+                          w-full
+                          rounded-form-element
+                          border-base-border
+                          bg-base-body-background
+                          text-body-medium
+                          placeholder:text-base-secondary
+                          autofill:shadow-inset-white
+                          focus:border-base-body
+                        "
+                        name="address[company]"
+                        value="{{ form.company }}"
+                        autocapitalize="words"
+                      >
+                    </div>
+                    <div class="mb-5">
+                      <label
+                        class="mb-1 inline-block text-base-secondary"
+                        for="address-address1-{{ form.id }}"
+                      >
+                        {{ 'customer.addresses.address1' | t }}
+                      </label>
+                      <input
+                        type="text"
+                        id="address-address1-{{ form.id }}"
+                        class="
+                          form-input
+                          h-form-element
+                          w-full
+                          rounded-form-element
+                          border-base-border
+                          bg-base-body-background
+                          text-body-medium
+                          placeholder:text-base-secondary
+                          autofill:shadow-inset-white
+                          focus:border-base-body
+                        "
+                        name="address[address1]"
+                        value="{{ form.address1 }}"
+                        autocapitalize="words"
+                      >
+                    </div>
+                    <div class="mb-5">
+                      <label
+                        class="mb-1 inline-block text-base-secondary"
+                        for="address-address2-{{ form.id }}"
+                      >
+                        {{ 'customer.addresses.address2' | t }}
+                      </label>
+                      <input
+                        type="text"
+                        id="address-address2-{{ form.id }}"
+                        class="
+                          form-input
+                          h-form-element
+                          w-full
+                          rounded-form-element
+                          border-base-border
+                          bg-base-body-background
+                          text-body-medium
+                          placeholder:text-base-secondary
+                          autofill:shadow-inset-white
+                          focus:border-base-body
+                        "
+                        name="address[address2]"
+                        value="{{ form.address2 }}"
+                        autocapitalize="words"
+                      >
+                    </div>
+                    <div class="sm:grid sm:grid-cols-2 sm:space-x-8">
+                      <div class="mb-5">
+                        <label
+                          class="mb-1 inline-block text-base-secondary"
+                          for="address-city-{{ form.id }}"
+                        >
+                          {{ 'customer.addresses.city' | t }}
+                        </label>
+                        <input
+                          type="text"
+                          id="address-city-{{ form.id }}"
+                          class="
+                            form-input
+                            h-form-element
+                            w-full
+                            rounded-form-element
+                            border-base-border
+                            bg-base-body-background
+                            text-body-medium
+                            placeholder:text-base-secondary
+                            autofill:shadow-inset-white
+                            focus:border-base-body
+                          "
+                          name="address[city]"
+                          value="{{ form.city }}"
+                          autocapitalize="words"
+                        >
+                      </div>
+                      <div class="mb-5">
+                        <label
+                          class="mb-1 inline-block text-base-secondary"
+                          for="address-country-{{ form.id }}"
+                        >
+                          {{ 'customer.addresses.country' | t }}
+                        </label>
+                        <select
+                          id="address-country-{{ form.id }}"
+                          class="
+                            address-country-option
+                            form-select
+                            h-form-element
+                            w-full
+                            rounded-form-element
+                            border-base-border
+                            bg-base-body-background
+                            text-body-medium
+                          "
+                          name="address[country]"
+                          data-address-country
+                          data-form-id="{{ form.id }}"
+                          data-default="{{ form.country }}"
+                        ></select>
+                      </div>
+                    </div>
+                    <div
+                      class="mb-5"
+                      id="AddressProvinceContainer_{{ form.id }}"
+                      data-address-province-wrapper
+                    >
+                      <label
+                        class="mb-1 inline-block text-base-secondary"
+                        for="address-province-{{ form.id }}"
+                      >
+                        {{ 'customer.addresses.province' | t }}
+                      </label>
+                      <select
+                        id="address-province-{{ form.id }}"
+                        class="
+                          address-province-option
+                          form-select
+                          h-form-element
+                          w-full
+                          rounded-form-element
+                          border-base-border
+                          bg-base-body-background
+                          text-body-medium
+                        "
+                        name="address[province]"
+                        data-address-province
+                        data-default="{{ form.province }}"
+                      ></select>
+                    </div>
+                    <div class="mb-5">
+                      <label
+                        class="mb-1 inline-block text-base-secondary"
+                        for="address-zip-{{ form.id }}"
+                      >
+                        {{ 'customer.addresses.zip' | t }}
+                      </label>
+                      <input
+                        type="text"
+                        id="address-zip-{{ form.id }}"
+                        class="
+                          form-input
+                          h-form-element
+                          w-full
+                          rounded-form-element
+                          border-base-border
+                          bg-base-body-background
+                          text-body-medium
+                          placeholder:text-base-secondary
+                          autofill:shadow-inset-white
+                          focus:border-base-body
+                        "
+                        name="address[zip]"
+                        value="{{ form.zip }}"
+                        autocapitalize="characters"
+                      >
+                    </div>
+                    <div class="mb-5">
+                      <label
+                        class="mb-1 inline-block text-base-secondary"
+                        for="address-phone-{{ form.id }}"
+                      >
+                        {{ 'customer.addresses.phone' | t }}
+                      </label>
+                      <input
+                        type="tel"
+                        id="address-phone-{{ form.id }}"
+                        class="
+                          form-input
+                          h-form-element
+                          w-full
+                          rounded-form-element
+                          border-base-border
+                          bg-base-body-background
+                          text-body-medium
+                          placeholder:text-base-secondary
+                          autofill:shadow-inset-white
+                          focus:border-base-body
+                        "
+                        name="address[phone]"
+                        value="{{ form.phone }}"
+                        pattern="[0-9\-]*"
+                      >
+                    </div>
+                  </div>
+                  <div class="custom-input relative mb-8 md:mb-10">
+                    {{ form.set_as_default_checkbox }}
+                    <label
+                      class="custom-input__label inline-flex items-center"
+                      for="address_default_address_{{ form.id }}"
+                    >
+                      <span
+                        class="
+                          custom-input__checkbox
+                          relative
+                          mr-2
+                          h-6
+                          w-6
+                          shrink-0
+                          cursor-pointer
+                          rounded-form-element
+                          border
+                          border-base-border
+                          bg-base-body-background
+                          transition-colors
+                          duration-300
+                          after:absolute
+                          after:left-1/2
+                          after:top-1/2
+                          after:z-2
+                          after:-mt-[2px]
+                          after:h-[6px]
+                          after:w-3
+                          after:-translate-x-1/2
+                          after:-translate-y-1/2
+                          after:-rotate-45
+                          after:border
+                          after:border-b-[2px]
+                          after:border-l-[2px]
+                          after:border-r-0
+                          after:border-t-0
+                          after:border-customizable-base
+                          after:opacity-0
+                          after:content-['']
+                        "
+                      ></span>
+                      {{ 'customer.addresses.set_default' | t }}
+                    </label>
+                  </div>
+                  <div class="-mb-5 sm:mb-0 sm:grid sm:auto-cols-max sm:grid-flow-col sm:gap-8">
+                    <div class="mb-5 sm:mb-0">
+                      {%
+                        render 'button',
+                        element: 'button',
+                        type: 'submit',
+                        class: 'w-full sm:w-auto',
+                        color: 'primary',
+                        size: 'md',
+                        locales_text: 'customer.addresses.update'
+                      %}
+                    </div>
+                    <div class="mb-5 sm:mb-0">
+                      {% capture button_data_attribute %}
+                        data-address-toggle data-form-id = "{{ form.id }}"
+                      {% endcapture %}
+                      {%
+                        render 'button',
+                        element: 'button',
+                        class: 'w-full sm:w-auto',
+                        color: 'secondary',
+                        size: 'md',
+                        locales_text: 'customer.addresses.cancel',
+                        data_attribute: button_data_attribute
+                      %}
+                    </div>
+                  </div>
+                {% endform %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        {% if paginate.pages > 1 %}
+          <div class="pt-6">
+            {% render 'pagination' %}
+          </div>
+        {% endif %}
+      {% endpaginate %}
+    </div>
+  </div>
+</section>
+
+<link
+  rel="stylesheet"
+  href="{{ 'custom-forms.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>

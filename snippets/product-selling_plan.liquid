@@ -1,0 +1,198 @@
+{% if product.selling_plan_groups != blank %}
+  <div class="mb-3 sm:flex">
+    <div class="w-100 md:w-10/12 xl:w-6/12">
+      <form action="#">
+        {% liquid
+          if current_variant.selected_selling_plan_allocation
+            assign current_selling_plan_allocation = current_variant.selected_selling_plan_allocation
+          else
+            assign current_selling_plan_allocation = current_variant.selling_plan_allocations[0]
+          endif
+
+          assign price = current_selling_plan_allocation.price
+          assign compare_at_price = current_selling_plan_allocation.compare_at_price
+          assign price_format = price | money
+          assign compare_at_price_format = compare_at_price | money
+          assign discount_amount = compare_at_price | minus: price | money_without_currency
+          assign discount_percentage = discount_amount | times: 10000 | divided_by: compare_at_price | ceil
+        %}
+        <fieldset data-selling-plan-fieldset>
+          <legend class="sr-only">Product options</legend>
+          <div class="pl-4">
+            {% for group in product.selling_plan_groups %}
+              <div class="mb-5">
+                <div class="relative">
+                  <input
+                    type="radio"
+                    class="
+                      peer
+                      absolute
+                      left-0
+                      top-0
+                      -z-1
+                      opacity-0
+                    "
+                    id="purchase_field_{{ forloop.index }}"
+                    name="purchase_option"
+                    data-selling-plan-input
+                    {% if current_variant.selected_selling_plan_allocation %}
+                      checked
+                    {% endif %}
+                  >
+                  <label
+                    class="
+                      relative
+                      pl-10
+                      before:absolute
+                      before:left-0
+                      before:top-1/2
+                      before:z-2
+                      before:h-6
+                      before:w-6
+                      before:-translate-y-1/2
+                      before:rounded-full
+                      before:border
+                      before:border-base-body
+                      before:bg-base-body-background
+                      before:transition-colors
+                      before:duration-300
+                      after:absolute
+                      after:left-[6px]
+                      after:top-1/2
+                      after:z-2
+                      after:h-3
+                      after:w-3
+                      after:-translate-y-1/2
+                      after:rounded-full
+                      after:bg-base-body
+                      after:opacity-0
+                      after:transition-opacity
+                      after:duration-300
+                      after:ease-in-out
+                      after:content-['']
+                      peer-checked:after:opacity-100
+                    "
+                    for="purchase_field_{{ forloop.index }}"
+                    data-label-text
+                  >
+                    {{ 'products.product.with_subscription' | t }}
+                    <span data-discount-percentage>{{ discount_percentage }}%</span>
+                    <span data-price>
+                      {{ price_format }}
+                    </span>
+                  </label>
+                </div>
+                <div
+                  class="pt-3"
+                  data-select-container
+                >
+                  <label
+                    class="sr-only"
+                    for="purchase_field_{{ forloop.index }}"
+                  >
+                    {{ 'products.product.with_subscription' | t: discount_percentage: discount_percentage, price: price_format }}
+                  </label>
+                  <select
+                    id="purchase_field_{{ forloop.index }}"
+                    class="
+                      w-100
+                      form-select
+                      rounded-[var(--form-element-border-radius)]
+                      border-base-border
+                      bg-base-body-background
+                      text-body-medium
+                    "
+                    data-select
+                  >
+                    {% for selling_plan in group.selling_plans %}
+                      <option
+                        value="{{ selling_plan.id }}"
+                        {% if selling_plan.id == current_variant.selected_selling_plan_allocation.selling_plan.id %}
+                          selected
+                        {% endif %}
+                      >
+                        {{ selling_plan.name }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            {% endfor %}
+            <div class="mb-5">
+              <div class="relative">
+                <input
+                  type="radio"
+                  class="
+                    peer
+                    absolute
+                    left-0
+                    top-0
+                    -z-1
+                    opacity-0
+                  "
+                  id="without_selling_plan"
+                  name="purchase_option"
+                  data-without-selling-plan-input
+                  {% unless current_variant.selected_selling_plan_allocation %}
+                    checked
+                  {% endunless %}
+                >
+                <label
+                  class="
+                    relative
+                    pl-10
+                    before:absolute
+                    before:left-0
+                    before:top-1/2
+                    before:z-2
+                    before:h-6
+                    before:w-6
+                    before:-translate-y-1/2
+                    before:rounded-full
+                    before:border
+                    before:border-base-body
+                    before:bg-base-body-background
+                    before:transition-colors
+                    before:duration-300
+                    after:absolute
+                    after:left-[6px]
+                    after:top-1/2
+                    after:z-2
+                    after:h-3
+                    after:w-3
+                    after:-translate-y-1/2
+                    after:rounded-full
+                    after:bg-base-body
+                    after:opacity-0
+                    after:transition-opacity
+                    after:duration-300
+                    after:ease-in-out
+                    after:content-['']
+                    peer-checked:after:opacity-100
+                  "
+                  for="without_selling_plan"
+                >
+                  {{ 'products.product.without_subscription' | t }}
+                  <span data-compare-at-price>
+                    {{ compare_at_price_format }}
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          {% if block.settings.subscription_details_text != blank and block.settings.subscription_details_link != blank %}
+            <a
+              href="{{ block.settings.subscription_details_link }}"
+              class="inline-flex items-center no-underline hover:underline"
+            >
+              <div class="mr-2 shrink-0">
+                {%- render 'icon' with 'reload' -%}
+              </div>
+              {{ block.settings.subscription_details_text }}
+            </a>
+          {% endif %}
+        </fieldset>
+      </form>
+    </div>
+  </div>
+{% endif %}

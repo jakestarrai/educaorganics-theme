@@ -1,0 +1,271 @@
+{% case media.media_type %}
+  {% when 'image' %}
+    <div
+      class="splide__slide"
+      data-product-slider
+    >
+      <div class="flex h-full w-full overflow-hidden {{ slide_rounded }}">
+        <div
+          class="group/thumbnails:shadow-xs-inset relative w-full"
+          data-position="{{ media.position }}"
+        >
+          {%
+            render 'image',
+            class: 'w-full h-full max-w-full object-cover',
+            src: media,
+            m: image_size_mobile,
+            src_d: media,
+            d: image_size_desktop,
+            alt: media.alt,
+            lazyload: lazyload,
+            fetchpriority: fetchpriority_value
+          %}
+        </div>
+      </div>
+    </div>
+  {% when 'external_video' %}
+    <div
+      class="splide__slide"
+      data-product-slider
+    >
+      <div class="flex h-full w-full items-center overflow-hidden {{ slide_rounded }}">
+        <deferred-media
+          class="
+            deferred-media
+            media
+            product-gallery__img
+            fluid-iframe
+            relative
+            block
+            h-[0]
+            w-full
+            overflow-hidden
+            pt-[100%]
+            md:pt-[56.25%]
+            {{ slide_rounded }}
+          "
+          data-media-id="{{ media.id }}"
+        >
+          <button
+            id="Deferred-Poster-Modal-{{ media.id }}"
+            class="
+              deferred-media__poster
+              absolute
+              left-0
+              top-0
+              h-full
+              w-full
+              transition-opacity
+              duration-300
+              ease-in-out
+            "
+            type="button"
+          >
+            <span class="
+                motion-reduce
+                absolute
+                left-1/2
+                top-1/2
+                z-1
+                flex
+                h-15
+                w-15
+                -translate-x-1/2
+                -translate-y-1/2
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-base-body-background
+                bg-base-body-background
+                text-base-body
+                transition-transform
+                duration-300
+                ease-in-out
+                hover:scale-110
+              ">
+              {%- render 'icon', icon: 'play', class: 'w-6 h-6 ml-1' -%}
+            </span>
+            {%
+              render 'image',
+              src: media,
+              m: image_size_mobile,
+              src_d: media,
+              d: image_size_desktop,
+              alt: media.alt,
+              lazyload: lazyload,
+              fetchpriority: fetchpriority_value
+            %}
+          </button>
+          <template>
+            {%- assign video_class = 'js-' | append: media.host -%}
+            {%- if media.host == 'youtube' -%}
+              {{ media | external_video_url: attribute: string, autoplay: true, loop: loop, playlist: media.external_id | external_video_tag: class: video_class, loading: "lazy" }}
+            {%- else -%}
+              {{ media | external_video_url: attribute: string, autoplay: true, loop: loop | external_video_tag: class: video_class, loading: "lazy" }}
+            {%- endif -%}
+          </template>
+        </deferred-media>
+      </div>
+    </div>
+  {% when 'video' %}
+    <div
+      class="splide__slide"
+      data-product-slider
+    >
+      <div class="flex h-full w-full items-center overflow-hidden {{ slide_rounded }}">
+        <div
+          class="background-video-wrapper relative aspect-video w-full"
+          data-section-type="video"
+          data-section-id="{{ section.id }}"
+        >
+          {% assign video_poster = media | image_url: width: media.preview_image.width %}
+          {% if thumbnails_media %}
+            {{ media | image_url: width: media.preview_image.width | image_tag }}
+          {% else %}
+            {% for video in media.sources %}
+              {% if video.url contains '.mp4' %}
+                {% assign video_src = video.url %}
+              {% endif %}
+            {% endfor %}
+            <video
+              class="absolute left-0 top-0 z-1 h-full w-full object-cover"
+              poster="{{ video_poster }}"
+              data-video-src="{{ video_src }}"
+              preload="none"
+              controls="false"
+              playsinline
+              autoplay
+              loop
+              muted
+            ></video>
+          {% endif %}
+          <div class="
+              pointer-events-none
+              absolute
+              inset-0
+              z-5
+              px-10
+              py-5
+              md:p-10
+            ">
+            <div class="flex h-full items-center justify-center text-center">
+              <div class="video-text-block__holder sm:w-10/12 md:w-6/12 lg:w-4/12 [&>*]:pointer-events-auto">
+                {% if section.settings.title %}
+                  {% if section.settings.text_size == 'medium' %}
+                    <h2 class="font-heading text-h2 lg:text-h2-desktop">{{ section.settings.title }}</h2>
+                  {% else %}
+                    <h2 class="font-heading text-h1 lg:text-h1-desktop">{{ section.settings.title }}</h2>
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% when 'model' %}
+    <div
+      class="splide__slide"
+      data-product-slider
+    >
+      <div class="flex h-full w-full items-center overflow-hidden {{ slide_rounded }}">
+        <div class="model-viewer-block relative w-full pt-[100%] {% unless thumbnails_media %} product-gallery-slider__item {% endunless %}">
+          <product-model
+            class="
+              deferred-media
+              media
+              media--transparent
+              absolute
+              left-0
+              top-0
+              block
+              h-full
+              w-full
+              overflow-hidden
+            "
+            {% unless thumbnails_media %}
+              data-product-model
+            {% endunless %}
+          >
+            <button
+              id="Deferred-Poster-Modal-{{ media.id }}"
+              class="
+                deferred-media__poster
+                block
+                w-full
+                transition-opacity
+                duration-300
+                ease-in-out
+              "
+              type="button"
+            >
+              <span class="
+                  motion-reduce
+                  absolute
+                  left-1/2
+                  top-1/2
+                  z-1
+                  flex
+                  h-15
+                  w-15
+                  -translate-x-1/2
+                  -translate-y-1/2
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-base-body-background
+                  bg-base-body-background
+                  text-base-body
+                  transition-transform
+                  duration-300
+                  ease-in-out
+                  hover:scale-110
+                ">
+                {%- render 'icon', icon: 'play', class: 'w-6 h-6 ml-1' -%}
+              </span>
+              {% if main %}
+                {%
+                  render 'image',
+                  src: media,
+                  m: image_size_mobile,
+                  src_d: media,
+                  d: image_size_desktop,
+                  alt: media.alt,
+                  lazyload: lazyload,
+                  fetchpriority: fetchpriority_value
+                %}
+              {% else %}
+                {%
+                  render 'image',
+                  src: media,
+                  m: image_size_mobile,
+                  src_d: media,
+                  d: image_size_desktop,
+                  alt: media.alt,
+                  lazyload: lazyload,
+                  fetchpriority: fetchpriority_value
+                %}
+              {% endif %}
+            </button>
+            <template>
+              {%- case media.media_type -%}
+                {%- when 'model' -%}
+                  {{ media | media_tag: image_size: "2048x", toggleable: true }}
+              {%- endcase -%}
+            </template>
+          </product-model>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div
+      class="splide__slide pt-[100%]"
+      data-media-id="{{ media.id }}"
+    >
+      <div class="flex h-full w-full items-center overflow-hidden {{ slide_rounded }}">
+        {{ media | media_tag: image_size: image_size_desktop }}
+      </div>
+    </div>
+{% endcase %}

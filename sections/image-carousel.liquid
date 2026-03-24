@@ -1,0 +1,674 @@
+<link
+  rel="stylesheet"
+  href="{{ 'splide-gallery.css' | asset_url }}"
+  media="all"
+  {% if section.settings.enable_lazyload %}
+    fetchpriority="low"
+  {% else %}
+    fetchpriority="low"
+  {% endif %}
+>
+
+<section
+  id="image-carousel-{{ section.id }}"
+  class="py-16 lg:py-30"
+  data-section-type="image-carousel"
+  data-section-id="{{ section.id }}"
+>
+  <div class="container max-w-screen-3xl">
+    <div class="text-center">
+      {%- if section.settings.subtitle != blank -%}
+        <div class="
+            text-green
+            mb-4
+            text-caps-s
+            uppercase
+            last:mb-0
+            md:mb-6
+            lg:text-h6
+          ">
+          {{ section.settings.subtitle }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="
+            text-green
+            mb-6
+            font-heading
+            text-h2
+            last:mb-0
+            md:mb-0
+            lg:text-h1-desktop
+          ">
+          {{ section.settings.title }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="
+            prose
+            mb-6
+            px-10
+            text-body-xs
+            last:mb-0
+            md:mb-9
+            md:hidden
+          ">
+          {{ section.settings.text }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {% capture gallery_layout_1 %}
+    <div
+      class="overflow-hidden"
+      data-layout="{{ section.settings.gallery_layout }}"
+    >
+      <div class="mx-auto my-6 max-w-[1920px] lg:mb-9 lg:mt-11">
+        <div
+          class="splide image-carousel-thumbnails"
+          role="group"
+          aria-label="Image carousel with thumbnails"
+        >
+          <div class="splide__track">
+            <ul class="splide__list">
+              {% for block in section.blocks %}
+                {% if block.settings.image != blank %}
+                  <li
+                    class="
+                      splide__slide
+                      group/slide
+                      flex
+                      items-center
+                      justify-center
+                      overflow-hidden
+                      rounded-full
+                      !border-none
+                    "
+                    {{ block.shopify_attributes }}
+                  >
+                    <div class="
+                        h-25
+                        w-25
+                        rounded-full
+                        border-solid
+                        border-transparent
+                        transition-[height,width,border-width]
+                        duration-300
+                        ease-in-out
+                        group-[&.is-active]/slide:h-50
+                        group-[&.is-active]/slide:w-50
+                        group-[&.is-active]/slide:border-[10px]
+                        group-[&.is-active]/slide:border-base-accent
+                        group-[&.is-active]/slide:p-4
+                        lg:h-40
+                        lg:w-40
+                        lg:group-[&.is-active]/slide:h-92
+                        lg:group-[&.is-active]/slide:w-92
+                        lg:group-[&.is-active]/slide:border-[16px]
+                        lg:group-[&.is-active]/slide:p-4
+                      ">
+                      {%
+                        render 'image',
+                        class: 'object-cover w-full h-full rounded-full',
+                        src: block.settings.image,
+                        m: '148x148',
+                        d: '276x276',
+                        crop: 'center',
+                        lazyload: true,
+                        fetchpriority: 'low'
+                      %}
+                    </div>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="container max-w-screen-3xl">
+        <div
+          class="splide image-carousel mx-auto max-w-[648px] px-6"
+          role="group"
+          aria-label="Image carousel thumbnails"
+        >
+          <div class="
+              splide__arrows
+              hidden
+              lg:pointer-events-none
+              lg:absolute
+              lg:-left-36
+              lg:-right-36
+              lg:top-10
+              lg:z-3
+              lg:flex
+              lg:items-center
+              lg:justify-between
+            ">
+            <button
+              class="
+                splide__arrow
+                splide__arrow--prev
+                group/button
+                !bg-transparent
+                text-june-dark
+                !opacity-100
+                hover:!bg-base-accent
+                lg:pointer-events-auto
+                lg:relative
+                lg:!h-16
+                lg:!w-16
+              "
+              aria-label="Previous slide"
+            >
+              {%
+                render 'icon',
+                icon: 'arrow-right-circle',
+                class: '
+                !fill-none
+                !h-16
+                !w-16
+                transition-opacity
+                duration-300
+                ease-in-out
+                group-hover/button:opacity-0
+                group-focus/button:opacity-0
+                '
+              %}
+              {%
+                render 'icon',
+                icon: 'arrow-right-circle-filled',
+                class: '
+                !fill-none
+                lg:!h-17
+                lg:!w-17
+                absolute
+                -left-[2px]
+                -top-[2px]
+                !opacity-0
+                transition-opacity
+                duration-300
+                ease-in-out
+                group-hover/button:!opacity-100
+                group-focus/button:!opacity-100
+                '
+              %}
+            </button>
+            <button
+              class="
+                splide__arrow
+                splide__arrow--next
+                group/button
+                !bg-transparent
+                text-june-dark
+                !opacity-100
+                hover:!bg-base-accent
+                lg:pointer-events-auto
+                lg:relative
+                lg:!h-16
+                lg:!w-16
+              "
+              aria-label="Next slide"
+            >
+              {%
+                render 'icon',
+                icon: 'arrow-right-circle',
+                class: '
+                !fill-none
+                lg:!h-16
+                lg:!w-16
+                transition-opacity
+                duration-300
+                ease-in-out
+                group-hover/button:opacity-0
+                group-focus/button:opacity-0
+                '
+              %}
+              {%
+                render 'icon',
+                icon: 'arrow-right-circle-filled',
+                class: '
+                !fill-none
+                lg:!h-17
+                lg:!w-17
+                absolute
+                -left-[2px]
+                -top-[2px]
+                !opacity-0
+                transition-opacity
+                duration-300
+                ease-in-out
+                group-hover/button:!opacity-100
+                group-focus/button:!opacity-100
+                '
+              %}
+            </button>
+          </div>
+
+          <div class="splide__track">
+            <ul class="splide__list">
+              {% for block in section.blocks %}
+                {% if block.settings.image != blank %}
+                  <li
+                    class="splide__slide custom_slide"
+                    {{ block.shopify_attributes }}
+                  >
+                    <div class="text-center">
+                      {% if block.settings.title != blank %}
+                        <h3 class="mb-6 font-heading text-h4 lg:text-h4-desktop">{{ block.settings.title }}</h3>
+                      {% endif %}
+                      {% if block.settings.richtext != blank %}
+                        <div class="prose mb-6 text-body-xs lg:text-body-small">
+                          {{ block.settings.richtext }}
+                        </div>
+                      {% endif %}
+                    </div>
+
+                    {% if block.settings.additional_richtext != blank %}
+                      <div class="
+                          prose
+                          grid
+                          gap-2
+                          border-t
+                          border-black
+                          pt-4
+                          text-[12px]
+                          leading-3
+                          [&_p]:mb-0
+                        ">
+                        {{ block.settings.additional_richtext }}
+                      </div>
+                    {% endif %}
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endcapture %}
+
+  {% capture gallery_layout_2 %}
+    <div
+      class="overflow-hidden"
+      data-layout="{{ section.settings.gallery_layout }}"
+    >
+      <div class="mx-auto my-6 max-w-screen-3xl lg:mb-9 lg:mt-11">
+        <div
+          class="splide image-carousel-thumbnails"
+          role="group"
+          aria-label="Image carousel with thumbnails"
+        >
+          <div class="
+              splide__arrows
+              pointer-events-none
+              absolute
+              left-2
+              right-2
+              top-1/2
+              z-3
+              flex
+              translate-y-[-50%]
+              items-center
+              justify-between
+              max-[374px]:-left-1
+              max-[374px]:-right-1
+              md:hidden
+            ">
+            <button
+              class="
+                splide__arrow
+                splide__arrow--prev
+                group/button
+                pointer-events-auto
+                relative
+                !h-12
+                !w-12
+                !bg-transparent
+                text-june-dark
+                !opacity-100
+              "
+              aria-label="Previous slide"
+            >
+              {%
+                render 'icon',
+                icon: 'arrow-right-circle',
+                class: '!fill-none !h-12 !w-12'
+              %}
+            </button>
+            <button
+              class="
+                splide__arrow
+                splide__arrow--next
+                group/button
+                pointer-events-auto
+                relative
+                !h-12
+                !w-12
+                !bg-transparent
+                text-june-dark
+                !opacity-100
+              "
+              aria-label="Next slide"
+            >
+              {%
+                render 'icon',
+                icon: 'arrow-right-circle',
+                class: '!fill-none !h-12 !w-12'
+              %}
+            </button>
+          </div>
+
+          <div class="splide__track">
+            <ul class="splide__list">
+              {% for block in section.blocks %}
+                {% if block.settings.image != blank %}
+                  <li
+                    class="
+                      splide__slide
+                      group/slide
+                      flex
+                      items-center
+                      justify-center
+                      overflow-hidden
+                      rounded-full
+                      !border-none
+                    "
+                    {{ block.shopify_attributes }}
+                  >
+                    <div class="
+                        h-25
+                        w-25
+                        rounded-full
+                        border-solid
+                        border-transparent
+                        transition-[height,width,border-width]
+                        duration-300
+                        ease-in-out
+                        group-[&.is-active]/slide:h-53
+                        group-[&.is-active]/slide:w-53
+                        group-[&.is-active]/slide:border-[10px]
+                        group-[&.is-active]/slide:border-base-accent
+                        group-[&.is-active]/slide:p-4
+                        lg:h-40
+                        lg:w-40
+                        lg:group-[&.is-active]/slide:h-92
+                        lg:group-[&.is-active]/slide:w-92
+                        lg:group-[&.is-active]/slide:border-[16px]
+                        lg:group-[&.is-active]/slide:p-4
+                      ">
+                      {%
+                        render 'image',
+                        class: 'object-cover w-full h-full rounded-full',
+                        src: block.settings.image,
+                        m: '158x158',
+                        d: '276x276',
+                        crop: 'center',
+                        lazyload: true,
+                        fetchpriority: 'low'
+                      %}
+                    </div>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="container max-w-screen-3xl">
+        <div
+          class="splide image-carousel mx-auto max-w-[648px] px-6"
+          role="group"
+          aria-label="Image carousel thumbnails"
+        >
+          <div class="
+              splide__arrows
+              hidden
+              lg:pointer-events-none
+              lg:absolute
+              lg:-left-36
+              lg:-right-36
+              lg:top-10
+              lg:z-3
+              lg:flex
+              lg:items-center
+              lg:justify-between
+            ">
+            <button
+              class="
+                splide__arrow
+                splide__arrow--prev
+                group/button
+                !bg-transparent
+                text-june-dark
+                !opacity-100
+                hover:!bg-base-accent
+                lg:pointer-events-auto
+                lg:relative
+                lg:!h-16
+                lg:!w-16
+              "
+              aria-label="Previous slide"
+            >
+              {%
+                render 'icon',
+                icon: 'arrow-right-circle',
+                class: '
+                !fill-none
+                !h-16
+                !w-16
+                transition-opacity
+                duration-300
+                ease-in-out
+                group-hover/button:opacity-0
+                group-focus/button:opacity-0
+                '
+              %}
+              {%
+                render 'icon',
+                icon: 'arrow-right-circle-filled',
+                class: '
+                !fill-none
+                lg:!h-17
+                lg:!w-17
+                absolute
+                -left-[2px]
+                -top-[2px]
+                !opacity-0
+                transition-opacity
+                duration-300
+                ease-in-out
+                group-hover/button:!opacity-100
+                group-focus/button:!opacity-100
+                '
+              %}
+            </button>
+            <button
+              class="
+                splide__arrow
+                splide__arrow--next
+                group/button
+                !bg-transparent
+                text-june-dark
+                !opacity-100
+                hover:!bg-base-accent
+                lg:pointer-events-auto
+                lg:relative
+                lg:!h-16
+                lg:!w-16
+              "
+              aria-label="Next slide"
+            >
+              {%
+                render 'icon',
+                icon: 'arrow-right-circle',
+                class: '
+                !fill-none
+                lg:!h-16
+                lg:!w-16
+                transition-opacity
+                duration-300
+                ease-in-out
+                group-hover/button:opacity-0
+                group-focus/button:opacity-0
+                '
+              %}
+              {%
+                render 'icon',
+                icon: 'arrow-right-circle-filled',
+                class: '
+                !fill-none
+                lg:!h-17
+                lg:!w-17
+                absolute
+                -left-[2px]
+                -top-[2px]
+                !opacity-0
+                transition-opacity
+                duration-300
+                ease-in-out
+                group-hover/button:!opacity-100
+                group-focus/button:!opacity-100
+                '
+              %}
+            </button>
+          </div>
+
+          <div class="splide__track">
+            <ul class="splide__list">
+              {% for block in section.blocks %}
+                <li
+                  class="splide__slide custom_slide"
+                  {{ block.shopify_attributes }}
+                >
+                  <div class="text-center">
+                    {% if block.settings.title != blank %}
+                      <h3 class="mb-6 font-heading text-h4 lg:text-h4-desktop">{{ block.settings.title }}</h3>
+                    {% endif %}
+                    {% if block.settings.richtext != blank %}
+                      <div class="prose mb-6 text-body-xs lg:text-body-small">
+                        {{ block.settings.richtext }}
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  {% if block.settings.additional_richtext != blank %}
+                    <div class="
+                        prose
+                        grid
+                        gap-2
+                        border-t
+                        border-black
+                        pt-4
+                        text-[12px]
+                        leading-3
+                        [&_p]:mb-0
+                      ">
+                      {{ block.settings.additional_richtext }}
+                    </div>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endcapture %}
+
+  {% if section.settings.gallery_layout == 'gallery_layout_1' %}
+    {{ gallery_layout_1 }}
+  {% else %}
+    {{ gallery_layout_2 }}
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Image carousel",
+  "settings": [
+    {
+      "type": "select",
+      "id": "gallery_layout",
+      "label": "Gallery layout",
+      "default": "gallery_layout_1",
+      "options": [
+        {
+          "value": "gallery_layout_1",
+          "label": "Layout 1"
+        },
+        {
+          "value": "gallery_layout_2",
+          "label": "Layout 2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>They’re highly studied. Always active. And proven to work.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Slide",
+      "type": "image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Lactobacillus acidophilus DDS-1"
+        },
+        {
+          "type": "richtext",
+          "id": "richtext",
+          "label": "Content",
+          "default": "<p>Lactobacillus acidophilus DDS-1</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "additional_richtext",
+          "label": "Additional content",
+          "default": "<p>Lactobacillus acidophilus DDS-1</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image carousel",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

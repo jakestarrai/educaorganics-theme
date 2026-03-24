@@ -1,0 +1,104 @@
+<div class="border-t border-base-border last:border-b">
+  <details-utils
+    animate
+    force-restore
+  >
+    <details
+      class="js-filter group/filter-item"
+      data-index="{{ forloop.index }}"
+    >
+      <summary class="
+          flex
+          cursor-pointer
+          items-center
+          justify-between
+          py-3
+          transition-all
+          duration-300
+          ease-in-out
+          [&::-webkit-details-marker]:hidden
+        ">
+        {{ filter.label }}
+        <span
+          class="
+            relative
+            mx-4
+            inline-block
+            h-6
+            w-6
+            shrink-0
+            before:absolute
+            before:left-1/2
+            before:top-1/2
+            before:h-[2px]
+            before:w-[64%]
+            before:-translate-x-1/2
+            before:-translate-y-1/2
+            before:bg-current
+            before:content-['']
+            after:absolute
+            after:left-1/2
+            after:top-1/2
+            after:h-[2px]
+            after:w-[64%]
+            after:-translate-x-1/2
+            after:-translate-y-1/2
+            after:rotate-90
+            after:bg-current
+            after:content-['']
+            after:group-open/filter-item:rotate-180
+            lg:ml-0
+          "
+        ></span>
+      </summary>
+
+      <div
+        class="overflow-hidden"
+        data-filter-slide-container
+      >
+        {% for value in filter.values %}
+          {% unless forloop.index > 5 %}
+            <div class="flex items-center py-3">
+              <input
+                type="checkbox"
+                id="Filter-{{ value.param_name }}-{{ forloop.index }}"
+                class="
+                  peer
+                  form-checkbox
+                  mr-2
+                  h-6
+                  w-6
+                  shrink-0
+                  rounded-form-element
+                  border-base-border
+                  bg-base-body-background
+                  text-base-body
+                  checked:bg-[length:75%_75%]
+                  focus:ring-0
+                  focus:ring-opacity-0
+                  focus:ring-offset-0
+                  focus:ring-offset-transparent
+                  disabled:bg-base-accent
+                "
+                value="{{ value.value }}"
+                name="{{ value.param_name }}"
+                {% if value.active -%}
+                  checked
+                {%- endif %}
+                {% if value.count == 0 and value.active == false -%}
+                  disabled
+                {%- endif %}
+              >
+              <label
+                for="Filter-{{ value.param_name }}-{{ forloop.index }}"
+                class="w-full peer-disabled:text-base-secondary"
+              >
+                {{ value.label }} ({{ value.count }})
+              </label>
+            </div>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </details>
+  </details-utils>
+</div>

@@ -1,0 +1,172 @@
+<section class="container max-w-screen-3xl max-lg:px-3">
+  <div class="
+      relative
+      rounded-bl-2xl
+      bg-june-5
+      px-6
+      pb-9
+      pt-10
+      md:p-10
+      md:pt-20
+      xl:p-20
+      xl:pt-30
+    ">
+    <div class="
+        mb-10
+        flex
+        flex-col
+        gap-6
+        last:mb-0
+        lg:mb-20
+        lg:gap-10
+        xl:flex-row
+      ">
+      {% if section.settings.subtitle != blank or section.settings.title != blank or section.settings.text != blank %}
+        <div class="xl:w-6/12">
+          {% if section.settings.subtitle != blank %}
+            <div class="
+                mb-4
+                font-heading
+                text-h6
+                uppercase
+                last:mb-0
+                lg:mb-6
+              ">
+              {{ section.settings.subtitle }}
+            </div>
+          {% endif %}
+          {% if section.settings.title != blank %}
+            <h2 class="
+                mb-6
+                font-heading
+                text-h2
+                last:mb-0
+                lg:mb-10
+                lg:text-h1-desktop
+              ">
+              {{ section.settings.title }}
+            </h2>
+          {% endif %}
+          {% if section.settings.text != blank %}
+            <div class="
+                prose
+                mb-6
+                text-body-small
+                last:mb-0
+                lg:mb-10
+                lg:text-body-large
+              ">
+              {{ section.settings.text }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if section.settings.content != blank %}
+        <div class="
+            prose
+            text-body-xs
+            {% if section.settings.enable_multicolumns %}
+              md:columns-2
+            {% endif %}
+            md:gap-6
+            lg:gap-10
+            lg:text-body-small
+            xl:w-6/12
+          ">
+          {{ section.settings.content }}
+        </div>
+      {% endif %}
+    </div>
+    {% if section.settings.endnote != blank %}
+      <div class="
+          flex
+          items-center
+          gap-4
+          border-t-2
+          border-june-dark
+          pr-12
+          pt-6
+          md:pr-0
+          lg:gap-6
+          xl:mr-30
+        ">
+        <div class="h-9 w-9 shrink-0 lg:h-12 lg:w-12">
+          {%- render 'icon', icon: 'info', class: 'w-full h-full' -%}
+        </div>
+        <div class="font-heading font-heading-weight lg:text-h4-desktop">
+          {{ section.settings.endnote }}
+        </div>
+      </div>
+    {% endif %}
+
+    {%- comment -%}Corner element{%- endcomment -%}
+    <div class="
+        pointer-events-none
+        absolute
+        bottom-0
+        right-0
+        z-4
+        overflow-hidden
+      ">
+      <div class="-mb-[2px] -mr-[2px] xl:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="142" height="144" viewBox="0 0 142 144" fill="none">
+          <path d="M142 144V0V41.2562C142 47.881 139.262 54.2113 134.433 58.7475L50.62 137.491C46.1697 141.672 40.293 144 34.1867 144H0L142 144Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="hidden xl:-mb-[1px] xl:-mr-[1px] xl:block">
+        <svg xmlns="http://www.w3.org/2000/svg" width="338" height="343" viewBox="0 0 338 343" fill="none">
+          <path d="M338 343V0V102.245C338 115.489 332.528 128.145 322.879 137.216L117.858 329.971C108.956 338.34 97.1975 343 84.9791 343H0L338 343Z" fill="white"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Nutrition Check",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "nutrition check:"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Can a infant formula really impact your performance?"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Let’s get this out of the way: your nutrition doesn’t just impact your performance — it’s absolutely essential for it.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_multicolumns",
+      "label": "Enable multicolumns for text in content desktop",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "endnote",
+      "label": "Endnote",
+      "default": "TL;DR — if you want to go big, start small. Real small."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nutrition Check",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

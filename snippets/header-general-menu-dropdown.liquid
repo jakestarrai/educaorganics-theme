@@ -1,0 +1,149 @@
+<div
+  class="
+    menu-drawer
+    fixed
+    inset-0
+    z-1000
+    -translate-x-full
+    bg-base-body-background
+    transition-transform
+    duration-300
+    ease-in-out
+    group-[.menu-active]/body:translate-x-0
+    xl:hidden
+  "
+  inert
+>
+  <div class="flex h-full flex-col">
+    <div class="
+        container
+        max-w-screen-3xl
+        shrink-0
+        border-b
+        border-june-5
+        px-5
+      ">
+      <div class="flex items-center justify-between py-5">
+        <div>
+          {% render 'header-logo', enable_lazyload: true, fetchpriority_value: 'low' %}
+        </div>
+
+        <div class="flex items-center justify-end">
+          {% render 'header-icons' %}
+          <div class="menu ml-2">
+            <button class="
+                menu__opener
+                page-wrapper__opener
+                relative
+                block
+                h-10
+                w-10
+                shrink-0
+                text-[0]
+                leading-[0]
+                before:absolute
+                before:left-2
+                before:right-2
+                before:top-1/2
+                before:h-[2px]
+                before:rotate-45
+                before:rounded-sm
+                before:bg-base-body
+                before:content-['']
+                after:absolute
+                after:left-2
+                after:right-2
+                after:top-1/2
+                after:h-[2px]
+                after:-rotate-[45deg]
+                after:rounded-sm
+                after:bg-base-body
+                after:content-['']
+              ">
+              <span class="sr-only">Menu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {% if section.settings.enable_search_form %}
+        <form
+          action="/search"
+          class="relative mb-2"
+          method="get"
+          role="search"
+        >
+          <input
+            type="search"
+            id="Search"
+            class="
+              form-input
+              h-form-element
+              w-full
+              rounded-form-element
+              border-base-border
+              bg-base-body-background
+              pr-13
+              text-body-medium
+              placeholder:text-base-secondary
+              autofill:shadow-inset-white
+              focus:border-base-body
+            "
+            name="q"
+            value="{{ search.terms | escape }}"
+            aria-label="Search"
+            placeholder="{{ 'general.search.placeholder' | t }}"
+          >
+          {%
+            render 'button',
+            element: 'button',
+            type: 'submit',
+            class: 'page-search-form__button min-h absolute bottom-1 right-1 top-1 !min-h-0 !rounded-form-element !border-none !bg-transparent !text-[0]',
+            color: 'primary',
+            size: 'btn-md',
+            snippet: true,
+            icon: 'search'
+          %}
+        </form>
+      {% endif %}
+    </div>
+
+    <div class="h-full overflow-y-auto overflow-x-hidden px-6 pb-5">
+      <nav aria-label="Mobile navigation">
+        <ul class="
+            menu-accordion
+            accordion
+            js-menu-accordion
+            divide-y-2
+            divide-base-body
+            pt-1
+          ">
+          {% render 'nav-menu-mobile-general' %}
+        </ul>
+      </nav>
+
+      <nav aria-label="Account menu">
+        <ul class="
+            menu-accordion
+            font-heading
+            text-h4
+            text-h4-desktop
+          ">
+          {% render 'nav-account-menu' %}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="shrink-0 bg-white px-6 py-9">
+      {%
+        render 'button',
+        element: 'a',
+        class: 'w-full',
+        color: 'primary',
+        size: 'md',
+        href: '/collections/all',
+        text: 'Shop All Products'
+      %}
+    </div>
+  </div>
+</div>

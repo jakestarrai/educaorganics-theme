@@ -1,0 +1,72 @@
+{% if section.settings.enable %}
+  <div
+    id="popup"
+    class="age-popup hidden"
+    data-section-type="popup"
+    data-section-id="{{ section.id }}"
+    data-days="{{ section.settings.days }}"
+    style="display: none;"
+  >
+    <div class="border border-base-border p-8 text-center">
+      {% if section.settings.custom_html != blank %}
+        {{ section.settings.custom_html }}
+      {% else %}
+        <div class="prose mb-4">
+          {{ section.settings.text }}
+        </div>
+        <div class="mb-4 font-heading text-h3 lg:text-h3-desktop">{{ section.settings.title }}</div>
+        {%
+          render 'button',
+          element: 'button',
+          color: 'primary',
+          size: 'md',
+          text: section.settings.button_text,
+          data_attribute: 'data-fancybox-close'
+        %}
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Popup",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Are you over 18?"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body text",
+      "default": "<p>This website requires you to be 18 or older to enter.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Close button text",
+      "default": "Yes, i am"
+    },
+    {
+      "type": "text",
+      "id": "days",
+      "label": "Number of days after which popup should be shown again",
+      "default": "1"
+    },
+    {
+      "type": "html",
+      "id": "custom_html",
+      "label": "Custom HTML"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable popup",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

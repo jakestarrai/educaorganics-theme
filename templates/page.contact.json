@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-template",
+      "settings": {
+        "subtitle": "Have a question or feedback? We're here to help!",
+        "title": "gEt in touch",
+        "richtext": "<p>Fill out the form and we’ll get back to you as soon as we can.<\/p>",
+        "link": "shopify:\/\/pages\/faqs",
+        "button_text": "FAQs",
+        "form_richtext": "<p>P.S. Don’t forget to check out our FAQs to see if your question has already been covered.<\/p>"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

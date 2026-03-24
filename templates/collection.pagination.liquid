@@ -1,0 +1,9 @@
+{% layout none %}
+{% assign limit = settings.limit %}
+{% paginate collection.products by limit %}
+  {% liquid
+    for product in collection.products
+      render "product-card", product: product, grid_item_width: 'sm:w-6/12 lg:w-3/12'
+    endfor
+  %}
+{% endpaginate %}

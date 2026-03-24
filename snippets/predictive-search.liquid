@@ -1,0 +1,261 @@
+<details-utils
+  class="predictive-search"
+  close-click-outside
+  close-esc
+  toggle-document-class="predictive-search-open"
+>
+  <details id="predictive-search">
+    <summary
+      class="
+        predictive-search-opener
+        page-wrapper__opener
+        relative
+        flex
+        h-11
+        w-11
+        cursor-pointer
+        items-center
+        justify-center
+        text-inherit
+        hover:opacity-80
+        focus:opacity-80
+        [&::-webkit-details-marker]:hidden
+      "
+      aria-haspopup="dialog"
+    >
+      <span class="sr-only">{{ 'general.search.placeholder' | t }}</span>
+      {%- render 'icon' with 'search' -%}
+    </summary>
+    <div
+      class="
+        absolute
+        left-0
+        top-0
+        z-100
+        w-full
+        bg-base-body-background
+        after:pointer-events-none
+        after:absolute
+        after:left-0
+        after:top-full
+        after:h-[calc(100vh-(var(--header-height)))]
+        after:w-full
+        after:cursor-default
+        after:bg-base-overlay-dark
+        after:opacity-60
+        after:content-['']
+        after:group-[.fixed-position]/sticky-wrapper:h-[calc(100dvh-(var(--header-sticky-height)))]
+      "
+      role="dialog"
+    >
+      <div class="container max-w-[930px] px-2 xl:p-0">
+        <form
+          action="{{ routes.search_url }}"
+          method="get"
+          role="search"
+          class="predictive-search__form py-2 lg:py-3"
+        >
+          <div class="w-full lg:relative">
+            <div class="flex">
+              <div class="relative w-full">
+                <input
+                  type="search"
+                  id="predictive-search-field"
+                  class="
+                    peer
+                    form-input
+                    h-[52px]
+                    w-full
+                    appearance-none
+                    rounded-form-element
+                    border-base-border
+                    bg-base-body-background
+                    pb-[5px]
+                    pr-21
+                    pt-[21px]
+                    text-body-medium
+                    outline-none
+                    placeholder:text-base-secondary
+                    placeholder:opacity-0
+                    autofill:shadow-inset-white
+                    focus:border-base-body
+                    focus:outline-none
+                    [&::-webkit-search-cancel-button]:appearance-none
+                  "
+                  name="q"
+                  value="{{ search.terms | escape }}"
+                  placeholder="{{ 'general.search.placeholder' | t }}"
+                  aria-label="Search"
+                  autocomplete="off"
+                  accesskey="4"
+                >
+
+                <label
+                  for="predictive-search-field"
+                  class="
+                    absolute
+                    left-[13px]
+                    top-[14px]
+                    z-2
+                    origin-[0]
+                    -translate-y-2
+                    scale-75
+                    transform
+                    font-bold
+                    text-base-secondary
+                    duration-300
+                    peer-placeholder-shown:translate-y-0
+                    peer-placeholder-shown:scale-100
+                    peer-placeholder-shown:font-body-weight
+                    peer-focus:-translate-y-2
+                    peer-focus:scale-75
+                    peer-focus:font-bold
+                  "
+                >
+                  {{ 'general.search.placeholder' | t }}
+                </label>
+                <div
+                  class="
+                    absolute
+                    right-[54px]
+                    top-1/2
+                    hidden
+                    -translate-y-1/2
+                    flex-nowrap
+                    items-center
+                    peer-[:not(:placeholder-shown)]:flex
+                  "
+                  data-btn-reset
+                >
+                  <button
+                    type="reset"
+                    class="
+                      inline-flex
+                      min-h-button-md
+                      min-w-button-md
+                      items-center
+                      justify-center
+                      p-1
+                      text-base-body
+                    "
+                    aria-label="Reset form"
+                  >
+                    <span class="
+                        relative
+                        inline-block
+                        min-h-[16px]
+                        min-w-[16px]
+                        rounded-full
+                        border
+                        border-base-border
+                        before:absolute
+                        before:left-1/2
+                        before:top-1/2
+                        before:h-[1px]
+                        before:w-[8px]
+                        before:-translate-x-1/2
+                        before:-translate-y-1/2
+                        before:-rotate-45
+                        before:bg-current
+                        before:content-['']
+                        after:absolute
+                        after:left-1/2
+                        after:top-1/2
+                        after:h-[1px]
+                        after:w-[8px]
+                        after:-translate-x-1/2
+                        after:-translate-y-1/2
+                        after:rotate-45
+                        after:bg-current
+                        after:content-['']
+                      ">
+                      <span class="sr-only">{{ 'general.search.reset_form' | t }}</span>
+                    </span>
+                  </button>
+                  <div class="h-6 w-[1px] bg-base-border">
+                    <span class="sr-only">{{ 'general.search.divider' | t }}</span>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  class="
+                    absolute
+                    right-[7px]
+                    top-1/2
+                    flex
+                    min-h-[44px]
+                    min-w-[44px]
+                    -translate-y-1/2
+                    items-center
+                    justify-center
+                    p-2
+                    text-base-body
+                  "
+                >
+                  {%- render 'icon', icon: 'search', class: 'w-5 h-5' -%}
+                </button>
+              </div>
+              <button
+                type="button"
+                class="
+                  page-wrapper__opener
+                  relative
+                  mb-1
+                  ml-2
+                  mt-1
+                  inline-block
+                  min-h-[44px]
+                  min-w-[44px]
+                  before:absolute
+                  before:left-1/2
+                  before:top-1/2
+                  before:h-[2px]
+                  before:w-[57%]
+                  before:-translate-x-1/2
+                  before:-translate-y-1/2
+                  before:-rotate-45
+                  before:bg-current
+                  before:content-['']
+                  after:absolute
+                  after:left-1/2
+                  after:top-1/2
+                  after:h-[2px]
+                  after:w-[57%]
+                  after:-translate-x-1/2
+                  after:-translate-y-1/2
+                  after:rotate-45
+                  after:bg-current
+                  after:content-['']
+                "
+                data-close-predictive-search
+                aria-controls="predictive-search"
+                aria-label="Close search form"
+              >
+                <span class="sr-only">{{ 'general.search.close_search_form' | t }}</span>
+              </button>
+            </div>
+
+            <div
+              id="predictive-search-container"
+              class="
+                absolute
+                left-0
+                top-full
+                z-1004
+                max-h-[calc(100dvh-(var(--header-height)))]
+                w-full
+                overflow-y-auto
+                overflow-x-hidden
+                bg-base-body-background
+                group-[.fixed-position]/sticky-wrapper:max-h-[calc(100dvh-(var(--header-sticky-height)))]
+                lg:w-[calc(100%-52px)]
+                lg:border
+                lg:border-base-border
+              "
+            ></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </details>
+</details-utils>

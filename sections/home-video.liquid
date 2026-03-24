@@ -1,0 +1,274 @@
+{% if section.settings.image != blank %}
+  {% assign image = section.settings.image | image_url: width: 5760 %}
+{% else %}
+  {% assign image = 'video-placeholder.svg' | asset_url %}
+{% endif %}
+<section
+  data-section-type="video"
+  data-section-id="{{ section.id }}"
+>
+  <div class="container max-w-screen-3xl">
+    <div class="
+        background-video-wrapper
+        relative
+        aspect-video
+        {{ section.settings.height }}
+        [&.background-video-wrapper--large]:aspect-[3/4]
+        md:[&.background-video-wrapper--large]:aspect-[4/3]
+        [&.background-video-wrapper--small]:aspect-[21/9]
+      ">
+      <video
+        class="
+          js-player
+          absolute
+          left-0
+          top-0
+          z-1
+          h-full
+          w-full
+          object-cover
+        "
+        playsinline
+        autoplay
+        loop
+        muted
+        data-poster="{{ image }}"
+      >
+        <source
+          src="{{ section.settings.video | default: "https://d2ezlykacdqcnj.cloudfront.net/_assets/home-video/beach-waves-loop.mp4" }}"
+          type="video/mp4"
+        >
+      </video>
+      <div class="
+          pointer-events-none
+          absolute
+          inset-0
+          z-5
+          px-10
+          py-5
+          md:p-10
+        ">
+        <div class="flex h-full items-center justify-center text-center">
+          <div class="video-text-block__holder sm:w-10/12 md:w-6/12 lg:w-4/12 [&>*]:pointer-events-auto {{ section.settings.text_color }}">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'title' %}
+                  {% if block.settings.text_size == 'medium' %}
+                    <h2
+                      class="mb-2 font-heading text-h2 last:mb-0 lg:text-h2-desktop"
+                      {{ block.shopify_attributes }}
+                    >
+                      {{ block.settings.title }}
+                    </h2>
+                  {% else %}
+                    <h2
+                      class="mb-2 font-heading text-h1 last:mb-0 lg:text-h1-desktop"
+                      {{ block.shopify_attributes }}
+                    >
+                      {{ block.settings.title }}
+                    </h2>
+                  {% endif %}
+                {% when 'subheading' %}
+                  <div
+                    class="mb-2 last:mb-0 md:mb-4"
+                    {{ block.shopify_attributes }}
+                  >
+                    {{ block.settings.subheading }}
+                  </div>
+                {% when 'button' %}
+                  {% if block.settings.button_link != blank and block.settings.button_label != blank %}
+                    {%
+                      render 'button',
+                      class: 'mb-4 last:mb-0',
+                      href: block.settings.button_link,
+                      color: 'primary',
+                      size: 'md',
+                      text: block.settings.button_label
+                    %}
+                  {% endif %}
+              {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% style %}
+  [data-section-id="{{ section.id }}"] {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    [data-section-id="{{ section.id }}"] {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<link
+  rel="stylesheet"
+  href="{{ 'js-video.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>
+
+{% schema %}
+{
+  "name": "Video",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Poster image"
+    },
+    {
+      "type": "url",
+      "id": "video",
+      "label": "Video link",
+      "info": "Only direct links to mp4 files"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Video height",
+      "default": "",
+      "options": [
+        {
+          "value": "background-video-wrapper--small",
+          "label": "Small"
+        },
+        {
+          "value": "",
+          "label": "Medium"
+        },
+        {
+          "value": "background-video-wrapper--large",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "",
+      "options": [
+        {
+          "value": "text-customizable-base",
+          "label": "White"
+        },
+        {
+          "value": "",
+          "label": "Black"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading",
+      "info": "Mobile screen uses 75% of selected value"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Text size",
+          "default": "medium",
+          "options": [
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Subheading"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link",
+          "info": "Button is disabled if empty"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Button"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video",
+      "category": "Video",
+      "blocks": [
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "title"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

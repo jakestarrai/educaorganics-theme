@@ -1,0 +1,186 @@
+<div class="border-t border-base-border last:border-b">
+  <details-utils
+    animate
+    force-restore
+  >
+    <details
+      class="js-filter group/filter-item"
+      data-index="{{ forloop.index }}"
+    >
+      <summary class="
+          flex
+          cursor-pointer
+          items-center
+          justify-between
+          py-3
+          transition-all
+          duration-300
+          ease-in-out
+          [&::-webkit-details-marker]:hidden
+        ">
+        {{ filter.label }}
+        <span
+          class="
+            relative
+            mx-4
+            inline-block
+            h-6
+            w-6
+            shrink-0
+            before:absolute
+            before:left-1/2
+            before:top-1/2
+            before:h-[2px]
+            before:w-[64%]
+            before:-translate-x-1/2
+            before:-translate-y-1/2
+            before:bg-current
+            before:content-['']
+            after:absolute
+            after:left-1/2
+            after:top-1/2
+            after:h-[2px]
+            after:w-[64%]
+            after:-translate-x-1/2
+            after:-translate-y-1/2
+            after:rotate-90
+            after:bg-current
+            after:content-['']
+            after:group-open/filter-item:rotate-180
+            lg:ml-0
+          "
+        ></span>
+      </summary>
+
+      <div
+        class="overflow-hidden"
+        data-filter-slide-container
+      >
+        {% if filter.values.size > 0 %}
+          {% for value in filter.values %}
+            {% for color in shop.metaobjects.swatcher_color.values %}
+              {% if color.key == value.value %}
+                <div
+                  class="py-3"
+                  data-filter-element
+                >
+                  <label
+                    for="Filter-{{ color.title }}--{{ forloop.index }}"
+                    class="relative flex items-center"
+                  >
+                    <input
+                      type="checkbox"
+                      id="Filter-{{ color.title }}--{{ forloop.index }}"
+                      class="
+                        peer
+                        absolute
+                        left-0
+                        top-0
+                        -z-1
+                        h-full
+                        w-full
+                        opacity-0
+                      "
+                      name="{{ value.param_name }}"
+                      value="{{ value.value }}"
+                      {% if value.active %}
+                        checked
+                      {% endif %}
+                      {% if value.count == 0 and value.active == false %}
+                        disabled
+                      {% endif %}
+                    >
+                    <span class="
+                        group
+                        relative
+                        mr-2
+                        h-6
+                        w-6
+                        shrink-0
+                        cursor-pointer
+                        overflow-hidden
+                        rounded-full
+                        border
+                        border-base-border
+                        p-[1px]
+                        transition-colors
+                        duration-300
+                        after:absolute
+                        after:left-1/2
+                        after:top-1/2
+                        after:z-2
+                        after:h-full
+                        after:w-[1px]
+                        after:-translate-x-1/2
+                        after:-translate-y-1/2
+                        after:rotate-45
+                        after:bg-base-overlay-white
+                        after:opacity-0
+                        after:content-['']
+                        peer-checked:border-base-body
+                        peer-focus:border-base-body
+                        peer-disabled:cursor-default
+                        peer-disabled:after:opacity-100
+                      ">
+                      <span
+                        style="background-color: {{ value.value }};"
+                        class="block h-full w-full group-[&.rounded-full]:rounded-full"
+                      ></span>
+                    </span>
+                    <span class="peer-disabled:text-base-secondary">{{ color.title }} ({{ value.count }})</span>
+                  </label>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        {% endif %}
+        {% if filter.values.size > 5 %}
+          <more-less class="mb-3 inline-block pt-4">
+            <button
+              type="button"
+              data-id="more"
+              class="mr-4"
+            >
+              + More
+            </button>
+            <button
+              type="button"
+              data-id="less"
+              class="hidden"
+            >
+              - Less
+            </button>
+            {% # theme-check-disable LiquidTag %}
+            <script data-filter-items data-template="1" type="application/json">
+              {
+                "filter_label": {{ filter.label | json }},
+                "filter_type": {{ filter.type | json }},
+                "filter_values": [
+                  {% assign matching_colors = '' %}
+                  {% for value in filter.values %}
+                    {% for color in shop.metaobjects.swatcher_color.values %}
+                      {% if color.key == value.value %}
+                        {% capture matching_color %}
+                          {
+                            "active": {{ value.active | json }},
+                            "count": {{ value.count | json }},
+                            "label": {{ color.title | json }},
+                            "param_name": {{ value.param_name | json }},
+                            "value": "{{ color.value }}"
+                          }
+                        {% endcapture %}
+                        {% assign matching_colors = matching_colors | append: matching_color | append: ',' %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                  {{ matching_colors | remove_last: ',' }}
+                ]
+              }
+            </script>
+            {% # theme-check-enable LiquidTag %}
+          </more-less>
+        {% endif %}
+      </div>
+    </details>
+  </details-utils>
+</div>

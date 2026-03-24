@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "article-template",
+      "settings": {
+        "enable_lazyload": false
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

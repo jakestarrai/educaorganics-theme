@@ -1,0 +1,434 @@
+<section class="py-10">
+  <div class="container max-w-screen-3xl">
+    <div class="mb-10 lg:mb-14">
+      <a
+        href="/account"
+        class="
+          relative
+          inline-block
+          pl-3
+          text-base-label
+          no-underline
+          before:absolute
+          before:left-0
+          before:top-1/2
+          before:-mt-1
+          before:h-2
+          before:w-2
+          before:-rotate-45
+          before:border-l-2
+          before:border-t-2
+          before:border-base-body
+          before:content-['']
+          lg:text-base-label-desktop
+        "
+      >
+        {{ 'customer.account.return' | t }}
+      </a>
+    </div>
+    <div class="mb-4 text-center">
+      <h1 class="mb-0 font-heading text-h6">{{ 'customer.order.title' | t: name: order.name }}</h1>
+      <time datetime="2019-12-18T05:47:00">
+        {{- 'customer.order.date' | t: date: order.created_at | date: "%B %d, %Y %I:%M%p" -}}
+      </time>
+    </div>
+
+    {% if order.cancelled %}
+      {%- assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" -%}
+      <p>{{ 'customer.order.cancelled' | t: date: cancelled_at }}</p>
+      <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason }}</p>
+    {% endif %}
+
+    <div class="overflow-hidden lg:flex lg:space-x-10 xl:space-x-30">
+      <div class="mb-10 lg:mb-0 lg:w-full">
+        <table class="w-full table-fixed border-collapse">
+          <caption class="sr-only">
+            {{ 'customer.order.order_detail_table' | t }}
+          </caption>
+          <thead>
+            <tr class="
+                border-b
+                border-base-border
+                align-top
+                text-body-small
+                text-base-secondary
+                md:align-middle
+              ">
+              <th class="
+                  py-3
+                  text-left
+                  font-normal
+                  md:w-[55%]
+                  lg:pl-4
+                  lg:pr-2
+                ">
+                <div class="flex justify-between space-x-2 md:block">
+                  <div>
+                    {{ 'customer.order.product' | t }}
+                  </div>
+                  <div
+                    aria-hidden="true"
+                    class="md:hidden"
+                  >
+                    {{ 'customer.order.price' | t }}
+                  </div>
+                </div>
+              </th>
+              <th class="
+                  py-3
+                  font-normal
+                  max-md:hidden
+                  md:w-[15%]
+                  md:text-right
+                  lg:pr-2
+                ">
+                {{ 'customer.order.price' | t }}
+              </th>
+              <th class="
+                  py-3
+                  font-normal
+                  max-md:hidden
+                  md:w-[15%]
+                  md:text-right
+                  lg:pr-2
+                ">
+                {{ 'customer.order.quantity' | t }}
+              </th>
+              <th class="
+                  py-3
+                  font-normal
+                  max-md:hidden
+                  md:w-[15%]
+                  md:text-right
+                ">
+                {{ 'customer.order.total' | t }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for line_item in order.line_items %}
+              <tr
+                id="{{ line_item.key }}"
+                class="border-b border-base-border align-top md:align-middle"
+              >
+                {% comment %}
+                  The data-label attributes on <td> elements are mobile-friendly
+                  helpers used for responsive-table labels
+                {% endcomment %}
+                <td
+                  class="
+                    py-3
+                    text-left
+                    md:w-[55%]
+                    md:pr-2
+                    lg:py-5
+                    lg:pl-4
+                  "
+                  data-label="{{ 'customer.order.product' | t }}"
+                >
+                  <div class="flex overflow-hidden md:items-center">
+                    <div class="mr-5 w-16 shrink-0 md:w-22">
+                      <a href="{{ line_item.product.url }}">
+                        {% if line_item.image != blank %}
+                          {%
+                            render 'image',
+                            src: line_item.image,
+                            m: '64x106',
+                            src_d: line_item.image,
+                            d: '88x110',
+                            crop: 'center',
+                            loading: 'lazy',
+                            fetchpriority: 'low',
+                          %}
+                        {% else %}
+                          {%
+                            render 'image',
+                            asset_img_url: true,
+                            src: 'img-placeholder.png',
+                            m: '64x106',
+                            src_d: 'img-placeholder.png',
+                            d: '88x110',
+                            crop: 'center',
+                            loading: 'lazy',
+                            fetchpriority: 'low',
+                          %}
+                        {% endif %}
+                      </a>
+                    </div>
+                    <div class="w-full">
+                      <div class="flex md:block">
+                        <div class="w-full">
+                          <div class="mb-2 text-title last:mb-0">
+                            {{ line_item.title | link_to: line_item.product.url }}
+                          </div>
+                          {%- unless line_item.product.has_only_default_variant %}
+                            {% for option in line_item.options_with_values -%}
+                              <div class="mb-2 text-body-small last:mb-0">
+                                <span class="mr-1 inline-block text-base-secondary">
+                                  {{- option.name }}: {{ option.value -}}
+                                </span>
+                              </div>
+                            {% endfor %}
+                          {% endunless %}
+                          {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                            <span>
+                              {{- discount_allocation.discount_application.title }} (-
+                              {{- discount_allocation.amount | money -}}
+                              )
+                            </span>
+                          {%- endfor -%}
+                          <div class="mb-2 text-body-small last:mb-0 md:hidden">
+                            <span class="mr-1 inline-block text-base-secondary">
+                              {{- 'customer.order.quantity' | t -}}
+                            </span>
+                            {{ line_item.quantity }}
+                          </div>
+                        </div>
+                        <div
+                          class="ml-4 w-4/12 shrink-0 text-right md:hidden"
+                          data-label="{{ 'customer.order.price' | t }}"
+                        >
+                          {%- if line_item.unit_price_measurement -%}
+                            {%- capture unit_price_separator -%}
+                              <span aria-hidden="true">/</span>
+                              <span class="sr-only">{{- 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+                            {%- endcapture -%}
+                            {% liquid
+                              capture unit_price_base_unit
+                                if line_item.unit_price_measurement.reference_value != 1
+                                  echo line_item.unit_price_measurement.reference_value
+                                endif
+                                  echo line_item.unit_price_measurement.reference_unit
+                              endcapture
+                            %}
+                          {% endif %}
+                          <div class="flex flex-col text-product-price-large lg:text-product-price-large-desktop">
+                            {% if line_item.original_price != line_item.final_price %}
+                              <ins class="no-underline">{{ line_item.final_price | money }}</ins>
+                              <del class="text-base-sale-price">{{ line_item.original_price | money }}</del>
+                            {% else %}
+                              <div class="text-product-price-large lg:text-product-price-large-desktop">
+                                {{ line_item.final_price | money }}
+                              </div>
+                            {% endif %}
+                          </div>
+                          {% if line_item.unit_price %}
+                            <div class="pt-2 text-product-price-small md:pt-0 lg:text-product-price-small-desktop">
+                              {{ line_item.unit_price | money }}
+                              {{- unit_price_separator -}}
+                              {{- unit_price_base_unit -}}
+                            </div>
+                          {% endif %}
+                        </div>
+                      </div>
+                      <div class="mb-2 text-body-small">{{ line_item.sku }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td
+                  class="
+                    py-3
+                    max-md:hidden
+                    md:w-[15%]
+                    md:pr-2
+                    md:text-right
+                    lg:py-5
+                  "
+                  data-label="{{ 'customer.order.price' | t }}"
+                >
+                  <div class="flex flex-col text-product-price-large lg:text-product-price-large-desktop">
+                    {% if line_item.original_price != line_item.final_price %}
+                      <ins class="no-underline">{{ line_item.final_price | money }}</ins>
+                      <del class="text-base-sale-price">{{ line_item.original_price | money }}</del>
+                    {% else %}
+                      <div class="text-product-price-large lg:text-product-price-large-desktop">
+                        {{ line_item.final_price | money }}
+                      </div>
+                    {% endif %}
+                  </div>
+                  {% if line_item.unit_price %}
+                    <div class="pt-2 text-product-price-small md:pt-0 lg:text-product-price-small-desktop">
+                      {{ line_item.unit_price | money }}
+                      {{- unit_price_separator -}}
+                      {{- unit_price_base_unit -}}
+                    </div>
+                  {% endif %}
+                </td>
+                <td
+                  class="
+                    py-3
+                    max-md:hidden
+                    md:w-[15%]
+                    md:pr-2
+                    md:text-right
+                    lg:py-5
+                  "
+                  data-label="{{ 'customer.order.quantity' | t }}"
+                >
+                  <div class="text-product-price-large lg:text-product-price-large-desktop">
+                    {{ line_item.quantity }}
+                  </div>
+                </td>
+                <td
+                  class="
+                    py-3
+                    max-md:hidden
+                    md:w-[15%]
+                    md:pr-2
+                    md:text-right
+                    lg:py-5
+                  "
+                  data-label="{{ 'customer.order.total' | t }}"
+                >
+                  <div class="flex flex-col text-product-price-large lg:text-product-price-large-desktop">
+                    {% if line_item.original_price != line_item.final_price %}
+                      <ins class="no-underline">
+                        {{ line_item.quantity | times: line_item.final_price | money }}
+                      </ins>
+                      <del class="text-base-sale-price">
+                        {{ line_item.quantity | times: line_item.original_price| money }}
+                      </del>
+                    {% else %}
+                      <div class="text-product-price-large lg:text-product-price-large-desktop">
+                        {{ line_item.quantity | times: line_item.final_price | money }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="md:ml-auto md:w-6/12 lg:w-5/12">
+          <div class="
+              flex
+              justify-between
+              space-x-4
+              border-b
+              border-base-border
+              py-4
+              text-body-small
+            ">
+            <div class="text-base-secondary">{{ 'customer.order.subtotal' | t }}</div>
+            <div data-label="{{ 'customer.order.subtotal' | t }}">{{ order.subtotal_price | money }}</div>
+          </div>
+          {% for discount_allocation in order.discount_applications %}
+            <div class="
+                flex
+                justify-between
+                space-x-4
+                border-b
+                border-base-border
+                py-4
+                text-body-small
+              ">
+              <div class="text-base-secondary">
+                {{ 'customer.order.discount' | t }}
+              </div>
+              <div data-label="{{ 'customer.order.discount' | t }}">
+                {{ discount_allocation.total_allocated_amount | money }}
+              </div>
+            </div>
+          {% endfor %}
+          {%- for shipping_method in order.shipping_methods -%}
+            <div class="
+                flex
+                justify-between
+                space-x-4
+                border-b
+                border-base-border
+                py-4
+                text-body-small
+              ">
+              <div class="text-base-secondary">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</div>
+              <div data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">
+                {{ shipping_method.price | money }}
+              </div>
+            </div>
+          {% endfor %}
+          {%- for tax_line in order.tax_lines -%}
+            <div class="
+                flex
+                justify-between
+                space-x-4
+                border-b
+                border-base-border
+                py-4
+                text-body-small
+              ">
+              <div class="text-base-secondary">
+                {{ 'customer.order.tax' | t }} ({{ tax_line.title }}
+                {{ tax_line.rate | times: 100 }}%)
+              </div>
+              <div data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">
+                {{ tax_line.price | money }}
+              </div>
+            </div>
+          {% endfor %}
+          <div class="
+              flex
+              justify-between
+              space-x-4
+              border-b
+              border-base-border
+              py-4
+              text-body-small
+            ">
+            <div class="text-base-secondary">{{ 'customer.order.total' | t }}</div>
+            <div data-label="{{ 'customer.order.total' | t }}">
+              {{ order.total_price | money }}
+              {{ order.currency }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:w-4/12 lg:shrink-0">
+        <div class="mb-10 last:mb-0">
+          <div class="mb-3 border-b border-base-border py-3 text-base-secondary">
+            <h2 class="text-body-small">{{ 'customer.order.billing_address' | t }}</h2>
+          </div>
+          <div class="prose">
+            <div class="[&>p]:first-line:font-semibold xl:[&>p]:first-line:text-[18px]">
+              {{ order.billing_address | format_address }}
+            </div>
+          </div>
+        </div>
+        <div class="mb-10 last:mb-0">
+          <div class="mb-3 border-b border-base-border py-3 text-base-secondary">
+            <h2 class="text-body-small">{{ 'customer.order.shipping_address' | t }}</h2>
+          </div>
+          <div class="prose">
+            <div class="[&>p]:first-line:font-semibold xl:[&>p]:first-line:text-[18px]">
+              {{ order.shipping_address | format_address }}
+            </div>
+          </div>
+        </div>
+        <div class="mb-10 last:mb-0">
+          <div class="mb-3 border-b border-base-border py-3 text-base-secondary">
+            <h2 class="text-body-small">{{ 'customer.order.order_details' | t }}</h2>
+          </div>
+          <dl>
+            <div class="mb-2 flex items-center space-x-8">
+              <dt class="w-5/12 shrink-0 text-title md:w-4/12 lg:text-title-desktop">
+                {{ 'customer.order.placed_on' | t }}
+              </dt>
+              <dd>{{ order.created_at | date: '%B %d, %Y' }}</dd>
+            </div>
+            <div class="mb-2 flex items-center space-x-8">
+              <dt class="w-5/12 shrink-0 text-title md:w-4/12 lg:text-title-desktop">
+                {{ 'customer.order.payment_status' | t }}
+              </dt>
+              <dd>{{ order.financial_status_label }}</dd>
+            </div>
+            <div class="mb-2 flex items-center space-x-8">
+              <dt class="w-5/12 shrink-0 text-title md:w-4/12 lg:text-title-desktop">
+                {{ 'customer.order.fulfillment_status' | t }}
+              </dt>
+              <dd>{{ order.fulfillment_status_label }}</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

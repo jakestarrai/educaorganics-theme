@@ -1,0 +1,85 @@
+{% for link in linklists[section.settings.menu].links %}
+  {% if link.links != blank %}
+    <li class="
+        ac
+        group/ac
+        has-drop
+        !mb-0
+      ">
+      <button
+        type="button"
+        class="
+          menu-accordion__opener
+          relative
+          block
+          w-full
+          py-8
+          pr-12
+          text-left
+          font-heading
+          text-h4
+          text-h4-desktop
+          capitalize
+          no-underline
+        "
+      >
+        {{ link.title }}
+        {%
+          render 'icon',
+          icon: 'arrow-down',
+          class: '
+          absolute
+          top-1/2
+          right-0
+          w-9
+          h-9
+          translate-y-[-50%]
+          rotate-[180deg]
+          transition-transform
+          duration-300
+          ease-in-out
+          origin-center
+          group-[.is-active]/ac:rotate-0
+          '
+        %}
+      </button>
+
+      <div class="ac-panel font-body-weight">
+        <ul class="mb-9">
+          {% for child_link in link.links %}
+            <li>
+              <a
+                href="{{ child_link.url }}"
+                class="block py-2"
+              >
+                {{ child_link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </li>
+  {% else %}
+    <li class="
+        group
+        {% if third_level.active %}
+        active
+        {% endif %}
+      ">
+      <a
+        href="{{ link.url }}"
+        class="
+          block
+          py-8
+          font-heading
+          text-h4
+          text-h4-desktop
+          capitalize
+          group-[.active]:text-base-accent
+        "
+      >
+        {{ link.title }}
+      </a>
+    </li>
+  {% endif %}
+{% endfor %}

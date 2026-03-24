@@ -1,0 +1,197 @@
+{% if section.blocks.size > 0 %}
+  <section
+    class="py-10"
+    data-section-id="{{ section.id }}"
+  >
+    <div class="container max-w-screen-3xl overflow-hidden">
+      {% if section.settings.title != blank %}
+        <h2 class="mb-4 text-center font-heading text-h2 lg:text-h2-desktop">{{ section.settings.title }}</h2>
+      {% endif %}
+      <div class="
+          grid
+          gap-y-2
+          max-md:-mx-[calc(var(--grid-gutter-width)/2)]
+          md:grid-cols-2
+          md:gap-x-2
+          xl:gap-8
+        ">
+        {% for block in section.blocks %}
+          <div class="block-{{ block.id }} relative">
+            <div class="
+                image-container
+                relative
+                z-1
+                block
+                w-full
+                overflow-hidden
+                pt-[54%]
+                after:pointer-events-none
+                after:absolute
+                after:left-0
+                after:top-0
+                after:z-1
+                after:h-full
+                after:w-full
+                after:bg-base-body
+                after:content-['']
+                md:pt-[55.7%]
+              ">
+              {% if block.settings.image != blank %}
+                {% liquid
+                  if block.settings.enable_lazyload
+                    assign enable_lazyload = true
+                    assign fetchpriority_value = 'low'
+                  else
+                    assign enable_lazyload = false
+                    assign fetchpriority_value = 'high'
+                  endif
+                %}
+                {%
+                  render 'image',
+                  class: 'absolute top-0 left-0 w-full h-full object-cover',
+                  src: block.settings.image,
+                  m: '360x202',
+                  src_d: block.settings.image,
+                  d: '689x384',
+                  alt: block.settings.image.alt,
+                  crop: 'center',
+                  lazyload: enable_lazyload,
+                  fetchpriority: fetchpriority_value
+                %}
+              {% else %}
+                {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+            {% if block.settings.title != blank or block.settings.btn_url != blank %}
+              <div class="
+                  custom-color
+                  absolute
+                  inset-0
+                  z-10
+                  flex
+                  flex-col
+                  items-center
+                  justify-center
+                  overflow-hidden
+                  p-5
+                  md:p-10
+                ">
+                {% if block.settings.title != blank %}
+                  <h3 class="mb-2 font-heading text-h3 last:mb-0 lg:text-h3-desktop">{{ block.settings.title }}</h3>
+                {% endif %}
+                {% if block.settings.copy != blank %}
+                  <div class="prose mb-3 last:mb-0">
+                    {{ block.settings.copy }}
+                  </div>
+                {% endif %}
+                {% if block.settings.btn_url != blank %}
+                  {%
+                    render 'button',
+                    href: block.settings.btn_url,
+                    color: 'primary',
+                    size: 'md',
+                    text: block.settings.btn_text
+                  %}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<style>
+  section[data-section-id="{{ section.id }}"] .custom-color {
+    color: #fff;
+  }
+  {% for block in section.blocks %}
+    .block-{{ block.id }} .image-container::after {
+      opacity: {{ block.settings.image_overlay_opacity | divided_by: 100.0 }};
+    }
+  {% endfor %}
+</style>
+
+{% schema %}
+{
+  "name": "Text columns with images",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Text columns with images"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Text column",
+      "type": "text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_lazyload",
+          "label": "Enable lazyload",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "image_overlay_opacity",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "unit": "%",
+          "label": "Image overlay opacity",
+          "default": 60
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Add a title or tagline"
+        },
+        {
+          "type": "richtext",
+          "id": "copy",
+          "label": "Copy",
+          "default": "<p>Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.</p>"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button text",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text columns with images",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

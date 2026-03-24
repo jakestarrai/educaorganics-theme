@@ -1,0 +1,61 @@
+{
+  "sections": {
+    "1640013986983c0b0e": {
+      "type": "home-text-with-images",
+      "disabled": true,
+      "blocks": {
+        "1640013986b76f05bd-0": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2021-07-26_at_9.55_2_710x_f9c8861e-4c7a-40f7-9bbc-c5d7e8f0ff54.png",
+            "title": "",
+            "copy": "",
+            "btn_url": ""
+          }
+        },
+        "1640013986b76f05bd-1": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2021-06-10_at_1.04_17_710x_2e13fc8a-3104-43ff-9a73-39e43efeaed3.png",
+            "title": "",
+            "copy": "",
+            "btn_url": ""
+          }
+        },
+        "1640013986b76f05bd-2": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2021-06-10_at_1.07_710x_c895b394-6272-4bd4-aaed-70a04e29ab09.png",
+            "title": "",
+            "copy": "",
+            "btn_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "1640013986b76f05bd-0",
+        "1640013986b76f05bd-1",
+        "1640013986b76f05bd-2"
+      ],
+      "settings": {
+        "title": ""
+      }
+    },
+    "main": {
+      "type": "page-template",
+      "settings": {
+      }
+    },
+    "1640014220e00abc68": {
+      "type": "home-rich-text",
+      "disabled": true,
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "1640013986983c0b0e",
+    "main",
+    "1640014220e00abc68"
+  ]
+}

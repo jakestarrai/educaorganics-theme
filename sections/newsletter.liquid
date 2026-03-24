@@ -1,0 +1,104 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available when you add "Newsletter" section on the Theme Editor.
+
+  Theme Store required settings
+  - Heading: title of the newsletter section
+  - Subheading: description of the newsletter section
+{%- endcomment -%}
+
+<section class="py-10">
+  <div class="container max-w-screen-3xl">
+    <div class="md:mx-auto md:w-9/12 lg:w-6/12">
+      {% if section.settings.title != blank %}
+        <h2 class="mb-4 text-center font-heading text-h2 lg:text-h2-desktop">
+          {{ section.settings.title | escape }}
+        </h2>
+      {% endif %}
+      {% assign form_id = 'newsletter-form-' | append: section.id %}
+      {% form 'customer', id: form_id, class: "newsletter-form" %}
+        <fieldset>
+          <legend class="sr-only">Subscribe form</legend>
+          {{ form.errors | default_errors }}
+          {% if form.posted_successfully? %}
+            <div class="text-center text-messages-success">
+              {{ 'general.newsletter_form.confirmation' | t }}
+            </div>
+          {% else %}
+            <input
+              type="hidden"
+              name="contact[tags]"
+              value="newsletter"
+            >
+            <div class="sm:flex sm:items-center">
+              <div class="relative mb-5 w-full sm:mb-0">
+                <label
+                  for="subscribe-form-field"
+                  class="sr-only"
+                >
+                  {{ 'general.newsletter_form.email_placeholder' | t }}
+                </label>
+                <input
+                  type="email"
+                  id="subscribe-form-field"
+                  class="
+                    form-input
+                    h-form-element
+                    w-full
+                    rounded-l-form-element
+                    border-base-border
+                    bg-base-body-background
+                    text-body-medium
+                    placeholder:text-base-secondary
+                    autofill:shadow-inset-white
+                    focus:border-base-body
+                  "
+                  name="contact[email]"
+                  value="{% if customer.email != blank %}{{ customer.email }}{% endif %}"
+                  placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                  autocorrect="off"
+                  autocapitalize="off"
+                >
+              </div>
+              {%
+                render 'button',
+                element: 'button',
+                type: 'submit',
+                class: 'rounded-l-none w-full sm:min-w-[223px]',
+                color: 'primary',
+                size: 'md',
+                locales_text: 'general.newsletter_form.submit',
+                data_attribute: 'id="Subscribe"',
+                other: 'name="commit"'
+              %}
+            </div>
+          {% endif %}
+        </fieldset>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Join our mailing list for updates"
+    },
+    {
+      "type": "paragraph",
+      "content": "Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,304 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+
+  unless grid_item_width
+    assign mobile_grid_item_width = 'sm:w-6/12'
+    assign grid_item_width = 'lg:w-3/12'
+  endunless
+
+  unless image_sizes_desktop
+    assign image_sizes_desktop = '325x'
+  endunless
+
+  unless image_sizes_mobile
+    assign image_sizes_mobile = '154x'
+  endunless
+
+  assign fetchpriority_value = fetchpriority_value | default: 'auto'
+
+  assign servings_text = ""
+  for item in product.metafields.product.servings.value
+    assign servings_text = servings_text | append: item
+    unless forloop.last
+      assign servings_text = servings_text | append: ' | '
+    endunless
+  endfor
+%}
+
+<div
+  class="{{ mobile_grid_item_width }} {{ grid_item_width }} {{ classes }}"
+  data-js-product-card
+  data-index="{{ forloop.index0 }}"
+>
+  <div
+    class="product-item {{ image_ratio }} group"
+    data-current-variant-id="{{ current_variant.id }}"
+    data-product-container-js
+  >
+    <a
+      href="{{ current_variant.url | within: collection }}"
+      class="
+        group/product-img
+        relative
+        mb-6
+        block
+        overflow-hidden
+        rounded-lg
+        bg-product-card
+        group-[.product-item--portrait]:aspect-portrait
+        group-[.product-item--square]:aspect-square
+        lg:rounded-xl
+      "
+    >
+      {% if current_variant.featured_media != blank %}
+        {%
+          render 'image',
+          class: '
+          rounded-xl
+          group-[.product-item--portrait]:absolute
+          group-[.product-item--square]:absolute
+          group-[.product-item--portrait]:left-0
+          group-[.product-item--portrait]:top-0
+          group-[.product-item--square]:left-0
+          group-[.product-item--square]:top-0
+          group-[.product-item--square]:h-full
+          group-[.product-item--portrait]:h-full
+          group-[.product-item--portrait]:object-contain
+          group-[.product-item--square]:object-contain
+          group-[.product-item--portrait]:object-center
+          group-[.product-item--square]:object-center
+          lg:group-hover/product-img:opacity-0
+          ',
+          src: current_variant.featured_media.preview_image,
+          m: image_sizes_mobile,
+          src_d: current_variant.featured_media.preview_image,
+          d: image_sizes_desktop,
+          alt: current_variant.featured_media.alt,
+          lazyload: enable_lazyload,
+          fetchpriority: fetchpriority_value
+        %}
+        {%- comment -%}Hover image{%- endcomment -%}
+        {% if product.media[1] != blank %}
+          {%
+            render 'image',
+            class: '
+            rounded-xl
+            opacity-0
+            ease-in-out
+            absolute
+            left-0
+            top-0
+            h-full
+            object-contain
+            object-center
+            lg:transition-opacity
+            lg:duration-300
+            lg:group-hover/product-img:opacity-100
+            ',
+            src: product.media[1],
+            m: image_sizes_mobile,
+            src_d: product.media[1],
+            d: image_sizes_desktop,
+            alt: product.media[1].alt,
+            lazyload: true,
+            fetchpriority: 'low'
+          %}
+        {% endif %}
+      {% elsif product.featured_media != blank %}
+        {%
+          render 'image',
+          class: '
+          rounded-xl
+          group-[.product-item--portrait]:absolute
+          group-[.product-item--portrait]:top-0
+          group-[.product-item--portrait]:left-0
+          group-[.product-item--portrait]:object-contain
+          group-[.product-item--portrait]:object-center
+          group-[.product-item--square]:absolute
+          group-[.product-item--square]:top-0
+          group-[.product-item--square]:left-0
+          group-[.product-item--square]:h-full
+          group-[.product-item--portrait]:h-full
+          group-[.product-item--square]:object-contain
+          group-[.product-item--square]:object-center
+          lg:group-hover/product-img:opacity-0
+          ',
+          src: product.featured_media.preview_image,
+          m: image_sizes_mobile,
+          src_d: product.featured_media.preview_image,
+          d: image_sizes_desktop,
+          alt: product.featured_media.alt,
+          lazyload: enable_lazyload,
+          fetchpriority: fetchpriority_value
+        %}
+        {%- comment -%}Hover second image{%- endcomment -%}
+        {% if product.media[1] != blank %}
+          {%
+            render 'image',
+            class: '
+            rounded-xl
+            opacity-0
+            ease-in-out
+            absolute
+            left-0
+            top-0
+            h-full
+            object-contain
+            object-center
+            lg:transition-opacity
+            lg:duration-300
+            lg:group-hover/product-img:opacity-100
+            ',
+            src: product.media[1],
+            m: '240x380',
+            d: '360x480',
+            crop: 'center',
+            lazyload: true,
+            fetchpriority: 'low'
+          %}
+        {% endif %}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg group-[.product-item--portrait]:absolute group-[.product-item--portrait]:top-0 group-[.product-item--portrait]:left-0 group-[.product-item--portrait]:w-full group-[.product-item--portrait]:h-full group-[.product-item--square]:absolute group-[.product-item--square]:top-0 group-[.product-item--square]:left-0 group-[.product-item--square]:w-full group-[.product-item--square]:h-full' }}
+      {% endif %}
+
+      {%- comment -%}Product Labels{%- endcomment -%}
+      {% if settings.enable_product_labels %}
+        <div class="absolute inset-2 z-5 flex items-start">
+          <div class="
+              flex
+              flex-wrap
+              gap-x-2
+              gap-y-1
+              text-base-label
+              lg:text-base-label-desktop
+            ">
+            {% if product.compare_at_price > product.price %}
+              <div class="
+                  bg-labels-sale-background
+                  px-[6px]
+                  py-[1px]
+                  text-labels-sale
+                ">
+                {{ 'products.product_card.labels.sale' | t }}
+              </div>
+            {% endif %}
+            {% unless product.available %}
+              <div class="
+                  bg-labels-soldout-background
+                  px-[6px]
+                  py-[1px]
+                  text-labels-soldout
+                ">
+                {{ 'products.product_card.labels.sold_out' | t }}
+              </div>
+            {% endunless %}
+            {% if product.tags contains "new" %}
+              <div class="
+                  bg-labels-new-background
+                  px-[6px]
+                  py-[1px]
+                  text-labels-new
+                ">
+                {{ 'products.product_card.labels.new' | t }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </a>
+
+    <div class="px-2 [&>*:last-child]:mb-0">
+      {%- comment -%} Default variant {%- endcomment -%}
+      {% unless template.name == 'collection' and settings.collection_type == 'general' %}
+        <div class="mb-3 flex justify-between gap-4">
+          <div>
+            <h3 class="
+                mb-2
+                font-heading
+                text-body-small
+                !font-medium
+                last:mb-0
+                lg:text-body-medium
+              ">
+              <a href="{{ current_variant.url | within: collection }}">{{ product.title }}</a>
+            </h3>
+            {% if servings_text != blank %}
+              <div class="text-body-xxs lg:text-body-xs">{{ servings_text }}</div>
+            {% endif %}
+            {% if show_vendor %}
+              <div class="text-body-xxs lg:text-body-xs">{{ product.vendor }}</div>
+            {% endif %}
+          </div>
+
+          <div class="max-w-[100px] shrink-0 text-right">
+            {% render "product-price", current_variant: current_variant, product: product %}
+          </div>
+        </div>
+      {% else %}
+        {%- comment -%} Collection variant {%- endcomment -%}
+        <div class="mb-3 flex flex-col gap-4 lg:flex-row lg:justify-between">
+          <div>
+            <h3 class="
+                mb-2
+                font-heading
+                text-body-small
+                !font-medium
+                last:mb-0
+                lg:text-body-medium
+              ">
+              <a href="{{ current_variant.url | within: collection }}">{{ product.title }}</a>
+            </h3>
+            {% if servings_text != blank %}
+              <div class="text-body-xxs lg:text-body-xs">{{ servings_text }}</div>
+            {% endif %}
+            {% if show_vendor %}
+              <div class="text-body-xxs lg:text-body-xs">{{ product.vendor }}</div>
+            {% endif %}
+          </div>
+
+          <div class="lg:max-w-[100px] lg:shrink-0 lg:text-right">
+            {% render "product-price", current_variant: current_variant, product: product %}
+          </div>
+        </div>
+      {% endunless %}
+
+      {% if current_variant.unit_price_measurement %}
+        <div
+          class="mb-1 md:mb-2"
+          data-unit-price-wrapper
+        >
+          {% liquid
+            if current_variant.unit_price_measurement
+              echo current_variant.unit_price | money | append: ' / '
+              if current_variant.unit_price_measurement.reference_value != 1
+                echo current_variant.unit_price_measurement.reference_value | append: ' '
+              endif
+              echo current_variant.unit_price_measurement.reference_unit
+            endif
+          %}
+        </div>
+      {% endif %}
+
+      {% liquid
+        if template.name == 'collection' or template.name == 'search'
+          assign filtered = false
+          for filter in collection.filters
+            if filter.active_values.size > 0
+              assign filtered = true
+            endif
+          endfor
+          if section.settings.enable_color_swatches
+            render 'color-swatches', product: product, current_variant: current_variant, collection: collection, filtered: filtered
+          endif
+          render 'quick-add', enable_quick_add_button: enable_quick_add_button, product: product, current_variant: current_variant, filtered: filtered
+        endif
+      %}
+    </div>
+  </div>
+
+  {% if section.settings.enable_color_swatches %}
+    <script type="application/json" data-product-vatiants>
+      {{ product.variants | json }}
+    </script>
+  {% endif %}
+</div>

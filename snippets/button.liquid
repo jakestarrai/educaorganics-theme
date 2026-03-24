@@ -1,0 +1,240 @@
+{% comment %}theme-check-disable{% endcomment %}
+{% comment %}
+  NOTE:
+    Renders a button
+    Accepts:
+    - href: {string} link for button (default is '#');
+
+    - element: {string} to define which element you want to be rendered ('a', 'button', 'input', 'span', default is 'a');
+
+    - class: {string} for adding additional classes (should be separated with space, example 'class1 class2');
+
+    - type: {string} define witch type of input you want to be rendered ('submit', 'reset', 'button', 'icon', default is 'button');
+
+    - color: {string} define which type of color scheme you want to be rendered ('primary', 'secondary', 'third', default is 'default');
+
+    - size: {string} define which type of button size you want to be rendered ('large', 'small', default is 'md');
+
+    - text: {string} override button label (default is 'Button');
+
+    - locales_text: {string} used for including text from locales, instead of {{ 'products.product.quantity' | t }}
+                    write 'products.product.quantity');
+
+    - snippet: {string} for adding icons or other snippets (except element 'input');
+
+    - icon: {string} passed for a snippet as a parameter (will be rendered as {% render 'snippet-name' with 'icon' %});
+
+    - data_attribute: {string} for adding data attributes.
+        If you want more than one it should be separated with space (example 'data-fancybox data-custom-attr');
+
+    - other: {string} for other parameters (example 'name="test" disabled="disabled"') only for button type 'button' and 'input';
+
+    for usage:
+    {% render 'button',
+      href: '/',
+      class: 'class2 class3',
+      color: 'primary',
+      size: 'md',
+      text: 'text',
+      data_attribute: 'data-text'
+    %}
+    with locales text
+    {% render 'button',
+      href: '/',
+      class: 'class2 class3',
+      color: 'primary',
+      size: 'md',
+      locales_text: 'products.product.quantity',
+      data_attribute: 'data-text'
+    %}
+    usage with snippet:
+    {% render 'button',
+      href: '/',
+      class: 'class2 class3',
+      color: 'primary',
+      size: 'md',
+      text: 'text',
+      snippet: 'snippet-name',
+      icon: 'name'
+      data_attribute: 'data-text'
+    %}
+{% endcomment %}
+
+{% liquid
+  assign element = element | default: "a"
+
+  capture text_content
+    if locales_text
+      echo locales_text | t
+    else
+      echo text
+    endif
+  endcapture
+
+  capture content
+    if text_content != blank
+      assign icon_class = 'w-4 h-4 -m-[3px] ml-3'
+    else
+      assign icon_class = 'w-4 h-4 -m-[3px]'
+    endif
+    if type == 'icon'
+      if snippet
+        render 'icon', icon: icon, class: icon_class
+      endif
+    else
+      echo text_content
+      if snippet
+        render 'icon', icon: icon, class: icon_class
+      endif
+    endif
+  endcapture
+
+  assign size = size | default: settings.button_size
+%}
+
+{% capture button_style %}
+  class="
+        inline-flex
+        items-center
+        justify-center
+        box-border
+        {{- ' ' -}}
+    {%- case size -%}
+      {%- when 'sm' -%}
+        min-w-[200px]
+        min-h-button-sm
+        py-2
+        px-6
+        text-button-small
+        {{- ' ' -}}
+      {%- when 'md' -%}
+        min-w-[254px]
+        min-h-button-md
+        py-3
+        px-6
+        text-button-large
+        {{- ' ' -}}
+      {%- when 'lg' -%}
+        min-w-[254px]
+        min-h-button-lg
+        py-3
+        px-6
+        text-button-large
+        {{- ' ' -}}
+      {%- when 'btn-sm' -%}
+        min-w-button-sm
+        min-h-button-sm
+        p-1
+        text-button-small
+        {{- ' ' -}}
+      {%- when 'btn-md' -%}
+        min-w-button-md
+        min-h-button-md
+        p-1
+        text-button-small
+        {{- ' ' -}}
+      {%- when 'btn-lg' -%}
+        min-w-button-lg
+        min-h-button-lg
+        p-1
+        text-button-small
+        {{- ' ' -}}
+      {%- endcase -%}
+
+        font-body
+        border-2
+        cursor-pointer
+        rounded-button
+        appearance-none
+        focus:outline-dashed
+        focus:outline-offset-2
+        disabled:cursor-default
+        disabled:pointer-events-none
+        disabled:outline-none
+        {{- ' ' -}}
+
+  {%- if color != blank -%}
+    {%- case color -%}
+      {%- when 'primary' -%}
+        text-primary-button-text-color
+        bg-primary-button-background-color
+        border-primary-button-border-color
+        hover:text-primary-button-hover-text-color
+        hover:bg-primary-button-hover-background-color
+        hover:border-primary-button-hover-border-color
+        focus:text-primary-button-focus-text-color
+        focus:bg-primary-button-focus-background-color
+        focus:border-primary-button-focus-border-color
+        focus:outline-primary-button-focus-border-color
+        disabled:text-primary-button-text-on-disabled
+        disabled:bg-primary-button-border-on-disabled
+        disabled:border-primary-button-background-on-disabled
+        {{- ' ' -}}
+      {%- when 'secondary' -%}
+        text-secondary-button-text-color
+        bg-secondary-button-background-color
+        border-secondary-button-border-color
+        hover:text-secondary-button-hover-text-color
+        hover:bg-secondary-button-hover-background-color
+        hover:border-secondary-button-hover-border-color
+        focus:text-secondary-button-focus-text-color
+        focus:bg-secondary-button-focus-background-color
+        focus:border-secondary-button-focus-border-color
+        focus:outline-secondary-button-focus-border-color
+        disabled:text-primary-button-text-on-disabled
+        disabled:bg-primary-button-border-on-disabled
+        disabled:border-primary-button-background-on-disabled
+        {{- ' ' -}}
+      {%- when 'third' -%}
+        text-third-button-text-color
+        bg-third-button-background-color
+        border-third-button-border-color
+        hover:text-third-button-hover-text-color
+        hover:bg-third-button-hover-background-color
+        hover:border-third-button-hover-border-color
+        focus:text-third-button-focus-text-color
+        focus:bg-third-button-focus-background-color
+        focus:border-third-button-focus-border-color
+        focus:outline-third-button-focus-border-color
+        disabled:text-third-button-text-on-disabled
+        disabled:bg-third-button-border-on-disabled
+        disabled:border-third-button-background-on-disabled
+        {{- ' ' -}}
+    {%- endcase -%}
+  {%- endif -%}
+  {{- ' ' -}}
+  {{- class -}}
+  "
+{% endcapture %}
+
+{% capture type_attr %}
+  {% if type == 'icon' %}
+    text="{{ icon }}"
+  {% else %}
+    type="{{ type | default: "button" }}"
+  {% endif %}
+{% endcapture %}
+
+{%- case element -%}
+  {%- when 'a' -%}
+    <a href="{{ href | default: '#' }}" {{ button_style }} {{ data_attribute }}>
+      {{- content -}}
+    </a>
+  {%- when 'button' -%}
+    <button {{ type_attr }} {{ button_style }} {{ data_attribute }} {{ other }}>
+      {{- content -}}
+    </button>
+  {%- when 'span' -%}
+    <span {{ button_style }} {{ data_attribute }}>
+      {{- content -}}
+    </span>
+  {%- when 'input' -%}
+    <input
+      {{ type_attr }}
+      {{ button_style }}
+      {{ data_attribute }}
+      value="{{ text_content }}"
+      {{ other }}
+    >
+{%- endcase -%}
+{% comment %}theme-check-enable{% endcomment %}

@@ -1,0 +1,167 @@
+<div class="
+    section-padding
+    group
+    overflow-hidden
+    {% if section.settings.enable_full_width %}
+    full-width
+    {% endif %}
+  ">
+  <div class="container relative max-w-screen-3xl p-0 group-[&.full-width]:max-w-full">
+    <div class="absolute inset-0 h-full overflow-hidden rounded-t-2xl">
+      {%- if section.settings.image_mobile != blank -%}
+        {% liquid
+          if section.settings.enable_lazyload
+            assign enable_lazyload = true
+            assign fetchpriority_value = 'low'
+          else
+            assign enable_lazyload = false
+            assign fetchpriority_value = 'high'
+          endif
+        %}
+        {%
+          render 'image',
+          class: 'w-full h-full object-cover',
+          src: section.settings.image_mobile,
+          m: '390x300',
+          src_d: section.settings.image,
+          d: '1440x908',
+          alt: section.settings.image_mobile.alt,
+          lazyload: enable_lazyload,
+          fetchpriority: fetchpriority_value
+        %}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    <div class="container max-w-screen-3xl px-0">
+      <div class="
+          relative
+          px-4
+          pb-36
+          pt-6
+          text-center
+          lg:px-16
+          lg:pb-[343px]
+          lg:pt-20
+        ">
+        <img
+          src="{{'small-is-mighty.svg' | asset_url}}"
+          class="relative h-auto w-full"
+          width="354"
+          height="130"
+          alt="Small is mighty"
+          loading="lazy"
+          fetchpriority="low"
+        >
+        <div class="
+            absolute
+            !left-1/2
+            !top-[51%]
+            z-2
+            -ml-2
+            h-5
+            w-4
+            sm:!top-[59%]
+            md:!top-[64%]
+            md:-ml-6
+            md:h-12
+            md:w-9
+            lg:!top-[58%]
+            lg:-ml-12
+            lg:h-24
+            lg:w-18
+            xl:!top-[60%]
+            3xl:!top-[62%]
+          ">
+          {%
+            render 'image',
+            asset_img_url: true,
+            src: 'small-is-mighty-person.png',
+            m: '15x20',
+            d: '72x96',
+            crop: 'center',
+            alt: 'Small is mighty person',
+            lazyload: true,
+            fetchpriority: 'low'
+          %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% style %}
+  [data-section-id="{{ section.id }}"] {
+    padding-top: {{ section.settings.section_padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    [data-section-id="{{ section.id }}"] {
+      padding-top: {{ section.settings.section_padding_top }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Hero with parallax",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile",
+      "info": "This field is required to fullfill to display image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading",
+      "info": "Mobile screen uses 75% of selected value"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero with parallax",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

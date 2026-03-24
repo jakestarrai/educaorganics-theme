@@ -1,0 +1,171 @@
+<section class="py-6 lg:py-10">
+  <div class="container max-w-screen-3xl max-lg:px-3">
+    <div class="overflow-hidden rounded-2xl bg-june-5">
+      <div class="
+          group
+          flex
+          flex-col
+          md:flex-row
+          {{ section.settings.layout }}
+        ">
+        <div class="relative md:w-6/12">
+          {%- if section.settings.title != blank -%}
+            <div class="
+                absolute
+                inset-6
+                z-2
+                flex
+                flex-col
+                justify-end
+                md:inset-10
+                xl:inset-20
+              ">
+              <h2 class="
+                  mb-4
+                  font-heading
+                  text-h1
+                  text-base-accent
+                  last:mb-0
+                  lg:text-h1-desktop
+                ">
+                {{ section.settings.title }}
+              </h2>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.image != blank -%}
+            {% liquid
+              if section.settings.enable_lazyload
+                assign enable_lazyload = true
+                assign fetchpriority_value = 'low'
+              else
+                assign enable_lazyload = false
+                assign fetchpriority_value = 'high'
+              endif
+            %}
+            {%
+              render 'image',
+              src: section.settings.image,
+              class: 'md:w-full md:h-full md:object-cover',
+              m: "365x",
+              src_d: section.settings.image,
+              d: "680x",
+              alt: section.settings.image.alt,
+              lazyload: enable_lazyload,
+              fetchpriority: fetchpriority_value
+            %}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+          {%- endif -%}
+        </div>
+        <div class="
+            check-list-holder
+            flex
+            flex-col
+            justify-between
+            gap-12
+            p-6
+            md:w-6/12
+            md:pl-10
+            md:text-left
+            lg:p-20
+          ">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when "text" %}
+                <div class="prose text-body-small lg:text-body-medium">
+                  {{ block.settings.text }}
+                </div>
+              {% when "list" %}
+                {%- if block.settings.list != blank -%}
+                  {{ block.settings.list }}
+                {%- endif -%}
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Made better markup",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "We’re <br>made better."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image alignment",
+      "default": "",
+      "options": [
+        {
+          "value": "",
+          "label": "Left"
+        },
+        {
+          "value": "md:flex-row-reverse",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "list",
+      "name": "List",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "list",
+          "label": "List",
+          "default": "<ul><li>Non-GMO</li></ul>"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body text",
+          "default": "<p>Only the absolute highest-quality ingredients are used in EDUCA Organics products. Because achieving your best means starting with the best.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Made better markup",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "list"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

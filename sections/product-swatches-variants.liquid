@@ -1,0 +1,215 @@
+{% if section.settings.show_breadcrumbs %}
+  {% render "breadcrumbs" %}
+{% endif %}
+{% liquid
+  render 'swatches-variants', product: product, enable_lazyload: section.settings.enable_lazyload
+%}
+
+{% render 'product-model-script', product: product %}
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": [
+    {
+      "type": "select",
+      "id": "product_options_layout",
+      "label": "Appearance of product options (other options except Color)",
+      "default": "select",
+      "options": [
+        {
+          "value": "select",
+          "label": "Select"
+        },
+        {
+          "value": "square_swatches",
+          "label": "Square swatches"
+        },
+        {
+          "value": "round_swatches",
+          "label": "Round swatches"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "product_option_color_layout",
+      "label": "Appearance of product options (Color)",
+      "default": "square_swatches",
+      "options": [
+        {
+          "value": "square_swatches",
+          "label": "Square swatches"
+        },
+        {
+          "value": "round_swatches",
+          "label": "Round swatches"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_following_image",
+      "label": "Show following image on mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_size_chart",
+      "label": "Show size chart",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_label",
+      "label": "Show variant label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "size_chart_url",
+      "label": "Size chart url"
+    },
+    {
+      "type": "select",
+      "id": "swatches_color_type",
+      "label": "Variants swatcher option",
+      "default": "image",
+      "options": [
+        {
+          "value": "metafields",
+          "label": "Metafields"
+        },
+        {
+          "value": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1
+    },
+    {
+      "type": "quantity_selector",
+      "name": "Quantity selector",
+      "limit": 1
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "collapsible_row",
+      "name": "Collapsible row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Row content"
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "Social sharing buttons",
+      "limit": 1
+    },
+    {
+      "type": "complementary",
+      "name": "Complementary products",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "block_heading",
+          "default": "Pairs well with",
+          "label": "Heading"
+        },
+        {
+          "type": "range",
+          "id": "product_list_limit",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 10,
+          "label": "Maximum products to show"
+        }
+      ]
+    },
+    {
+      "type": "selling_plan",
+      "name": "Selling Plan",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subscription_details_text",
+          "label": "Subscription details text",
+          "default": "Subscription details"
+        },
+        {
+          "type": "url",
+          "id": "subscription_details_link",
+          "label": "Subscription details link"
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom Liquid"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

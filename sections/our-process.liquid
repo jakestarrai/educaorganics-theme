@@ -1,0 +1,423 @@
+<link
+  rel="stylesheet"
+  href="{{ 'splide-gallery.css' | asset_url }}"
+  media="all"
+  {% if section.settings.enable_lazyload %}
+    fetchpriority="low"
+  {% else %}
+    fetchpriority="high"
+  {% endif %}
+>
+
+{% if section.settings.enable_lazyload == false %}
+  <link
+    rel="preload"
+    href="{{ section.settings.background_image | img_url: 'master' }}"
+    as="image"
+    fetchpriority="high"
+  >
+{% endif %}
+
+{%- if section.settings.background_image != blank -%}
+  <style>
+    [id="our-process-{{ section.id }}"] .section-frame {
+      background-image: url("{{ section.settings.background_image | img_url: 'master' }}");
+      background-repeat: repeat;
+    }
+  </style>
+{%- endif -%}
+
+{% liquid
+  assign show_gallery = false
+  for block in section.blocks
+    if block.type == 'text'
+      assign show_gallery = true
+      break
+    endif
+  endfor
+%}
+<section
+  id="our-process-{{ section.id }}"
+  data-section-type="our-process"
+  data-section-id="{{ section.id }}"
+>
+  <div class="container relative max-w-screen-3xl px-3 lg:px-0">
+    <div class="
+        section-frame
+        overflow-hidden
+        rounded-2xl
+        bg-june-dark
+        text-white
+        lg:rounded-b-3xl
+        lg:rounded-t-2xl
+      ">
+      {% if show_gallery %}
+        <div class="
+            overflow-hidden
+            px-6
+            py-9
+            md:px-10
+            lg:px-20
+            lg:pb-20
+            lg:pt-30
+          ">
+          {% if section.settings.title != blank or section.settings.text != blank %}
+            <div class="
+                mb-6
+                grid
+                gap-6
+                md:grid-cols-2
+                md:gap-10
+                lg:gap-20
+              ">
+              {% if section.settings.title != blank %}
+                <div>
+                  <h2 class="font-heading text-h1 lg:text-h1-desktop">{{ section.settings.title }}</h2>
+                </div>
+              {% endif %}
+              {% if section.settings.text != blank %}
+                <div>
+                  <div class="prose text-body-xs lg:text-body-small">
+                    {{ section.settings.text }}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div
+            class="splide our-process-slider md:my-20 md:-mr-10 lg:-mr-20"
+            role="group"
+            aria-label="Our process slider"
+          >
+            <div class="splide__track">
+              <ul class="splide__list max-md:!flex max-md:flex-col max-md:gap-6">
+                {% assign block_index = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.type == 'text' %}
+                    {% assign block_index = block_index | plus: 1 %}
+                    {% assign index = "0" | append: block_index %}
+                    <li
+                      class="splide__slide group/text-item {{ block.settings.background_color }}"
+                      {{ block.shopify_attributes }}
+                    >
+                      <div class="
+                          flex
+                          h-full
+                          flex-col
+                          justify-between
+                          gap-9
+                          rounded-2xl
+                          border-2
+                          border-white
+                          bg-white
+                          px-6
+                          py-9
+                          text-june-dark
+                          group-[&.item-dark]/text-item:border-base-accent
+                          group-[&.item-yellow]/text-item:border-base-accent
+                          group-[&.item-dark]/text-item:bg-transparent
+                          group-[&.item-yellow]/text-item:bg-base-accent
+                          group-[&.item-dark]/text-item:text-base-accent
+                          group-[&.item-yellow]/text-item:text-june-dark
+                          lg:gap-18
+                          lg:p-9
+                        ">
+                        {% if block.settings.title != blank %}
+                          <div>
+                            <div class="flex items-center gap-5">
+                              <div class="
+                                  font-heading
+                                  text-[64px]
+                                  font-heading-weight
+                                  leading-none
+                                  lg:text-[88px]
+                                ">
+                                {% if block_index < 10 %}
+                                  {{ index }}
+                                {% else %}
+                                  {{ block_index }}
+                                {% endif %}
+                              </div>
+                              <h3 class="font-heading text-h3 lg:text-h3-desktop">{{ block.settings.title }}</h3>
+                            </div>
+                          </div>
+                        {% endif %}
+                        {% if block.settings.text != blank %}
+                          <div>
+                            <div class="prose text-body-xs lg:text-body-small">
+                              {{ block.settings.text }}
+                            </div>
+                          </div>
+                        {% endif %}
+                      </div>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="splide__progress splide__progress--white splide__progress--alt hidden md:block"
+            aria-hidden="true"
+          >
+            <div class="splide__progress-bar"></div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="
+          pt-9
+          md:px-10
+          md:py-10
+          lg:px-20
+          lg:pb-20
+        ">
+        <div class="
+            grid
+            gap-9
+            md:grid-cols-2
+            md:place-items-center
+            md:gap-10
+            xl:gap-20
+          ">
+          <div class="px-6 md:px-0">
+            {% if section.settings.sertification_subtitle != blank or section.settings.sertification_title != blank or section.settings.sertification_text != blank %}
+              <div class="mb-10 text-center last:mb-0 md:mb-9 md:text-left">
+                {% if section.settings.sertification_subtitle != blank %}
+                  <div class="
+                      mb-4
+                      text-caps-s
+                      uppercase
+                      text-base-accent
+                      last:mb-0
+                      md:mb-6
+                      lg:text-h6
+                    ">
+                    {{ section.settings.sertification_subtitle }}
+                  </div>
+                {% endif %}
+                {% if section.settings.sertification_title != blank %}
+                  <h2 class="
+                      mb-6
+                      font-heading
+                      text-h2
+                      last:mb-0
+                      md:mb-9
+                      lg:text-h2-desktop
+                    ">
+                    {{ section.settings.sertification_title }}
+                  </h2>
+                {% endif %}
+                {% if section.settings.sertification_text != blank %}
+                  <div class="
+                      prose
+                      mb-6
+                      text-body-xs
+                      last:mb-0
+                      md:mb-9
+                      lg:text-body-small
+                    ">
+                    {{ section.settings.sertification_text }}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <div class="
+                mb-9
+                grid
+                grid-cols-2
+                gap-9
+                text-base-accent
+                last:mb-12
+                lg:grid-cols-5
+                lg:place-items-start
+                lg:justify-items-center
+                lg:gap-4
+              ">
+              {% for block in section.blocks %}
+                {% if block.type == 'icon' %}
+                  <div
+                    class="flex flex-col items-center gap-4 text-center"
+                    {{ block.shopify_attributes }}
+                  >
+                    <div class="flex h-12 w-12 items-center justify-center">
+                      {% if block.settings.icon != blank %}
+                        {%
+                          render 'image',
+                          class: 'w-full h-full object-contain',
+                          src: block.settings.icon,
+                          m: '48x48',
+                          crop: 'center',
+                          alt: block.settings.icon.alt,
+                          lazyload: true,
+                          fetchpriority: 'low'
+                        %}
+                      {% else %}
+                        {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+                      {% endif %}
+                    </div>
+                    <div class="px-2 font-heading text-caps-s uppercase lg:px-0">{{ block.settings.text }}</div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="overflow-hidden rounded-b-2xl md:rounded-2xl">
+            {% if section.settings.image != blank %}
+              {%
+                render 'image',
+                src: section.settings.image,
+                m: '366x375',
+                d: '600x717',
+                crop: 'center',
+                alt: section.settings.image.alt,
+                lazyload: true,
+                fetchpriority: 'low'
+              %}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%}Corner element{%- endcomment -%}
+    <div class="
+        pointer-events-none
+        hidden
+        lg:absolute
+        lg:bottom-0
+        lg:left-3
+        lg:z-4
+        lg:block
+        xl:left-0
+      ">
+      <div class="lg:-mb-[2px] lg:-ml-[2px]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="338" height="343" viewBox="0 0 338 343" fill="none">
+          <path d="M0 343V0V102.245C0 115.489 5.47208 128.145 15.1212 137.216L220.142 329.971C229.044 338.34 240.802 343 253.021 343H338L0 343Z" fill="white"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our process",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Identify Key Strains"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Our team of experts thoroughly researches different strains to identify those with the most beneficial effects on performance. We carefully select the strains that have a proven ability to improve digestion, nutrient absorption, wellness, and immune function.</p>"
+    },
+    {
+      "type": "text",
+      "id": "sertification_subtitle",
+      "label": "Sertification Subtitle",
+      "default": "OUR CERTIFICATIONS"
+    },
+    {
+      "type": "text",
+      "id": "sertification_title",
+      "label": "Sertification title",
+      "default": "Tested. Tasty."
+    },
+    {
+      "type": "richtext",
+      "id": "sertification_text",
+      "label": "Sertification text",
+      "default": "<p> As leaders in the field of infant formulas, we believe in the power of science and innovation, combined with the wisdom of nature, to create the most effective infant formulas for athletes and active individuals.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Identify Key Strains",
+          "label": "Block title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>As leaders in the field of infant formulas, we believe in the power of science and innovation, combinedwith the wisdom of nature, to create the most effective infant formulas for athletes and active individuals.</p>",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "background_color",
+          "label": "Block background color",
+          "default": "",
+          "options": [
+            {
+              "value": "",
+              "label": "White"
+            },
+            {
+              "value": "item-yellow",
+              "label": "Yellow"
+            },
+            {
+              "value": "item-dark",
+              "label": "Dark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "icon",
+      "name": "Icon with text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Icon text"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "icon"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our process",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

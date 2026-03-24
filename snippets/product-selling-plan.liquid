@@ -1,0 +1,190 @@
+{% if product.selling_plan_groups != blank %}
+  {% liquid
+    if current_variant.selected_selling_plan_allocation
+      assign current_selling_plan_allocation = current_variant.selected_selling_plan_allocation
+    else
+      assign current_selling_plan_allocation = current_variant.selling_plan_allocations[0]
+    endif
+
+    assign price = current_selling_plan_allocation.price
+    assign compare_at_price = current_selling_plan_allocation.compare_at_price
+    assign price_format = price | money
+    assign compare_at_price_format = compare_at_price | money
+    assign discount_amount = compare_at_price | minus: price | money_without_currency
+    assign discount_percentage = discount_amount | times: 10000 | divided_by: compare_at_price | ceil
+  %}
+  <div
+    class="subscribe-block mb-9 grid gap-4 last:mb-0 lg:mb-8"
+    data-selling-plan-fieldset
+  >
+    <div class="relative">
+      <input
+        type="radio"
+        id="radio-{{ forloop.index }}"
+        class="
+          subscribe-block__input
+          peer
+          pointer-events-none
+          absolute
+          h-full
+          w-full
+          opacity-0
+        "
+        data-selling-plan-input
+        checked
+        name="radio"
+      >
+      <div class="
+          subscribe-block__holder
+          text-green
+          rounded-xl
+          border
+          border-base-border
+          peer-checked:border-2
+          peer-checked:border-june-dark
+        ">
+        <label
+          for="radio-{{ forloop.index }}"
+          class="
+            flex
+            cursor-pointer
+            items-center
+            justify-between
+            px-4
+            py-4
+            font-heading-weight
+          "
+          data-label-text
+        >
+          <span class="flex items-center">
+            <span class="subscribe-block__label-circle"></span>
+            <span class="flex flex-wrap items-center gap-2">
+              <span>{{ 'products.product.subscribe' | t }}</span>
+              <span>
+                {% render 'icon', icon: 'refresh', class: 'w-6 h-6' %}
+              </span>
+              <span class="
+                  rounded-lg
+                  bg-june-dark
+                  px-3
+                  py-1
+                  text-caps-s
+                  uppercase
+                  text-primary-button-text-color
+                ">
+                {{ 'products.product.with_subscription' | t: price: discount_percentage }}
+              </span>
+            </span>
+          </span>
+
+          <span class="flex flex-col gap-2 xl:flex-row-reverse">
+            <ins
+              class="no-underline"
+              data-selling-plan-price
+            >
+              {{ price_format }}
+            </ins>
+            <del
+              class="font-body-weight text-june-fitness"
+              data-selling-plan-compare-at-price
+            >
+              {{ compare_at_price_format }}
+            </del>
+          </span>
+        </label>
+        <div class="subscribe-block__hidden-block hidden pb-4 pl-11 pr-4 lg:pl-13">
+          <div class="prose text-body-xxs lg:text-body-xs">
+            <p>{{ 'products.product.subscribe_text' | t }}</p>
+          </div>
+          <div>
+            <label
+              for="form-select-01"
+              class="sr-only"
+            >
+              {{ 'products.product.subscribe_text' | t }}
+            </label>
+            <select
+              name="form-select-01"
+              class="
+                text-green
+                form-select
+                h-10
+                w-full
+                rounded
+                border
+                border-june-dark
+                px-4
+                py-2
+                text-body-xs
+              "
+              data-select
+              id="form-select-01"
+            >
+              {% for group in product.selling_plan_groups %}
+                {% for selling_plan in group.selling_plans %}
+                  <option
+                    value="{{ selling_plan.id }}"
+                    {% if selling_plan.id == current_variant.selected_selling_plan_allocation.selling_plan.id %}
+                      selected
+                    {% endif %}
+                  >
+                    {{ selling_plan.name }}
+                  </option>
+                {% endfor %}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative">
+      <input
+        type="radio"
+        id="radio-2"
+        class="
+          subscribe-block__input
+          peer
+          pointer-events-none
+          absolute
+          h-full
+          w-full
+          opacity-0
+        "
+        data-without-selling-plan-input
+        name="radio"
+      >
+      <div class="
+          subscribe-block__holder
+          text-green
+          rounded-xl
+          border
+          border-base-border
+          peer-checked:border-2
+          peer-checked:border-june-dark
+        ">
+        <label
+          for="radio-2"
+          class="
+            flex
+            cursor-pointer
+            items-center
+            justify-between
+            px-4
+            py-4
+            font-heading-weight
+          "
+        >
+          <span class="flex flex-wrap items-center">
+            <span class="subscribe-block__label-circle"></span>
+            <span class="mr-1">{{ 'products.product.buy_once' | t }}</span>
+          </span>
+
+          <span class="flex flex-col gap-2 lg:flex-row-reverse">
+            <span data-selling-plan-compare-at-price>{{ compare_at_price_format }}</span>
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+{% endif %}

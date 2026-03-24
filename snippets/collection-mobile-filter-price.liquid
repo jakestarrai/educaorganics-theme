@@ -1,0 +1,219 @@
+<div class="
+    relative
+    border-t
+    border-base-border
+    last:border-b
+    lg:mr-5
+    lg:!border-0
+  ">
+  <details-utils
+    close-esc="(min-width: 1024px)"
+    close-click-outside="(min-width: 1024px)"
+    force-close="(min-width: 1024px)"
+    force-restore
+    animate
+  >
+    <details
+      class="js-filter group/filter-item"
+      data-index="mobile-{{ forloop.index }}"
+    >
+      <summary class="
+          flex
+          cursor-pointer
+          items-center
+          justify-between
+          py-3
+          transition-all
+          duration-300
+          ease-in-out
+          lg:text-body-small
+          [&::-webkit-details-marker]:hidden
+        ">
+        {{ filter.label }}
+        <span
+          class="
+            relative
+            mx-4
+            inline-block
+            h-6
+            w-6
+            shrink-0
+            before:absolute
+            before:left-1/2
+            before:top-1/2
+            before:h-[2px]
+            before:w-[64%]
+            before:-translate-x-1/2
+            before:-translate-y-1/2
+            before:bg-current
+            before:content-['']
+            after:absolute
+            after:left-1/2
+            after:top-1/2
+            after:h-[2px]
+            after:w-[64%]
+            after:-translate-x-1/2
+            after:-translate-y-1/2
+            after:rotate-90
+            after:bg-current
+            after:content-['']
+            after:group-open/filter-item:rotate-180
+            lg:ml-1
+            lg:mr-0
+            lg:before:hidden
+            lg:after:-mt-[1px]
+            lg:after:h-[9px]
+            lg:after:w-[9px]
+            lg:after:-rotate-45
+            lg:after:border-b-2
+            lg:after:border-l-2
+            lg:after:border-base-icons
+            lg:after:bg-transparent
+            lg:after:group-open/filter-item:mt-[3px]
+            lg:after:group-open/filter-item:rotate-[135deg]
+          "
+        ></span>
+      </summary>
+
+      <div
+        class="
+          overflow-hidden
+          lg:absolute
+          lg:-left-[12px]
+          lg:top-full
+          lg:z-1000
+          lg:w-[330px]
+          lg:border
+          lg:border-base-border
+          lg:bg-base-body-background
+        "
+        data-filter-slide-container
+      >
+        <div class="
+            hidden
+            lg:flex
+            lg:items-center
+            lg:justify-between
+            lg:space-x-2
+            lg:border-b
+            lg:border-base-border
+            lg:p-4
+            lg:text-body-small
+          ">
+          {% liquid
+            assign max_price_amount = filter.range_max | money | strip_html | escape
+          %}
+          <div>{{ 'collections.filters.filter_product_price' | t: amount: max_price_amount }}</div>
+          <div>
+            <facet-remove>
+              <a
+                href="{{ filter.url_to_remove }}"
+                class="underline"
+              >
+                {{ 'collections.filters.reset' | t }}
+              </a>
+            </facet-remove>
+          </div>
+        </div>
+
+        <price-range class="flex items-center py-3 lg:p-4">
+          <div class="w-full">
+            <label
+              for="Filter-{{ filter.min_value.param_name }}"
+              class="mb-2 inline-block"
+            >
+              {{- 'collections.filters.minimum_price' | t -}}
+            </label>
+            <div class="relative">
+              <span class="
+                  absolute
+                  left-4
+                  top-1/2
+                  -translate-y-1/2
+                  text-body-medium
+                  text-base-secondary
+                ">
+                {{ cart.currency.symbol }}
+              </span>
+              <input
+                type="number"
+                id="Filter-{{ filter.min_value.param_name }}"
+                class="
+                  range-slider__input
+                  form-input
+                  min-h-button-md
+                  w-full
+                  border-base-border
+                  py-3
+                  pl-7
+                  pr-2
+                  text-right
+                  text-body-medium
+                  leading-none
+                  [appearance:textfield]
+                  [&::-webkit-inner-spin-button]:appearance-none
+                  [&::-webkit-outer-spin-button]:appearance-none
+                "
+                inputmode="numeric"
+                name="{{ filter.min_value.param_name }}"
+                min="0"
+                max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                {% if filter.min_value.value -%}
+                  value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                {%- endif %}
+              >
+            </div>
+          </div>
+          <div class="mx-4 mb-3 shrink-0">{{ 'collections.filters.to' | t }}</div>
+          <div class="w-full">
+            <label
+              for="Filter-{{ filter.max_value.param_name }}"
+              class="mb-2 inline-block"
+            >
+              {{- 'collections.filters.maximum_price' | t -}}
+            </label>
+            <div class="relative">
+              <span class="
+                  absolute
+                  left-4
+                  top-1/2
+                  -translate-y-1/2
+                  text-body-medium
+                  text-base-secondary
+                ">
+                {{- cart.currency.symbol -}}
+              </span>
+              <input
+                type="number"
+                id="Filter-{{ filter.max_value.param_name }}"
+                class="
+                  range-slider__input
+                  form-input
+                  min-h-button-md
+                  w-full
+                  border-base-border
+                  py-3
+                  pl-7
+                  pr-2
+                  text-right
+                  text-body-medium
+                  leading-none
+                  [appearance:textfield]
+                  [&::-webkit-inner-spin-button]:appearance-none
+                  [&::-webkit-outer-spin-button]:appearance-none
+                "
+                inputmode="numeric"
+                name="{{ filter.max_value.param_name }}"
+                {% if filter.max_value.value -%}
+                  value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                {%- endif %}
+                min="0"
+                max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+              >
+            </div>
+          </div>
+        </price-range>
+      </div>
+    </details>
+  </details-utils>
+</div>

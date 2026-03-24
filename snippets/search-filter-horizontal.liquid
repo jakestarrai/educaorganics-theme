@@ -1,0 +1,566 @@
+{% liquid
+  assign limit = settings.limit
+  assign sort_by = search.sort_by | default: search.default_sort_by
+
+  case section.settings.desktop_grid
+  when 1
+    assign image_sizes_desktop = '1410'
+  when 2
+    assign image_sizes_desktop = '695'
+  when 3
+    assign image_sizes_desktop = '457'
+  when 4
+    assign image_sizes_desktop = '338'
+  when 5
+    assign image_sizes_desktop = '266'
+  endcase
+
+  if search.url
+    assign results_url = search.url
+  else
+    assign terms = search.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+  endif
+%}
+
+{% paginate search.results by limit %}
+  <div
+    class="py-10"
+    data-section-id="{{ section.id }}"
+    data-section-type="search"
+    data-infinite="{{ section.settings.enable_infinite }}"
+    data-total-products-quantity="{{ search.results_count }}"
+    data-search-term="{{ search.terms }}"
+    data-color-swatches="{{ section.settings.enable_color_swatches }}"
+  >
+    <div class="
+        flex
+        items-center
+        space-x-8
+        border
+        border-base-border
+        pr-4
+        lg:border-0
+        lg:p-0
+        {% if section.settings.enable_filtering %}
+        justify-between
+        {%- else -%}
+        justify-end
+        {%- endif -%}
+      ">
+      {% if section.settings.enable_filtering %}
+        <div class="w-7/12 lg:w-8/12">
+          <details-utils
+            close-click-outside="(max-width: 1023px)"
+            force-close="(max-width: 1023px)"
+            force-open="(min-width: 1024px)"
+            close-esc="(max-width: 1024px)"
+            force-restore
+          >
+            <details
+              class="group/filter relative"
+              id="filter-main-open-close"
+            >
+              <summary class="
+                  page-wrapper__opener
+                  inline-flex
+                  cursor-pointer
+                  items-center
+                  px-4
+                  py-3
+                  text-body-large
+                  lg:hidden
+                  [&::-webkit-details-marker]:hidden
+                ">
+                {%- render 'icon', icon: 'filter', class: 'mr-2 h-6 w-6 shrink-0' -%}
+                {{ 'collections.general.filter_and_sort' | t }}
+              </summary>
+              <div class="
+                  fixed
+                  left-[45px]
+                  right-0
+                  top-0
+                  z-[102]
+                  flex
+                  h-full
+                  flex-col
+                  justify-between
+                  bg-base-body-background
+                  lg:static
+                  lg:block
+                  lg:h-auto
+                  lg:bg-transparent
+                ">
+                <div class="w-full shrink-0 border-b border-base-border lg:hidden">
+                  <button
+                    class="
+                      page-wrapper__opener
+                      flex
+                      items-center
+                      px-4
+                      py-2
+                      text-body-medium
+                    "
+                    type="button"
+                    aria-controls="filter-main-open-close"
+                    data-close-click
+                  >
+                    <span class="
+                        pointer-events-none
+                        relative
+                        mr-1
+                        inline-block
+                        min-h-[26px]
+                        min-w-[26px]
+                        shrink-0
+                        before:absolute
+                        before:left-1/2
+                        before:top-1/2
+                        before:h-[2px]
+                        before:w-[57%]
+                        before:-translate-x-1/2
+                        before:-translate-y-1/2
+                        before:-rotate-45
+                        before:bg-current
+                        before:content-['']
+                        after:absolute
+                        after:left-1/2
+                        after:top-1/2
+                        after:h-[2px]
+                        after:w-[57%]
+                        after:-translate-x-1/2
+                        after:-translate-y-1/2
+                        after:rotate-45
+                        after:bg-current
+                        after:content-['']
+                      ">
+                      <span class="sr-only">{{ 'collections.general.icon_close' | t }}</span>
+                    </span>
+                    {{ 'collections.general.close' | t }}
+                  </button>
+                </div>
+                <div class="
+                    h-full
+                    overflow-y-auto
+                    overflow-x-hidden
+                    lg:h-auto
+                    lg:overflow-visible
+                  ">
+                  <div
+                    id="FacetFiltersMobile"
+                    class="px-4 lg:px-0"
+                  >
+                    {% if section.settings.enable_sorting %}
+                      <div class="py-4 lg:hidden">
+                        <label
+                          class="mb-1 inline-block"
+                          for="filter-sortby"
+                        >
+                          {{ 'collections.general.sort_by' | t }}
+                        </label>
+                        <select
+                          id="filter-sortby"
+                          class="
+                            form-select
+                            h-form-element
+                            w-full
+                            rounded-form-element
+                            border-base-border
+                            bg-base-body-background
+                            text-body-medium
+                          "
+                          name="sort_by"
+                          form="FacetFiltersForm"
+                        >
+                          {%- for option in  search.sort_options -%}
+                            <option
+                              value="{{ option.value | escape }}"
+                              {% if option.value == sort_by %}
+                                selected="selected"
+                              {% endif %}
+                            >
+                              {{ option.name | escape }}
+                            </option>
+                          {%- endfor -%}
+                        </select>
+                      </div>
+                    {% endif %}
+                    <facet-filters-form>
+                      <form
+                        id="FacetFiltersForm"
+                        class="facets__form"
+                      >
+                        {%- if search.terms -%}
+                          <input
+                            type="hidden"
+                            name="q"
+                            value="{{ search.terms | escape }}"
+                          >
+                          <input
+                            type="hidden"
+                            name="options[prefix]"
+                            value="last"
+                          >
+                        {%- endif -%}
+                        <div
+                          id="FacetsWrapperDesktop"
+                          class="lg:flex lg:flex-wrap"
+                        >
+                          <div class="
+                              mr-5
+                              hidden
+                              py-3
+                              text-body-small
+                              lg:flex
+                              lg:items-center
+                            ">
+                            {{ 'collections.general.filter' | t }}
+                          </div>
+                          {% liquid
+                            for filter in  search.filters
+                              case filter.param_name
+                                when 'filter.v.option.color'
+                                  render 'collection-mobile-filter-color', forloop: forloop, filter: filter
+                                when 'filter.v.price'
+                                  render 'collection-mobile-filter-price', forloop: forloop, filter: filter
+                                when 'filter.v.option.size'
+                                  render 'collection-mobile-filter-size', forloop: forloop, filter: filter
+                                when 'filter.p.vendor'
+                                  render 'collection-mobile-filter-brand', forloop: forloop, filter: filter
+                                when 'filter.p.product_type'
+                                  render 'collection-mobile-filter-product-type', forloop: forloop, filter: filter
+                                when 'filter.v.option.material'
+                                  render 'collection-mobile-filter-product-material', forloop: forloop, filter: filter
+                                else
+                                  render 'collection-mobile-filter-common', forloop: forloop, filter: filter
+                              endcase
+                            endfor
+                          %}
+                        </div>
+                      </form>
+                    </facet-filters-form>
+                  </div>
+                </div>
+                <div class="shrink-0 px-4 py-5 lg:hidden">
+                  {%
+                    render 'button',
+                    element: 'button',
+                    type: 'button',
+                    class: 'w-full page-wrapper__opener',
+                    locales_text: 'collections.general.apply',
+                    data_attribute: 'aria-controls="filter-main-open-close" data-apply-close-click'
+                  %}
+                </div>
+              </div>
+              <div
+                class="
+                  page-wrapper__opener
+                  pointer-events-none
+                  fixed
+                  left-0
+                  top-0
+                  z-[101]
+                  h-full
+                  w-full
+                  bg-black
+                  opacity-0
+                  transition-opacity
+                  duration-300
+                  ease-in-out
+                  group-open/filter:pointer-events-auto
+                  group-open/filter:opacity-60
+                  lg:hidden
+                "
+                aria-controls="filter-main-open-close"
+                data-outside-close-click
+              >
+                <span class="sr-only">{{ 'collections.general.closer_filter_drawer' | t }}</span>
+              </div>
+            </details>
+          </details-utils>
+        </div>
+      {% endif %}
+      <div class="w-5/12 lg:w-4/12 lg:pl-3">
+        <div class="lg:flex lg:items-center lg:justify-end">
+          {% if section.settings.enable_sorting %}
+            <div class="hidden w-full lg:block">
+              <label
+                class="sr-only"
+                for="filter-sortby-2"
+              >
+                {{ 'collections.general.sort_by' | t }}
+              </label>
+              <select
+                id="filter-sortby-2"
+                class="
+                  form-select
+                  h-form-element
+                  w-full
+                  rounded-form-element
+                  border-base-border
+                  bg-base-body-background
+                  text-body-medium
+                "
+                name="sort_by"
+                form="FacetFiltersForm"
+              >
+                {%- for option in  search.sort_options -%}
+                  <option
+                    value="{{ option.value | escape }}"
+                    {% if option.value == sort_by %}
+                      selected="selected"
+                    {% endif %}
+                  >
+                    {{ option.name | escape }}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {% endif %}
+          {% if section.settings.enable_filtering %}
+            <div
+              id="ProductCountDesktop"
+              class="ml-5 shrink-0 text-right text-body-small"
+            >
+              {%- if search.results_count -%}
+                {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+              {%- elsif search.products_count ==  search.all_products_count -%}
+                {{ 'products.facets.product_count_simple' | t: count: search.products_count }}
+              {%- else -%}
+                {{ 'products.facets.product_count' | t: product_count: search.products_count, count: search.all_products_count }}
+              {%- endif -%}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="py-4 lg:py-5">
+      {% if section.settings.enable_filtering %}
+        <div class="
+            filter-selected-element-list
+            flex
+            flex-wrap
+            items-center
+            gap-x-3
+            pb-1
+          ">
+          <facet-remove
+            data-facet-clear-all
+            hidden
+          >
+            {%
+              render 'button',
+              href: results_url,
+              class: 'mb-3',
+              color: 'primary',
+              size: 'md',
+              locales_text: 'collections.general.clear_all',
+              data_attribute: 'id="clear-all"'
+            %}
+          </facet-remove>
+
+          {% for filter in search.filters %}
+            {% if filter.type == "price_range" %}
+              {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+                <facet-remove>
+                  <a
+                    class="
+                      mb-3
+                      flex
+                      items-center
+                      justify-center
+                      rounded-form-element
+                      border
+                      border-base-border
+                      px-3
+                      py-[5px]
+                      no-underline
+                    "
+                    href="{{ filter.url_to_remove }}"
+                    role="button"
+                  >
+                    {%- assign min_value = filter.min_value.value | default: 0 -%}
+                    {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+                    {{ min_value | money }} - {{ max_value | money }}
+                    <div class="
+                        relative
+                        ml-2
+                        inline-block
+                        min-h-[24px]
+                        min-w-[24px]
+                        shrink-0
+                        before:absolute
+                        before:left-1/2
+                        before:top-1/2
+                        before:h-[2px]
+                        before:w-[57%]
+                        before:-translate-x-1/2
+                        before:-translate-y-1/2
+                        before:-rotate-45
+                        before:bg-current
+                        before:content-['']
+                        after:absolute
+                        after:left-1/2
+                        after:top-1/2
+                        after:h-[2px]
+                        after:w-[57%]
+                        after:-translate-x-1/2
+                        after:-translate-y-1/2
+                        after:rotate-45
+                        after:bg-current
+                        after:content-['']
+                      ">
+                      <span class="sr-only">
+                        {{ 'collections.filters.filter_price' | t: min_price: min_value, max_price: max_value }}
+                      </span>
+                    </div>
+                  </a>
+                </facet-remove>
+              {%- endif -%}
+            {% else %}
+              {% for filter_value in filter.active_values %}
+                <facet-remove>
+                  <a
+                    class="
+                      mb-3
+                      flex
+                      items-center
+                      justify-center
+                      rounded-form-element
+                      border
+                      border-base-border
+                      px-3
+                      py-[5px]
+                      no-underline
+                    "
+                    href="{{ filter_value.url_to_remove }}"
+                    role="button"
+                  >
+                    {{ filter_value.label }}
+                    <div class="
+                        relative
+                        ml-2
+                        inline-block
+                        min-h-[24px]
+                        min-w-[24px]
+                        shrink-0
+                        before:absolute
+                        before:left-1/2
+                        before:top-1/2
+                        before:h-[2px]
+                        before:w-[57%]
+                        before:-translate-x-1/2
+                        before:-translate-y-1/2
+                        before:-rotate-45
+                        before:bg-current
+                        before:content-['']
+                        after:absolute
+                        after:left-1/2
+                        after:top-1/2
+                        after:h-[2px]
+                        after:w-[57%]
+                        after:-translate-x-1/2
+                        after:-translate-y-1/2
+                        after:rotate-45
+                        after:bg-current
+                        after:content-['']
+                      ">
+                      <span class="sr-only">
+                        {{ 'collections.general.clear_value' | t: value: filter_value.label }}
+                      </span>
+                    </div>
+                  </a>
+                </facet-remove>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div
+        id="product-grid"
+        class="group/collection-grid grid {{ mobile_grid_item_width }} {{ desktop_grid_item_width }} js-products-wrapper gap-x-5 gap-y-8"
+        data-id="{{ section.id }}"
+      >
+        {% for item in search.results %}
+          {% liquid
+            if forloop.first and section.settings.enable_lazyload == true
+              assign fetchpriority_value = 'high'
+              assign enable_lazyload = false
+            else
+              assign fetchpriority_value = 'low'
+              assign enable_lazyload = true
+            endif
+          %}
+          {% case item.object_type %}
+            {% when 'product' %}
+              {%
+                render "product-card",
+                product: item,
+                grid_item_width: '',
+                image_sizes_mobile: image_sizes_mobile,
+                image_sizes_desktop: image_sizes_desktop,
+                enable_quick_add_button: enable_quick_add_button,
+                image_ratio: image_ratio,
+                enable_lazyload: enable_lazyload,
+                fetchpriority_value: fetchpriority_value
+              %}
+            {% when 'article' or 'page' %}
+              {%
+                render "item-card",
+                item: item,
+                grid_item_width: '',
+                image_sizes_mobile: image_sizes_mobile,
+                image_sizes_desktop: image_sizes_desktop,
+                image_ratio: image_ratio,
+                enable_lazyload: enable_lazyload,
+                fetchpriority_value: fetchpriority_value
+              %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+    {% if section.settings.enable_infinite %}
+      <div class="
+          spinner-holder
+          overflow-hidden
+          pb-6
+          pt-9
+          md:mt-[-25px]
+          md:pb-8
+          md:pt-20
+        ">
+        <div
+          class="
+            spinner
+            m-auto
+            hidden
+            h-8
+            w-8
+            animate-spin
+            rounded-full
+            border-3
+            border-[#dadada]
+            border-t-[#333]
+            md:h-11
+            md:w-11
+          "
+        ></div>
+      </div>
+    {% else %}
+      <div id="pagination-container">
+        {% if paginate.pages > 1 %}
+          {% render 'pagination', paginate: paginate %}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+{% endpaginate %}
+
+{% if enable_quick_add_button %}
+  <link
+    rel="stylesheet"
+    href="{{ 'quick-view-popup.css' | asset_url }}"
+    media="print"
+    onload="this.media='all'"
+  >
+{% endif %}

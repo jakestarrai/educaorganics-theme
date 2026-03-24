@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "typography-template",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

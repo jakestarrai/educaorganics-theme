@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "e334e13d-e815-4a3a-b070-e87db27dee97": {
+      "type": "collection-hero",
+      "blocks": {
+        "fe2cd047-3530-4485-a307-dc767eb3ed7d": {
+          "type": "title",
+          "settings": {
+            "title": "elevate your performance"
+          }
+        },
+        "ee5bbf19-f91d-43a3-a208-50b8f6c0b007": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Infant Formulas to improve your digestion and enhance your everyday.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "fe2cd047-3530-4485-a307-dc767eb3ed7d",
+        "ee5bbf19-f91d-43a3-a208-50b8f6c0b007"
+      ],
+      "settings": {
+        "image_mobile": "{{ collection.metafields.custom.collection_hero_mobile.value }}",
+        "image": "{{ collection.metafields.custom.collection_hero_desktop.value }}",
+        "image_link": "",
+        "enable_lazyload": true,
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "enable_full_height": false,
+        "enable_full_width": false,
+        "alignment": "md:items-center md:justify-start",
+        "alignment_text": "md:text-left",
+        "color": "#edf979",
+        "color_mobile": "#000000",
+        "hero_padding_top": 0,
+        "hero_padding_bottom": 40,
+        "hero_padding_top_mob": 40,
+        "hero_padding_bottom_mob": 40
+      }
+    },
+    "main": {
+      "type": "collection-template",
+      "settings": {
+        "enable_infinite": false,
+        "hide_compared_price": true,
+        "enable_breadcrumbs": true,
+        "enable_filtering": false,
+        "enable_sorting": true,
+        "enable_lazyload": true,
+        "enable_quick_add_button": false,
+        "enable_color_swatches": false,
+        "filter_type": "horizontal",
+        "desktop_grid": 3,
+        "mobile_grid": "2",
+        "image_ratio": ""
+      }
+    }
+  },
+  "order": [
+    "e334e13d-e815-4a3a-b070-e87db27dee97",
+    "main"
+  ]
+}

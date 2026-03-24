@@ -1,0 +1,61 @@
+{% if section.settings.logo_svg != blank %}
+  <div class="
+      h-auto
+      max-w-[var(--header-logo-width-mobile)]
+      xl:mx-auto
+      xl:max-w-[var(--header-logo-width-desktop)]
+      xl:group-[.xl\:justify-start]/logo-holder:m-0
+    ">
+    <a
+      href="{{ routes.root_url }}"
+      class="block h-full"
+      rel="nofollow"
+    >
+      <img
+        src="{{ section.settings.logo_svg | asset_url }}"
+        class="block w-full"
+        width="96"
+        height="106"
+        alt="{{ shop.name }} logo"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </a>
+  </div>
+{% elsif section.settings.logo != blank %}
+  <div class="
+      h-auto
+      max-w-[var(--header-logo-width-mobile)]
+      lg:max-w-[var(--header-logo-width-desktop)]
+      xl:mx-auto
+      xl:group-[.xl\:justify-start]/logo-holder:m-0
+    ">
+    <a
+      href="{{ routes.root_url }}"
+      class="block h-full"
+      rel="nofollow"
+    >
+      {%
+        render 'image',
+        src: section.settings.logo,
+        m: '175x',
+        src_d: section.settings.logo,
+        d: '262x',
+        class: 'block w-full',
+        alt: '{{ shop.name }} logo',
+        lazyload: enable_lazyload,
+        fetchpriority: fetchpriority_value
+      %}
+    </a>
+  </div>
+{% elsif section.settings.logo_text != blank %}
+  <div class="px-3 text-center text-h4 lg:text-h4-desktop">
+    <a
+      href="{{ routes.root_url }}"
+      class="text-inherit no-underline"
+      rel="nofollow"
+    >
+      {{ section.settings.logo_text }}
+    </a>
+  </div>
+{% endif %}

@@ -1,0 +1,124 @@
+{% assign color_option = 'products.product.color' | t | downcase %}
+
+<form class="mb-2">
+  <div class="flex flex-wrap items-center justify-center gap-2">
+    {% for option in product.options_with_values %}
+      {% assign option_name = option.name | downcase %}
+      {% liquid
+        for value in option.values
+          for variant in product.variants
+            assign current_variant_options_string = current_variant.options | join: '/'
+          endfor
+        endfor
+      %}
+
+      {% if option_name == color_option %}
+        {% for value in option.values %}
+          {% liquid
+            assign break_loop = false
+            assign fallback_found = false
+            assign fallback_option_variant = false
+
+            for variant in product.variants
+
+              assign option_variant = false
+              for variant_option_value in variant.options
+
+                if variant_option_value == value and fallback_found == false
+                  assign fallback_option_variant = variant
+                  assign fallback_found = true
+                endif
+
+                if variant_option_value == value and variant.available
+                  assign option_variant = variant
+                  assign break_loop = true
+                  break
+                endif
+
+                if break_loop
+                  break
+                endif
+
+              endfor
+
+              if break_loop
+                break
+              endif
+
+            endfor
+            assign option_variant = option_variant | default: fallback_option_variant
+          %}
+          {% if option_variant.metafields.swatches.swatcher_color.value.value != blank %}
+            <div class="relative">
+              <input
+                type="radio"
+                id="field-{{ product.handle }}-{{ color_option }}-{{ forloop.index }}"
+                class="
+                  peer
+                  absolute
+                  left-0
+                  top-0
+                  -z-1
+                  h-full
+                  w-full
+                  opacity-0
+                "
+                name="filter-color"
+                aria-label="{{ value }}"
+                data-variant-id="{{ option_variant.id }}"
+                {% if current_variant_options_string contains value %}
+                  checked
+                {% endif %}
+                {% unless option_variant.available %}
+                  disabled
+                {% endunless %}
+              >
+
+              <label
+                for="field-{{ product.handle }}-{{ color_option }}-{{ forloop.index }}"
+                class="
+                  group
+                  relative
+                  block
+                  h-6
+                  w-6
+                  cursor-pointer
+                  overflow-hidden
+                  rounded-full
+                  border
+                  border-base-border
+                  p-[1px]
+                  transition-colors
+                  duration-300
+                  after:absolute
+                  after:left-1/2
+                  after:top-1/2
+                  after:z-2
+                  after:h-full
+                  after:w-[1px]
+                  after:-translate-x-1/2
+                  after:-translate-y-1/2
+                  after:rotate-45
+                  after:bg-base-overlay-white
+                  after:opacity-0
+                  after:content-['']
+                  peer-checked:border-base-body
+                  peer-focus:border-base-body
+                  peer-disabled:pointer-events-none
+                  peer-disabled:cursor-default
+                  peer-disabled:after:opacity-100
+                "
+                data-variant="{{ option_variant }}"
+              >
+                <span
+                  style="background-color: {{ option_variant.metafields.swatches.swatcher_color.value.value }}"
+                  class="block h-full w-full group-[&.rounded-full]:rounded-full"
+                ></span>
+              </label>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</form>

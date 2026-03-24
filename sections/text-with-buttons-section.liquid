@@ -1,0 +1,141 @@
+<section class="
+    relative
+    rounded-tl-2xl
+    bg-base-accent
+    py-16
+    md:pb-10
+    md:pt-30
+  ">
+  <div class="container max-w-screen-3xl">
+    <div class="xl:px-10">
+      <div class="flex flex-col gap-9 md:flex-row md:gap-10">
+        <div class="text-center md:w-7/12 md:text-left">
+          {% if section.settings.title != blank %}
+            <div class="
+                mb-4
+                text-caps-s
+                uppercase
+                last:mb-0
+                lg:mb-6
+                lg:font-heading
+                lg:text-h6
+              ">
+              {{ section.settings.title }}
+            </div>
+          {% endif %}
+          {% if section.settings.title != blank %}
+            <h2 class="font-heading text-h1 lg:text-h1-desktop">
+              {{ section.settings.text }}
+            </h2>
+          {% endif %}
+        </div>
+        {% if section.blocks.size > 0 %}
+          <div class="flex flex-col gap-4 md:w-5/12 md:gap-6 xl:w-4/12 xl:pr-10">
+            {% for block in section.blocks %}
+              {% if block.settings.text != blank %}
+                <div {{ block.shopify_attributes }}>
+                  {%
+                    render 'button',
+                    href: block.settings.link,
+                    class: 'w-full',
+                    color: block.settings.color,
+                    size: 'md',
+                    text: block.settings.text
+                  %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}Corner element{%- endcomment -%}
+  <div class="
+      pointer-events-none
+      absolute
+      right-0
+      top-0
+      z-4
+      overflow-hidden
+    ">
+    <div class="-mr-[2px] -mt-[2px] xl:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="126" height="128" viewBox="0 0 126 128" fill="none">
+        <path d="M126.134 0V128V97.6651C126.134 87.7322 122.03 78.2406 114.793 71.4368L49.204 9.77164C42.5275 3.49465 33.7086 0 24.5448 0H0L126.134 0Z" fill="white"/>
+      </svg>
+    </div>
+    <div class="hidden xl:-mr-[1px] xl:-mt-[1px] xl:block">
+      <svg xmlns="http://www.w3.org/2000/svg" width="338" height="312" viewBox="0 0 338 312" fill="none">
+        <path d="M338 0V343V240.755C338 227.511 332.528 214.855 322.879 205.784L117.858 13.0289C108.956 4.65954 97.1975 0 84.9791 0H0L338 0Z" fill="white"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text with buttons",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "What are you waiting for?"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Experience the difference.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Button color",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Black"
+            },
+            {
+              "value": "third",
+              "label": "White"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text with buttons",
+      "category": "text",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
