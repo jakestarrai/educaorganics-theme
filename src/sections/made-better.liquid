@@ -55,7 +55,7 @@
               fetchpriority: fetchpriority_value
             %}
           {%- else -%}
-            {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+            <img src="{{ 'educa-hero-2.png' | asset_url }}" alt="EDUCA Organics Ingredients" class="w-full h-full object-cover" loading="lazy">
           {%- endif -%}
 
           {%- comment -%}Corner element{%- endcomment -%}

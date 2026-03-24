@@ -4,7 +4,7 @@
 >
   <div class="container max-w-screen-3xl">
     <div class="group/collapsible md:flex md:items-start {{ section.settings.image_align }}">
-      {%- if section.settings.image != blank -%}
+      {%- if section.settings.image != blank or true -%}
         <div class="
             mb-8
             max-md:-mx-3
@@ -16,17 +16,21 @@
             md:group-[.md\:flex-row-reverse]/collapsible:pr-0
           ">
           <div class="relative">
-            {%
-              render 'image',
-              class: 'h-full w-full object-cover rounded-2xl',
-              src:  section.settings.image,
-              m: '388x308',
-              src_d:  section.settings.image,
-              d: '640x671',
-              alt: 'image-description',
-              lazyload: true,
-              fetchpriority: 'low'
-            %}
+            {%- if section.settings.image != blank -%}
+              {%
+                render 'image',
+                class: 'h-full w-full object-cover rounded-2xl',
+                src:  section.settings.image,
+                m: '388x308',
+                src_d:  section.settings.image,
+                d: '640x671',
+                alt: 'image-description',
+                lazyload: true,
+                fetchpriority: 'low'
+              %}
+            {%- else -%}
+              <img src="{{ 'educa-hero-1.png' | asset_url }}" alt="EDUCA Organics Science" class="h-full w-full object-cover rounded-2xl" loading="lazy">
+            {%- endif -%}
 
             {%- comment -%}Corner element{%- endcomment -%}
             <div class="pointer-events-none absolute left-0 top-0 z-4">

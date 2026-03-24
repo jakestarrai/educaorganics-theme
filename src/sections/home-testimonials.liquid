@@ -85,7 +85,7 @@
                           fetchpriority: fetchpriority_value
                         %}
                       {% else %}
-                        {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+                        <img src="{{ 'educa-hero-mom.png' | asset_url }}" alt="EDUCA testimonial" class="w-full h-full object-cover rounded-full" loading="lazy">
                       {% endif %}
                     </div>
                     {% if block.settings.image_2 != blank %}
