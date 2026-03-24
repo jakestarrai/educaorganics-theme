@@ -1,0 +1,71 @@
+<section class="py-10">
+  <div class="container max-w-screen-3xl">
+    <div class="pb-3 pt-5 text-center lg:pb-5 lg:pt-7">
+      <h1 class="font-heading text-h2 lg:text-h2-desktop">{{ page_title }}</h1>
+    </div>
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
+      {% liquid
+        if section.blocks.size > 0
+          for block in section.blocks
+            assign collection = block.settings.collection
+            if block.settings.collection_image != blank
+              assign image = block.settings.collection_image
+            else
+              assign image = collection.image | default: collection.products[0].featured_image
+            endif
+
+            if forloop.first
+              assign enable_lazyload = false
+              assign fetchpriorityValue = 'high'
+            else
+              assign enable_lazyload = true
+              assign fetchpriorityValue = 'low'
+            endif
+
+            if collection != blank
+              render 'collections-list-block', collection: collection, block: block, image: image, enable_lazyload: enable_lazyload, fetchpriorityValue: fetchpriorityValue
+            endif
+          endfor
+        else
+          for collection in collections
+            assign image = collection.image | default: collection.products[0].featured_image
+
+            if forloop.first
+              assign enable_lazyload = false
+              assign fetchpriorityValue = 'high'
+            else
+              assign enable_lazyload = true
+              assign fetchpriorityValue = 'low'
+            endif
+
+            render 'collections-list-block', collection: collection, image: image, enable_lazyload: enable_lazyload, fetchpriorityValue: fetchpriorityValue
+          endfor
+        endif
+      %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection list",
+  "blocks": [
+    {
+      "name": "Collection",
+      "type": "collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection_image",
+          "label": "Collection image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

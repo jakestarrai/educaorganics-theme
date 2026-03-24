@@ -1,0 +1,64 @@
+{% if product.media.size > 0 %}
+  {% if current_variant.featured_media != null %}
+    {% assign featured_media = current_variant.featured_media %}
+
+    <div class="
+        product-gallery-slider__item
+        max-w-full
+        max-md:w-full
+        max-md:shrink-0
+        max-md:snap-start
+        max-md:group-[&.product-gallery-slider--alt]:w-[calc(85%+15px)]
+        max-md:group-[&.product-gallery-slider--alt]:pr-[15px]
+        md:pb-4
+        md:first:w-full
+        lg:w-[calc(50%-1rem/2)]
+        lg:grow
+        lg:pr-4
+      ">
+      <div
+        class="product-gallery-slider__img relative pt-[100%]"
+        data-position="{{ featured_media.position }}"
+      >
+        {%
+          render 'image',
+          class: 'absolute top-0 left-0 w-full h-full max-w-full object-cover',
+          src: featured_media,
+          m: '345x',
+          src_d: featured_media,
+          d: '673x',
+          alt: featured_media.alt,
+          lazyload: false,
+          fetchpriority: 'high'
+        %}
+      </div>
+    </div>
+  {% endif %}
+  {% liquid
+    for media in product.media
+      if media.id != current_variant.featured_media.id
+        if enable_lazyload
+          assign lazyload = true
+          assign fetchpriority_value = 'low'
+        elsif forloop.first
+          assign lazyload = false
+          assign fetchpriority_value = 'high'
+        else
+          assign lazyload = true
+          assign fetchpriority_value = 'low'
+        endif
+        render 'product-media', media: media, main: true, lazyload: lazyload, fetchpriority_value: fetchpriority_value
+      endif
+
+    endfor
+  %}
+{% else %}
+  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+{% endif %}
+
+<link
+  rel="stylesheet"
+  href="{{ 'js-video.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>

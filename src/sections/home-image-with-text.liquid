@@ -1,0 +1,358 @@
+{% if section.settings.section_layout == 'section_layout_1' %}
+  <section class="overflow-hidden py-16 lg:pb-20 lg:pt-30">
+    <div class="container max-w-screen-3xl xl:px-20">
+      <div class="
+          animate-on-scroll
+          group
+          flex
+          flex-col-reverse
+          gap-9
+          md:items-center
+          md:gap-8
+          lg:[&.animate-on-scroll.animate]:-translate-x-0
+          lg:[&.animate-on-scroll.animate]:opacity-100
+          lg:[&.animate-on-scroll]:-translate-x-1/4
+          lg:[&.animate-on-scroll]:opacity-0
+          lg:[&.animate-on-scroll]:transition
+          lg:[&.animate-on-scroll]:delay-150
+          lg:[&.animate-on-scroll]:duration-1000
+          lg:[&.animate-on-scroll]:ease-in-out
+          {{ section.settings.layout }}
+        ">
+        <div class="md:w-7/12">
+          {%- if section.settings.image != blank -%}
+            {% liquid
+              if section.settings.enable_lazyload
+                assign enable_lazyload = true
+                assign fetchpriority_value = 'low'
+              else
+                assign enable_lazyload = false
+                assign fetchpriority_value = 'high'
+              endif
+            %}
+            <div class="
+                -ml-[30%]
+                sm:-ml-[20%]
+                md:-ml-[30%]
+                md:group-[&.md\:flex-row-reverse]:!ml-0
+                md:group-[&.md\:flex-row-reverse]:-mr-[30%]
+              ">
+              {%
+                render 'image',
+                class: 'w-auto md:w-full',
+                src: section.settings.image,
+                m: "445x122",
+                src_d: section.settings.image,
+                d: "1008x370",
+                alt: section.settings.image.alt,
+                lazyload: enable_lazyload,
+                fetchpriority: fetchpriority_value
+              %}
+            </div>
+          {%- else -%}
+            {{ 'detailed-apparel-1' | placeholder_svg_tag: "placeholder-svg" }}
+          {%- endif -%}
+        </div>
+        <div class="
+            text-center
+            md:w-5/12
+            md:text-left
+            lg:pl-10
+            lg:group-[.md\:flex-row-reverse]:pl-0
+            lg:group-[.md\:flex-row-reverse]:pr-10
+          ">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when "subtitle" %}
+                {%- if block.settings.subtitle != blank -%}
+                  <div class="
+                      mb-4
+                      text-caps-s
+                      uppercase
+                      last:mb-0
+                      md:mb-6
+                      lg:text-h6
+                    ">
+                    {{ block.settings.subtitle }}
+                  </div>
+                {%- endif -%}
+              {% when "title" %}
+                {%- if block.settings.title != blank -%}
+                  <h2 class="
+                      mb-6
+                      font-heading
+                      text-h2
+                      last:mb-0
+                      md:mb-9
+                      lg:text-h1-desktop
+                    ">
+                    {{ block.settings.title }}
+                  </h2>
+                {%- endif -%}
+              {% when "text" %}
+                {%- if block.settings.text != blank -%}
+                  <div class="
+                      prose
+                      mb-6
+                      text-body-small
+                      last:mb-0
+                      md:mb-9
+                      lg:text-body-medium
+                    ">
+                    {{ block.settings.text }}
+                  </div>
+                {%- endif -%}
+              {% when "button" %}
+                {%- if block.settings.button_link != blank and block.settings.button_label != blank -%}
+                  {%
+                    render 'button',
+                    href: block.settings.button_link,
+                    class: 'mb-6 md:mb-9 last:mb-0',
+                    color: 'primary',
+                    size: 'md',
+                    text: block.settings.button_label
+                  %}
+                {%- endif -%}
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% else %}
+  <section class="overflow-hidden py-6 lg:pb-10 lg:pt-20">
+    <div class="container max-w-screen-3xl xl:px-20">
+      <div class="
+          animate-on-scroll
+          group
+          flex
+          flex-col-reverse
+          gap-9
+          md:items-center
+          md:gap-8
+          lg:[&.animate-on-scroll.animate]:-translate-x-0
+          lg:[&.animate-on-scroll.animate]:opacity-100
+          lg:[&.animate-on-scroll]:-translate-x-1/4
+          lg:[&.animate-on-scroll]:opacity-0
+          lg:[&.animate-on-scroll]:transition
+          lg:[&.animate-on-scroll]:delay-150
+          lg:[&.animate-on-scroll]:duration-1000
+          lg:[&.animate-on-scroll]:ease-in-out
+          {{ section.settings.layout }}
+        ">
+        <div class="relative overflow-hidden md:w-6/12">
+          {%- if section.settings.image != blank -%}
+            {% liquid
+              if section.settings.enable_lazyload
+                assign enable_lazyload = true
+                assign fetchpriority_value = 'low'
+              else
+                assign enable_lazyload = false
+                assign fetchpriority_value = 'high'
+              endif
+            %}
+            <div>
+              {%
+                render 'image',
+                class: 'rounded-2xl',
+                src: section.settings.image,
+                m: "330x",
+                src_d: section.settings.image,
+                d: "624x",
+                alt: section.settings.image.alt,
+                lazyload: enable_lazyload,
+                fetchpriority: fetchpriority_value
+              %}
+            </div>
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+          {%- endif -%}
+
+          {%- comment -%}Corner element{%- endcomment -%}
+          <div class="pointer-events-none absolute left-0 top-0 z-4">
+            <div class="-ml-[2px] -mt-[2px] lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" width="127" height="129" viewBox="0 0 127 129" fill="none">
+                <path d="M0.865883 0.823853V128.824V98.489C0.865883 88.556 4.96993 79.0645 12.2067 72.2606L77.796 10.5955C84.4725 4.3185 93.2914 0.823853 102.455 0.823853H127L0.865883 0.823853Z" fill="white"/>
+              </svg>
+            </div>
+            <div class="hidden lg:-ml-[1px] lg:-mt-[1px] lg:block">
+              <svg xmlns="http://www.w3.org/2000/svg" width="338" height="343" viewBox="0 0 338 343" fill="none">
+                <path d="M0 0V343V240.755C0 227.511 5.47208 214.855 15.1212 205.784L220.142 13.0289C229.044 4.65954 240.802 0 253.021 0H338L0 0Z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="
+            md:w-6/12
+            lg:pl-10
+            lg:group-[.md\:flex-row-reverse]:pl-0
+            lg:group-[.md\:flex-row-reverse]:pr-10
+          ">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when "subtitle" %}
+                {%- if block.settings.subtitle != blank -%}
+                  <div class="
+                      mb-4
+                      text-caps-s
+                      uppercase
+                      last:mb-0
+                      md:mb-6
+                      lg:text-h6
+                    ">
+                    {{ block.settings.subtitle }}
+                  </div>
+                {%- endif -%}
+              {% when "title" %}
+                {%- if block.settings.title != blank -%}
+                  <h2 class="
+                      mb-6
+                      font-heading
+                      text-h2
+                      last:mb-0
+                      md:mb-9
+                      lg:text-h2-desktop
+                    ">
+                    {{ block.settings.title }}
+                  </h2>
+                {%- endif -%}
+              {% when "text" %}
+                {%- if block.settings.text != blank -%}
+                  <div class="prose mb-6 text-body-small last:mb-0 md:mb-9">
+                    {{ block.settings.text }}
+                  </div>
+                {%- endif -%}
+              {% when "button" %}
+                {%- if block.settings.button_link != blank and block.settings.button_label != blank -%}
+                  {%
+                    render 'button',
+                    href: block.settings.button_link,
+                    class: 'mb-6 md:mb-9 last:mb-0',
+                    color: 'primary',
+                    size: 'md',
+                    text: block.settings.button_label
+                  %}
+                {%- endif -%}
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Image with text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "section_layout",
+      "label": "Section layout",
+      "default": "section_layout_1",
+      "options": [
+        {
+          "value": "section_layout_1",
+          "label": "Elongated image"
+        },
+        {
+          "value": "section_layout_2",
+          "label": "Default image"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image alignment",
+      "default": "md:flex-row",
+      "options": [
+        {
+          "value": "md:flex-row",
+          "label": "Left"
+        },
+        {
+          "value": "md:flex-row-reverse",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "button",
+      "name": "Button Info",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop now"
+        }
+      ]
+    },
+    {
+      "type": "subtitle",
+      "name": "Subtitle",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Welcome to the revolution"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Image with text"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body text",
+          "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

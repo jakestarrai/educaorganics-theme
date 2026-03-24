@@ -1,0 +1,517 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "elements_outline": false,
+    "color_accent": "#c8a96e",
+    "color_body_text": "#1b1b1b",
+    "color_main_bg": "#faf9f7",
+    "color_base_footer_background": "#1b1b1b",
+    "color_base_links": "#1b1b1b",
+    "color_base_sale_price": "#b8860b",
+    "button_text_color": "#faf9f7",
+    "button_hover_color": "#1b1b1b",
+    "button_focus_text_color": "#1b1b1b",
+    "button_border_color": "#1b1b1b",
+    "button_hover_border_color": "#1b1b1b",
+    "button_focus_border_color": "#1b1b1b",
+    "button_bg_color": "#1b1b1b",
+    "button_hover_bg_color": "transparent",
+    "button_focus_bg_color": "transparent",
+    "button_border_radius": "34px",
+    "button_size": "md",
+    "checkout_button_text_color": "#fff",
+    "checkout_button_hover_color": "#262c30",
+    "checkout_button_focus_text_color": "#262c30",
+    "checkout_button_border_color": "#000000",
+    "checkout_button_hover_border_color": "#000000",
+    "checkout_button_focus_border_color": "#000000",
+    "checkout_button_bg_color": "#000000",
+    "checkout_button_hover_bg_color": "#fff",
+    "checkout_button_focus_bg_color": "#fff",
+    "secondary_button_text_color": "#1b1b1b",
+    "secondary_button_hover_text_color": "#faf9f7",
+    "secondary_button_focus_text_color": "#faf9f7",
+    "secondary_button_border_color": "#c8a96e",
+    "secondary_button_hover_border_color": "#1b1b1b",
+    "secondary_button_focus_border_color": "#1b1b1b",
+    "secondary_button_background_color": "#c8a96e",
+    "secondary_button_hover_background_color": "#1b1b1b",
+    "secondary_button_focus_background_color": "#1b1b1b",
+    "secondary_button_text_on_disabled": "#2b2627",
+    "secondary_button_border_on_disabled": "#f8f8f8",
+    "secondary_button_background_on_disabled": "#f8f8f8",
+    "third_button_text_color": "#faf9f7",
+    "third_button_hover_text_color": "#1b1b1b",
+    "third_button_focus_text_color": "#1b1b1b",
+    "third_button_border_color": "#1b1b1b",
+    "third_button_hover_border_color": "#1b1b1b",
+    "third_button_focus_border_color": "#1b1b1b",
+    "third_button_background_color": "#1b1b1b",
+    "third_button_hover_background_color": "#c8a96e",
+    "third_button_focus_background_color": "#c8a96e",
+    "third_button_text_on_disabled": "#f8f8f8",
+    "third_button_border_on_disabled": "#f8f8f8",
+    "third_button_background_on_disabled": "#f8f8f8",
+    "form_element_border_radius": 16,
+    "font_library": "hardcoded",
+    "font_heading": "source_sans_pro_n7",
+    "heading_base_size": 48,
+    "font_body": "source_sans_pro_n4",
+    "font_base_size": 18,
+    "google_font_heading": "Assistant",
+    "google_font_body": "Assistant",
+    "google_integration": "https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&amp;display=swap",
+    "hardcoded_body_weight": 300,
+    "hardcoded_heading_weight": 500,
+    "share_image": "shopify://shop_images/Social_Sharing.png",
+    "social_sharing_blog": true,
+    "share_facebook": false,
+    "share_twitter": false,
+    "share_pinterest": false,
+    "social_twitter_link": "",
+    "social_facebook_link": "",
+    "social_pinterest_link": "",
+    "social_instagram_link": "",
+    "social_snapchat_link": "",
+    "social_tumblr_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "show_dynamic_button": false,
+    "enable_product_labels": false,
+    "cart_notes_enable": true,
+    "target_price": "50",
+    "cart_recommendations_enable": true,
+    "continue_shopping_link": "shopify://collections/all",
+    "products": [
+      "balance-relief-infant formula-fastmelts-test",
+      "fitness-recovery-infant formula-fastmelts-test"
+    ],
+    "empty_cart_drawer_image": "shopify://shop_images/cart.png",
+    "limit": 16,
+    "favicon": "shopify://shop_images/JS_Favicon.png",
+    "checkout_header_image": "",
+    "checkout_logo_image": "",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#197bbd",
+    "checkout_button_color": "#197bbd",
+    "checkout_error_color": "#e32c2b",
+    "enable_fonts_library": true,
+    "sections": {
+      "home-hero": {
+        "type": "home-hero",
+        "settings": {
+          "image_mobile": "",
+          "image": "",
+          "alignment": "justify-start items-center",
+          "alignment_text": "text-center",
+          "color": "#ffffff",
+          "color_mobile": "#000000"
+        }
+      },
+      "1589983221519": {
+        "type": "home-featured-collection",
+        "settings": {
+          "title": "Featured collection",
+          "collection": "test",
+          "show_view_all": true
+        }
+      },
+      "1589984445229": {
+        "type": "home-hero",
+        "settings": {
+          "image": "shopify://shop_images/Untitled_design.png",
+          "alignment": "justify-start items-center",
+          "alignment_text": "text-center",
+          "color": "#000000",
+          "color_mobile": "#000000"
+        }
+      },
+      "1589985337197": {
+        "type": "home-image-with-text",
+        "settings": {
+          "image": "shopify://shop_images/working-at-night.jpg",
+          "layout": ""
+        }
+      },
+      "1589985461361": {
+        "type": "home-image-with-text",
+        "settings": {
+          "image": "shopify://shop_images/woman-works-on-computer-at-home.jpg",
+          "layout": "flex-md-row-reverse"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "ee6b2e7f-190b-4975-a2af-bc2748abcbe8": {
+            "type": "link_list",
+            "settings": {
+              "menu_title_1": "Shop",
+              "menu_1": "footer",
+              "menu_title_2": "",
+              "menu_2": "",
+              "menu_title_3": "",
+              "menu_3": "",
+              "menu_title_4": "",
+              "menu_4": ""
+            }
+          },
+          "615e284a-c276-40ba-936f-7dceba81a00a": {
+            "type": "link_list",
+            "settings": {
+              "menu_title_1": "Learn",
+              "menu_1": "footer-learn-menu",
+              "menu_title_2": "Help",
+              "menu_2": "footer-help-menu",
+              "menu_title_3": "",
+              "menu_3": "",
+              "menu_title_4": "",
+              "menu_4": ""
+            }
+          },
+          "cab53290-b6e3-45d1-8198-d444333647c9": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Join the club.",
+              "first_part_text": "Get 10% off when you sign up for our newsletter.",
+              "second_part_text": "",
+              "second_part_link": ""
+            }
+          },
+          "3e51c344-cd85-4290-8f30-8ea4819152bd": {
+            "type": "social_link",
+            "disabled": true,
+            "settings": {
+              "social_name_1": "Instagram",
+              "social_link_1": "https://www.instagram.com/educaorganics",
+              "social_name_2": "Tiktok",
+              "social_link_2": "https://www.tiktok.com/en/",
+              "social_name_3": "Facebook",
+              "social_link_3": "https://www.facebook.com/",
+              "email": "hello@educaorganics.com"
+            }
+          }
+        },
+        "block_order": [
+          "ee6b2e7f-190b-4975-a2af-bc2748abcbe8",
+          "615e284a-c276-40ba-936f-7dceba81a00a",
+          "cab53290-b6e3-45d1-8198-d444333647c9",
+          "3e51c344-cd85-4290-8f30-8ea4819152bd"
+        ],
+        "settings": {
+          "logo_svg": "footer-logo.svg",
+          "logo_text": "EDUCA Organics",
+          "info": "<p>* These statements have not been evaluated by the Food and Drug Administration. Our products are not intended to diagnose, treat, cure, or prevent any disease.</p>",
+          "site_by": "<p>Sacred Nourishment for Every Stage</p>"
+        }
+      },
+      "popup": {
+        "type": "popup",
+        "settings": {
+          "title": "Are you over 18?",
+          "text": "<p>This website requires you to be 18 or older to enter.</p>",
+          "button_text": "Yes, i am",
+          "days": "1",
+          "custom_html": "",
+          "enable": false
+        }
+      },
+      "header": {
+        "type": "header",
+        "custom_css": [],
+        "settings": {
+          "announcement_bar_enabled": false,
+          "announcement_bar_home_page_only": false,
+          "announcement_bar_text": "Free shipping available on all orders!",
+          "announcement_bar_link": "",
+          "announcement_bar_bg_color": "#ffffff",
+          "announcement_bar_text_color": "#000000",
+          "logo_svg": "logo.svg",
+          "enable_lazyload": true,
+          "logo_text": "Draft",
+          "menu": "main-menu",
+          "layout": "center",
+          "search_enable": false,
+          "enable_search_form": false,
+          "cart_enable": true,
+          "enable_account_icon": true,
+          "button_link": "",
+          "button_label": "Submit",
+          "enable_shadow": false
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {}
+      },
+      "1601544214239": {
+        "type": "home-logos-list",
+        "blocks": {
+          "1601544214239-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "url": "shopify://collections/all"
+            }
+          },
+          "1601544214239-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "url": "shopify://collections/all"
+            }
+          },
+          "1601544214239-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "url": "shopify://collections/all"
+            }
+          },
+          "1601544214239-3": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "url": "shopify://collections/all"
+            }
+          }
+        },
+        "block_order": [
+          "1601544214239-0",
+          "1601544214239-1",
+          "1601544214239-2",
+          "1601544214239-3"
+        ],
+        "settings": {
+          "title": "Logo list"
+        }
+      },
+      "1601544682336": {
+        "type": "newsletter",
+        "settings": {}
+      },
+      "1601544716980": {
+        "type": "home-benefits",
+        "blocks": {
+          "1601544716980-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "title": "Ultra-speed Connection"
+            }
+          },
+          "1601544716980-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "title": "Ultra-speed Connection"
+            }
+          },
+          "1601544716980-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "title": "Ultra-speed Connection"
+            }
+          },
+          "1601544716980-3": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "title": "Ultra-speed Connection"
+            }
+          },
+          "1601544716980-4": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Untitled_design_475x478_crop_right_f25cf6b2-549a-4829-8f46-5651cbd98037.png",
+              "title": "Ultra-speed Connection"
+            }
+          }
+        },
+        "block_order": [
+          "1601544716980-0",
+          "1601544716980-1",
+          "1601544716980-2",
+          "1601544716980-3",
+          "1601544716980-4"
+        ],
+        "settings": {}
+      },
+      "1601545071577": {
+        "type": "home-plans",
+        "blocks": {
+          "1601545071577-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "title": "Heading",
+              "subtitle": "Internet",
+              "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
+              "price": "$24.99",
+              "period": "month",
+              "button_link": "shopify://collections/all",
+              "button_label": "Get started"
+            }
+          },
+          "1601545071577-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "title": "Heading",
+              "subtitle": "Internet",
+              "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
+              "price": "$24.99",
+              "period": "month",
+              "button_link": "shopify://collections/all",
+              "button_label": "Get started"
+            }
+          },
+          "1601545071577-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/kisspng-angularjs-ruby-on-rails-typescript-web-application-icon-hacker-5ad97b80444060.9437504315242023682796.png",
+              "title": "Heading",
+              "subtitle": "Internet",
+              "features": "<ul class=\"plan-item__list list-checks text-left\">\n<li>Up to 50Mbps</li>\n<li>Night Turbo-Speed</li>\n<li>WiFi router</li>\n<li>Unlimited devices</li>\n</ul>",
+              "price": "$24.99",
+              "period": "month",
+              "button_link": "shopify://collections/all",
+              "button_label": "Get started"
+            }
+          }
+        },
+        "block_order": [
+          "1601545071577-0",
+          "1601545071577-1",
+          "1601545071577-2"
+        ],
+        "settings": {
+          "title": "Choose your plan",
+          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>"
+        }
+      },
+      "home-iframe-video": {
+        "type": "home-iframe-video",
+        "settings": {
+          "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+          "enable_full_width": true,
+          "enable_overlay": true,
+          "text_color": ""
+        }
+      },
+      "160819240302c38667": {
+        "type": "home-iframe-video",
+        "settings": {
+          "video": "https://vimeo.com/420059153",
+          "enable_full_width": true,
+          "enable_overlay": false,
+          "text_color": ""
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      },
+      "footer--markup": {
+        "type": "footer--markup",
+        "settings": {
+          "logo_svg": "footer-logo.svg",
+          "logo_text": "Draft"
+        }
+      },
+      "header-general": {
+        "type": "header-general",
+        "settings": {
+          "announcement_bar_enabled": false,
+          "announcement_bar_home_page_only": false,
+          "announcement_bar_text": "Announce something here",
+          "announcement_bar_link": "",
+          "announcement_bar_bg_color": "#000000",
+          "announcement_bar_text_color": "#ffffff",
+          "logo_svg": "logo.svg",
+          "logo_svg_width": 175,
+          "logo_svg_height": 24,
+          "enable_lazyload": true,
+          "logo_text": "EDUCA Organics",
+          "menu": "main-menu-mobile",
+          "menu_desktop": "main-menu",
+          "layout": "center",
+          "search_enable": false,
+          "enable_search_form": false,
+          "cart_enable": true,
+          "enable_account_icon": true,
+          "button_link": "",
+          "button_label": "Submit an inquiry",
+          "enable_shadow": false
+        }
+      },
+      "product-recommendations-json": {
+        "type": "product-recommendations-json",
+        "settings": {}
+      }
+    },
+    "content_for_index": [
+      "1589984445229",
+      "1589983221519",
+      "1589985337197",
+      "1589985461361",
+      "1601544214239",
+      "1601544682336",
+      "1601544716980",
+      "1601545071577",
+      "160819240302c38667"
+    ],
+    "blocks": {
+      "733389323033596483": {
+        "type": "shopify://apps/okendo-product-reviews-ugc/blocks/theme-settings/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+        "disabled": false,
+        "settings": {
+          "show_preview_data": false
+        }
+      },
+      "17151115064775110295": {
+        "type": "shopify://apps/recharge-subscriptions/blocks/recharge-theme/371eed76-0b44-4869-9813-730372ea378e",
+        "disabled": false,
+        "settings": {
+          "color_brand": "#467c99",
+          "contrast_color": "#ffffff",
+          "color_brand_secondary": "#467c99",
+          "corners": "8px",
+          "app_background": "#f9f8f4",
+          "app_container": 1200,
+          "app_vertical_padding": 32,
+          "images_aspect_ratio": "1",
+          "cards_background": "#ffffff",
+          "cards_border_color": "rgba(0,0,0,0)"
+        }
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "content_for_index": []
+    }
+  }
+}

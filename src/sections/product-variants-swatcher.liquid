@@ -1,0 +1,51 @@
+{% render 'breadcrumbs' %}
+<section
+  data-section-id="{{ section.id }}"
+  class="pb-5 md:pb-7 md:pt-5 lg:pb-10"
+  data-section-type="product-variants-swatcher"
+></section>
+
+<link
+  rel="stylesheet"
+  href="{{ 'dynamic-button.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>
+
+{% render "dynamic-checkout" with product %}
+
+<script type="application/json" id="product-json">
+  {% render 'product-json' %}
+</script>
+
+{% render "section-json", settings_id: "product-settings" %}
+
+{% schema %}
+{
+  "name": "Product pages",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "Show social sharing buttons",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "swatcher_type",
+      "label": "Swatchers Type",
+      "options": [
+        {
+          "value": "variants",
+          "label": "Variants"
+        },
+        {
+          "value": "products",
+          "label": "Products"
+        }
+      ],
+      "default": "products"
+    }
+  ]
+}
+{% endschema %}

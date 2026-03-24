@@ -1,0 +1,58 @@
+<details-utils
+  class="block last:mb-5"
+  animate
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.title != blank %}
+    <details class="
+        group
+        border-b
+        border-base-border
+        transition-colors
+        duration-300
+        ease-in-out
+        open:border-black
+        motion-reduce:transition-none
+      ">
+      <summary class="
+          relative
+          flex
+          cursor-pointer
+          items-center
+          py-3
+          pl-0
+          pr-10
+          font-heading
+          text-h6-desktop
+          [&::-webkit-details-marker]:hidden
+        ">
+        {{ block.settings.title }}
+        {%
+          render 'icon',
+          icon: 'caret',
+          class: '
+          absolute
+          right-0
+          top-1/2
+          mr-1
+          h-3
+          w-3
+          -translate-y-1/2
+          transition-transform
+          duration-300
+          ease-in-out
+          group-open:rotate-180
+          motion-reduce:transition-none
+          '
+        %}
+      </summary>
+      {% if block.settings.content != blank %}
+        <div class="overflow-hidden">
+          <div class="prose pb-2 lg:pb-3">
+            {{ block.settings.content }}
+          </div>
+        </div>
+      {% endif %}
+    </details>
+  {% endif %}
+</details-utils>

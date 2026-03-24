@@ -1,0 +1,152 @@
+{% liquid
+  if section.settings.enable_blog_hero_lazyload
+    assign enable_lazyload = true
+    assign fetchpriority_value = 'low'
+  else
+    assign enable_lazyload = false
+    assign fetchpriority_value = 'high'
+  endif
+  if section.settings.blog_hero_display
+    render 'blog-hero', section: section, enable_lazyload: enable_lazyload, fetchpriority_value: fetchpriority_value
+  endif
+%}
+
+<div class="py-10">
+  <div class="container max-w-screen-3xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+      {% for article in blog.articles %}
+        {% liquid
+          if section.settings.blog_hero_layout == 'text' and forloop.first
+            assign enable_lazyload = false
+            assign fetchpriority_value = 'high'
+          elsif section.settings.blog_hero_display == false and forloop.first
+            assign enable_lazyload = false
+            assign fetchpriority_value = 'high'
+          else
+            assign enable_lazyload = true
+            assign fetchpriority_value = 'low'
+          endif
+        %}
+        <article class="post">
+          {% if article.image %}
+            <a
+              href="{{ article.url }}"
+              class="block max-md:-mx-[calc(var(--grid-gutter-width)/2)]"
+            >
+              {%
+                render 'image',
+                src: article.image.src,
+                m: '375x',
+                src_d: article.image.src,
+                d: '690x',
+                alt: article.image.alt,
+                lazyload: enable_lazyload,
+                fetchpriority: fetchpriority_value
+              %}
+            </a>
+          {% endif %}
+
+          <div class="py-4 md:py-5">
+            <h2 class="mb-4 font-heading text-h5 md:mb-3">
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h2>
+            <div class="mb-3 text-base-secondary md:mb-4">
+              {{ article.published_at | time_tag: format: 'month_day_year' }}
+            </div>
+            {% if blog.comments_enabled? %}
+              <div class="mb-3 md:mb-4">
+                <a href="{{ article.url }}#comments">
+                  {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+                </a>
+              </div>
+            {% endif %}
+            <div class="prose mb-3">
+              {% if article.excerpt.size > 0 %}
+                {{ article.excerpt }}
+              {% else %}
+                {{ article.content | strip_html | truncate: 150 }}
+              {% endif %}
+            </div>
+            <a
+              href="{{ article.url }}"
+              class="text-link lg:text-link-desktop"
+            >
+              {{ 'blogs.article.read_more' | t }}
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% if section.settings.blog_hero_background != blank and section.settings.blog_hero_background.alpha != 0 and section.settings.blog_hero_layout == 'text' %}
+  <style>
+    .blog-hero::after {
+      background: {{ section.settings.blog_hero_background }};
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Blog hero"
+    },
+    {
+      "type": "color",
+      "id": "blog_hero_background",
+      "label": "Blog hero background",
+      "default": "rgba(0, 0, 0, 0.6)"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_hero_display",
+      "label": "Display Blog Hero",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "blog_hero_layout",
+      "label": "Blog Hero layout",
+      "default": "text",
+      "options": [
+        {
+          "value": "text",
+          "label": "Without image"
+        },
+        {
+          "value": "image",
+          "label": "With image"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "blog_hero_image",
+      "label": "Blog Hero image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_blog_hero_lazyload",
+      "label": "Enable blog hero lazyload",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_hero_display_description",
+      "label": "Display Blog Hero description",
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "blog_hero_description",
+      "label": "Blog Hero description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.</p>"
+    }
+  ]
+}
+{% endschema %}

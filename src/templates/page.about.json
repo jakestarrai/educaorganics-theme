@@ -1,0 +1,173 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-template",
+      "disabled": true,
+      "settings": {
+        "show_title": true,
+        "show_breadcrumbs": true
+      }
+    },
+    "25bc079a-a69d-4565-8a94-1b74a2be4965": {
+      "type": "our-mission",
+      "blocks": {
+        "fff38beb-3e7c-482a-b66f-96a39d3caad9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Mission-01.jpg"
+          }
+        },
+        "e7fd9ee2-ae82-417d-a11d-42f882230bba": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Mission-02.jpg"
+          }
+        },
+        "dcd03e30-6901-495d-adbf-55b2c88a8cee": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Mission-03.jpg"
+          }
+        },
+        "5bd87ea4-5412-4c3f-8e7b-6dd7425f7b7e": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Mission-04.jpg"
+          }
+        },
+        "2a0d0f84-9066-4a32-9aec-a2aad02c246c": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Mission-05.jpg"
+          }
+        },
+        "475d2272-33fc-4a1e-8312-726399f7ee77": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Mission-06.jpg"
+          }
+        },
+        "5f3da4b3-0704-456b-8596-f107e8a4c1c8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Mission-07.jpg"
+          }
+        },
+        "156f126f-2a9e-48ab-aaa6-7399e66d1a4d": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Mission-08.jpg"
+          }
+        },
+        "0640bc89-db02-4ffa-86ad-136bd0e9cb7b": {
+          "type": "text",
+          "settings": {
+            "richtext": "<p>Around here, June isn’t just a month. It's a state of being. One where the the spirit is alive and the path to greatness is waiting to be trekked. And we believe that a healthy nutrition is where it all begins.</p><p>With our advanced Active Culture Formulas, we’re here to help support your ambitions — big and small. Because when you’ve got a strong foundation, each new day is an opportunity to do something you never thought you could.</p>",
+            "title": "Next-generation infant formula to empower your active lifestyle."
+          }
+        }
+      },
+      "block_order": [
+        "fff38beb-3e7c-482a-b66f-96a39d3caad9",
+        "e7fd9ee2-ae82-417d-a11d-42f882230bba",
+        "dcd03e30-6901-495d-adbf-55b2c88a8cee",
+        "5bd87ea4-5412-4c3f-8e7b-6dd7425f7b7e",
+        "2a0d0f84-9066-4a32-9aec-a2aad02c246c",
+        "475d2272-33fc-4a1e-8312-726399f7ee77",
+        "5f3da4b3-0704-456b-8596-f107e8a4c1c8",
+        "156f126f-2a9e-48ab-aaa6-7399e66d1a4d",
+        "0640bc89-db02-4ffa-86ad-136bd0e9cb7b"
+      ],
+      "settings": {
+        "heading": "Our mission",
+        "enable_lazyload": false,
+        "image_mobile": "shopify://shop_images/What_June_Means.jpg",
+        "image": "shopify://shop_images/What_June_Means.jpg",
+        "layout": "md:flex-row",
+        "subheading": "The benefits",
+        "title": "What June means for you",
+        "text": "<p>Unlike traditional infant formula, EDUCA Organics Ultra Premium Formula are specifically designed for active individuals on-the-go. With proven, hard-working strains that are crafted to boost your performance, streamline your system, and help you achieve your full potential. </p><p>Where's your nutrition going to take you today?</p>"
+      }
+    },
+    "827f1106-c6d1-4a58-ab02-c6e8107a7b37": {
+      "type": "active-culture-formulas",
+      "settings": {
+        "subtitle": "Active culture formulas",
+        "title": "We formulate for key performance areas",
+        "text": "<p>Our bodies are incredible machines. But push them too hard, and things can get a bit wonky. That’s why athletic individuals are particularly prone to various issues (think: immune suppression, colds, gastrointestinal upset, bloating, and mental health stress, among others). These are the  exact areas that EDUCA Organics Ultra Premium Formula are designed to target. It's a bit like having your own miniature infant nutrition pit crew, working hard to keep you in the race and ahead of the pack.</p>",
+        "alignment_text": "text-center"
+      }
+    },
+    "a6929aa5-bf97-465d-a710-08aea801522c": {
+      "type": "our-values",
+      "blocks": {
+        "aa963019-c7e9-4b46-b757-14d7b1d0faed": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/our_values_1.png",
+            "title": "Quality and Efficacy",
+            "richtext": "<p>We prioritize quality and efficacy in every product we create.</p>",
+            "bg_color": "item-yellow"
+          }
+        },
+        "140a9472-b1e7-448a-a007-539462e1c4d9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/our_values_2.png",
+            "title": "Scientifically Backed Formulas",
+            "richtext": "<p>Our infant formula formulas are backed by scientific research and expertise.</p>",
+            "bg_color": "item-dark"
+          }
+        },
+        "1665cc95-252d-45e8-b54f-da7b7c942b21": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/our_values_3.png",
+            "title": "Tailored for Active Lifestyles",
+            "richtext": "<p>We understand the unique needs of athletic individuals and design our products accordingly.</p>",
+            "bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "aa963019-c7e9-4b46-b757-14d7b1d0faed",
+        "140a9472-b1e7-448a-a007-539462e1c4d9",
+        "1665cc95-252d-45e8-b54f-da7b7c942b21"
+      ],
+      "settings": {
+        "subtitle": "Our Values",
+        "title": "Guided by Science",
+        "text": "<p>We believe in innovation, quality, and the power of science to improve lives. Guiding our pursuit for the world’s best infant formula are a set of key values and principles which inform every decision.</p>",
+        "link": "shopify://pages/the-science",
+        "btn_text": "Learn more"
+      }
+    },
+    "hero_with_parallax_markup_pTHCyW": {
+      "type": "hero-with-parallax--markup",
+      "settings": {
+        "image_mobile": "shopify://shop_images/hero-parallax-mobile.png",
+        "image": "shopify://shop_images/hero-parallax-desktop.png",
+        "enable_lazyload": true,
+        "enable_full_width": true,
+        "section_padding_top": 0,
+        "section_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "25bc079a-a69d-4565-8a94-1b74a2be4965",
+    "827f1106-c6d1-4a58-ab02-c6e8107a7b37",
+    "a6929aa5-bf97-465d-a710-08aea801522c",
+    "hero_with_parallax_markup_pTHCyW"
+  ]
+}

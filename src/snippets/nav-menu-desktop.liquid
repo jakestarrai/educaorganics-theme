@@ -1,0 +1,378 @@
+{% for link in linklists[section.settings.menu_desktop].links %}
+  {% liquid
+    assign show_second_level = false
+    for block in section.blocks
+      assign link_title = link.title | downcase
+      assign block_title = block.settings.title | downcase
+      if link_title == block_title
+        assign show_second_level = true
+      endif
+    endfor
+  %}
+  {% if link.links != blank or show_second_level %}
+    <li class="
+        {% unless show_second_level %}
+        xl:relative
+        {% endunless %}
+        xl:has-drop
+        xl:group-[.justify-center]/header-column:mx-1
+      ">
+      {% if show_second_level %}
+        <details-utils
+          close-click-outside
+          close-esc
+          toggle-document-class="megamenu-open"
+        >
+          <details class="group/details">
+            <summary class="
+                menu-accordion__opener
+                xl:relative
+                xl:block
+                xl:cursor-pointer
+                xl:list-none
+                xl:appearance-none
+                xl:px-3
+                xl:py-4
+                xl:text-body-small
+                xl:text-inherit
+                xl:before:absolute
+                xl:before:bottom-3
+                xl:before:left-3
+                xl:before:right-3
+                xl:before:h-[2px]
+                xl:before:bg-base-body
+                xl:before:opacity-0
+                xl:before:transition-opacity
+                xl:before:duration-300
+                xl:before:ease-in-out
+                xl:before:content-['']
+                xl:hover:before:opacity-100
+                xl:focus:before:opacity-100
+                xl:group-[.active]:font-heading
+                xl:[&::-webkit-details-marker]:hidden
+              ">
+              {{ link.title }}
+            </summary>
+            <div class="
+                xl:absolute
+                xl:left-0
+                xl:top-full
+                xl:z-1000
+                xl:box-border
+                xl:w-full
+                xl:overflow-y-auto
+                xl:overflow-x-hidden
+                xl:bg-base-body-background
+                xl:shadow-sm
+                xl:group-open/details:max-h-[calc(100vh-var(--header-height))]
+                xl:group-[.fixed-position]/sticky-wrapper:max-h-[calc(100vh-var(--header-sticky-height))]
+              ">
+              <div class="container max-w-screen-3xl xl:px-0 xl:py-10">
+                <div class="
+                    xl:mx-auto
+                    xl:flex
+                    xl:w-10/12
+                    xl:flex-wrap
+                    xl:justify-center
+                    xl:gap-8
+                  ">
+                  {% for child_link in link.links %}
+                    <div class="xl:w-2/12">
+                      {% if child_link.links != blank %}
+                        <div class="
+                            xl:mb-3
+                            xl:font-heading
+                            xl:text-title
+                            xl:text-title-desktop
+                            xl:text-base-body
+                          ">
+                          {{ child_link.title }}
+                        </div>
+                      {% else %}
+                        <a
+                          href="{{ child_link.url }}"
+                          class="
+                            xl:mb-3
+                            xl:font-heading
+                            xl:text-title
+                            xl:text-title-desktop
+                            xl:text-base-body
+                            xl:hover:underline
+                            xl:focus:underline
+                          "
+                        >
+                          {{ child_link.title }}
+                        </a>
+                      {% endif %}
+                      {% if child_link.links != blank %}
+                        <ul class="xl:mb-5 xl:p-0 xl:font-light">
+                          {% for third_level in child_link.links %}
+                            <li class="
+                                {% if third_level.active %}
+                                active
+                                {% endif %}
+                                group
+                                xl:mb-4
+                                xl:last:mb-0
+                              ">
+                              <a
+                                href="{{ third_level.url }}"
+                                class="
+                                  xl:inline-block
+                                  xl:text-base-body
+                                  xl:hover:underline
+                                  xl:focus:underline
+                                  xl:group-[.active]:underline
+                                "
+                              >
+                                {{ third_level.title }}
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                  {% # theme-check-disable LiquidTag %}
+                  {% for block in section.blocks %}
+                    {% liquid
+                      assign link_title = link.title | downcase
+                      assign block_title = block.settings.title | downcase
+                    %}
+                    {% if link_title == block_title %}
+                      {% for item in (1..5) %}
+                        {% liquid
+                          assign image = 'image_' | append: forloop.index
+                          assign heading = 'heading_' | append: forloop.index
+                          assign text = 'text_' | append: forloop.index
+                          assign block_link = 'block_url_' | append: forloop.index
+                        %}
+                        {% if block.settings[image] != blank %}
+                          <div
+                            class="xl:w-2/12"
+                            {{ block.shopify_attributes }}
+                          >
+                            <a
+                              href="{{ block.settings[block_link] }}"
+                              class="xl:mb-3 xl:block"
+                            >
+                              {%
+                                render 'image',
+                                src: block.settings[image],
+                                m: '210x210',
+                                crop: 'center',
+                                lazyload: true,
+                                fetchpriority: 'low',
+                              %}
+                            </a>
+                            {% if block.settings[heading] != blank %}
+                              <a
+                                href="{{ block.settings[block_link] }}"
+                                class="
+                                  xl:block
+                                  xl:text-center
+                                  xl:font-heading
+                                  xl:text-title-desktop
+                                  xl:text-base-body
+                                  xl:hover:underline
+                                  xl:focus:underline
+                                "
+                              >
+                                {{ block.settings[heading] }}
+                              </a>
+                            {% endif %}
+                            {% if block.settings[text] != blank %}
+                              <div class="
+                                  xl:mb-2
+                                  xl:flex
+                                  xl:items-center
+                                  xl:justify-center
+                                  xl:gap-3
+                                  xl:text-product-price-large-desktop
+                                  xl:last:mb-0
+                                ">
+                                {{ block.settings[text] }}
+                              </div>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  {% endfor %}
+                  {% # theme-check-enable LiquidTag %}
+                </div>
+              </div>
+            </div>
+          </details>
+        </details-utils>
+      {% else %}
+        <details-utils
+          close-click-outside
+          close-esc
+          toggle-document-class="megamenu-open"
+        >
+          <details class="group/details">
+            <summary class="
+                menu-accordion__opener
+                xl:relative
+                xl:block
+                xl:cursor-pointer
+                xl:list-none
+                xl:appearance-none
+                xl:px-3
+                xl:py-4
+                xl:text-body-small
+                xl:text-inherit
+                xl:before:absolute
+                xl:before:bottom-3
+                xl:before:left-3
+                xl:before:right-3
+                xl:before:h-[2px]
+                xl:before:bg-base-body
+                xl:before:opacity-0
+                xl:before:transition-opacity
+                xl:before:duration-300
+                xl:before:ease-in-out
+                xl:before:content-['']
+                xl:hover:before:opacity-100
+                xl:focus:before:opacity-100
+                xl:before:group-open/details:opacity-100
+                xl:[&::-webkit-details-marker]:hidden
+              ">
+              {{ link.title }}
+            </summary>
+            <div class="
+                xl:absolute
+                xl:-left-6
+                xl:top-full
+                xl:z-1000
+                xl:mt-2
+                xl:box-border
+                xl:w-44
+                xl:bg-base-body-background
+                xl:shadow-dropdown
+              ">
+              <ul>
+                {% for child_link in link.links %}
+                  <li>
+                    <details-utils
+                      close-click-outside
+                      close-esc
+                    >
+                      <details class="xl:relative">
+                        <summary class="
+                            xl:flex
+                            xl:cursor-pointer
+                            xl:list-none
+                            xl:appearance-none
+                            xl:items-center
+                            xl:justify-between
+                            xl:break-words
+                            xl:px-6
+                            xl:py-2
+                            xl:text-inherit
+                            xl:hover:underline
+                            xl:focus:underline
+                            xl:[&::-webkit-details-marker]:hidden
+                          ">
+                          {% if child_link.links != blank %}
+                            {{ child_link.title }}
+                            {%
+                              render 'icon',
+                              icon: 'arrow-right-2',
+                              class: 'xl:-mr-2 xl:ml-4 xl:h-5 xl:w-5 xl:shrink-0'
+                            %}
+                          {% elsif child_link.url != blank %}
+                            <a href="{{ child_link.url }}">
+                              {{ child_link.title }}
+                            </a>
+                          {% else %}
+                            {{ child_link.title }}
+                          {% endif %}
+                        </summary>
+                        <div class="
+                            xl:absolute
+                            xl:left-full
+                            xl:top-0
+                            xl:z-1000
+                            xl:ml-[1px]
+                            xl:box-border
+                            xl:w-44
+                            xl:bg-base-body-background
+                            xl:shadow-dropdown
+                          ">
+                          {% if child_link.links != blank %}
+                            <ul class="xl:mb-3 xl:p-0 xl:font-light xl:last:mb-0">
+                              {% for third_level in child_link.links %}
+                                <li class="
+                                    {% if third_level.active %}
+                                    active
+                                    {% endif %}
+                                    group
+                                  ">
+                                  <a
+                                    href="{{ third_level.url }}"
+                                    class="
+                                      xl:block
+                                      xl:px-6
+                                      xl:py-2
+                                      xl:text-base-body
+                                      xl:hover:underline
+                                      xl:focus:underline
+                                      xl:group-[.active]:underline
+                                    "
+                                  >
+                                    {{ third_level.title }}
+                                  </a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          {% endif %}
+                        </div>
+                      </details>
+                    </details-utils>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </details>
+        </details-utils>
+      {% endif %}
+    </li>
+  {% else %}
+    <li class="
+        {% if link.active %}
+        active
+        {% endif %}
+        group
+        xl:group-[.justify-center]/header-column:mx-1
+      ">
+      <a
+        href="{{ link.url }}"
+        class="
+          xl:relative
+          xl:block
+          xl:px-3
+          xl:py-4
+          xl:text-body-small
+          xl:before:absolute
+          xl:before:bottom-3
+          xl:before:left-3
+          xl:before:right-3
+          xl:before:h-[2px]
+          xl:before:bg-base-body
+          xl:before:opacity-0
+          xl:before:transition-opacity
+          xl:before:duration-300
+          xl:before:ease-in-out
+          xl:before:content-['']
+          xl:hover:before:opacity-100
+          xl:focus:before:opacity-100
+          xl:group-[.active]:font-heading
+        "
+      >
+        {{ link.title }}
+      </a>
+    </li>
+  {% endif %}
+{% endfor %}

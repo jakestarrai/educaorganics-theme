@@ -1,0 +1,78 @@
+<div
+  class="{{ grid_item_width }}"
+  data-js-product-card
+>
+  <div
+    class="product-item {{ image_ratio }} group text-center"
+    data-product-container-js
+  >
+    {%- case item.object_type -%}
+      {%- when 'article' -%}
+        {% assign article = item %}
+        <a
+          href="{{ article.url }}"
+          class="
+            relative
+            mb-3
+            block
+            group-[.product-item--portrait]:aspect-portrait
+            group-[.product-item--square]:aspect-square
+            group-[.product-item--portrait]:pb-[125%]
+          "
+        >
+          {% if article.image != blank %}
+            {%
+              render 'image',
+              class: 'group-[.product-item--portrait]:absolute group-[.product-item--portrait]:top-0 group-[.product-item--portrait]:left-0 group-[.product-item--portrait]:h-full group-[.product-item--portrait]:object-cover group-[.product-item--portrait]:object-center group-[.product-item--square]:absolute group-[.product-item--square]:top-0 group-[.product-item--square]:left-0 group-[.product-item--square]:h-full group-[.product-item--square]:object-cover group-[.product-item--square]:object-center',
+              src: article.image,
+              m: image_sizes_mobile,
+              src_d: article.image,
+              d: image_sizes_desktop,
+              alt: article.image.alt,
+              lazyload: enable_lazyload,
+              fetchpriority: fetchpriority_value
+            %}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: "placeholder-svg group-[.product-item--portrait]:absolute group-[.product-item--portrait]:top-0 group-[.product-item--portrait]:left-0 group-[.product-item--portrait]:w-full group-[.product-item--portrait]:h-full group-[.product-item--square]:absolute group-[.product-item--square]:top-0 group-[.product-item--square]:left-0 group-[.product-item--square]:w-full group-[.product-item--square]:h-full" }}
+          {% endif %}
+        </a>
+        <div class="[&>*:last-child]:mb-0">
+          <h3 class="mb-2 text-title lg:text-title-desktop">
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </h3>
+          <div class="mb-1 text-product-price-small md:mb-2 lg:text-product-price-small-desktop">
+            <time datetime="{{ article.published_at | date: "%Y-%m-%d" }}">
+              {{ article.published_at | date: "%b %d %Y" }}
+            </time>
+          </div>
+          {%
+            render 'button',
+            href: article.url,
+            color: 'primary',
+            size: 'md',
+            locales_text: 'blogs.article.read_more'
+          %}
+        </div>
+      {%- when 'page' -%}
+        <div class="md:flex md:items-center md:justify-between md:space-x-8">
+          <div class="mb-3 md:mb-0 md:w-6/12">
+            <h2 class="
+                text-body-small
+                font-semibold
+                tracking-wider
+                last:mb-0
+                lg:text-body-medium
+                lg:tracking-wide
+              ">
+              <a
+                class="inline-block"
+                href="{{ item.url }}"
+              >
+                {{ item.title }}
+              </a>
+            </h2>
+          </div>
+        </div>
+    {%- endcase -%}
+  </div>
+</div>

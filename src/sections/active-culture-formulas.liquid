@@ -1,0 +1,128 @@
+<section class="overflow-hidden pb-9 pt-16 lg:pb-20 lg:pt-40 {{ section.settings.alignment_text }}">
+  {% if section.settings.subtitle != blank or section.settings.title != blank %}
+    <div class="container mb-6 max-w-2xl last:mb-0 lg:px-0">
+      {% if section.settings.subtitle != blank %}
+        <div class="
+            mb-4
+            text-caps-s
+            uppercase
+            last:mb-0
+            lg:mb-6
+            lg:text-h5
+          ">
+          {{ section.settings.subtitle }}
+        </div>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2 class="
+            mb-6
+            font-heading
+            text-h2
+            last:mb-0
+            lg:text-h1-desktop
+          ">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if section.settings.image != blank %}
+    <div class="mb-6 last:mb-0">
+      {%
+        render 'image',
+        src: section.settings.image,
+        m: '360x171',
+        d: '1440x300',
+        crop: 'center',
+        lazyload: true,
+        fetchpriority: 'low',
+      %}
+    </div>
+  {% endif %}
+
+  <div class="mb-6 overflow-x-auto overflow-y-hidden lg:overflow-hidden">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
+    <dotlottie-player
+      src="{{ 'wave-animation.json' | asset_url }}"
+      class="w-[982px] lg:w-full"
+      background="transparent"
+      speed="1"
+      loop
+      autoplay
+    ></dotlottie-player>
+  </div>
+
+  {% if section.settings.text != blank %}
+    <div class="container mb-6 max-w-2xl last:mb-0 lg:px-0">
+      <div class="
+          prose
+          mb-6
+          text-body-xs
+          last:mb-0
+          lg:mb-9
+          lg:text-body-small
+        ">
+        {{ section.settings.text }}
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Rich text with image",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Active culture formulas"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "We formulate for key performance areas"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Our bodies are incredible machines. But when we push them hard, things can start to get a bit wonky. That’s why athletic individuals are particularly prone to various issues (think immune suppression, colds, gastrointestinal upset, bloating, and mental health stress). Formulated to laser-target these key areas, EDUCA Organics Ultra Premium Formula are like your very own infant nutrition pit crew, working hard to keep you in the race and ahead of the pack.</p>"
+    },
+    {
+      "type": "select",
+      "id": "alignment_text",
+      "label": "Alignment regarding text block",
+      "default": "text-center",
+      "options": [
+        {
+          "value": "text-left",
+          "label": "Left"
+        },
+        {
+          "value": "text-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text with image",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

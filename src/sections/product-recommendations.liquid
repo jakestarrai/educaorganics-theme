@@ -1,0 +1,199 @@
+{% liquid
+  assign image_sizes_mobile = '184x'
+  assign image_sizes_desktop = '360x'
+%}
+{% if section.settings.show_product_recommendations %}
+  <div
+    id="product-recommendations"
+    data-intent="{{ recommendations.intent }}"
+    data-section-type="product-recommendations"
+    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.limit }}"
+    data-section-id="{{ section.id }}"
+    data-product-id="{{ product.id }}"
+    data-limit="{{ section.settings.limit }}"
+  >
+    {%- if recommendations.performed and recommendations.products_count > 0 -%}
+      <section
+        class="overflow-hidden py-16 lg:pb-0 lg:pt-30"
+        data-recomendations
+      >
+        <div class="container max-w-screen-3xl xl:px-20">
+          <div class="
+              flex
+              flex-col
+              gap-6
+              text-center
+              lg:mb-10
+              lg:flex-row
+              lg:items-end
+              lg:justify-between
+              lg:gap-20
+              lg:text-left
+            ">
+            {% if section.settings.subheading != blank or section.settings.title != blank %}
+              <div class="lg:w-6/12">
+                {% if section.settings.subheading != blank %}
+                  <div class="
+                      mb-4
+                      text-caps-s
+                      uppercase
+                      last:mb-0
+                      lg:mb-6
+                      lg:font-heading
+                      lg:text-h6
+                    ">
+                    {{ section.settings.subheading }}
+                  </div>
+                {% endif %}
+                {% if section.settings.title != blank %}
+                  <h2 class="
+                      mb-4
+                      font-heading
+                      text-h2
+                      last:mb-0
+                      lg:text-h1-desktop
+                    ">
+                    {{ section.settings.title }}
+                  </h2>
+                {% endif %}
+              </div>
+            {% endif %}
+            {% if section.settings.text != blank %}
+              <div class="prose lg:w-2/5">
+                {{ section.settings.text }}
+              </div>
+            {% endif %}
+          </div>
+          <div
+            class="
+              product-recommendations-gallery
+              splide
+              group/slider
+              js-products
+              -mr-6
+              gap-x-5
+              gap-y-8
+              pt-10
+              md:py-10
+              lg:-mr-20
+              lg:gap-10
+              xl:gap-x-8
+            "
+            id="product-gallery-{{ section.id }}"
+          >
+            <div class="splide__track mb-10">
+              <div class="splide__list flex">
+                {%- for product in recommendations.products -%}
+                  {%
+                    render 'product-card',
+                    product: product,
+                    classes: 'splide__slide'
+                    grid_item_width: '',
+                    image_sizes_mobile: image_sizes_mobile,
+                    image_sizes_desktop: image_sizes_desktop,
+                    image_ratio: section.settings.image_ratio,
+                    show_vendor: settings.show_vendor
+                  %}
+                {%- endfor -%}
+              </div>
+            </div>
+            <div
+              class="splide__progress"
+              aria-hidden="true"
+            >
+              <div class="splide__progress-bar"></div>
+            </div>
+          </div>
+          {% if section.settings.button_link != blank %}
+            <div class="text-center sm:pt-4">
+              {%
+                render 'button',
+                href: section.settings.button_link,
+                color: 'primary',
+                size: 'md',
+                text: section.settings.button_label
+              %}
+            </div>
+          {% endif %}
+        </div>
+      </section>
+    {%- endif -%}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Dynamic recommendations change and improve with time. Create manual product recommendations using the Shopify Search & Discovery app. [Learn more](https://help.shopify.com/en/manual/online-store/search-and-discovery/product-recommendations)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_recommendations",
+      "label": "Turn on product recommendations",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "you might like these products"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Whether you’re wandering the globe or working out hard, there’s a precision infant formula to suit your daily needs.</p>"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Maximum products to show",
+      "default": 5
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "",
+      "options": [
+        {
+          "value": "",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "product-item--portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "product-item--square",
+          "label": "Square"
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Button is disabled if empty"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "back to home page"
+    }
+  ]
+}
+{% endschema %}

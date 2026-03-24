@@ -1,0 +1,249 @@
+<section
+  class="overflow-hidden py-8 lg:py-10"
+  id="testimonials-section"
+  data-section-type="testimonials"
+  data-section-id="{{ section.id }}"
+  data-block-size="{{ section.blocks.size }}"
+>
+  <div class="container max-w-screen-3xl xl:px-20">
+    {% if section.settings.title != blank %}
+      <h2 class="mb-9 text-center font-heading text-h2 lg:text-h2-desktop">{{ section.settings.title }}</h2>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="
+          splide
+          testimonials-slider
+          -mx-6
+          pb-10
+          lg:-mx-10
+          xl:mx-0
+          xl:pb-0
+        ">
+        <div class="splide__track">
+          <div class="splide__list xl:!grid xl:grid-cols-3 xl:gap-10">
+            {% for block in section.blocks %}
+              <div
+                class="splide__slide group/slide pt-12 md:pt-21 {{ block.settings.color_schema }}"
+                {{ block.shopify_attributes }}
+                data-index="{{ forloop.index0 }}"
+              >
+                <blockquote class="
+                    flex
+                    h-full
+                    flex-col
+                    justify-between
+                    rounded-2xl
+                    bg-base-body
+                    p-6
+                    pb-9
+                    text-center
+                    text-white
+                    group-[.june-gray]/slide:bg-june-5
+                    group-[.june-yellow]/slide:bg-base-accent
+                    group-[.june-gray]/slide:text-base-body
+                    group-[.june-yellow]/slide:text-base-body
+                    md:p-9
+                  ">
+                  <div>
+                    <div class="
+                        relative
+                        mx-auto
+                        -mt-18
+                        mb-4
+                        box-border
+                        h-24
+                        w-24
+                        overflow-hidden
+                        rounded-full
+                        border-8
+                        border-base-body
+                        group-[.june-gray]/slide:border-june-5
+                        group-[.june-yellow]/slide:border-base-accent
+                        md:-mt-30
+                        md:h-[166px]
+                        md:w-[166px]
+                      ">
+                      {% liquid
+                        if block.settings.enable_lazyload
+                          assign enable_lazyload = true
+                          assign fetchpriority_value = 'low'
+                        else
+                          assign enable_lazyload = false
+                          assign fetchpriority_value = 'high'
+                        endif
+                      %}
+                      {% if block.settings.image_1 != blank %}
+                        {%
+                          render 'image',
+                          class: 'object-cover h-full rounded-full',
+                          src: block.settings.image_1,
+                          m: '96x96',
+                          src_d: block.settings.image_1,
+                          d: '166x166',
+                          alt: 'image description',
+                          lazyload: enable_lazyload,
+                          fetchpriority: fetchpriority_value
+                        %}
+                      {% else %}
+                        {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+                      {% endif %}
+                    </div>
+                    {% if block.settings.image_2 != blank %}
+                      <div class="mb-6 md:mb-9">
+                        {%
+                          render 'image',
+                          class: "w-auto mx-auto",
+                          src: block.settings.image_2,
+                          m: '116x20',
+                          crop: 'center'
+                        %}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.quote != blank %}
+                      <div class="
+                          prose
+                          mb-6
+                          text-body-xs
+                          md:mb-9
+                          md:text-body-small
+                        ">
+                        {{ block.settings.quote }}
+                      </div>
+                    {% endif %}
+                  </div>
+                  {% if block.settings.author != blank or block.settings.profession != blank %}
+                    <cite class="
+                        block
+                        border-t-2
+                        pt-6
+                        text-body-xs
+                        not-italic
+                        md:pt-9
+                      ">
+                      {% if block.settings.author != blank %}
+                        <span class="
+                            mb-3
+                            block
+                            font-heading
+                            text-h4
+                            capitalize
+                            lg:text-h4-desktop
+                          ">
+                          {{ block.settings.author }}
+                        </span>
+                      {% endif %}
+                      {{ block.settings.profession }}
+                    </cite>
+                  {% endif %}
+                </blockquote>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Add the progress bar element -->
+      <div
+        class="splide__progress xl:hidden"
+        aria-hidden="true"
+      >
+        <div class="splide__progress-bar"></div>
+      </div>
+    {% endif %}
+    {% if section.blocks.size == 0 %}
+      {% render 'no-blocks' %}
+    {% endif %}
+  </div>
+</section>
+
+<link
+  rel="stylesheet"
+  href="{{ 'splide-gallery.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "First image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Second image"
+        },
+        {
+          "type": "select",
+          "id": "color_schema",
+          "label": "Color schema",
+          "options": [
+            {
+              "value": "",
+              "label": "June Dark"
+            },
+            {
+              "value": "june-gray",
+              "label": "June Gray"
+            },
+            {
+              "value": "june-yellow",
+              "label": "June June"
+            }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "quote",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Author's name"
+        },
+        {
+          "type": "text",
+          "id": "profession",
+          "label": "Author profession",
+          "default": "Professional Jet Skier"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

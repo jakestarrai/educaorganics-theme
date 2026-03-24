@@ -1,0 +1,63 @@
+import { register } from '@shopify/theme-sections';
+import { afterScrollEnable, callbackOnElOutOfView, performanceMeasure } from '../helpers/utils.js';
+
+register('iframe-video', {
+  initIframeVideo() {
+    afterScrollEnable(this.container, () => {
+      const videoRatio = this.container.querySelector(`.media-block #player-${this.id}`).getAttribute('data-ratio');
+
+      const options = {
+        autoplay: true,
+        muted: true,
+        loop: {
+          active: true,
+        },
+        fullscreen: {
+          enabled: false,
+          fallback: false,
+          iosNative: false,
+        },
+        controls: false,
+        hideControls: true,
+        disableContextMenu: false,
+        ratio: videoRatio,
+        youtube: {
+          playsinline: 1,
+          fs: 0,
+          iv_load_policy: 3,
+          rel: 0,
+          autohide: 1,
+          showinfo: 0,
+          enablejsapi: 1,
+          muted: 1,
+          autoplay: 1,
+        },
+        vimeo: {
+          autoplay: true,
+          muted: true,
+          playsinline: true,
+          controls: false,
+          loop: true,
+          byline: true,
+        },
+      };
+
+      import('plyr').then((mod) => {
+        const Plyr = mod.default;
+
+        this.iframeVideo = new Plyr(this.container.querySelector(`.media-block #player-${this.id}`), options);
+        window.plyrPlayer = this.iframeVideo;
+
+        document.addEventListener('ready', () => {
+          this.iframeVideo.play();
+        });
+
+        callbackOnElOutOfView(this.container.querySelector(`.media-block`), () => this.iframeVideo.pause());
+      });
+    });
+  },
+
+  onLoad() {
+    performanceMeasure(this.id, this.initIframeVideo.bind(this));
+  },
+});

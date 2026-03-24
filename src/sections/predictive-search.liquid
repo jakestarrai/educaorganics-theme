@@ -1,0 +1,153 @@
+{%- if predictive_search.performed -%}
+  <div class="overflow-hidden p-4 pb-0 xl:px-2 xl:pt-3">
+    <div class="-mx-4 lg:flex lg:flex-wrap">
+      {%- if predictive_search.resources.queries.size > 0 -%}
+        <div class="mb-6 px-4 lg:w-5/12">
+          <div class="
+              mx-2
+              block
+              border-b
+              border-base-border
+              pb-3
+              text-base-label
+              text-base-secondary
+              lg:text-base-label-desktop
+            ">
+            {{ 'general.search.predictive_search.suggestions' | t }}
+          </div>
+          <ul>
+            {%- for query in predictive_search.resources.queries -%}
+              <li>
+                <a
+                  href="{{ query.url }}"
+                  class="
+                    block
+                    p-2
+                    no-underline
+                    hover:bg-base-background
+                    focus:bg-base-background
+                    xl:px-3
+                    xl:py-1
+                  "
+                >
+                  {{ query.styled_text }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+      {%- if predictive_search.resources.products.size > 0 -%}
+        <div class="mb-9 px-4 lg:w-7/12 xl:mb-6">
+          <div class="
+              mx-2
+              block
+              border-b
+              border-base-border
+              pb-3
+              text-base-label
+              text-base-secondary
+              lg:text-base-label-desktop
+            ">
+            {{ 'general.search.predictive_search.product' | t }}
+          </div>
+          <ul>
+            {%- for product in predictive_search.resources.products -%}
+              <li id="predictive-search-option-product-{{ forloop.index }}">
+                <a
+                  href="{{ product.url }}"
+                  class="
+                    flex
+                    items-center
+                    px-2
+                    py-1
+                    no-underline
+                    hover:bg-base-background
+                    focus:bg-base-background
+                  "
+                >
+                  <div class="mr-4 h-12 w-12 shrink-0">
+                    {% if product.featured_media != blank %}
+                      {%
+                        render 'image',
+                        src: product.featured_media,
+                        m: '48x48',
+                        class: 'w-full h-full object-cover rounded-md',
+                        lazyload: true,
+                        fetchpriority: 'low',
+                        alt: product.featured_media.alt
+                      %}
+                    {% else %}
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {% endif %}
+                  </div>
+                  <div class="w-full">{{ product.title }}</div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {%- endif -%}
+      {%- if predictive_search.resources.pages.size > 0 -%}
+        <div class="mb-6 px-4 lg:w-5/12">
+          <div class="
+              mx-2
+              block
+              border-b
+              border-base-border
+              pb-3
+              text-base-label
+              text-base-secondary
+              lg:text-base-label-desktop
+            ">
+            {{ 'general.search.predictive_search.pages' | t }}
+          </div>
+          <ul>
+            {%- for page in predictive_search.resources.pages -%}
+              <li id="predictive-search-option-page-desktop-{{ forloop.index }}">
+                <a
+                  href="{{ page.url }}"
+                  class="
+                    block
+                    p-2
+                    no-underline
+                    hover:bg-base-background
+                    focus:bg-base-background
+                    xl:px-3
+                    xl:py-1
+                  "
+                >
+                  {{ page.title }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+    <button class="
+        relative
+        flex
+        w-full
+        items-center
+        justify-between
+        py-3
+        text-body-large
+        before:absolute
+        before:left-2
+        before:right-2
+        before:top-0
+        before:h-[1px]
+        before:bg-base-border
+        before:content-['']
+        hover:bg-base-background
+        focus:bg-base-background
+        xl:px-2
+      ">
+      <span data-predictive-search-search-for-text>
+        {{- 'general.search.predictive_search.search_for' | t: terms: predictive_search.terms -}}
+      </span>
+      {% render "icon" with "arrow-right" %}
+    </button>
+  </div>
+{%- endif -%}

@@ -1,0 +1,18 @@
+<article>
+  {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+  <h3 class="font-heading text-h3 lg:text-h3-desktop">
+    {{ 'blogs.placeholder.title' | t }}
+  </h3>
+  {% if section.settings.show_date %}
+    <div class="mb-3">
+      <time datetime="{{ 'now' | date: "%Y-%m-%d" }}">
+        {{ 'now' | date: '%b %d %Y' }}
+      </time>
+    </div>
+  {% endif %}
+  {% if section.settings.show_excerpt %}
+    <div class="prose mb-3">
+      {{ 'blogs.placeholder.content' | t }}
+    </div>
+  {% endif %}
+</article>

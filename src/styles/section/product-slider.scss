@@ -1,0 +1,53 @@
+@import "../vendors/include-media";
+
+.product-slider {
+  @include media ("≥desktop") {
+    max-width: 600px;
+  }
+
+  .splide__pagination {
+    position: static;
+    margin-top: 16px;
+  }
+
+  .splide__list {
+    height: auto;
+  }
+
+  .splide__slide {
+    border: none !important;
+  }
+}
+
+.product-slider-thumbnails {
+
+  .splide__slide {
+    border: none !important;
+    overflow: hidden;
+    &.is-active {
+      &::before {
+        opacity: 1;
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      border: 1px solid var(--base-body-text);
+      border-radius: 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease-in-out;
+      inset: 0;
+    }
+  }
+
+  .deferred-media__poster {
+
+    > span {
+      @include media ("≥desktop") {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+@import "../vendors/include-media";
+
+.subscribe-block__input {
+  &:checked {
+
+    + .subscribe-block__holder {
+
+      .subscribe-block__label-circle {
+        border-color: #000;
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      .subscribe-block__hidden-block {
+        display: grid;
+        gap: 16px;
+      }
+    }
+  }
+}
+
+.subscribe-block__label-circle {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  border: 2px solid #ccc8c3;
+  border-radius: 100%;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: #000;
+    border-radius: 100%;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    transform: translate(-50%, -50%);
+  }
+  @include media ("≥desktop") {
+    margin-right: 16px;
+  }
+}

@@ -1,0 +1,18 @@
+{% liquid
+  if enable_quick_add_button
+    if product.variants.size > 1 and product.available
+      assign data_product_url = current_variant.url
+      assign popup_url = data_product_url | append: '&view=quick-card'
+      assign data_product_url = 'data-product-url="' | append: data_product_url | append: '"'
+      assign data_attrs = data_product_url | append: 'data-src="' | append: popup_url | append: '"'
+
+      render 'button', element: 'button', class: 'w-full min-w-full max-sm:group-[.grid-cols-2]/collection-grid:px-[10px]', color: 'primary', size: 'sm', locales_text: 'products.product.choose_options', data_attribute: 'data-fancybox = "quick-view" data-quick-choose', other: data_attrs
+    else
+      if current_variant.available
+        render 'button', element: 'button', type: 'submit', class: 'w-full min-w-full max-sm:group-[.grid-cols-2]/collection-grid:px-[10px]', color: 'primary', size: 'sm', locales_text: 'products.product.add_to_cart', data_attribute: 'data-submit-button', other: 'name = "add"'
+      else
+        render 'button', element: 'button', type: 'submit', class: 'w-full min-w-full max-sm:group-[.grid-cols-2]/collection-grid:px-[10px] disabled', color: 'primary', size: 'sm', locales_text: 'products.product.sold_out', data_attribute: 'data-submit-button', other: 'name = "add" disabled'
+      endif
+    endif
+  endif
+%}

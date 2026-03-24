@@ -1,0 +1,141 @@
+{% capture section_content %}
+  <div class="container max-w-screen-3xl">
+    {% if title != blank or text != blank %}
+      <div class="
+          mx-auto
+          mb-5
+          max-w-lg
+          text-center
+          md:mb-8
+          md:max-w-xl
+        ">
+        {% if title != blank %}
+          {% if section.settings.heading_level == 'h1' %}
+            <h1 class="text- mb-4 font-heading{{ section.settings.heading_level }} lg:text- last:mb-0{{ section.settings.heading_level }}-desktop">
+              {{ title }}
+            </h1>
+          {% elsif section.settings.heading_level == 'h2' %}
+            <h2 class="text- mb-4 font-heading{{ section.settings.heading_level }} lg:text- last:mb-0{{ section.settings.heading_level }}-desktop">
+              {{ title }}
+            </h2>
+          {% endif %}
+        {% endif %}
+        {% if text != blank %}
+          <div class="prose">
+            {{ text }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="-mb-5 overflow-hidden">
+        <div class="md:-mx-4 md:flex md:flex-wrap md:justify-center">
+          {% for block in section.blocks %}
+            {% liquid
+              if block.settings.enable_lazyload
+                assign enable_lazyload = true
+                assign fetchpriority_value = 'low'
+              else
+                assign enable_lazyload = false
+                assign fetchpriority_value = 'high'
+              endif
+            %}
+            <div
+              class="md:w-4/12 md:px-4"
+              {{ block.shopify_attributes }}
+            >
+              <div class="mb-5 px-5 pt-11 text-center">
+                {% if block.settings.subtitle != blank %}
+                  <div class="mb-2">{{ block.settings.subtitle }}</div>
+                {% endif %}
+                {% if block.settings.title != blank %}
+                  <h3 class="mb-5 font-heading text-h5">{{ block.settings.title }}</h3>
+                {% endif %}
+                <div class="
+                    mx-auto
+                    mb-6
+                    flex
+                    h-13
+                    w-13
+                    items-center
+                    justify-center
+                    overflow-hidden
+                    rounded-full
+                  ">
+                  {% if block.settings.image != blank %}
+                    {%
+                      render 'image',
+                      src: block.settings.image,
+                      m: '50x',
+                      alt: block.settings.image.alt,
+                      lazyload: enable_lazyload,
+                      fetchpriority: fetchpriority_value
+                    %}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                </div>
+                <div class="prose">
+                  {{ block.settings.features }}
+                </div>
+                {% if block.settings.period != blank or block.settings.price != blank %}
+                  <ul class="mb-8 flex flex-wrap justify-center last:mb-0 md:mb-10">
+                    {% if block.settings.price != blank %}
+                      <li class="
+                          relative
+                          pr-5
+                          font-bold
+                          after:absolute
+                          after:right-2
+                          after:top-0
+                          after:content-['|']
+                          last:pr-0
+                          last:after:content-none
+                        ">
+                        {{ block.settings.price }}
+                      </li>
+                    {% endif %}
+                    {% if block.settings.period != blank %}
+                      <li class="
+                          relative
+                          pr-5
+                          font-bold
+                          after:absolute
+                          after:right-2
+                          after:top-0
+                          after:content-['|']
+                          last:pr-0
+                          last:after:content-none
+                        ">
+                        {{ block.settings.period }}
+                      </li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+                {% if block.settings.button_link != blank and block.settings.button_label != blank %}
+                  {%
+                    render 'button',
+                    href: block.settings.button_link,
+                    color: 'primary',
+                    size: 'md',
+                    text: block.settings.button_label
+                  %}
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endcapture %}
+
+{% if title != blank %}
+  <section class="py-10">
+    {{ section_content }}
+  </section>
+{% else %}
+  <div class="py-10">
+    {{ section_content }}
+  </div>
+{% endif %}

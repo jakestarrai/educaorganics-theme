@@ -1,0 +1,185 @@
+<section class="py-6 lg:py-10">
+  <div class="container max-w-screen-3xl xl:px-20">
+    {% if section.settings.subtitle != blank or section.settings.title != blank %}
+      <div class="border-t border-june-dark py-10 lg:py-20">
+        {% if section.settings.subtitle != blank %}
+          <div class="
+              mb-2
+              text-caps-s
+              uppercase
+              md:mb-4
+              lg:mb-6
+              lg:text-h6
+            ">
+            {{ section.settings.subtitle }}
+          </div>
+        {% endif %}
+        {% if section.settings.title != blank %}
+          <h2 class="
+              mb-9
+              font-heading
+              text-h2
+              last:mb-0
+              lg:mb-6
+              lg:text-h2-desktop
+            ">
+            {{ section.settings.title }}
+          </h2>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="grid gap-10 lg:grid-cols-3">
+        {% for block in section.blocks %}
+          <div
+            class="lg:flex"
+            {{ block.shopify_attributes }}
+          >
+            <div class="
+                hidden
+                lg:mr-6
+                lg:block
+                lg:w-15
+                lg:shrink-0
+                xl:mr-10
+              ">
+              {%- render 'icon', icon: 'arrow-right-circle', class: 'w-15 h-15' -%}
+            </div>
+            <div class="
+                flex
+                items-center
+                gap-6
+                lg:flex-col-reverse
+                lg:items-start
+                lg:justify-between
+                lg:gap-8
+              ">
+              <div class="
+                  h-32
+                  w-32
+                  self-start
+                  overflow-hidden
+                  rounded-full
+                  max-lg:shrink-0
+                  lg:h-50
+                  lg:w-50
+                  2xl:h-75
+                  2xl:w-75
+                ">
+                {% if block.settings.image != blank %}
+                  {%
+                    render 'image',
+                    class: 'object-cover h-full rounded-full',
+                    src: block.settings.image,
+                    m: '128x128',
+                    t: '200x200',
+                    d: '300x300',
+                    crop: 'center',
+                    alt: 'image description',
+                    lazyload: true,
+                    fetchpriority: 'low'
+                  %}
+                {% endif %}
+              </div>
+              <div>
+                {% if block.settings.subtitle != blank %}
+                  <div class="
+                      mb-2
+                      text-caps-s
+                      uppercase
+                      last:mb-0
+                      lg:mb-4
+                      lg:text-h5
+                    ">
+                    {{ block.settings.subtitle }}
+                  </div>
+                {% endif %}
+                {% if block.settings.subtitle != blank %}
+                  <h3 class="
+                      mb-4
+                      font-heading
+                      text-h2
+                      last:mb-0
+                      lg:mb-6
+                      lg:text-h2-desktop
+                    ">
+                    {{ block.settings.title }}
+                  </h3>
+                {% endif %}
+                {% if block.settings.subtitle != blank %}
+                  <div class="
+                      prose
+                      mb-4
+                      text-body-xs
+                      last:mb-0
+                      lg:mb-6
+                      lg:text-body-small
+                    ">
+                    {{ block.settings.richtext }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instructions section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subitle",
+      "default": "instructions"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "How to take our Premium Formula"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Content",
+      "type": "image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Step 1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Tear it."
+        },
+        {
+          "type": "richtext",
+          "id": "richtext",
+          "label": "Content",
+          "default": "<p>Rip open an individual packet (make sure to dispose of it responsibly!)</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instructions section",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

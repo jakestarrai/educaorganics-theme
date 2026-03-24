@@ -1,0 +1,46 @@
+{% liquid
+  assign product_placeholder = 'collections.general.product' | t
+  assign products_placeholder = 'collections.general.products' | t
+%}
+<div class="text-center">
+  <a
+    class="
+      mb-1
+      block
+      overflow-hidden
+      rounded-lg
+      last:mb-0
+      lg:rounded-xl
+    "
+    href="{{ collection.url }}"
+    title="{{ 'collections.general.link_title' | t: title: collection.title }}"
+  >
+    {% if image != blank %}
+      {%
+        render 'image',
+        src: image,
+        m: '375x375',
+        src_d: image,
+        d: '303x303',
+        crop: 'center',
+        alt: image.alt,
+        lazyload: enable_lazyload,
+        fetchpriority: fetchpriorityValue
+      %}
+    {% else %}
+      {% echo 'image' | placeholder_svg_tag: 'placeholder-svg' %}
+    {% endif %}
+  </a>
+  <h2 class="mb-1 font-heading font-heading-weight last:mb-0">
+    <a
+      href="{{ collection.url }}"
+      title="{{ 'collections.general.link_title' | t: title: collection.title }}"
+    >
+      {{- collection.title -}}
+    </a>
+  </h2>
+  <div class="mb-1 last:mb-0">
+    {{ collection.all_products_count }}
+    {{ collection.all_products_count | pluralize: product_placeholder, products_placeholder }}
+  </div>
+</div>

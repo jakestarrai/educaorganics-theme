@@ -1,0 +1,188 @@
+<link
+  rel="stylesheet"
+  href="{{ 'splide-gallery.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>
+
+<section
+  id="community-section"
+  class="overflow-hidden bg-base-accent py-16 lg:pb-20 lg:pt-10"
+  data-section-type="community-section"
+  data-section-id="{{ section.id }}"
+>
+  <div class="container max-w-screen-3xl xl:px-20">
+    <div class="border-t-2 border-june-dark pb-10 pt-16 lg:py-20">
+      <div class="text-center lg:flex lg:items-end lg:justify-between lg:text-left">
+        <h2 class="
+            mb-4
+            font-custom-heading
+            text-d1
+            uppercase
+            last:mb-0
+            lg:mb-0
+            lg:text-d1-desktop
+          ">
+          It’s June all year round
+        </h2>
+        <div class="
+            prose
+            px-10
+            text-body-small
+            lg:max-w-[220px]
+            lg:shrink-0
+            lg:px-0
+            lg:pb-10
+            lg:text-body-medium
+          ">
+          <p>Hype-worthy moments from the EDUCA Organics community.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="only:pt-10">
+    <div
+      class="splide community-carousel"
+      role="group"
+      aria-label="Community image carousel"
+    >
+      <div class="splide__track">
+        <ul class="splide__list">
+          <li class="splide__slide">
+            <a
+              href="#"
+              class="
+                relative
+                block
+                aspect-square
+                overflow-hidden
+                rounded-2xl
+              "
+            >
+              {%
+                render 'image',
+                asset_img_url: true,
+                class: 'w-full h-full object-cover',
+                src: 'img-placeholder.png',
+                m: '200x200',
+                d: '300x300',
+                crop: 'center',
+                lazyload: true,
+                fetchpriority: 'low',
+              %}
+            </a>
+          </li>
+          <li class="splide__slide">
+            <a
+              href="#"
+              class="
+                relative
+                block
+                aspect-square
+                overflow-hidden
+                rounded-2xl
+              "
+            >
+              {%
+                render 'image',
+                asset_img_url: true,
+                class: 'w-full h-full object-cover',
+                src: 'img-placeholder.png',
+                m: '200x200',
+                d: '300x300',
+                crop: 'center',
+                lazyload: true,
+                fetchpriority: 'low',
+              %}
+            </a>
+          </li>
+          <li class="splide__slide">
+            <a
+              href="#"
+              class="
+                relative
+                block
+                aspect-square
+                overflow-hidden
+                rounded-2xl
+              "
+            >
+              {%
+                render 'image',
+                asset_img_url: true,
+                class: 'w-full h-full object-cover',
+                src: 'img-placeholder.png',
+                m: '200x200',
+                d: '300x300',
+                crop: 'center',
+                lazyload: true,
+                fetchpriority: 'low',
+              %}
+            </a>
+          </li>
+          <li class="splide__slide">
+            <a
+              href="#"
+              class="
+                relative
+                block
+                aspect-square
+                overflow-hidden
+                rounded-2xl
+              "
+            >
+              {%
+                render 'image',
+                asset_img_url: true,
+                class: 'w-full h-full object-cover',
+                src: 'img-placeholder.png',
+                m: '200x200',
+                d: '300x300',
+                crop: 'center',
+                lazyload: true,
+                fetchpriority: 'low',
+              %}
+            </a>
+          </li>
+          <li class="splide__slide">
+            <a
+              href="#"
+              class="
+                relative
+                block
+                aspect-square
+                overflow-hidden
+                rounded-2xl
+              "
+            >
+              {%
+                render 'image',
+                asset_img_url: true,
+                class: 'w-full h-full object-cover',
+                src: 'img-placeholder.png',
+                m: '200x200',
+                d: '300x300',
+                crop: 'center',
+                lazyload: true,
+                fetchpriority: 'low',
+              %}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Community carousel markup",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Community carousel markup",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

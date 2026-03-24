@@ -1,0 +1,470 @@
+<div
+  class="
+    hero
+    section-padding
+    group
+    relative
+    z-2
+    {% if section.settings.enable_full_width %} hero--full-width{% endif %}
+    hero--banner-{{ section.settings.image_height }}
+    {% if section.settings.fullheight %} hero--full-height{% endif %}
+  "
+  data-section-id="{{ section.id }}"
+>
+  <div class="
+      container
+      max-w-screen-3xl
+      group-[&.hero--full-width]:max-w-full
+      max-lg:px-3
+      md:relative
+    ">
+    <div class="
+        hero__img
+        relative
+        md:absolute
+        md:inset-x-3
+        md:inset-y-0
+        md:h-full
+        md:after:pointer-events-none
+        md:after:absolute
+        md:after:left-0
+        md:after:top-0
+        md:after:z-1
+        md:after:h-full
+        md:after:w-full
+        md:after:bg-base-body
+        md:after:content-['']
+        lg:inset-x-10
+      ">
+      <div class="h-full w-full overflow-hidden rounded-t-2xl md:rounded-2xl">
+        {%- if section.settings.image_mobile != blank -%}
+          {% liquid
+            if section.settings.enable_lazyload
+              assign enable_lazyload = true
+              assign fetchpriority_value = 'low'
+            else
+              assign enable_lazyload = false
+              assign fetchpriority_value = 'high'
+            endif
+          %}
+          {%
+            render 'image',
+            class: 'w-full h-full object-cover',
+            src: section.settings.image_mobile,
+            m: '366x240',
+            src_d: section.settings.image,
+            d: '1360x640',
+            alt: section.settings.image_mobile.alt,
+            lazyload: enable_lazyload,
+            fetchpriority: fetchpriority_value,
+          %}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      {%- comment -%}Left bottom corner element{%- endcomment -%}
+      <div class="pointer-events-none absolute bottom-0 left-0 z-4">
+        <div class="-mb-[1px] -mr-[1px] md:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" width="126" height="129" viewBox="0 0 126 129" fill="none">
+            <path d="M-0.134117 128.523L-0.134095 0.522988L-0.1341 30.8578C-0.134102 40.7908 3.96995 50.2824 11.2068 57.0862L76.796 118.751C83.4725 125.028 92.2914 128.523 101.455 128.523L126 128.523L-0.134117 128.523Z" fill="#EDF979"/>
+          </svg>
+        </div>
+        <div class="hidden md:-mb-[1px] md:-ml-[1px] md:block">
+          <svg xmlns="http://www.w3.org/2000/svg" width="338" height="343" viewBox="0 0 338 343" fill="none">
+            <path d="M0 343V0V102.245C0 115.489 5.47208 128.145 15.1212 137.216L220.142 329.971C229.044 338.34 240.802 343 253.021 343H338L0 343Z" fill="white"/>
+          </svg>
+        </div>
+      </div>
+
+      {%- comment -%}Right top corner element{%- endcomment -%}
+      <div class="pointer-events-none absolute right-0 top-0 z-4">
+        <div class="-mr-[1px] -mt-[1px] md:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" width="126" height="128" viewBox="0 0 126 128" fill="none">
+            <path d="M126.134 -0.478188L126.134 127.522L126.134 97.1869C126.134 87.254 122.03 77.7624 114.793 70.9586L49.204 9.29344C42.5275 3.01645 33.7086 -0.478205 24.5448 -0.478206L0 -0.47821L126.134 -0.478188Z" fill="white"/>
+          </svg>
+        </div>
+        <div class="hidden md:-mr-[1px] md:-mt-[1px] md:block">
+          <svg xmlns="http://www.w3.org/2000/svg" width="338" height="343" viewBox="0 0 338 343" fill="none">
+            <path d="M338 0V343V240.755C338 227.511 332.528 214.855 322.879 205.784L117.858 13.0289C108.956 4.65954 97.1975 0 84.9791 0L0 0L338 0Z" fill="white"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="relative z-4">
+      <div class="container relative max-w-screen-3xl px-0">
+        <div class="
+            hero__content
+            custom-color
+            flex
+            rounded-b-2xl
+            bg-base-accent
+            p-6
+            {{ section.settings.alignment_text }}
+            {{ section.settings.alignment }}
+            relative
+            md:rounded-none
+            md:bg-transparent
+            md:group-[&.hero--banner-large]:min-h-[746px]
+            md:group-[&.hero--banner-medium]:min-h-[560px]
+            md:group-[&.hero--banner-small]:min-h-[420px]
+            lg:p-10
+            xl:p-20
+          ">
+          <div class="md:w-2/3 xl:w-1/2">
+            <blockquote>
+              <div class="
+                  absolute
+                  bottom-full
+                  left-6
+                  mb-4
+                  last:mb-0
+                  md:static
+                  md:mb-6
+                  lg:mb-9
+                ">
+                {%- render 'icon', icon: 'quote', class: 'w-19 h-17 lg:w-26 lg:h-24' -%}
+              </div>
+              {% for block in section.blocks %}
+                {% case block.type %}
+                  {% when 'title' %}
+                    <div
+                      class="
+                        mb-6
+                        font-custom-heading
+                        text-d2
+                        uppercase
+                        last:mb-0
+                        lg:mb-9
+                        lg:text-d2-desktop
+                      "
+                      {{ block.shopify_attributes }}
+                    >
+                      {{ block.settings.title }}
+                    </div>
+                  {% when 'text' %}
+                    <div
+                      class="
+                        prose
+                        mb-6
+                        text-body-small
+                        last:mb-0
+                        lg:mb-9
+                        lg:text-body-large
+                        [&_p]:before:content-['']
+                        [&_p]:after:content-['']
+                      "
+                      {{ block.shopify_attributes }}
+                    >
+                      {{ block.settings.text }}
+                    </div>
+                    {% if block.settings.autor_name != blank %}
+                      <cite class="
+                          mb-6
+                          block
+                          text-right
+                          font-heading
+                          text-h4
+                          last:mb-0
+                          lg:mb-9
+                          lg:text-h4-desktop
+                        ">
+                        {{ block.settings.autor_name }}
+                      </cite>
+                    {% endif %}
+                  {% when 'button' %}
+                    <div class="mb-6 last:mb-0 lg:mb-9">
+                      {% if block.settings.button_link != blank and block.settings.button_label != blank %}
+                        {%
+                          render 'button',
+                          href: block.settings.button_link,
+                          color: 'secondary',
+                          size: 'md',
+                          text: block.settings.button_label,
+                          data_attribute: block.shopify_attributes
+                        %}
+                      {% endif %}
+                    </div>
+                {% endcase %}
+              {% endfor %}
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% style %}
+  [data-section-id="{{ section.id }}"] {
+    padding-top: {{ section.settings.hero_padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.hero_padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    [data-section-id="{{ section.id }}"] {
+      padding-top: {{ section.settings.hero_padding_top }}px;
+      padding-bottom: {{ section.settings.hero_padding_bottom }}px;
+    }
+  }
+
+  [data-section-id="{{ section.id }}"] .hero__img::after {
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+
+  {% if section.settings.enable_full_height %}
+    @media screen and (min-width: 768px) {
+      [data-section-id="{{ section.id }}"] .hero__content {
+        min-height: calc(100vh - var(--header-height, 84px)) !important;
+      }
+    }
+  {% endif %}
+
+  {% if section.settings.color.alpha != 0 and section.settings.color != blank %}
+    [data-section-id="{{ section.id }}"] .custom-color {
+      color: {{ section.settings.color }};
+    }
+  {% endif %}
+
+  {% if section.settings.color_mobile.alpha != 0 and section.settings.color_mobile != blank %}
+    @media screen and (max-width: 767px) {
+      [data-section-id="{{ section.id }}"] .custom-color {
+        color: {{ section.settings.color_mobile }};
+      }
+    }
+  {% endif %}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Image banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile",
+      "info": "This field is required to fullfill to display image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Image overlay opacity",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "label": "Banner height",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_full_height",
+      "label": "Full height",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Text alignment",
+      "default": "md:items-center md:justify-end",
+      "options": [
+        {
+          "value": "md:items-start md:justify-start",
+          "label": "Top left"
+        },
+        {
+          "value": "md:items-start md:justify-center",
+          "label": "Top center"
+        },
+        {
+          "value": "md:items-start md:justify-end",
+          "label": "Top right"
+        },
+        {
+          "value": "md:items-center md:justify-start",
+          "label": "Middle left"
+        },
+        {
+          "value": "md:items-center md:justify-center",
+          "label": "Middle center"
+        },
+        {
+          "value": "md:items-center md:justify-end",
+          "label": "Middle right"
+        },
+        {
+          "value": "md:items-end md:justify-start",
+          "label": "Bottom left"
+        },
+        {
+          "value": "md:items-end md:justify-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "md:items-end md:justify-end",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment_text",
+      "label": "Alignment regarding text block",
+      "default": "text-left",
+      "options": [
+        {
+          "value": "text-left",
+          "label": "Left"
+        },
+        {
+          "value": "text-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_mobile",
+      "label": "Text color mobile",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading",
+      "info": "Mobile screen uses 75% of selected value"
+    },
+    {
+      "type": "range",
+      "id": "hero_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "hero_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Title",
+      "type": "title",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Title"
+        }
+      ]
+    },
+    {
+      "name": "Text",
+      "type": "text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body text",
+          "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>"
+        },
+        {
+          "type": "text",
+          "id": "autor_name",
+          "label": "Autor name",
+          "default": "— Jane Smith, Junior Skier"
+        }
+      ]
+    },
+    {
+      "name": "Button",
+      "type": "button",
+      "settings": [
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link",
+          "info": "Button is disabled if empty"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Button label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image banner",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

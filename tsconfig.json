@@ -1,0 +1,24 @@
+{
+  "extends": "./paths.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "node_modules/@types",
+      "src/scripts/types"
+    ],
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "module": "es6",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "jsx": "react",
+    "jsxFactory": "h",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+  }
+}

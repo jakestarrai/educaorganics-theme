@@ -1,0 +1,366 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "product": {
+      "type": "product",
+      "blocks": {
+        "a94a6c69-2545-4168-bd3b-024fc6b9f1bd": {
+          "type": "shopify:\/\/apps\/okendo\/blocks\/star-rating\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "ef0d8f99-35fc-448d-b904-8bf918eb4c82": {
+          "type": "servings",
+          "settings": {
+          }
+        },
+        "b13a3696-81d9-4800-9914-7f2a6ba2a598": {
+          "type": "benefits",
+          "settings": {
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+          }
+        },
+        "selling_plan_bRNKem": {
+          "type": "selling_plan",
+          "settings": {
+            "subscription_details_text": "Subscription details",
+            "subscription_details_link": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+          }
+        },
+        "collapsible_row_KP6t89": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "Benefits",
+            "content": "{{ product.metafields.custom.product_accordions.value.benefits | metafield_tag }}"
+          }
+        },
+        "collapsible_row_TfjfyY": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "Active cultures",
+            "content": "{{ product.metafields.custom.product_accordions.value.active_cultures | metafield_tag }}"
+          }
+        },
+        "collapsible_row_ffM3yn": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "Other ingredients",
+            "content": "{{ product.metafields.custom.product_accordions.value.other_ingredients | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "a94a6c69-2545-4168-bd3b-024fc6b9f1bd",
+        "title",
+        "ef0d8f99-35fc-448d-b904-8bf918eb4c82",
+        "b13a3696-81d9-4800-9914-7f2a6ba2a598",
+        "description",
+        "variant_picker",
+        "selling_plan_bRNKem",
+        "quantity_selector",
+        "buy_buttons",
+        "collapsible_row_KP6t89",
+        "collapsible_row_TfjfyY",
+        "collapsible_row_ffM3yn"
+      ],
+      "custom_css": [
+
+      ],
+      "settings": {
+        "enable_lazyload": false,
+        "enable_slider": true,
+        "show_size_chart": false,
+        "show_breadcrumbs": false,
+        "show_variant_label": false,
+        "show_following_image": true,
+        "size_chart_url": "shopify:\/\/pages\/size-chart",
+        "swatches_color_type": "metafields"
+      }
+    },
+    "8d3bf3ac-da23-43ca-b5e6-c34d58109e95": {
+      "type": "product-benefits",
+      "blocks": {
+        "template--14673224564782__8d3bf3ac-da23-43ca-b5e6-c34d58109e95-image-1": {
+          "type": "image",
+          "settings": {
+            "text_element": "",
+            "image": "{{ product.metafields.custom.product_benefits.value.product_benefit_1_image.value }}",
+            "enable_lazyload": true,
+            "title": "{{ product.metafields.custom.product_benefits.value.product_benefit_1_heading.value }}"
+          }
+        },
+        "template--14673224564782__8d3bf3ac-da23-43ca-b5e6-c34d58109e95-image-2": {
+          "type": "image",
+          "settings": {
+            "text_element": "",
+            "image": "{{ product.metafields.custom.product_benefits.value.product_benefit_2_image.value }}",
+            "enable_lazyload": true,
+            "title": "{{ product.metafields.custom.product_benefits.value.product_benefit_2_heading.value }}"
+          }
+        },
+        "template--14673224564782__8d3bf3ac-da23-43ca-b5e6-c34d58109e95-image-3": {
+          "type": "image",
+          "settings": {
+            "text_element": "",
+            "image": "{{ product.metafields.custom.product_benefits.value.product_benefit_3_image.value }}",
+            "enable_lazyload": true,
+            "title": "{{ product.metafields.custom.product_benefits.value.product_benefit_3_heading.value }}"
+          }
+        },
+        "template--14673224564782__8d3bf3ac-da23-43ca-b5e6-c34d58109e95-image-4": {
+          "type": "image",
+          "settings": {
+            "text_element": "",
+            "image": "{{ product.metafields.custom.product_benefits.value.product_benefit_4_image.value }}",
+            "enable_lazyload": true,
+            "title": "{{ product.metafields.custom.product_benefits.value.product_benefit_4_heading.value }}"
+          }
+        },
+        "template--14673224564782__8d3bf3ac-da23-43ca-b5e6-c34d58109e95-image-5": {
+          "type": "image",
+          "settings": {
+            "text_element": "",
+            "image": "{{ product.metafields.custom.product_benefits.value.product_benefit_5_image.value }}",
+            "enable_lazyload": true,
+            "title": "{{ product.metafields.custom.product_benefits.value.product_benefit_5_heading.value }}"
+          }
+        }
+      },
+      "block_order": [
+        "template--14673224564782__8d3bf3ac-da23-43ca-b5e6-c34d58109e95-image-1",
+        "template--14673224564782__8d3bf3ac-da23-43ca-b5e6-c34d58109e95-image-2",
+        "template--14673224564782__8d3bf3ac-da23-43ca-b5e6-c34d58109e95-image-3",
+        "template--14673224564782__8d3bf3ac-da23-43ca-b5e6-c34d58109e95-image-4",
+        "template--14673224564782__8d3bf3ac-da23-43ca-b5e6-c34d58109e95-image-5"
+      ],
+      "settings": {
+      }
+    },
+    "11dce246-9208-4c5e-9db7-974759f66e28": {
+      "type": "home-image-with-text",
+      "blocks": {
+        "5f701f36-6c8f-455c-9ab7-7eeb89ccc431": {
+          "type": "subtitle",
+          "settings": {
+            "subtitle": "PRODUCT OVERVIEW"
+          }
+        },
+        "e4b15aad-82c0-42f4-b8b6-9a2efae11292": {
+          "type": "title",
+          "settings": {
+            "title": "{{ product.metafields.custom.product_overview.value.title.value }}"
+          }
+        },
+        "005a608c-4720-40a4-b775-bb72b8866c9b": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.custom.product_overview.value.description | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "5f701f36-6c8f-455c-9ab7-7eeb89ccc431",
+        "e4b15aad-82c0-42f4-b8b6-9a2efae11292",
+        "005a608c-4720-40a4-b775-bb72b8866c9b"
+      ],
+      "settings": {
+        "image": "{{ product.metafields.custom.product_overview.value.image.value }}",
+        "section_layout": "section_layout_2",
+        "enable_lazyload": true,
+        "layout": "md:flex-row-reverse"
+      }
+    },
+    "43a93f72-7e39-4e29-b8b5-2feb6c6db87c": {
+      "type": "instructions-section",
+      "blocks": {
+        "d91047c4-9fa7-4050-a2f9-0876c593a5e7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/01_Tear_it.svg",
+            "subtitle": "Step 1",
+            "title": "Tear it.",
+            "richtext": "<p>Rip open an individual packet (make sure to dispose of it responsibly!)<\/p>"
+          }
+        },
+        "5fc79fc1-b6ba-400f-a338-223d09f49b82": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/02_Pour_It.svg",
+            "subtitle": "Step 2",
+            "title": "Pour it.",
+            "richtext": "<p>Tip the powder directly into your mouth – no water required. The good bacteria will get to work straight away.<\/p>"
+          }
+        },
+        "40573e81-a712-4ea2-88cf-24f15ebca238": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/03_Live_it.svg",
+            "subtitle": "Step 3",
+            "title": "Live it.",
+            "richtext": "<p>The day’s yours for the taking. What’s on the cards?<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "d91047c4-9fa7-4050-a2f9-0876c593a5e7",
+        "5fc79fc1-b6ba-400f-a338-223d09f49b82",
+        "40573e81-a712-4ea2-88cf-24f15ebca238"
+      ],
+      "settings": {
+        "subtitle": "instructions",
+        "title": "How to take our Ultra Premium Formula"
+      }
+    },
+    "e5b17426-99d7-449a-80fd-e0f1360c4230": {
+      "type": "made-better",
+      "blocks": {
+        "template--14673224564782__e5b17426-99d7-449a-80fd-e0f1360c4230-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Only the absolute highest-quality ingredients are used in EDUCA Organics products. Because achieving your best means starting with the best.<\/p>"
+          }
+        },
+        "template--14673224564782__e5b17426-99d7-449a-80fd-e0f1360c4230-list-1": {
+          "type": "list",
+          "settings": {
+            "list": "<ul><li>Non-GMO<\/li><li>Multiple Third Party Tests<\/li><li>cGMP Manufacturing Facility<\/li><li>Trademarked clinically-backed strains<\/li><\/ul>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14673224564782__e5b17426-99d7-449a-80fd-e0f1360c4230-text-1",
+        "template--14673224564782__e5b17426-99d7-449a-80fd-e0f1360c4230-list-1"
+      ],
+      "settings": {
+        "title": "We’re  made better.",
+        "image": "shopify:\/\/shop_images\/made_better.jpg",
+        "enable_lazyload": true,
+        "layout": ""
+      }
+    },
+    "a6dd5496-294c-44cc-b385-e5e5c80ced1e": {
+      "type": "product-collapsible-section",
+      "blocks": {
+        "template--14673224564782__a6dd5496-294c-44cc-b385-e5e5c80ced1e-text-1": {
+          "type": "text",
+          "settings": {
+            "heading": "Are there any side effects?",
+            "richtext": "<p>While most people tolerate infant formula well, some may experience mild side effects such as bloating, gas, or nutritional discomfort when first starting the supplement. These symptoms typically subside as your body adjusts. If you experience any severe or persistent side effects, it's recommended to stop use and consult with a healthcare professional.<\/p>"
+          }
+        },
+        "fcd28fee-9c74-43e0-be52-c4889a09eb73": {
+          "type": "text",
+          "settings": {
+            "heading": "How long does it take to see results?",
+            "richtext": "<p>Results can vary depending on the individual and their specific health conditions. Some users may start to notice improvements in digestion and energy levels within a day to a couple of weeks. For benefits related to immune support and overall well-being, it may take a few weeks to a couple of months of consistent use to see noticeable changes.<\/p>"
+          }
+        },
+        "text_j97ceM": {
+          "type": "text",
+          "settings": {
+            "heading": "Do these dissolve in water?",
+            "richtext": "<p>No water is required. Our fastmelt sticks are designed to be enjoyed on-the-go, wherever you are! Simply pour the contents directly onto your tongue and the good bacteria will get straight to work.<\/p>"
+          }
+        },
+        "2fc738e8-1317-4366-bf5d-050ffe0bc9af": {
+          "type": "text",
+          "settings": {
+            "heading": "Can I take these with food?",
+            "richtext": "<p>You can take EDUCA Organics infant formula with or without food. However, taking them with a meal can enhance the absorption and efficacy of the infant formula, as the food provides a buffer that protects the infant formula from stomach acid, ensuring they reach the intestines where they can be most effective. We recommend aiming to take them at the same time each day.Text<\/p>"
+          }
+        },
+        "text_r97McN": {
+          "type": "text",
+          "settings": {
+            "heading": "What kind of testing do you do?",
+            "richtext": "<p>All our products undergo rigorous testing to ensure quality, safety, and efficacy. This includes testing for purity, potency, and the presence of active cultures. Additionally, each batch is tested for contaminants such as heavy metals, pathogens, and allergens.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14673224564782__a6dd5496-294c-44cc-b385-e5e5c80ced1e-text-1",
+        "fcd28fee-9c74-43e0-be52-c4889a09eb73",
+        "text_j97ceM",
+        "2fc738e8-1317-4366-bf5d-050ffe0bc9af",
+        "text_r97McN"
+      ],
+      "settings": {
+        "title": "nutrition <br> questions?",
+        "enable_padding": false
+      }
+    },
+    "1703871224979f13c4": {
+      "type": "apps",
+      "blocks": {
+        "6257bcfe-c91f-4afa-b526-e988bc30eadc": {
+          "type": "shopify:\/\/apps\/okendo\/blocks\/reviews-widget\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": "{{product}}",
+            "widget_type": "reviews_widget"
+          }
+        }
+      },
+      "block_order": [
+        "6257bcfe-c91f-4afa-b526-e988bc30eadc"
+      ],
+      "settings": {
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "show_product_recommendations": true,
+        "subheading": "other products you might like",
+        "title": "Check these out",
+        "text": "<p>Whether you’re wandering the globe or working out hard, there’s a precision infant formula to suit your daily needs.<\/p>",
+        "limit": 4,
+        "image_ratio": "",
+        "button_link": "",
+        "button_label": "back to home page"
+      }
+    }
+  },
+  "order": [
+    "product",
+    "8d3bf3ac-da23-43ca-b5e6-c34d58109e95",
+    "11dce246-9208-4c5e-9db7-974759f66e28",
+    "43a93f72-7e39-4e29-b8b5-2feb6c6db87c",
+    "e5b17426-99d7-449a-80fd-e0f1360c4230",
+    "a6dd5496-294c-44cc-b385-e5e5c80ced1e",
+    "1703871224979f13c4",
+    "product-recommendations"
+  ]
+}

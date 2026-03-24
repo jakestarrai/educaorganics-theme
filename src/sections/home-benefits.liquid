@@ -1,0 +1,133 @@
+<div class="py-10 md:py-8">
+  <div class="container max-w-screen-3xl px-12 md:px-10 2xl:px-20">
+    <div class="
+        grid
+        grid-cols-2
+        gap-x-4
+        gap-y-6
+        md:gap-x-12
+        md:overflow-hidden
+        md:py-2
+        xl:grid-cols-4
+      ">
+      {% for block in section.blocks %}
+        {% liquid
+          if block.settings.enable_lazyload
+            assign enable_lazyload = true
+            assign fetchpriorityValue = 'low'
+          else
+            assign enable_lazyload = false
+            assign fetchpriorityValue = 'high'
+          endif
+        %}
+        <div
+          class="
+            break-words
+            max-md:text-center
+            md:relative
+            md:flex
+            md:items-center
+            md:before:absolute
+            md:before:-left-6
+            md:before:top-1/2
+            md:before:z-2
+            md:before:h-full
+            md:before:w-[2px]
+            md:before:-translate-y-1/2
+            md:before:bg-base-body
+            md:before:content-['']
+          "
+          {{ block.shopify_attributes }}
+        >
+          <div class="
+              mx-auto
+              mb-2
+              flex
+              h-12
+              w-12
+              items-center
+              justify-center
+              md:mb-0
+              md:ml-0
+              md:mr-6
+              md:shrink-0
+            ">
+            {% if block.settings.image != blank %}
+              {%
+                render 'image',
+                src: block.settings.image,
+                m: '48x48',
+                crop: 'center',
+                alt: block.settings.image.alt,
+                lazyload: enable_lazyload,
+                fetchpriority: fetchpriorityValue
+              %}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+          {% if block.settings.title != blank %}
+            <div class="font-heading text-h4 lg:text-h4-desktop">{{ block.settings.title }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Benefits",
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_lazyload",
+          "label": "Enable lazyload",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Ultra-speed Connection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

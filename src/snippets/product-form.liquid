@@ -1,0 +1,60 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%
+  form 'product',
+  product,
+  id: id,
+  data-product-form: '',
+  data-product-handle: product.handle,
+  data-enable-history-state: 'true',
+  data-type: 'add-to-cart-form',
+  data-test-id: 'add-to-cart'
+%}
+  <input
+    type="hidden"
+    id="product-id"
+    name="id"
+    data-productid="{{ product.id }}"
+    value="{{ product.selected_or_first_available_variant.id }}"
+    disabled
+  >
+  <input
+    type="hidden"
+    name="selling_plan"
+    value="{{ current_selling_plan_allocation.selling_plan.id | default: '' }}"
+  >
+
+  <div class="mb-4 md:mb-5 md:w-10/12 xl:w-6/12">
+    <div class="mb-4 last:mb-0">
+      {% if current_variant.available %}
+        {%
+          render 'button',
+          element: 'button',
+          type: 'submit',
+          class: 'w-full',
+          color: 'primary',
+          size: 'md',
+          locales_text: 'products.product.add_to_cart',
+          data_attribute: 'data-submit-button',
+          other: 'name="add"'
+        %}
+      {% else %}
+        {%
+          render 'button',
+          element: 'button',
+          type: 'submit',
+          class: 'w-full disabled',
+          color: 'primary',
+          size: 'md',
+          locales_text: 'products.product.sold_out',
+          data_attribute: 'data-submit-button',
+          other: 'name="add" disabled'
+        %}
+      {% endif %}
+    </div>
+    {% if settings.show_dynamic_button %}
+      <div class="mb-4 last:mb-0">
+        {{ form | payment_button }}
+      </div>
+    {% endif %}
+  </div>
+{% endform %}

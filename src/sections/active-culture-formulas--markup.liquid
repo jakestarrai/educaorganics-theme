@@ -1,0 +1,57 @@
+<section class="overflow-hidden pb-9 pt-16 lg:pb-20 lg:pt-40 {{ section.settings.alignment_text }}">
+  {% if section.settings.subtitle != blank or section.settings.title != blank %}
+    <div class="container mb-6 max-w-2xl last:mb-0 lg:px-0">
+      {% if section.settings.subtitle != blank %}
+        <div class="
+            mb-4
+            text-caps-s
+            uppercase
+            last:mb-0
+            lg:mb-6
+            lg:text-h5
+          ">
+          {{ section.settings.subtitle }}
+        </div>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2 class="
+            mb-6
+            font-heading
+            text-h2
+            last:mb-0
+            lg:text-h1-desktop
+          ">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="mb-6 last:mb-0">
+    {%
+      render 'image',
+      asset_img_url: true,
+      src: 'img-placeholder.png',
+      m: '360x171',
+      d: '1440x300',
+      crop: 'center',
+      lazyload: true,
+      fetchpriority: 'low',
+    %}
+  </div>
+
+  {% if section.settings.text != blank %}
+    <div class="container mb-6 max-w-2xl last:mb-0 lg:px-0">
+      <div class="
+          prose
+          mb-6
+          text-body-xs
+          last:mb-0
+          lg:mb-9
+          lg:text-body-small
+        ">
+        {{ section.settings.text }}
+      </div>
+    </div>
+  {% endif %}
+</section>

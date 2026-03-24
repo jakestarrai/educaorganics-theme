@@ -1,0 +1,12 @@
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+**/src/snippets/*-json.liquid
+**/src/snippets/button.liquid
+**/src/snippets/image.liquid
+**/src/snippets/icon.liquid
+**/src/snippets/theme-seo.liquid
+**/src/snippets/theme-meta.liquid
+**/src/snippets/social-meta-tags.liquid
+**/src/assets/*.css.liquid

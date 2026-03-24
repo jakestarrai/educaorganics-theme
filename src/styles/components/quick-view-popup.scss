@@ -1,0 +1,41 @@
+@import "../vendors/include-media";
+
+.fancybox-quick-view {
+
+  .fancybox__slide {
+    padding: 20px 16px;
+  }
+
+  .fancybox__content {
+    width: 100%;
+    padding: 20px 20px 40px;
+    color: var(--base-body-text);
+    @include media ("≥tablet") {
+      max-width: 1267px;
+    }
+    @include media ("≥desktop") {
+      padding: 40px;
+    }
+
+    > .carousel__button {
+      &.is-close {
+        top: 8px;
+        right: 8px;
+        width: 32px;
+        height: 32px;
+        padding: 7px;
+        color: var(--base-secondary-text);
+        background: var(--base-overlay-white);
+        border: 1px solid var(--base-border);
+        @include media ("≥desktop") {
+          top: 40px;
+          right: 40px;
+        }
+
+        svg {
+          filter: none;
+        }
+      }
+    }
+  }
+}

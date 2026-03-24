@@ -1,0 +1,86 @@
+{
+  "sections": {
+    "product": {
+      "type": "product-swatches-variants",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "share"
+      ],
+      "settings": {
+        "product_options_layout": "select",
+        "product_option_color_layout": "square_swatches",
+        "enable_lazyload": true,
+        "show_following_image": true,
+        "show_size_chart": true,
+        "show_variant_label": true,
+        "show_breadcrumbs": true,
+        "size_chart_url": "shopify:\/\/pages\/size-chart",
+        "swatches_color_type": "metafields"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "show_product_recommendations": true,
+        "title": "You may also like",
+        "limit": 4,
+        "image_ratio": "",
+        "button_link": "",
+        "button_label": "back to home page"
+      }
+    }
+  },
+  "order": [
+    "product",
+    "product-recommendations"
+  ]
+}

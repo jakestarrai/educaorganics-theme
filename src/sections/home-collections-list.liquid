@@ -1,0 +1,206 @@
+{% if section.blocks.size > 0 %}
+  {% liquid
+    assign slider_classes = 'max-xl:flex max-xl:-mr-[calc(var(--grid-gutter-width)/2)] max-xl:snap-x max-xl:snap-mandatory max-xl:overflow-x-auto max-xl:overflow-y-hidden xl:grid xl:grid-cols-4 xl:gap-8'
+    assign grid_classes = 'grid sm:grid-cols-2 xl:grid-cols-4 gap-8'
+  %}
+
+  <section class="py-10">
+    <div class="container max-w-screen-3xl overflow-hidden">
+      {% if section.settings.title != blank %}
+        <h2 class="mb-4 text-center font-heading text-h2 lg:text-h2-desktop">{{ section.settings.title }}</h2>
+      {% endif %}
+      {%- comment -%}collection grid {%- endcomment -%}
+      <div class="{% if section.settings.layout_mobile == 'grid' %}{{ grid_classes }}{% else %}{{ slider_classes }}{% endif %}">
+        {% for block in section.blocks %}
+          {% liquid
+            assign collection = block.settings.collection
+            assign collection_title = block.settings.title | default: collection.title
+            if block.settings.collection_image != blank
+              assign collection_image = block.settings.collection_image
+            elsif collection.image != blank
+              assign collection_image = collection.image
+            else
+              assign collection_image = collection.products[0].featured_image
+            endif
+
+            if section.settings.layout_mobile == 'grid'
+              assign mobile_size = '345x'
+            else
+              assign mobile_size = '250x'
+            endif
+
+            if block.settings.enable_lazyload
+              assign enable_lazyload = true
+              assign fetchpriority_value = 'low'
+            else
+              assign enable_lazyload = false
+              assign fetchpriority_value = 'high'
+            endif
+
+            assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1
+            assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index
+          %}
+          <div
+            class="text-center{% if section.settings.layout_mobile == 'slider' %} max-xl:box-content max-xl:w-[250px] max-xl:flex-shrink-0 max-xl:snap-start max-xl:px-[15px] max-xl:first:pl-0{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <a
+              href="{{ collection.url | default: '#'}}"
+              class="
+                image-container
+                relative
+                z-1
+                mb-3
+                block
+                w-full
+                overflow-hidden
+                pt-[100%]
+                no-underline
+                {% if section.settings.layout_mobile == 'slider' %}
+                pt-[150.8%]
+                md:pt-[125.6%]
+                xl:pt-[100%]
+                {% endif %}
+              "
+            >
+              {%- comment -%} collection grid image {%- endcomment -%}
+              {% if collection_image != blank %}
+                {%
+                  render 'image',
+                  class: 'absolute top-0 left-0 w-full h-full object-cover',
+                  src: collection_image,
+                  m: mobile_size,
+                  src_d: collection_image,
+                  d: '328x',
+                  alt: collection_image.alt,
+                  lazyload: enable_lazyload,
+                  fetchpriority: fetchpriority_value
+                %}
+              {% else %}
+                {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </a>
+            <div class="{% if section.settings.layout_mobile == 'grid' %}text-body-large{% endif %}">
+              <h3 class="text-body-large">
+                <a
+                  href="{{ collection.url | default: '#' }}"
+                  class="no-underline"
+                >
+                  {{ collection_title }}
+                </a>
+              </h3>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {% if section.settings.btn_url != blank and section.settings.btn_text != blank %}
+        <div class="pt-4 text-center">
+          {%
+            render 'button',
+            href: section.settings.btn_url,
+            color: 'primary',
+            size: 'md',
+            text: section.settings.btn_text
+          %}
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Collections list",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Mobile layout",
+      "default": "grid",
+      "info": "Only applies to mobile",
+      "options": [
+        {
+          "value": "slider",
+          "label": "Slider"
+        },
+        {
+          "value": "grid",
+          "label": "Columns"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collections list"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Collection",
+      "type": "collection",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "collection_image",
+          "label": "Collection image"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_lazyload",
+          "label": "Enable lazyload",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Collection name"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections list",
+      "category": "Collection",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

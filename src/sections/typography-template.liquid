@@ -1,0 +1,801 @@
+<div class="py-10">
+  <div class="container max-w-screen-3xl">
+    <div class="pb-3 pt-5 text-center lg:pb-5 lg:pt-7">
+      <h1 class="font-custom-heading text-h1 lg:text-h1-desktop">{{ page.title }}</h1>
+    </div>
+    <div>
+      <div class="mb-5">
+        <h1 class="font-custom-heading text-d1 uppercase lg:text-d1-desktop">the official sponsors of your guts.</h1>
+        <h1 class="font-custom-heading text-d2 uppercase lg:text-d2-desktop">unlock your potential.</h1>
+        <h1 class="font-heading text-h1 lg:text-h1-desktop">Infant Formulas that push you further.</h1>
+        <h2 class="font-heading text-h2 lg:text-h2-desktop">Infant Formulas that push you further.</h2>
+        <h3 class="font-heading text-h3 lg:text-h3-desktop">Infant Formulas that push you further.</h3>
+        <h4 class="font-heading text-h4 lg:text-h4-desktop">Infant Formulas that push you further.</h4>
+        <h5 class="font-heading text-h5">Infant Formulas that push you further.</h5>
+        <h6 class="font-heading text-h6">Infant Formulas that push you further.</h6>
+      </div>
+
+      <div class="mb-5 text-title lg:text-title-desktop">Title</div>
+
+      <div class="mb-10">
+        <h5 class="mb-5 font-heading text-h5">Body</h5>
+        <h6 class="mb-3 font-heading text-h6">Text large</h6>
+        <div class="mb-5 text-body-large">
+          <p>Infant Formulas that push you further.</p>
+        </div>
+        <h6 class="mb-3 font-heading text-h6">Text medium</h6>
+        <div class="mb-5 text-body-medium">
+          <p>Infant Formulas that push you further.</p>
+        </div>
+        <h6 class="mb-3 font-heading text-h6">Text small</h6>
+        <div class="mb-5 text-body-small">
+          <p>
+            Try on frames
+            <b>b</b>
+            at
+            <strong>strong</strong>
+            Infant Formulas that push you further.
+          </p>
+        </div>
+        <h6 class="mb-3 font-heading text-h6">Text xs</h6>
+        <div class="mb-5 text-body-xs">
+          <p>
+            Try on frames
+            <b>b</b>
+            at
+            <strong>strong</strong>
+            Infant Formulas that push you further.
+          </p>
+        </div>
+        <h6 class="mb-3 font-heading text-h6">Text xxs</h6>
+        <div class="mb-5 text-body-xxs">
+          <p>
+            Try on frames
+            <b>b</b>
+            at
+            <strong>strong</strong>
+            Infant Formulas that push you further.
+          </p>
+        </div>
+      </div>
+
+      <div class="mb-10">
+        <h5 class="mb-5 font-heading text-h5">Captions & Tags</h5>
+        <h6 class="mb-3 font-heading text-h6">Caps s</h6>
+        <div class="mb-5 text-caps-s">
+          <p>Infant Formulas that push you further.</p>
+        </div>
+        <h6 class="mb-3 font-heading text-h6">Caps xs</h6>
+        <div class="mb-5 text-caps-xs">
+          <p>Infant Formulas that push you further.</p>
+        </div>
+      </div>
+
+      <div class="mb-5 text-button-large">button large</div>
+      <div class="mb-5 text-button-small">button small</div>
+      <div class="mb-5 text-product-price-large lg:text-product-price-large-desktop">product price large</div>
+      <div class="mb-5 text-product-price-small lg:text-product-price-small-desktop">product price small</div>
+      <div class="mb-5">
+        <a
+          title="Apple"
+          href="https://apple.com/"
+          class="text-link no-underline hover:underline lg:text-link-desktop"
+        >
+          Base link
+        </a>
+      </div>
+      <div class="mb-5 text-base-label lg:text-base-label-desktop">base label</div>
+
+      <h3 class="font-heading text-h2">Primary button lg md sm</h3>
+      <div class="mb-7 grid gap-8 py-5">
+        {%- comment -%}Buttons lg{%- endcomment -%}
+        <div class="flex flex-wrap items-start gap-2">
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'primary',
+              size: 'lg',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'primary',
+              size: 'lg',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'primary',
+              size: 'lg',
+              snippet: 'icon',
+              icon: 'search',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'primary',
+              size: 'btn-lg',
+              type: 'icon',
+              snippet: true,
+              icon: 'search',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              class: 'disabled'
+              element: 'button',
+              color: 'primary',
+              size: 'lg',
+              text: 'Button',
+              data_attribute: 'disabled'
+            %}
+          </div>
+        </div>
+
+        {%- comment -%}Buttons md{%- endcomment -%}
+        <div class="flex flex-wrap items-start gap-2">
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'primary',
+              size: 'md',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button'
+              color: 'primary',
+              size: 'md',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'primary',
+              size: 'md',
+              snippet: true,
+              icon: 'search',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'primary',
+              size: 'btn-md',
+              type: 'icon',
+              snippet: true,
+              icon: 'account',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'primary',
+              size: 'md',
+              text: 'Button',
+              data_attribute: 'disabled'
+            %}
+          </div>
+        </div>
+
+        {%- comment -%}Buttons sm{%- endcomment -%}
+        <div class="flex flex-wrap items-start gap-2">
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'primary',
+              size: 'sm',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'primary',
+              size: 'sm',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'primary',
+              size: 'sm',
+              text: 'Button',
+              snippet: true,
+              icon: 'search',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'primary',
+              size: 'btn-sm',
+              snippet: true,
+              type: 'icon',
+              icon: 'cart',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'primary',
+              size: 'sm',
+              text: 'Button',
+              data_attribute: 'disabled'
+            %}
+          </div>
+        </div>
+      </div>
+
+      <h3 class="font-heading text-h2">Secondary button lg md sm</h3>
+      <div class="mb-7 grid gap-8 py-5">
+        {%- comment -%}Buttons lg{%- endcomment -%}
+        <div class="flex flex-wrap items-start gap-2">
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'secondary',
+              size: 'lg',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'secondary',
+              size: 'lg',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'secondary',
+              size: 'lg',
+              text: 'Button',
+              snippet: true,
+              icon: 'search',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'secondary',
+              size: 'btn-lg',
+              type: 'icon',
+              snippet: true,
+              icon: 'search',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              class: 'disabled'
+              color: 'secondary',
+              size: 'lg',
+              text: 'Button',
+              data_attribute: 'disabled'
+            %}
+          </div>
+        </div>
+
+        {%- comment -%}Buttons md{%- endcomment -%}
+        <div class="flex flex-wrap items-start gap-2">
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'secondary',
+              size: 'md',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'secondary',
+              size: 'md',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'secondary',
+              size: 'md',
+              text: 'Button',
+              snippet: true,
+              icon: 'search',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'secondary',
+              size: 'btn-md',
+              type: 'icon',
+              snippet: true,
+              icon: 'search',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              class: 'disabled'
+              color: 'secondary',
+              size: 'md',
+              text: 'Button',
+              data_attribute: 'disabled'
+            %}
+          </div>
+        </div>
+
+        {%- comment -%}Buttons sm{%- endcomment -%}
+        <div class="flex flex-wrap items-start gap-2">
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'secondary',
+              size: 'sm',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'secondary',
+              size: 'sm',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'secondary',
+              size: 'sm',
+              text: 'Button',
+              snippet: true,
+              icon: 'search',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'secondary',
+              size: 'btn-sm',
+              type: 'icon',
+              snippet: true,
+              icon: 'search',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              class: 'disabled'
+              color: 'secondary',
+              size: 'sm',
+              text: 'Button',
+              data_attribute: 'disabled'
+            %}
+          </div>
+        </div>
+      </div>
+
+      <h3 class="font-heading text-h2">Third button lg md sm</h3>
+      <div class="mb-7 grid gap-8 py-5">
+        {%- comment -%}Buttons lg{%- endcomment -%}
+        <div class="flex flex-wrap items-start gap-2">
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'third',
+              size: 'lg',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'third',
+              size: 'lg',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'third',
+              size: 'lg',
+              snippet: 'icon',
+              icon: 'search',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'third',
+              size: 'btn-lg',
+              type: 'icon',
+              snippet: true,
+              icon: 'search',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              class: 'disabled'
+              element: 'button',
+              color: 'third',
+              size: 'lg',
+              text: 'Button',
+              data_attribute: 'disabled'
+            %}
+          </div>
+        </div>
+
+        {%- comment -%}Buttons md{%- endcomment -%}
+        <div class="flex flex-wrap items-start gap-2">
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'third',
+              size: 'md',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button'
+              color: 'third',
+              size: 'md',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'third',
+              size: 'md',
+              snippet: true,
+              icon: 'search',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'third',
+              size: 'btn-md',
+              type: 'icon',
+              snippet: true,
+              icon: 'account',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'third',
+              size: 'md',
+              text: 'Button',
+              data_attribute: 'disabled'
+            %}
+          </div>
+        </div>
+
+        {%- comment -%}Buttons sm{%- endcomment -%}
+        <div class="flex flex-wrap items-start gap-2">
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'third',
+              size: 'sm',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'third',
+              size: 'sm',
+              text: 'Button',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'third',
+              size: 'sm',
+              text: 'Button',
+              snippet: true,
+              icon: 'search',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              color: 'third',
+              size: 'btn-sm',
+              snippet: true,
+              type: 'icon',
+              icon: 'cart',
+            %}
+          </div>
+          <div class="mb-2 inline-flex items-start">
+            {%
+              render 'button',
+              element: 'button',
+              color: 'third',
+              size: 'sm',
+              text: 'Button',
+              data_attribute: 'disabled'
+            %}
+          </div>
+        </div>
+      </div>
+
+      <div class="prose mb-5 lg:prose-lg">
+        <h1 class="border-b">Prose Typography Components and elements</h1>
+        <h1>Title h1</h1>
+        <h2>Title h2</h2>
+        <h3>Title h3</h3>
+        <h4>Title h4</h4>
+        <h5>Title h5</h5>
+        <h6>Title h6</h6>
+        <p>
+          For years parents have espoused the health benefits of eating garlic bread with cheese to their children, with
+          the food earning such an iconic status in our culture that kids will often dress up as warm, cheesy loaf for
+          Halloween.
+        </p>
+        <h2>What to expect from here on out</h2>
+        <p>
+          What follows from here is just a bunch of absolute nonsense I've written to dogfood the plugin itself. It
+          includes every sensible typographic element I could think of, like
+          <strong>bold text</strong>
+          , unordered lists, ordered lists, code blocks, block quotes,
+          <em>and even italics</em>
+          .
+        </p>
+        <p>It's important to cover all of these use cases for a few reasons:</p>
+        <ol>
+          <li>We want everything to look good out of the box.</li>
+          <li>Really just the first reason, that's the whole point of the plugin.</li>
+          <li>
+            Here's a third pretend reason though a list with three items looks more realistic than a list with two
+            items.
+          </li>
+        </ol>
+        <p>Now we're going to try out another header style.</p>
+        <h3>Typography should be easy</h3>
+        <p>
+          So that's a header for you — with any luck if we've done our job correctly that will look pretty reasonable.
+        </p>
+        <p>
+          This is an example of a
+          <a
+            title="Apple"
+            href="https://apple.com/"
+          >
+            link
+          </a>
+          .
+        </p>
+        <strong>Emphasize Tag</strong>
+        <p>
+          The emphasize tag should
+          <i>italicize</i>
+          text.
+        </p>
+        <p>Something a wise person once told me about typography is:</p>
+        <blockquote>
+          <p>
+            Typography is pretty important if you don't want your stuff to look like trash. Make it good then it won't
+            be bad.
+          </p>
+          <cite>Author</cite>
+        </blockquote>
+        <h4>Address tag</h4>
+        <address>
+          <p>1 Infinite Loop Cupertino, CA 95014 United States</p>
+        </address>
+
+        <h5>It's probably important that images look okay here by default as well:</h5>
+        <figure>
+          <img
+            src="https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
+            alt=""
+          >
+          <figcaption>
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+            Latin literature from 45 BC, making it over 2000 years old.
+          </figcaption>
+        </figure>
+        <p>Now I'm going to show you an example of an unordered list to make sure that looks good, too:</p>
+        <ul>
+          <li>So here is the first item in this list.</li>
+          <li>In this example we're keeping the items short.</li>
+          <li>Later, we'll use longer, more complex list items.</li>
+        </ul>
+        <p>And that's the end of this section.</p>
+        <h3>When a heading comes after a paragraph …</h3>
+        <p>
+          When a heading comes after a paragraph, we need a bit more space, like I already mentioned above. Now let's
+          see what a more complex list would look like.
+        </p>
+        <ul>
+          <li>
+            <p><strong>I often do this thing where list items have headings.</strong></p>
+            <p>
+              For some reason I think this looks cool which is unfortunate because it's pretty annoying to get the
+              styles right.
+            </p>
+            <p>
+              I often have two or three paragraphs in these list items, too, so the hard part is getting the spacing
+              between the paragraphs, list item heading, and separate list items to all make sense. Pretty tough
+              honestly, you could make a strong argument that you just shouldn't write this way.
+            </p>
+          </li>
+          <li>
+            <p><strong>Since this is a list, I need at least two items.</strong></p>
+            <p>
+              I explained what I'm doing already in the previous list item, but a list wouldn't be a list if it only had
+              one item, and we really want this to look realistic. That's why I've added this second list item so I
+              actually have something to look at when writing the styles.
+            </p>
+          </li>
+          <li>
+            <p><strong>It's not a bad idea to add a third item either.</strong></p>
+            <p>
+              I think it probably would've been fine to just use two items but three is definitely not worse, and since
+              I seem to be having no trouble making up arbitrary things to type, I might as well include it.
+            </p>
+          </li>
+        </ul>
+        <h3>What about nested lists?</h3>
+        <p>
+          Nested lists basically always look bad which is why editors like Medium don't even let you do it, but I guess
+          since some of you goofballs are going to do it we have to carry the burden of at least making it work.
+        </p>
+        <ol>
+          <li>
+            <strong>Nested lists are rarely a good idea.</strong>
+            <ul>
+              <li>
+                You might feel like you are being really "organized" or something but you are just creating a gross
+                shape on the screen that is hard to read.
+              </li>
+              <li>Nested navigation in UIs is a bad idea too, keep things as flat as possible.</li>
+              <li>Nesting tons of folders in your source code is also not helpful.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Since we need to have more items, here's another one.</strong>
+            <ul>
+              <li>I'm not sure if we'll bother styling more than two levels deep.</li>
+              <li>Two is already too much, three is guaranteed to be a bad idea.</li>
+              <li>If you nest four levels deep you belong in prison.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Two items isn't really a list, three is good though.</strong>
+            <ul>
+              <li>Again please don't nest lists if you want people to actually read your content.</li>
+              <li>Nobody wants to look at this.</li>
+              <li>I'm upset that we even have to bother styling this.</li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          The most annoying thing about lists in Markdown is that
+          <code>&lt;li&gt;</code>
+          elements aren't given a child
+          <code>&lt;p&gt;</code>
+          tag unless there are multiple paragraphs in the list item. That means I have to worry about styling that
+          annoying situation too.
+        </p>
+        <ul>
+          <li>
+            <p><strong>For example, here's another nested list.</strong></p>
+            <p>But this time with a second paragraph.</p>
+            <ul>
+              <li>
+                These list items won't have
+                <code>&lt;p&gt;</code>
+                tags
+              </li>
+              <li>Because they are only one line each</li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>But in this second top-level list item, they will.</strong></p>
+            <p>This is especially annoying because of the spacing on this paragraph.</p>
+            <ul>
+              <li>
+                <p>
+                  As you can see here, because I've added a second line, this list item now has a
+                  <code>&lt;p&gt;</code>
+                  tag.
+                </p>
+                <p>This is the second line I'm talking about by the way.</p>
+              </li>
+              <li><p>Finally here's another list item so it's more like a list.</p></li>
+            </ul>
+          </li>
+          <li><p>A closing list item, but with no nested list, because why not?</p></li>
+        </ul>
+        <p>And finally a sentence to close off this section.</p>
+        <p>We even included table styles, check it out:</p>
+        <h3>Table</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Wrestler</th>
+              <th>Origin</th>
+              <th>Finisher</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bret "The Hitman" Hart</td>
+              <td>Calgary, AB</td>
+              <td>Sharpshooter</td>
+            </tr>
+            <tr>
+              <td>Stone Cold Steve Austin</td>
+              <td>Austin, TX</td>
+              <td>Stone Cold Stunner</td>
+            </tr>
+            <tr>
+              <td>Randy Savage</td>
+              <td>Sarasota, FL</td>
+              <td>Elbow Drop</td>
+            </tr>
+            <tr>
+              <td>Vader</td>
+              <td>Boulder, CO</td>
+              <td>Vader Bomb</td>
+            </tr>
+            <tr>
+              <td>Razor Ramon</td>
+              <td>Chuluota, FL</td>
+              <td>Razor's Edge</td>
+            </tr>
+          </tbody>
+        </table>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/ScMzIvxBSi4"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen=""
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</div>

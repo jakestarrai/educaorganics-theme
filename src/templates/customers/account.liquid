@@ -1,0 +1,194 @@
+<section class="py-10">
+  <div class="container max-w-screen-3xl">
+    <div class="xl:flex">
+      <div class="xl:mx-auto xl:w-8/12">
+        <div class="mb-10 text-center [&>*:last-child]:mb-0">
+          <h1 class="mb-3 font-heading text-h4 lg:text-h4-desktop">{{ 'customer.account.title' | t }}</h1>
+          <a
+            href="/account/logout"
+            class="text-link lg:text-link-desktop"
+          >
+            Log out
+          </a>
+        </div>
+        <h2 class="mb-2 font-heading text-h6 md:mb-6">{{ 'customer.orders.title' | t }}</h2>
+        {% paginate customer.orders by 20 %}
+          {% if customer.orders.size != 0 %}
+            <table class="mb-7 w-full table-fixed border-collapse md:mb-12">
+              <caption class="sr-only">Orders table</caption>
+              <tbody class="max-md:block max-md:w-full">
+                <tr class="hidden md:table-row md:w-full md:border-b md:border-base-border">
+                  <th class="md:py-3 md:text-left md:!font-semibold xl:text-body-large">Order</th>
+                  <th class="md:py-3 md:text-left md:!font-semibold xl:text-body-large">Date</th>
+                  <th class="md:py-3 md:text-left md:!font-semibold xl:text-body-large">Payment Status</th>
+                  <th class="md:py-3 md:text-left md:!font-semibold xl:text-body-large">Fulfillment Status</th>
+                  <th class="md:py-3 md:text-left md:!font-semibold xl:text-body-large">Total</th>
+                </tr>
+                {% for order in customer.orders %}
+                  <tr class="
+                      block
+                      w-full
+                      border-b
+                      border-base-border
+                      py-4
+                      md:table-row md:py-0
+                    ">
+                    <td
+                      class="
+                        py-3
+                        max-md:relative
+                        max-md:flex
+                        max-md:w-full
+                        max-md:items-center
+                        max-md:justify-between
+                        max-md:before:w-40
+                        max-md:before:shrink-0
+                        max-md:before:pr-1
+                        max-md:before:align-top
+                        max-md:before:font-body
+                        max-md:before:font-semibold
+                        max-md:before:leading-body
+                        max-md:before:text-base-body
+                        max-md:before:content-[attr(data-label)]
+                        max-md:empty:hidden
+                      "
+                      data-label="Order"
+                    >
+                      {{ order.name | link_to: order.customer_url, class: 'no-underline hover:underline focus:underline' }}
+                    </td>
+                    <td
+                      class="
+                        py-3
+                        max-md:relative
+                        max-md:flex
+                        max-md:w-full
+                        max-md:items-center
+                        max-md:justify-between
+                        max-md:before:w-40
+                        max-md:before:shrink-0
+                        max-md:before:pr-1
+                        max-md:before:align-top
+                        max-md:before:font-body
+                        max-md:before:font-semibold
+                        max-md:before:leading-body
+                        max-md:before:text-base-body
+                        max-md:before:content-[attr(data-label)]
+                        max-md:empty:hidden
+                      "
+                      data-label="Date"
+                    >
+                      <time datetime="{{ order.created_at | date: format: 'month_day_year' }}">
+                        {{- order.created_at | date: format: 'month_day_year' -}}
+                      </time>
+                    </td>
+                    <td
+                      class="
+                        py-3
+                        max-md:relative
+                        max-md:flex
+                        max-md:w-full
+                        max-md:items-center
+                        max-md:justify-between
+                        max-md:before:w-40
+                        max-md:before:shrink-0
+                        max-md:before:pr-1
+                        max-md:before:align-top
+                        max-md:before:font-body
+                        max-md:before:font-semibold
+                        max-md:before:leading-body
+                        max-md:before:text-base-body
+                        max-md:before:content-[attr(data-label)]
+                        max-md:empty:hidden
+                      "
+                      data-label="Payment Status"
+                    >
+                      Paid
+                    </td>
+                    <td
+                      class="
+                        py-3
+                        max-md:relative
+                        max-md:flex
+                        max-md:w-full
+                        max-md:items-center
+                        max-md:justify-between
+                        max-md:before:w-40
+                        max-md:before:shrink-0
+                        max-md:before:pr-1
+                        max-md:before:align-top
+                        max-md:before:font-body
+                        max-md:before:font-semibold
+                        max-md:before:leading-body
+                        max-md:before:text-base-body
+                        max-md:before:content-[attr(data-label)]
+                        max-md:empty:hidden
+                      "
+                      data-label="Fulfillment Status"
+                    >
+                      Unfulfilled
+                    </td>
+                    <td
+                      class="
+                        py-3
+                        max-md:relative
+                        max-md:flex
+                        max-md:w-full
+                        max-md:items-center
+                        max-md:justify-between
+                        max-md:before:w-40
+                        max-md:before:shrink-0
+                        max-md:before:pr-1
+                        max-md:before:align-top
+                        max-md:before:font-body
+                        max-md:before:font-semibold
+                        max-md:before:leading-body
+                        max-md:before:text-base-body
+                        max-md:before:content-[attr(data-label)]
+                        max-md:empty:hidden
+                      "
+                      data-label="Total"
+                    >
+                      {{ order.total_price | money }}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>{{ 'customer.orders.none' | t }}</p>
+          {% endif %}
+          {% if paginate.pages > 1 %}
+            <div class="py-6">
+              {% render 'pagination' %}
+            </div>
+          {% endif %}
+        {% endpaginate %}
+        <h2 class="mb-6 font-heading text-h6">{{ 'customer.account.details' | t }}</h2>
+        <div class="prose mb-4 md:mb-10">
+          <div class="[&>p]:first-line:font-semibold xl:[&>p]:first-line:text-[18px]">
+            {{ customer.default_address | format_address }}
+          </div>
+          <!-- Begin ReCharge code -->
+          <p id="rc_link_container">
+            <a href="/tools/recurring/login">Manage Subscriptions</a>
+          </p>
+          <!-- End ReCharge code -->
+        </div>
+        {% liquid
+          assign addresses_count = customer.addresses_count | prepend: '(' | append: ')'
+          assign view_addresses = 'customer.account.view_addresses' | t
+          capture btn_text
+            echo view_addresses | append: ' ' | append: addresses_count
+          endcapture
+        %}
+        {%
+          render 'button',
+          href: '/account/addresses',
+          color: 'primary',
+          size: 'sm',
+          text: btn_text
+        %}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,10 @@
+@mixin animates {
+
+  @include media("≥desktop") {
+    transition: color var(--animation-speed) ease-in-out,
+                background var(--animation-speed) ease-in-out,
+                border-color var(--animation-speed) ease-in-out,
+                box-shadow var(--animation-speed) ease-in-out,
+                opacity var(--animation-speed) ease-in-out;
+  }
+}

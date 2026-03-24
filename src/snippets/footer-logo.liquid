@@ -1,0 +1,44 @@
+{% if section.settings.logo_svg != blank %}
+  <a
+    href="{{ routes.root_url }}"
+    class="block w-full"
+    rel="nofollow"
+  >
+    <img
+      src="{{ section.settings.logo_svg | asset_url }}"
+      class="block h-auto w-full"
+      width="95"
+      height="403"
+      alt="EDUCA Organics"
+      loading="lazy"
+      fetchpriority="low"
+    >
+  </a>
+{% elsif section.settings.logo != blank %}
+  <a
+    href="{{ routes.root_url }}"
+    class="block w-full"
+    rel="nofollow"
+  >
+    {%
+      render 'image',
+      class: 'block h-auto w-full',
+      src: section.settings.logo,
+      m: '95x403',
+      src_d: section.settings.logo,
+      d: '130x550',
+      alt: section.settings.logo.alt,
+      lazyload: 'lazy',
+      fetchpriority: 'low'
+    %}
+  </a>
+{% elsif section.settings.logo_text != blank %}
+  <div class="text-h6 text-base-accent">
+    <a
+      href="{{ routes.root_url }}"
+      rel="nofollow"
+    >
+      {{ section.settings.logo_text }}
+    </a>
+  </div>
+{% endif %}

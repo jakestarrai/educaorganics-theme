@@ -1,0 +1,106 @@
+import { h, FunctionComponent, Fragment } from 'preact';
+import { StateUpdater, useContext, useMemo } from 'preact/hooks';
+import { getId } from 'helpers/utils';
+
+import { OptionWithValuesType, ProductType, VariantType } from 'types';
+import { SwatcherProductsContext } from 'contexts/swatcherProductsContext';
+import { ProductContext } from 'contexts/productContext';
+import theme from 'helpers/themeSettings';
+
+import ProductColorOptionItem from './ProductColorOptionItem';
+
+interface Props {
+  variants?: boolean;
+  key?: string | number;
+  option?: OptionWithValuesType | null;
+  variantOptions?: object | null;
+  setVariantOptions?: StateUpdater<any>;
+  setChosenVariant?: StateUpdater<any>;
+  setQuantity?: StateUpdater<any>;
+  chosenProduct?: ProductType;
+  chosenVariant?: VariantType;
+}
+
+const ProductColorOptionWrapper: FunctionComponent<Props> = ({
+  chosenVariant,
+  variants,
+  option,
+  variantOptions,
+  setVariantOptions,
+  setChosenVariant,
+  setQuantity,
+}) => {
+  const { swatchProducts, swatchTypes } = useContext(SwatcherProductsContext);
+  const { settings, chosenProduct, setChosenProduct, enhanceProduct, getSwatchData } = useContext(ProductContext);
+
+  const renderVariants = useMemo(() => {
+    if (!option?.values?.length) return;
+
+    return option.values.map((color, idx) => (
+      <ProductColorOptionItem
+        enhanceProduct={enhanceProduct}
+        chosenProduct={chosenProduct}
+        chosenVariant={chosenVariant}
+        variants={variants}
+        settings={settings}
+        swatchTypes={swatchTypes}
+        variantOptions={variantOptions}
+        setVariantOptions={setVariantOptions}
+        idx={idx}
+        key={`${color}-${getId()}`}
+        color={color}
+        name={option?.name?.toLowerCase()}
+      />
+    ));
+  }, [option, variantOptions]);
+
+  const renderProducts = useMemo(() => {
+    if (!swatchProducts) return;
+
+    return swatchProducts.map((product, idx) => {
+      const { swatchName, swatchColor } = getSwatchData(product);
+
+      return (
+        <ProductColorOptionItem
+          enhanceProduct={enhanceProduct}
+          product={product}
+          chosenProduct={chosenProduct}
+          settings={settings}
+          swatchTypes={swatchTypes}
+          variantOptions={variantOptions}
+          setVariantOptions={setVariantOptions}
+          color={swatchColor}
+          name={swatchName}
+          key={product.id}
+          idx={idx}
+          setChosenProduct={setChosenProduct}
+          setChosenVariant={setChosenVariant}
+          setQuantity={setQuantity}
+        />
+      );
+    });
+  }, [swatchProducts, chosenProduct]);
+
+  return (
+    <div className="mb-4 md:mb-5 md:w-10/12 xl:w-6/12">
+      <div className="product__variant-label-box mb-1">
+        {settings?.swatcher_type === swatchTypes.products && !variants ? (
+          <Fragment>
+            <span className="mr-1 inline-block text-base-secondary">{theme.product.color_title}: </span>
+            <span>{chosenProduct?.swatchName}</span>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <span className="mr-1 inline-block text-base-secondary">{option.name}: </span>
+            <span>{variantOptions[option?.name.toLowerCase()]}</span>
+          </Fragment>
+        )}
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {settings?.swatcher_type === swatchTypes.products && !variants ? renderProducts : renderVariants}
+      </div>
+    </div>
+  );
+};
+
+export default ProductColorOptionWrapper;

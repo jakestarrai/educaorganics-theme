@@ -1,0 +1,85 @@
+<section class="py-10">
+  <div class="container max-w-screen-3xl">
+    <div class="mb-10 text-center [&>*:last-child]:mb-0">
+      <h1 class="mb-3 font-heading text-h4 lg:text-h4-desktop">{{ 'customer.activate_account.title' | t }}</h1>
+      <p>{{ 'customer.activate_account.subtext' | t }}</p>
+    </div>
+    {% form 'activate_customer_password', class: 'account-form max-w-[450px] mx-auto text-base-body' %}
+      {{ form.errors | default_errors }}
+      <div class="mb-5">
+        <label
+          class="mb-1 inline-block"
+          for="customer-password"
+        >
+          {{ 'customer.activate_account.password' | t }}
+        </label>
+        <input
+          type="password"
+          id="customer-password"
+          class="
+            form-input
+            h-form-element
+            w-full
+            rounded-form-element
+            border-base-border
+            bg-base-body-background
+            text-body-medium
+            placeholder:text-base-secondary
+            autofill:shadow-inset-white
+            focus:border-base-body
+          "
+          name="customer[password]"
+          placeholder="{{ 'customer.activate_account.password' | t }}"
+        >
+      </div>
+      <div class="mb-5">
+        <label
+          class="mb-1 inline-block"
+          for="customer-password-confirmation"
+        >
+          {{ 'customer.activate_account.password_confirm' | t }}
+        </label>
+        <input
+          type="password"
+          id="customer-password-confirmation"
+          class="
+            form-input
+            h-form-element
+            w-full
+            rounded-form-element
+            border-base-border
+            bg-base-body-background
+            placeholder:text-base-secondary
+            autofill:shadow-inset-white
+            focus:border-base-body
+          "
+          name="customer[password_confirmation]"
+          placeholder="{{ 'customer.activate_account.password_confirm' | t }}"
+        >
+      </div>
+      <div class="mb-5">
+        {%
+          render 'button',
+          element: 'input',
+          type: 'submit',
+          class: 'w-full',
+          color: 'primary',
+          size: 'md',
+          locales_text: 'customer.activate_account.submit'
+        %}
+      </div>
+      <div class="text-center text-body-small">
+        {%
+          render 'button',
+          element: 'button',
+          type: 'submit',
+          class: 'w-full',
+          color: 'primary',
+          size: 'md',
+          locales_text: 'customer.activate_account.cancel',
+          other: 'name="decline"'
+        %}
+      </div>
+    {% endform %}
+  </div>
+</section>

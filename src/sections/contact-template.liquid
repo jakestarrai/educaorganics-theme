@@ -1,0 +1,283 @@
+<section class="py-9 lg:pb-30 lg:pt-20">
+  <div class="container max-w-screen-3xl 2xl:px-20">
+    <div class="flex flex-col gap-4 md:flex-row md:gap-8">
+      <div class="text-center md:w-1/2 md:text-left">
+        {% if section.settings.subtitle != blank %}
+          <div class="
+              mb-6
+              px-9
+              font-heading
+              text-caps-s
+              uppercase
+              last:mb-0
+              md:px-0
+              lg:text-h6
+              xl:mb-9
+            ">
+            {{ section.settings.subtitle }}
+          </div>
+        {% endif %}
+        {% if section.settings.title != blank %}
+          <h1 class="
+              mb-6
+              font-custom-heading
+              text-d2
+              text-d2-desktop
+              uppercase
+              last:mb-0
+              lg:text-[190px]
+              xl:mb-9
+              xl:text-[224px]
+            ">
+            {{ section.settings.title }}
+          </h1>
+        {% endif %}
+        {% if section.settings.richtext != blank %}
+          <div class="
+              prose
+              mb-6
+              px-10
+              text-body-xs
+              last:mb-0
+              md:px-0
+              lg:text-body-medium
+              xl:mb-9
+            ">
+            {{ section.settings.richtext }}
+          </div>
+        {% endif %}
+      </div>
+      <div class="py-6 md:w-1/2 md:pb-0 md:pt-10">
+        {% form 'contact', class: 'md:flex md:h-full md:flex-col md:justify-between', id: contact_form_id %}
+          {% if form.posted_successfully? %}
+            <div class="form-success mb-4 text-center text-messages-success">
+              {{ "contact.form.post_success" | t }}
+            </div>
+          {% endif %}
+          {{ form.errors | default_errors }}
+
+          <div class="mb-15 last:mb-0 md:mb-9">
+            <div class="
+                mb-6
+                grid
+                gap-5
+                last:mb-0
+                md:grid-cols-2
+                md:gap-6
+                lg:mb-8
+              ">
+              <div>
+                <label
+                  for="ContactFormName-{{ section.id }}"
+                  class="mb-1 inline-block align-top text-caps-s uppercase"
+                >
+                  {{ 'contact.form.name_custom' | t }}
+                </label>
+                <input
+                  type="text"
+                  id="ContactFormName-{{ section.id }}"
+                  class="
+                    form-input
+                    h-[45px]
+                    w-full
+                    border-0
+                    border-b-2
+                    border-june-dark
+                    bg-transparent
+                    px-0
+                    py-[10px]
+                    text-body-small
+                    placeholder:text-base-secondary
+                    placeholder:opacity-50
+                    focus:ring-transparent
+                  "
+                  name="contact[name]"
+                  placeholder="{{ 'contact.form.firstname_lastname' | t }}"
+                  required
+                  value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                >
+              </div>
+              <div>
+                <label
+                  for="ContactFormEmail-{{ section.id }}"
+                  class="mb-1 inline-block align-top text-caps-s uppercase"
+                >
+                  {{ 'contact.form.email_address' | t }}
+                </label>
+                <input
+                  type="email"
+                  id="ContactFormEmail-{{ section.id }}"
+                  class="
+                    form-input
+                    h-[45px]
+                    w-full
+                    border-0
+                    border-b-2
+                    border-june-dark
+                    bg-transparent
+                    px-0
+                    py-[10px]
+                    text-body-small
+                    placeholder:text-base-secondary
+                    placeholder:opacity-50
+                    focus:ring-transparent
+                  "
+                  name="contact[email]"
+                  placeholder="{{ 'contact.form.sample_email' | t }}"
+                  required
+                  value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                  spellcheck="false"
+                  autocomplete="off"
+                  autocapitalize="off"
+                >
+              </div>
+            </div>
+            <div class="mb-6 pt-2 last:mb-0 lg:mb-8 lg:pt-0">
+              <label
+                for="ContactFormMessage-{{ section.id }}"
+                class="mb-1 inline-block align-top text-caps-s uppercase"
+              >
+                {{ 'contact.form.message_placeholder' | t }}
+              </label>
+              <textarea
+                id="ContactFormMessage-{{ section.id }}"
+                class="
+                  form-textarea
+                  h-[45px]
+                  max-h-[200px]
+                  min-h-[45px]
+                  w-full
+                  border-0
+                  border-b-2
+                  border-june-dark
+                  bg-transparent
+                  px-0
+                  py-[10px]
+                  text-body-small
+                  placeholder:text-base-secondary
+                  placeholder:opacity-50
+                  focus:ring-transparent
+                "
+                name="contact[body]"
+                placeholder="{{ 'contact.form.message_custom' | t }}"
+                rows="1"
+                required
+              >
+                {%- if form.body -%}
+                  {{- form.body -}}
+                {%- endif -%}
+              </textarea>
+            </div>
+            <div class="mb-6 last:mb-0 lg:mb-8">
+              {%
+                render 'button',
+                element: 'input',
+                class: "max-md:w-full",
+                type: 'submit',
+                color: 'primary',
+                size: 'md',
+                locales_text: 'contact.form.send'
+              %}
+            </div>
+          </div>
+
+          <div class="
+              mb-6
+              flex
+              items-center
+              justify-between
+              gap-5
+              border-t-2
+              border-june-dark
+              pt-4
+              last:mb-0
+              lg:mb-8
+              lg:gap-10
+              lg:pt-4
+            ">
+            {% if section.settings.form_richtext != blank %}
+              <div class="text-[14px] lg:text-body-xs">
+                {{ section.settings.form_richtext }}
+              </div>
+            {% endif %}
+            {% if section.settings.link != blank and section.settings.button_text != blank %}
+              <div>
+                <a
+                  href="{{ section.settings.link }}"
+                  class="
+                    group/link
+                    inline-flex
+                    items-center
+                    gap-4
+                    text-h2
+                    lg:gap-5
+                    lg:text-h2-desktop
+                  "
+                >
+                  <span>{{ section.settings.button_text }}</span>
+                  <span class="relative h-9 w-9 shrink-0 xl:h-15 xl:w-15">
+                    {%- render 'icon', icon: 'arrow-right-circle', class: 'h-full w-full transition-opacity duration-300 ease-in-out group-hover/link:opacity-0' -%}
+                    {%- render 'icon', icon: 'arrow-right-circle-filled', class: 'absolute left-0 top-0 h-full w-full opacity-0 transition-opacity duration-300 ease-in-out group-hover/link:opacity-100' -%}
+                  </span>
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  body.template-page,
+  body .header__panel {
+    background-color: var(--base-accent);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Have a question or feedback? We're here to help!"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "gEt in touch"
+    },
+    {
+      "type": "richtext",
+      "id": "richtext",
+      "label": "Richtext",
+      "default": "<p>Fill out the form and we’ll get back to you as soon as we can.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Form"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "richtext",
+      "id": "form_richtext",
+      "label": "Info",
+      "default": "<p>P.S. Don’t forget to check out our FAQs to see if your question has already been covered.</p>"
+    }
+  ]
+}
+{% endschema %}

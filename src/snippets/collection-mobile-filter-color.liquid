@@ -1,0 +1,193 @@
+<div class="
+    relative
+    border-t
+    border-base-border
+    last:border-b
+    lg:mr-5
+    lg:!border-0
+  ">
+  <details-utils
+    close-esc="(min-width: 1024px)"
+    close-click-outside="(min-width: 1024px)"
+    force-close="(min-width: 1024px)"
+    force-restore
+    animate
+  >
+    <details
+      class="js-filter group/filter-item"
+      data-index="mobile-{{ forloop.index }}"
+    >
+      <summary class="
+          flex
+          cursor-pointer
+          items-center
+          justify-between
+          py-3
+          transition-all
+          duration-300
+          ease-in-out
+          lg:text-body-small
+          [&::-webkit-details-marker]:hidden
+        ">
+        {{ filter.label }}
+        <span
+          class="
+            relative
+            mx-4
+            inline-block
+            h-6
+            w-6
+            shrink-0
+            before:absolute
+            before:left-1/2
+            before:top-1/2
+            before:h-[2px]
+            before:w-[64%]
+            before:-translate-x-1/2
+            before:-translate-y-1/2
+            before:bg-current
+            before:content-['']
+            after:absolute
+            after:left-1/2
+            after:top-1/2
+            after:h-[2px]
+            after:w-[64%]
+            after:-translate-x-1/2
+            after:-translate-y-1/2
+            after:rotate-90
+            after:bg-current
+            after:content-['']
+            after:group-open/filter-item:rotate-180
+            lg:ml-1
+            lg:mr-0
+            lg:before:hidden
+            lg:after:-mt-[1px]
+            lg:after:h-[9px]
+            lg:after:w-[9px]
+            lg:after:-rotate-45
+            lg:after:border-b-2
+            lg:after:border-l-2
+            lg:after:border-base-icons
+            lg:after:bg-transparent
+            lg:after:group-open/filter-item:mt-[3px]
+            lg:after:group-open/filter-item:rotate-[135deg]
+          "
+        ></span>
+      </summary>
+
+      <div
+        class="
+          overflow-hidden
+          lg:absolute
+          lg:-left-[12px]
+          lg:top-full
+          lg:z-1000
+          lg:w-[330px]
+          lg:border
+          lg:border-base-border
+          lg:bg-base-body-background
+        "
+        data-filter-slide-container
+      >
+        <div class="
+            hidden
+            lg:flex
+            lg:items-center
+            lg:justify-between
+            lg:space-x-2
+            lg:border-b
+            lg:border-base-border
+            lg:p-4
+            lg:text-body-small
+          ">
+          <div class="facets__selected no-js-hidden">
+            {{ 'products.facets.filters_selected' | t: count: filter.active_values.size }}
+          </div>
+          <div>
+            <facet-remove>
+              <a
+                href="{{ filter.url_to_remove }}"
+                class="underline"
+              >
+                {{ 'collections.filters.reset' | t }}
+              </a>
+            </facet-remove>
+          </div>
+        </div>
+
+        <div class="h-full max-h-[255px] overflow-y-auto overflow-x-hidden lg:px-4">
+          {% for color in shop.metaobjects.swatcher_color.values %}
+            {% assign value = filter.values | where: 'value', color.key | first %}
+            <div class="py-3">
+              <label
+                for="Filter-{{ color.title }}-{{ forloop.index }}"
+                class="relative flex items-center"
+              >
+                <input
+                  type="checkbox"
+                  id="Filter-{{ color.title }}-{{ forloop.index }}"
+                  class="
+                    peer
+                    absolute
+                    left-0
+                    top-0
+                    -z-1
+                    h-full
+                    w-full
+                    opacity-0
+                  "
+                  value="{{ color.key }}"
+                  name="{{ value.param_name }}"
+                  {% if value.active -%}
+                    checked
+                  {%- endif %}
+                  {% if value.count == 0 and value.active == false -%}
+                    disabled
+                  {%- endif %}
+                >
+                <span class="
+                    group
+                    relative
+                    mr-2
+                    h-6
+                    w-6
+                    shrink-0
+                    cursor-pointer
+                    overflow-hidden
+                    rounded-full
+                    border
+                    border-base-border
+                    p-[1px]
+                    transition-colors
+                    duration-300
+                    after:absolute
+                    after:left-1/2
+                    after:top-1/2
+                    after:z-2
+                    after:h-full
+                    after:w-[1px]
+                    after:-translate-x-1/2
+                    after:-translate-y-1/2
+                    after:rotate-45
+                    after:bg-base-overlay-white
+                    after:opacity-0
+                    after:content-['']
+                    peer-checked:border-base-body
+                    peer-focus:border-base-body
+                    peer-disabled:cursor-default
+                    peer-disabled:after:opacity-100
+                  ">
+                  <span
+                    style="background-color: {{ color.value }}; display: block; width: 100%; height: 100%; border-radius: 50%;"
+                    class="block h-full w-full group-[&.rounded-full]:rounded-full"
+                  ></span>
+                </span>
+                <span class="peer-disabled:text-base-secondary">{{ color.title }} ({{ value.count }})</span>
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </details>
+  </details-utils>
+</div>

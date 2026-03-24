@@ -1,0 +1,77 @@
+{% if shop.customer_accounts_enabled %}
+  {% if customer %}
+    <li class="
+        group
+        {% if third_level.active %}
+        active
+        {% endif %}
+      ">
+      <a
+        href="{{ routes.account_url }}"
+        class="
+          block
+          py-3
+          text-base-body
+          group-[.active]:text-base-accent
+        "
+      >
+        {{ 'customer.login.title' | t }}
+      </a>
+    </li>
+    <li class="
+        group
+        {% if third_level.active %}
+        active
+        {% endif %}
+      ">
+      <a
+        href="{{ routes.account_logout_url }}"
+        class="
+          block
+          py-3
+          text-base-body
+          group-[.active]:text-base-accent
+        "
+      >
+        {{ 'customer.login.log_out' | t }}
+      </a>
+    </li>
+  {% else %}
+    <li class="
+        group
+        {% if third_level.active %}
+        active
+        {% endif %}
+      ">
+      <a
+        href="{{ routes.account_register_url }}"
+        class="
+          block
+          py-3
+          text-base-body
+          group-[.active]:text-base-accent
+        "
+      >
+        {{ 'customer.login.create_account' | t }}
+      </a>
+    </li>
+    <li class="
+        group
+        {% if third_level.active %}
+        active
+        {% endif %}
+      ">
+      <a
+        href="{{ routes.account_login_url }}"
+        class="
+          block
+          py-3
+          text-base-body
+          group-[.active]:text-base-accent
+        "
+      >
+        {{ 'customer.login.log_in' | t }}
+      </a>
+    </li>
+  {% endif %}
+{% endif %}

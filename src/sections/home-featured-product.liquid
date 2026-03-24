@@ -1,0 +1,191 @@
+{% liquid
+  if section.settings.enable_lazyload
+    assign enable_lazyload = true
+  else
+    assign enable_lazyload = false
+  endif
+
+  render 'product', product: section.settings.product, enable_lazyload: enable_lazyload
+%}
+
+{% schema %}
+{
+  "name": "Featured product",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity",
+      "label": "Show quantity selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "Show social sharing buttons",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "Text",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "default": "text-caption uppercase",
+          "label": "Text style",
+          "options": [
+            {
+              "value": "",
+              "label": "Body"
+            },
+            {
+              "value": "text-body-large",
+              "label": "Subtitle"
+            },
+            {
+              "value": "text-caption uppercase",
+              "label": "Uppercase"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1
+    },
+    {
+      "type": "quantity_selector",
+      "name": "Quantity selector",
+      "limit": 1
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "share",
+      "name": "Share",
+      "limit": 1
+    },
+    {
+      "type": "selling_plan",
+      "name": "Selling Plan",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subscription_details_text",
+          "label": "Subscription details text",
+          "default": "Subscription details"
+        },
+        {
+          "type": "url",
+          "id": "subscription_details_link",
+          "label": "Subscription details link"
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Custom liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom liquid",
+          "info": "Add app snippets or other Liquid code to create advanced customizations."
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "vendor"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "title"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variant_picker"
+        },
+        {
+          "type": "quantity_selector"
+        },
+        {
+          "type": "buy_buttons"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "share"
+        },
+        {
+          "type": "custom_liquid"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

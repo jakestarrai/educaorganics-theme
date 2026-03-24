@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "collection-template",
+      "settings": {
+        "enable_infinite": false
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

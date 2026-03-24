@@ -1,0 +1,77 @@
+/* forms */
+
+form,
+fieldset {
+  margin: 0;
+  padding: 0;
+  border-style: none;
+}
+
+/* Remove extra spacing for search inputs in Safari */
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.form-select {
+  background-image: url('data:image/svg+xml,<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Group 10"><path id="Rectangle 10" d="M14.4826 6.92943L8.04198 13.3701L1.51879 6.84689" stroke="%232B2627" stroke-width="1.5625"/></g></svg>');
+  background-size: 16px 16px;
+  &.form-select--alt {
+    background-position: right 0.125rem center;
+  }
+  .group\/drawer & {
+    background-position-y: 4px;
+  }
+}
+
+.page-search-form__button {
+
+  svg {
+    margin: 0;
+  }
+}
+
+.errors {
+  margin: 0 0 20px;
+  padding: 10px;
+  color: var(--messages-error);
+  text-align: center;
+
+  .account-form & {
+    background-color: var(--messages-error-light);
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+.additional-checkout-buttons {
+
+  [data-shopify-buttoncontainer] {
+
+    div[role="button"] {
+      width: 100%;
+      height: 50px !important;
+      border-radius: 0 !important;
+      &:hover,
+      &:focus {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+#icButton {
+  width: 100%;
+  min-height: 50px !important;
+  border-radius: 0 !important;
+
+  .button {
+    min-height: 50px !important;
+    padding: 18px 10px 19px;
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+  }
+}

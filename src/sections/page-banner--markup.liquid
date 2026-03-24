@@ -1,0 +1,43 @@
+<section>
+  <div class="container relative max-w-screen-3xl max-lg:px-3">
+    <div class="relative overflow-hidden rounded-t-2xl">
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="mx-auto w-8/12 text-center">
+          {% if section.settings.heading_size == 'heading_h1' %}
+            <h1 class="font-heading text-h4 text-h4-desktop">{{ section.settings.heading }}</h1>
+          {% elsif section.settings.heading_size == 'heading_h2' %}
+            <h2 class="font-heading text-h4 text-h4-desktop">{{ section.settings.heading }}</h2>
+          {% endif %}
+        </div>
+      </div>
+
+      {%- if section.settings.background_image != blank -%}
+        {% liquid
+          if section.settings.enable_lazyload
+            assign enable_lazyload = true
+            assign fetchpriority_value = 'low'
+          else
+            assign enable_lazyload = false
+            assign fetchpriority_value = 'high'
+          endif
+        %}
+        {%
+          render 'image',
+          class: 'object-cover w-full h-full',
+          src: section.settings.background_image,
+          m: '366x260',
+          src_t: section.settings.background_image,
+          t: '744x380',
+          src_d: section.settings.background_image,
+          d: '1360x480',
+          crop: 'center',
+          alt: section.settings.background_image.alt,
+          lazyload: enable_lazyload,
+          fetchpriority: fetchpriority_value
+        %}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: "placeholder-svg h-65 md:h-120" }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>

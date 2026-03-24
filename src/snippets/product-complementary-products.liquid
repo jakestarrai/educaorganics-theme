@@ -1,0 +1,52 @@
+<div
+  id="complementary-products-container"
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.product_list_limit }}&intent=complementary"
+>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <ul class="accordion js-complementary-accordion">
+      <li class="ac is-active">
+        <button
+          type="button"
+          class="accordion__opener ac-trigger w-full text-title"
+        >
+          {{ block.settings.block_heading | default: 'Pairs well with' }}
+        </button>
+        <div class="accordion__slide ac-panel">
+          <div class="bg-base-body-background p-4">
+            {%- for product in recommendations.products limit: block.settings.product_list_limit offset: continue -%}
+              <div class="mb-4 flex last:mb-0">
+                <a
+                  href="{{ product.url | within: collection }}"
+                  class="mr-4 w-[90px] shrink-0"
+                >
+                  {% if product.featured_image %}
+                    {%
+                      render 'image',
+                      src: product.featured_image,
+                      m: '90x',
+                    %}
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                </a>
+                <div>
+                  <div class="mb-2 text-title lg:text-title-desktop">
+                    <a
+                      href="{{ product.url | within: collection }}"
+                      class="no-underline hover:underline"
+                    >
+                      {{ product.title }}
+                    </a>
+                  </div>
+                  <div class="text-product-price-large lg:text-product-price-large-desktop">
+                    {% render "product-price", product: product %}
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </li>
+    </ul>
+  {%- endif -%}
+</div>

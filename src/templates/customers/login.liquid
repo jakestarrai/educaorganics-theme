@@ -1,0 +1,196 @@
+<section class="py-10">
+  <div class="container max-w-screen-3xl">
+    <div
+      class="hidden text-center text-messages-success"
+      data-reset-success
+    >
+      {{ 'customer.recover_password.success' | t }}
+    </div>
+    <div data-login-form>
+      <div class="mb-10 text-center [&>*:last-child]:mb-0">
+        <h1 class="font-heading text-h4 lg:text-h4-desktop">{{ 'customer.login.title' | t }}</h1>
+      </div>
+      {% form 'customer_login', class: 'account-form max-w-[450px] mx-auto text-base-body' %}
+        {{ form.errors | default_errors }}
+        <div class="mb-5">
+          <label
+            class="mb-1 inline-block"
+            for="customer-email"
+          >
+            {{ 'customer.login.email' | t }}
+          </label>
+          <input
+            type="email"
+            id="customer-email"
+            class="
+              form-input
+              h-form-element
+              w-full
+              rounded-form-element
+              border-base-border
+              bg-base-body-background
+              text-body-medium
+              placeholder:text-base-secondary
+              autofill:shadow-inset-white
+              focus:border-base-body
+              {% if form.errors contains 'email' %}input-error{% endif %}
+            "
+            name="customer[email]"
+            placeholder="{{ 'customer.login.email' | t }}"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+          >
+        </div>
+        {% if form.password_needed %}
+          <div class="mb-5">
+            <label
+              class="mb-1 inline-block"
+              for="customer-password"
+            >
+              {{ 'customer.login.password' | t }}
+            </label>
+            <input
+              type="password"
+              id="customer-password"
+              class="
+                {% if form.errors contains 'password' %}input-error{% endif %}
+                form-input
+                h-form-element
+                w-full
+                rounded-form-element
+                border-base-border
+                bg-base-body-background
+                text-body-medium
+                placeholder:text-base-secondary
+                autofill:shadow-inset-white
+                focus:border-base-body
+              "
+              name="customer[password]"
+              placeholder="{{ 'customer.login.password' | t }}"
+            >
+          </div>
+        {% endif %}
+        {% if form.password_needed %}
+          <div class="mb-5 py-3 text-center text-body-small">
+            <a
+              href="#recover"
+              class="no-underline hover:underline"
+              data-recover-toggle
+            >
+              {{- 'customer.login.forgot_password' | t -}}
+            </a>
+          </div>
+        {% endif %}
+        <div class="mb-5">
+          {%
+            render 'button',
+            element: 'input',
+            type: 'submit',
+            class: 'w-full',
+            color: 'primary',
+            size: 'md',
+            locales_text: 'customer.login.sign_in'
+          %}
+        </div>
+        <div class="text-center">
+          {%
+            render 'button',
+            href: '/account/register',
+            class: 'w-full',
+            color: 'secondary',
+            size: 'md',
+            locales_text: 'layout.customer.create_account'
+          %}
+        </div>
+      {% endform %}
+    </div>
+
+    <div
+      class="hidden"
+      data-recover-form
+    >
+      <div class="mb-8 text-center md:mb-11 [&>*:last-child]:mb-0">
+        <h2 class="mb-3 font-heading text-h4 lg:text-h4-desktop">{{ 'customer.recover_password.title' | t }}</h2>
+        <p>{{ 'customer.recover_password.subtext' | t }}</p>
+      </div>
+      {% form 'recover_customer_password', class: 'account-form max-w-[450px] mx-auto text-base-body' %}
+        {{ form.errors | default_errors }}
+        {% if form.posted_successfully? %}
+          <span
+            class="hidden"
+            data-form-state
+          ></span>
+        {% endif %}
+        <div class="mb-5">
+          <label
+            class="mb-1 inline-block"
+            for="recover-email"
+          >
+            {{ 'customer.recover_password.email' | t }}
+          </label>
+          <input
+            type="email"
+            id="recover-email"
+            class="
+              form-input
+              h-form-element
+              w-full
+              rounded-form-element
+              border-base-border
+              bg-base-body-background
+              text-body-medium
+              placeholder:text-base-secondary
+              autofill:shadow-inset-white
+              focus:border-base-body
+            "
+            name="email"
+            placeholder="{{ 'customer.recover_password.email' | t }}"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+          >
+        </div>
+        <div class="mb-5">
+          {%
+            render 'button',
+            element: 'input',
+            type: 'submit',
+            class: 'w-full',
+            color: 'primary',
+            size: 'md',
+            locales_text: 'customer.recover_password.submit'
+          %}
+        </div>
+        <div class="text-center">
+          {%
+            render 'button',
+            href: '#',
+            class: 'w-full',
+            color: 'secondary',
+            size: 'md',
+            locales_text: 'customer.recover_password.cancel',
+            data_attribute: 'data-recover-toggle'
+          %}
+        </div>
+      {% endform %}
+    </div>
+
+    {% if shop.checkout.guest_login %}
+      <div class="pt-10">
+        <h2 class="mb-3 text-center font-heading text-h5">{{ 'customer.login.guest_title' | t }}</h2>
+        {% form 'guest_login', class: 'account-form max-w-[450px] mx-auto text-base-body' %}
+          {%
+            render 'button',
+            element: 'input',
+            type: 'submit',
+            class: 'w-full',
+            color: 'primary',
+            size: 'md',
+            locales_text: 'customer.login.guest_continue'
+          %}
+        {% endform %}
+      </div>
+    {% endif %}
+  </div>
+</section>

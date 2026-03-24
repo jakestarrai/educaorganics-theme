@@ -1,0 +1,382 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "e7434efd-45f3-4bc4-a1e5-eb920e7dfc5a": {
+      "type": "home-hero",
+      "blocks": {
+        "template--14673224302638__e7434efd-45f3-4bc4-a1e5-eb920e7dfc5a-title-1": {
+          "type": "title",
+          "settings": {
+            "title": "Sacred nourishment for every stage"
+          }
+        },
+        "template--14673224302638__e7434efd-45f3-4bc4-a1e5-eb920e7dfc5a-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ultra premium infant formula developed from the latest scientific studies on breast milk. Made in Germany.<\/p>"
+          }
+        },
+        "template--14673224302638__e7434efd-45f3-4bc4-a1e5-eb920e7dfc5a-button-1": {
+          "type": "button",
+          "settings": {
+            "button_link": "shopify:\/\/collections\/all",
+            "button_label": "See the Shop"
+          }
+        }
+      },
+      "block_order": [
+        "template--14673224302638__e7434efd-45f3-4bc4-a1e5-eb920e7dfc5a-title-1",
+        "template--14673224302638__e7434efd-45f3-4bc4-a1e5-eb920e7dfc5a-text-1",
+        "template--14673224302638__e7434efd-45f3-4bc4-a1e5-eb920e7dfc5a-button-1"
+      ],
+      "custom_css": [
+
+      ],
+      "settings": {
+        "image_mobile": "shopify:\/\/shop_images\/Hero-Mobile-min.jpg",
+        "image": "shopify:\/\/shop_images\/Hero-Desktop-min.jpg",
+        "enable_lazyload": false,
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "enable_full_width": false,
+        "alignment": "md:items-end md:justify-start",
+        "alignment_mobile": "items-end justify-center",
+        "alignment_text": "text-left",
+        "color": "#edf979",
+        "color_mobile": "#edf979",
+        "hero_padding_top": 0,
+        "hero_padding_bottom": 12
+      }
+    },
+    "e697ff63-d674-42ec-9e61-a980442b8a04": {
+      "type": "home-image-with-text",
+      "blocks": {
+        "370b19dd-f5c5-477d-843d-3c4d48aa64c2": {
+          "type": "subtitle",
+          "settings": {
+            "subtitle": "In the tradition of the goddess"
+          }
+        },
+        "6a6a4ab0-897e-4b27-85a7-e2e78ec655e3": {
+          "type": "title",
+          "settings": {
+            "title": "Formula that pushes boundaries."
+          }
+        },
+        "fabd42d8-f9c0-4c24-be02-4f8cc5359fb0": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Like the ancient Roman goddess Educa who guided children through their first nourishment, our formula is crafted to closely mirror breast milk composition with the highest quality ingredients.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "370b19dd-f5c5-477d-843d-3c4d48aa64c2",
+        "6a6a4ab0-897e-4b27-85a7-e2e78ec655e3",
+        "fabd42d8-f9c0-4c24-be02-4f8cc5359fb0"
+      ],
+      "custom_css": [
+
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/JS_home-herostick.png",
+        "section_layout": "section_layout_1",
+        "enable_lazyload": true,
+        "layout": "md:flex-row"
+      }
+    },
+    "9be13e33-588f-4eb8-b2c8-066e5b1d05e4": {
+      "type": "home-benefits",
+      "blocks": {
+        "0bfc8449-d4bd-499a-a2ac-59786efceca4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/run.png",
+            "enable_lazyload": true,
+            "title": "Active Culture Formulas™"
+          }
+        },
+        "406281e8-4b3c-4454-b016-fe86b6f81fd8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/target.png",
+            "enable_lazyload": true,
+            "title": "Precisely targets key areas"
+          }
+        },
+        "3bc4413d-5e76-42a2-8b5b-b552b76ec8ba": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/tongue.png",
+            "enable_lazyload": true,
+            "title": "Melts in your mouth"
+          }
+        },
+        "8b62c8fc-1988-4bde-b66e-c71d7543eebe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/navigation.png",
+            "enable_lazyload": true,
+            "title": "Designed for Adventure"
+          }
+        }
+      },
+      "block_order": [
+        "0bfc8449-d4bd-499a-a2ac-59786efceca4",
+        "406281e8-4b3c-4454-b016-fe86b6f81fd8",
+        "3bc4413d-5e76-42a2-8b5b-b552b76ec8ba",
+        "8b62c8fc-1988-4bde-b66e-c71d7543eebe"
+      ],
+      "custom_css": [
+
+      ],
+      "settings": {
+      }
+    },
+    "d6d0e909-8a88-434f-bb51-0b0e61b35a32": {
+      "type": "image-banner",
+      "blocks": {
+        "template--14673224302638__d6d0e909-8a88-434f-bb51-0b0e61b35a32-title-1": {
+          "type": "title",
+          "settings": {
+            "title": "It’s a game\u2028changer."
+          }
+        },
+        "template--14673224302638__d6d0e909-8a88-434f-bb51-0b0e61b35a32-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every parent deserves access to the purest infant nutrition. Our formula mirrors breast milk composition using the latest scientific research. <\/p>",
+            "autor_name": "— Dr. Sarah Chen, Pediatric Nutritionist"
+          }
+        },
+        "template--14673224302638__d6d0e909-8a88-434f-bb51-0b0e61b35a32-button-1": {
+          "type": "button",
+          "settings": {
+            "button_link": "",
+            "button_label": "Button label"
+          }
+        }
+      },
+      "block_order": [
+        "template--14673224302638__d6d0e909-8a88-434f-bb51-0b0e61b35a32-title-1",
+        "template--14673224302638__d6d0e909-8a88-434f-bb51-0b0e61b35a32-text-1",
+        "template--14673224302638__d6d0e909-8a88-434f-bb51-0b0e61b35a32-button-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_mobile": "shopify:\/\/shop_images\/Home-Quote_Mobile.jpg",
+        "image": "shopify:\/\/shop_images\/Home-Quote.jpg",
+        "enable_lazyload": true,
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "enable_full_height": false,
+        "enable_full_width": true,
+        "alignment": "md:items-center md:justify-end",
+        "alignment_text": "text-left",
+        "color": "#edf979",
+        "color_mobile": "#2b2627",
+        "hero_padding_top": 40,
+        "hero_padding_bottom": 40
+      }
+    },
+    "home_featured_collection": {
+      "type": "home-featured-collection",
+      "custom_css": [
+
+      ],
+      "settings": {
+        "title": "Shop our products",
+        "heading": "SHOP OUR PRODUCTS",
+        "text": "<p>Tailored nutrition for every stage of your baby’s development. EU certified, made in Germany.<\/p>",
+        "collection": "frontpage",
+        "image_ratio": "",
+        "product_limit": 12,
+        "enable_lazyload": false,
+        "show_vendor": false,
+        "show_view_all": false
+      }
+    },
+    "6e7ad74e-3bfa-4a68-bf8d-09364d9580aa": {
+      "type": "collapsible-content",
+      "blocks": {
+        "template--14673224302638__6e7ad74e-3bfa-4a68-bf8d-09364d9580aa-text-1": {
+          "type": "text",
+          "settings": {
+            "subtitle": "Lactoferrin Rich",
+            "richtext": "<p>Our formula contains the highest concentration of Lactoferrin available in baby food — an antimicrobial and antiviral agent that builds your baby's immune system from day one – just like you. <\/p>",
+            "icon": "checkmark"
+          }
+        },
+        "ca677a11-212f-45df-be82-8de7a1482f37": {
+          "type": "text",
+          "settings": {
+            "subtitle": "DHA + ARA Brain Support",
+            "richtext": "<p>Essential fatty acids DHA and ARA are critical for brain development and cognitive growth. Our formula delivers clinically-studied doses to support your baby’s neural development during the most critical growth period.<\/p>",
+            "icon": "checkmark"
+          }
+        },
+        "e213998e-aea7-41d9-a9b2-5196bb1be0da": {
+          "type": "text",
+          "settings": {
+            "subtitle": "Pure Ingredients",
+            "richtext": "<p>Giving your baby the purest start is one of the most important things you can do. EDUCA Organics ultra premium infant formula is crafted to closely mirror breast milk, providing the foundation for healthy growth and development.<\/p>",
+            "icon": "checkmark"
+          }
+        }
+      },
+      "block_order": [
+        "template--14673224302638__6e7ad74e-3bfa-4a68-bf8d-09364d9580aa-text-1",
+        "ca677a11-212f-45df-be82-8de7a1482f37",
+        "e213998e-aea7-41d9-a9b2-5196bb1be0da"
+      ],
+      "settings": {
+        "title": "The Science of Premium Nutrition",
+        "heading": "OUR FORMULA",
+        "image": "shopify:\/\/shop_images\/Home-Science_50ff8d43-b6fc-4dfa-a707-53f380aea153.jpg",
+        "image_align": "md:flex-row-reverse",
+        "btn_link": "shopify:\/\/pages\/the-science",
+        "btn_text": "Discover The Science",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "69259b4a-ceda-4012-8dd7-f48fd9e59d5a": {
+      "type": "home-testimonials",
+      "blocks": {
+        "template--14673224302638__69259b4a-ceda-4012-8dd7-f48fd9e59d5a-quote-1": {
+          "type": "quote",
+          "settings": {
+            "image_1": "shopify:\/\/shop_images\/testimonial_1.png",
+            "image_2": "shopify:\/\/shop_images\/stars_white.png",
+            "color_schema": "",
+            "quote": "<p>Like the ancient Roman goddess Educa who guided children through their first nourishment, this formula provides sacred nutrition for every stage of development.<\/p>",
+            "author": "Sarah M.",
+            "profession": "Mother of Two"
+          }
+        },
+        "template--14673224302638__69259b4a-ceda-4012-8dd7-f48fd9e59d5a-quote-2": {
+          "type": "quote",
+          "settings": {
+            "image_1": "shopify:\/\/shop_images\/testimonial_2.png",
+            "image_2": "shopify:\/\/shop_images\/stars_black.png",
+            "color_schema": "educa-cream",
+            "quote": "<p>EDUCA formula has given us peace of mind knowing our baby is getting the purest, most scientifically-backed nutrition available. The EU certification and German manufacturing standards are unmatched.<\/p>",
+            "author": "Emily R.",
+            "profession": "First-time Mom"
+          }
+        },
+        "template--14673224302638__69259b4a-ceda-4012-8dd7-f48fd9e59d5a-quote-3": {
+          "type": "quote",
+          "settings": {
+            "image_1": "shopify:\/\/shop_images\/testimonial_3.png",
+            "image_2": "shopify:\/\/shop_images\/stars_black.png",
+            "color_schema": "educa-gold",
+            "quote": "<p>EDUCA formula has given us peace of mind knowing our baby is getting the purest, most scientifically-backed nutrition available. The EU certification and German manufacturing standards are unmatched.<\/p>",
+            "author": "Dr. Lisa Park",
+            "profession": "Pediatrician"
+          }
+        }
+      },
+      "block_order": [
+        "template--14673224302638__69259b4a-ceda-4012-8dd7-f48fd9e59d5a-quote-1",
+        "template--14673224302638__69259b4a-ceda-4012-8dd7-f48fd9e59d5a-quote-2",
+        "template--14673224302638__69259b4a-ceda-4012-8dd7-f48fd9e59d5a-quote-3"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": ""
+      }
+    },
+    "433eeda3-7cd4-4b42-a3eb-062100464139": {
+      "type": "text-with-buttons-section",
+      "blocks": {
+        "template--14673224302638__433eeda3-7cd4-4b42-a3eb-062100464139-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "Shop Now",
+            "link": "shopify:\/\/collections\/all",
+            "color": "primary"
+          }
+        },
+        "template--14673224302638__433eeda3-7cd4-4b42-a3eb-062100464139-text-2": {
+          "type": "text",
+          "settings": {
+            "text": "Learn More",
+            "link": "shopify:\/\/pages\/our-mission",
+            "color": "third"
+          }
+        }
+      },
+      "block_order": [
+        "template--14673224302638__433eeda3-7cd4-4b42-a3eb-062100464139-text-1",
+        "template--14673224302638__433eeda3-7cd4-4b42-a3eb-062100464139-text-2"
+      ],
+      "settings": {
+        "title": "What are you waiting for?",
+        "text": "<p>Experience the<\/p><p>difference.<\/p>"
+      }
+    },
+    "d9b98f76-0951-4fb8-a441-a656b8db37a3": {
+      "type": "community-carousel",
+      "blocks": {
+        "49be2313-3a45-4658-83aa-c71ef29d3cd2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/instagram_1.png",
+            "link": "https:\/\/www.instagram.com\/educaorganics"
+          }
+        },
+        "d34aa1fd-85c0-4dff-b1f7-e49278518bf6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/instagram_2.png",
+            "link": "https:\/\/www.instagram.com\/educaorganics"
+          }
+        },
+        "ff8a281a-e95b-418f-9edd-6262335faef3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/instagram_3.png",
+            "link": "https:\/\/www.instagram.com\/educaorganics"
+          }
+        },
+        "0eb06371-91d3-4dd1-a9d1-c65ce9494782": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/instagram_4.png",
+            "link": "https:\/\/www.instagram.com\/educaorganics"
+          }
+        }
+      },
+      "block_order": [
+        "49be2313-3a45-4658-83aa-c71ef29d3cd2",
+        "d34aa1fd-85c0-4dff-b1f7-e49278518bf6",
+        "ff8a281a-e95b-418f-9edd-6262335faef3",
+        "0eb06371-91d3-4dd1-a9d1-c65ce9494782"
+      ],
+      "settings": {
+        "title": "It’s June all year round",
+        "text": "<p>Hype-worthy moments from the EDUCA Organics <a href=\"https:\/\/www.instagram.com\/educaorganics\" target=\"_blank\" title=\"https:\/\/www.instagram.com\/educaorganics\">community<\/a>.<\/p>"
+      }
+    }
+  },
+  "order": [
+    "e7434efd-45f3-4bc4-a1e5-eb920e7dfc5a",
+    "e697ff63-d674-42ec-9e61-a980442b8a04",
+    "9be13e33-588f-4eb8-b2c8-066e5b1d05e4",
+    "d6d0e909-8a88-434f-bb51-0b0e61b35a32",
+    "home_featured_collection",
+    "6e7ad74e-3bfa-4a68-bf8d-09364d9580aa",
+    "69259b4a-ceda-4012-8dd7-f48fd9e59d5a",
+    "433eeda3-7cd4-4b42-a3eb-062100464139",
+    "d9b98f76-0951-4fb8-a441-a656b8db37a3"
+  ]
+}

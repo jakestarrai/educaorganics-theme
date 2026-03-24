@@ -1,0 +1,439 @@
+// Constants
+const PROD = 'production';
+const DEV = 'development';
+
+// Libraries
+import dotenv from 'dotenv';
+import * as execute from 'child_process';
+import webpack from 'webpack';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import FileManagerPlugin from 'filemanager-webpack-plugin';
+import TerserJSPlugin from 'terser-webpack-plugin';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import getTemplateEntrypoints from './lib/utilities/get-template-entrypoints.mjs';
+import getLayoutEntrypoints from './lib/utilities/get-layout-entrypoints.mjs';
+import getStylesEntrypoints from './lib/utilities/get-styles-entrypoints.mjs';
+import getChunkName from './lib/utilities/get-chunk-name.mjs';
+import { settings } from './lib/config.mjs';
+import StylelintPlugin from 'stylelint-webpack-plugin';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import RemoveEmptyScriptsPlugin from 'webpack-remove-empty-scripts';
+
+dotenv.config();
+
+let isRunning = false;
+
+// Variables and settings
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const exec = execute.spawn;
+const env = process.env.NODE_ENV || DEV;
+const cli = process.env.CLI === 'true';
+const zip = process.env.ZIP || false;
+const deploy = process.env.DEPLOY == 'true';
+const bundleAnalyzerEnabled = !!process.env.BUNDLE_ANALIZER;
+const webpackPerformanceAnalyzerEnabled = !!process.env.WEBPACK_PERFORMANCE;
+const cleanDistPluginsDisabled = !!process.env.CLEAN_DIST_DISABLED;
+
+// Clean files on build but not watch
+const cleanDistPlugins = cleanDistPluginsDisabled
+  ? []
+  : [
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [settings.theme.roots.dist],
+    }),
+  ];
+
+// Bundle Analyzer Plugin
+const bundleAnalyzerPlugin = !bundleAnalyzerEnabled
+  ? []
+  : [
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'disabled',
+      generateStatsFile: env === PROD,
+      statsFilename: path.resolve(__dirname, 'stats.json'),
+    }),
+  ];
+
+// Setup to switch between prod and dev for minimize plugins
+const minimizer = [
+  new TerserJSPlugin({
+    extractComments: {
+      condition: false,
+    },
+  }),
+  // new OptimizeCSSAssetsPlugin(),
+];
+
+const zipPlugin = [
+  new FileManagerPlugin({
+    events: {
+      onStart: {
+        delete: ['./dist', './rc.zip'],
+      },
+      onEnd: {
+        copy: [
+          {
+            source: './src/assets',
+            destination: './dist/assets',
+          },
+          {
+            source: './src/config',
+            destination: './dist/config',
+          },
+          {
+            source: './src/layout',
+            destination: './dist/layout',
+          },
+          {
+            source: './src/locales',
+            destination: './dist/locales',
+          },
+          {
+            source: './src/sections',
+            destination: './dist/sections',
+          },
+          {
+            source: './src/snippets',
+            destination: './dist/snippets',
+          },
+          {
+            source: './src/templates',
+            destination: './dist/templates',
+          },
+        ],
+        archive: [{
+          source: './dist',
+          destination: './rc.zip',
+          format: 'zip',
+        }],
+      },
+    },
+    runTasksInSeries: true,
+  }),
+];
+
+if (env === DEV) {
+  minimizer.shift();
+}
+
+if (!zip) {
+  zipPlugin.shift();
+}
+
+const AfterBuildHook = {
+  apply: (compiler) => {
+    if (!cli) {
+      env === DEV
+        ? compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
+          if (!isRunning) {
+            console.log('----------- RELOAD --------');
+            const start = exec(
+              'npm run theme:deploy && npm run watch:theme:dev:win',
+              {
+                shell: true,
+                stdio: 'inherit',
+                stdout: 'inherit',
+              },
+            );
+            start.on('close', (code) => {
+              console.log(`child process exited with code ${code}`);
+              isRunning = false;
+            });
+          }
+          isRunning = true;
+        })
+        : compiler.hooks.done.tap('AfterEmitPlugin', (compilation) => {
+          if (deploy) {
+            const start = exec('npm run theme:deploy', {
+              shell: true,
+              stdio: 'inherit',
+              stdout: 'inherit',
+            });
+            start.on('close', (code) => {
+              console.log(`child process exited with code ${code}`);
+            });
+          }
+        });
+    } else {
+      compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
+        if (!isRunning) {
+          console.log('----------- Starting Shopify CLI --------');
+          const start = exec('cd ./dist && shopify theme serve', {
+            shell: true,
+            stdio: 'inherit',
+            stdout: 'inherit',
+          });
+          start.on('close', (code) => {
+            console.log(`child process exited with code ${code}`);
+            isRunning = false;
+          });
+        }
+        isRunning = true;
+      });
+    }
+  },
+};
+
+export default {
+  devtool: env === DEV ? 'eval-source-map' : false,
+  entry: {
+    ...getLayoutEntrypoints(settings),
+    ...getTemplateEntrypoints(settings),
+    ...getStylesEntrypoints(settings),
+  },
+  performance: {
+    hints: webpackPerformanceAnalyzerEnabled ? 'error' : 'warning',
+    maxAssetSize: 1000000, // Diff set at 300kb but never reached, increased to avoid fail
+    maxEntrypointSize: 1000000, // Diff set at 300kb but never reached, increased to avoid fail
+    // assetFilter: function assetFilter(assetFilename) {
+    //   // Don't count critical files as they are injected into source
+    //   return !(/\.map$/.test(assetFilename)) && !(/critical\.js$/.test(assetFilename));
+    // },
+  },
+  mode: env,
+  resolve: {
+    alias: {
+      scripts: path.resolve(__dirname, './src/scripts'),
+      sections: path.resolve(__dirname, './src/scripts/sections'),
+      components: path.resolve(__dirname, './src/scripts/components'),
+      helpers: path.resolve(__dirname, './src/scripts/helpers'),
+      store: path.resolve(__dirname, './src/scripts/store'),
+      styles: path.resolve(__dirname, './src/styles'),
+      react: 'preact/compat',
+      'react-dom/test-utils': 'preact/test-utils',
+      'react-dom': 'preact/compat', // Must be below test-utils
+      'react/jsx-runtime': 'preact/jsx-runtime',
+    },
+    plugins: [
+      new TsconfigPathsPlugin(),
+    ],
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
+  },
+
+  output: {
+    // Config for JS outputs
+    filename: '[name].js',
+    path: settings.theme.dist.assets,
+    publicPath: 'auto',
+    chunkFilename: 'chunk.[chunkhash:5].js',
+  },
+  watchOptions: {
+    ignored: /node_modules/,
+    aggregateTimeout: 1000,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]?ss$/i, // Find all scss imports and convert them to css files
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false,
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              url: false,
+              sourceMap: env === DEV,
+            },
+          },
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: env === DEV,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false,
+            },
+          },
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.(js|jsx|tsx|ts)$/,
+        exclude: /node_modules|\.scss$|\.css$/,
+        loader: 'ts-loader',
+      },
+    ],
+  },
+  optimization: { // Defining more chunks aside from the entry JS points
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        test: /theme.(sa|sc|c)ss$/,
+      }),
+      '...',
+    ],
+    splitChunks: {
+      automaticNameDelimiter: '--',
+      cacheGroups: {
+        criticalStyles: {
+          name: 'theme',
+          test: /theme.(sa|sc|c)ss$/,
+          chunks: 'initial',
+          enforce: true,
+        },
+      },
+    },
+  },
+  plugins: [
+    new RemoveEmptyScriptsPlugin(),
+    new FriendlyErrorsWebpackPlugin(),
+    ...bundleAnalyzerPlugin,
+    ...cleanDistPlugins,
+    ...zipPlugin,
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: settings.theme.src.assets,
+          to: settings.theme.dist.assets,
+          info: { minimized: true },
+        },
+        {
+          from: settings.theme.src.layout,
+          to: settings.theme.dist.layout,
+          info: { minimized: true },
+        },
+        {
+          from: settings.theme.src.locales,
+          to: settings.theme.dist.locales,
+          info: { minimized: true },
+        },
+        {
+          from: settings.theme.src.snippets,
+          to: settings.theme.dist.snippets,
+          info: { minimized: true },
+        },
+        {
+          from: settings.theme.src.sections,
+          to: settings.theme.dist.sections,
+          info: { minimized: true },
+        },
+        {
+          from: settings.theme.src.templates,
+          to: settings.theme.dist.templates,
+          info: { minimized: true },
+        },
+        {
+          from: settings.theme.src.config,
+          to: settings.theme.dist.config,
+          info: { minimized: true },
+        },
+        {
+          from: settings.theme.src.yml,
+          to: settings.theme.dist.yml,
+          info: { minimized: true },
+        },
+      ],
+    }),
+    new MiniCssExtractPlugin({
+      // Combines all css into chunked files
+      filename: '[name].css',
+      chunkFilename: (pathData, assetInfo) => {
+        // NOTE: this is optimization for themekit as it doesn't allow big file names and just skips this files while deploy
+        // in this case we just grabs last 25 characters of the file name, otherwise we keep the name as is
+        const isLarge = pathData.chunk.id.length > 25;
+        const name = isLarge ? pathData.chunk.id.substring(pathData.chunk.id.length - 25) : '[name]';
+        return `chunk.${name}.css`;
+      },
+    }),
+    new HtmlWebpackPlugin({
+      excludeChunks: ['static'],
+      filename: `${settings.theme.dist.snippets}/script-tags.liquid`,
+      template: './lib/script-tags.html',
+      inject: false,
+      minify:
+        env === PROD
+          ? {
+            ignoreCustomFragments: [
+              /<%[\s\S]*?%>/,
+              /<\?[\s\S]*?\?>/,
+              /{{[\s\S]*?}}/, // Add liquid tags {{ ... }}
+              /{%-[\s\S]*?-%}/, // Add liquid tags {%- ... -%}
+            ],
+            minifyJS: true,
+            collapseWhitespace: true,
+            removeComments: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: false,
+          }
+          : false,
+      isDevServer: false,
+      liquidTemplates: getTemplateEntrypoints(settings),
+      liquidLayouts: getLayoutEntrypoints(settings),
+    }),
+    new HtmlWebpackPlugin({
+      excludeChunks: ['static'],
+      filename: `${settings.theme.dist.snippets}/style-tags.liquid`,
+      template: './lib/style-tags.html',
+      inject: false,
+      // NOTE: since we are using critical styles approach
+      // webpack for some reason doesn't want to update inline styles after change
+      // to fix this we can just disable caching for this part
+      cache: false,
+      minify:
+        env === PROD
+          ? {
+            ignoreCustomFragments: [
+              /<%[\s\S]*?%>/,
+              /<\?[\s\S]*?\?>/,
+              /{{[\s\S]*?}}/, // Add liquid tags {{ ... }}
+              /{%-[\s\S]*?-%}/, // Add liquid tags {%- ... -%}
+            ],
+            minifyJS: true,
+            collapseWhitespace: true,
+            removeComments: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: false,
+          }
+          : false,
+      isDevServer: false,
+      liquidTemplates: getTemplateEntrypoints(settings),
+      liquidLayouts: getLayoutEntrypoints(settings),
+      injectCriticalCss(htmlWebpackPluginStats, compilation) {
+        return (htmlWebpackPluginStats.files.css)
+          .filter(cssFilename => /theme\b/.test(cssFilename))
+          .map(cssFilename => `<style>${
+            compilation.assets[cssFilename.split('/')[2]].source()
+          }</style>`)
+          .join('\n');
+      },
+    }),
+    // env plugin
+    new webpack.DefinePlugin({
+      'proccess.env': { NODE_ENV: JSON.stringify(env) },
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: bundleAnalyzerEnabled ? 'server' : 'disabled',
+    }),
+    AfterBuildHook,
+    new StylelintPlugin(),
+  ],
+  node: {
+    __dirname: true,
+  },
+};

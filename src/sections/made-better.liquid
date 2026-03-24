@@ -1,0 +1,206 @@
+<section class="py-6 lg:py-10">
+  <div class="container max-w-screen-3xl max-lg:px-3">
+    <div class="rounded-2xl bg-june-5">
+      <div class="
+          group
+          flex
+          flex-col
+          md:flex-row
+          {{ section.settings.layout }}
+        ">
+        <div class="relative md:w-6/12 md:overflow-hidden">
+          {%- if section.settings.title != blank -%}
+            <div class="
+                absolute
+                inset-6
+                z-2
+                flex
+                flex-col
+                justify-end
+                md:inset-10
+                xl:inset-20
+              ">
+              <h2 class="
+                  mb-4
+                  font-heading
+                  text-h1
+                  text-base-accent
+                  last:mb-0
+                  lg:text-h1-desktop
+                ">
+                {{ section.settings.title }}
+              </h2>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.image != blank -%}
+            {% liquid
+              if section.settings.enable_lazyload
+                assign enable_lazyload = true
+                assign fetchpriority_value = 'low'
+              else
+                assign enable_lazyload = false
+                assign fetchpriority_value = 'high'
+              endif
+            %}
+            {%
+              render 'image',
+              src: section.settings.image,
+              class: 'md:w-full md:h-full md:object-cover rounded-t-2xl md:rounded-l-2xl',
+              m: "365x",
+              src_d: section.settings.image,
+              d: "680x",
+              alt: section.settings.image.alt,
+              lazyload: enable_lazyload,
+              fetchpriority: fetchpriority_value
+            %}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: "placeholder-svg" }}
+          {%- endif -%}
+
+          {%- comment -%}Corner element{%- endcomment -%}
+          <div class="
+              pointer-events-none
+              absolute
+              right-0
+              top-0
+              z-4
+              md:-top-[1px]
+            ">
+            <div class="-mr-[1px] -mt-[1px] md:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" width="126" height="128" viewBox="0 0 126 128" fill="none">
+                <path d="M126.134 -0.654275L126.134 127.346L126.134 97.0109C126.134 87.0779 122.03 77.5863 114.793 70.7825L49.204 9.11735C42.5275 2.84036 33.7086 -0.654291 24.5448 -0.654293L0 -0.654297L126.134 -0.654275Z" fill="white"/>
+              </svg>
+            </div>
+            <div class="hidden max-lg:h-32 max-lg:w-[126px] md:-mr-[1px] md:block">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="max-lg:h-full max-lg:w-full"
+                width="338"
+                height="343"
+                viewBox="0 0 338 343"
+                fill="none"
+              >
+                <path d="M338 0V343V240.755C338 227.511 332.528 214.855 322.879 205.784L117.858 13.0289C108.956 4.65954 97.1975 0 84.9791 0H0L338 0Z" fill="var(--june-5)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        {% if section.blocks.size > 0 %}
+          <div class="
+              check-list-holder
+              flex
+              flex-col
+              justify-between
+              gap-12
+              p-6
+              md:w-6/12
+              md:pl-10
+              md:text-left
+              lg:p-20
+            ">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when "text" %}
+                  {% if block.settings.text != blank %}
+                    <div
+                      class="prose text-body-small lg:text-body-medium"
+                      {{ block.shopify_attributes }}
+                    >
+                      {{ block.settings.text }}
+                    </div>
+                  {% endif %}
+                {% when "list" %}
+                  {{ block.settings.list }}
+              {% endcase %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Made better",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "We’re <br>made better.",
+      "info": "To wrap to another line add <br>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lazyload",
+      "label": "Enable lazyload",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image alignment",
+      "default": "",
+      "options": [
+        {
+          "value": "",
+          "label": "Left"
+        },
+        {
+          "value": "md:flex-row-reverse",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "list",
+      "name": "List",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "list",
+          "label": "List",
+          "default": "<ul><li>Non-GMO</li></ul>"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body text",
+          "default": "<p>Only the absolute highest-quality ingredients are used in EDUCA Organics products. Because achieving your best means starting with the best.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Made better",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "list"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

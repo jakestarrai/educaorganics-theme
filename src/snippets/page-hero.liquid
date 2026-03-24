@@ -1,0 +1,14 @@
+{% if image != blank %}
+  <div class="h-[266px] overflow-hidden md:h-[326px]">
+    {%
+      render 'image',
+      class: 'h-full object-cover object-center',
+      src: image,
+      m: '360x',
+      src_d: image,
+      d: '1440x',
+      alt: image.alt,
+      lazyload: enable_lazyload
+    %}
+  </div>
+{% endif %}

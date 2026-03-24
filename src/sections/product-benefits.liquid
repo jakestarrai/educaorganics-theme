@@ -1,0 +1,163 @@
+{% if section.blocks.size > 0 %}
+  {% liquid
+    assign block_content = false
+    for block in section.blocks
+      if block.settings.image != blank or block.settings.title != blank or block.settings.text_element != blank
+        assign block_content = true
+      endif
+    endfor
+  %}
+  {% if block_content %}
+    <div class="py-10">
+      <div class="container max-w-screen-3xl px-3 lg:px-10 2xl:px-20">
+        <div class="
+            rounded-2xl
+            bg-base-accent
+            px-12
+            py-8
+            lg:px-10
+            lg:py-7
+          ">
+          <div class="
+              flex
+              flex-wrap
+              items-center
+              justify-center
+              gap-10
+              md:gap-x-12
+              md:overflow-hidden
+              xl:gap-x-20
+            ">
+            {% for block in section.blocks %}
+              {% liquid
+                if block.settings.enable_lazyload
+                  assign enable_lazyload = true
+                  assign fetchpriorityValue = 'low'
+                else
+                  assign enable_lazyload = false
+                  assign fetchpriorityValue = 'high'
+                endif
+              %}
+              <div
+                class="
+                  min-w-[40%]
+                  flex-1
+                  break-words
+                  text-center
+                  md:relative
+                  md:min-w-[25%]
+                  md:before:absolute
+                  md:before:-left-6
+                  md:before:top-1/2
+                  md:before:z-2
+                  md:before:h-[70px]
+                  md:before:w-[2px]
+                  md:before:-translate-y-1/2
+                  md:before:bg-base-body
+                  md:before:content-['']
+                  xl:before:-left-10
+                  2xl:min-w-[160px]
+                "
+                {{ block.shopify_attributes }}
+              >
+                <div class="
+                    mx-auto
+                    mb-2
+                    flex
+                    h-12
+                    max-w-[160px]
+                    items-center
+                    justify-center
+                    md:h-16
+                  ">
+                  {% if block.settings.text_element != blank %}
+                    <div class="font-heading text-[calc(var(--heading-font-size)-6px)] font-heading-weight lg:text-h2-desktop">
+                      {{ block.settings.text_element }}
+                    </div>
+                  {% endif %}
+                  {% if block.settings.image != blank %}
+                    {%
+                      render 'image',
+                      src: block.settings.image,
+                      class: 'w-auto',
+                      m: '48x48',
+                      src_d: block.settings.image,
+                      d: '64x64',
+                      crop: 'center',
+                      alt: block.settings.image.alt,
+                      lazyload: enable_lazyload,
+                      fetchpriority: fetchpriorityValue
+                    %}
+                  {% endif %}
+                </div>
+                {% if block.settings.title != blank %}
+                  <div class="font-heading text-caps-s uppercase lg:text-h6">{{ block.settings.title }}</div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+{% schema %}
+{
+  "name": "Product benefits",
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Product benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text_element",
+          "label": "Text element"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_lazyload",
+          "label": "Enable lazyload",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product benefits",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,89 @@
+{%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+  {%- assign t = template | split: '.' | first -%}
+  <nav aria-label="breadcrumbs">
+    <div class="container max-w-screen-3xl">
+      <ul class="flex flex-wrap py-3 text-body-small text-base-secondary">
+        <li class="mr-2 last:mr-0">
+          <a
+            href="{{ routes.root_url }}"
+            rel="nofollow"
+            class="text-base-links transition duration-300 ease-in-out hover:text-base-secondary"
+          >
+            {{ 'general.breadcrumbs.home' | t }}
+          </a>
+        </li>
+        {%- case t -%}
+          {%- when 'page' -%}
+            <li>
+              <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+              {{ page.title }}
+            </li>
+          {%- when 'product' -%}
+            {%- if collection.url -%}
+              <li class="mr-2 last:mr-0">
+                <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+                {{ collection.title | link_to: collection.url, class: "text-base-links transition duration-300 ease-in-out hover:text-base-secondary" }}
+              </li>
+            {%- endif -%}
+            <li class="mr-2 last:mr-0">
+              <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+              {{ product.title }}
+            </li>
+          {%- when 'collection' and collection.handle -%}
+            {%- if current_tags -%}
+              <li class="mr-2 last:mr-0">
+                <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+                {{ collection.title | link_to: collection.url, class: "text-base-links transition duration-300 ease-in-out hover:text-base-secondary" }}
+              </li>
+              <li class="mr-2 last:mr-0">
+                <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+                {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+" }}{%- endcapture -%}
+                {{ current_tags | join: " + " }}
+              </li>
+            {%- else -%}
+              <li class="mr-2 last:mr-0">
+                <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+                {{ collection.title }}
+              </li>
+            {%- endif -%}
+          {%- when 'blog' -%}
+            {%- if current_tags -%}
+              <li class="mr-2 last:mr-0">
+                <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+                {{ blog.title | link_to: blog.url, class: "text-base-links transition duration-300 ease-in-out hover:text-base-secondary" }}
+              </li>
+              <li class="mr-2 last:mr-0">
+                <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+                {%- capture tag_url -%}{{ blog.url }}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+                {{ current_tags | join: " + " }}
+              </li>
+            {%- else -%}
+              <li class="mr-2 last:mr-0">
+                <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+                {{ blog.title }}
+              </li>
+            {%- endif -%}
+          {%- when 'article' -%}
+            <li class="mr-2 last:mr-0">
+              <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+              {{ blog.title | link_to: blog.url, class: "text-base-links transition duration-300 ease-in-out hover:text-base-secondary" }}
+            </li>
+            <li class="mr-2 last:mr-0">
+              <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+              {{ article.title }}
+            </li>
+          {%- when 'search' -%}
+            <li class="mr-2 last:mr-0">
+              <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+              {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+            </li>
+          {%- else -%}
+            <li class="mr-2 last:mr-0">
+              <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
+              {{ page_title }}
+            </li>
+        {%- endcase -%}
+      </ul>
+    </div>
+  </nav>
+{%- endunless -%}

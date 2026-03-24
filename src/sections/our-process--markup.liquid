@@ -1,0 +1,547 @@
+<link
+  rel="stylesheet"
+  href="{{ 'splide-gallery.css' | asset_url }}"
+  media="all"
+  {% if section.settings.enable_lazyload %}
+    fetchpriority="low"
+  {% else %}
+    fetchpriority="high"
+  {% endif %}
+>
+
+{% if section.settings.enable_lazyload == false %}
+  <link
+    rel="preload"
+    href="{{ section.settings.background_image | img_url: 'master' }}"
+    as="image"
+    fetchpriority="high"
+  >
+{% endif %}
+
+{%- if section.settings.background_image != blank -%}
+  <style>
+    [id="our-process-{{ section.id }}"] .section-frame {
+      background-image: url("{{ section.settings.background_image | img_url: 'master' }}");
+      background-repeat: repeat;
+    }
+  </style>
+{%- endif -%}
+
+<section
+  id="our-process-{{ section.id }}"
+  data-section-type="our-process"
+  data-section-id="{{ section.id }}"
+>
+  <div class="container max-w-screen-3xl px-3 xl:px-0">
+    <div class="
+        section-frame
+        overflow-hidden
+        rounded-2xl
+        bg-june-dark
+        text-white
+        lg:rounded-b-3xl
+        lg:rounded-t-2xl
+      ">
+      <div class="
+          overflow-hidden
+          px-6
+          py-9
+          md:px-10
+          lg:px-20
+          lg:pb-20
+          lg:pt-30
+        ">
+        <div class="
+            mb-6
+            grid
+            gap-6
+            md:grid-cols-2
+            md:gap-10
+            lg:gap-20
+          ">
+          <div>
+            <h2 class="font-heading text-h1 lg:text-h1-desktop">Our Process</h2>
+          </div>
+          <div>
+            <div class="prose text-body-xs lg:text-body-small">
+              <p>
+                As leaders in the field of infant formulas, we believe in the power of science and innovation, combined with
+                the wisdom of nature, to create the most effective infant formulas for athletes and active individuals.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="splide our-process-slider md:my-20 md:-mr-10 lg:-mr-20"
+          role="group"
+          aria-label="Our process slider"
+        >
+          <div class="splide__track">
+            <ul class="splide__list max-md:!flex max-md:flex-col max-md:gap-6">
+              {%- comment -%}
+                Gallery has 3 variants: default white, item-yellow, item-dark.
+                To change the variant, add class to the slide element - "item-yellow" or "item-dark".
+              {%- endcomment -%}
+              <li class="splide__slide group/text-item">
+                <div class="
+                    flex
+                    h-full
+                    flex-col
+                    justify-between
+                    gap-9
+                    rounded-2xl
+                    border-2
+                    border-white
+                    bg-white
+                    px-6
+                    py-9
+                    text-june-dark
+                    group-[&.item-dark]/text-item:border-base-accent
+                    group-[&.item-yellow]/text-item:border-base-accent
+                    group-[&.item-dark]/text-item:bg-transparent
+                    group-[&.item-yellow]/text-item:bg-base-accent
+                    group-[&.item-dark]/text-item:text-base-accent
+                    group-[&.item-yellow]/text-item:text-june-dark
+                    lg:gap-18
+                    lg:p-9
+                  ">
+                  <div>
+                    <div class="flex items-center gap-5">
+                      <div class="
+                          font-heading
+                          text-[64px]
+                          font-heading-weight
+                          leading-none
+                          lg:text-[88px]
+                        ">
+                        01
+                      </div>
+                      <h3 class="font-heading text-h3 lg:text-h3-desktop">Identify Key Strains</h3>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="prose text-body-xs lg:text-body-small">
+                      <p>
+                        Our team of experts thoroughly researches different strains to identify those with the most
+                        beneficial effects on performance. We carefully select the strains that have a proven ability to
+                        improve digestion, nutrient absorption, wellness, and immune function.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="splide__slide group/text-item item-dark">
+                <div class="
+                    flex
+                    h-full
+                    flex-col
+                    justify-between
+                    gap-9
+                    rounded-2xl
+                    border-2
+                    border-white
+                    bg-white
+                    px-6
+                    py-9
+                    text-june-dark
+                    group-[&.item-dark]/text-item:border-base-accent
+                    group-[&.item-yellow]/text-item:border-base-accent
+                    group-[&.item-dark]/text-item:bg-transparent
+                    group-[&.item-yellow]/text-item:bg-base-accent
+                    group-[&.item-dark]/text-item:text-base-accent
+                    group-[&.item-yellow]/text-item:text-june-dark
+                    lg:gap-18
+                    lg:p-9
+                  ">
+                  <div>
+                    <div class="flex items-center gap-5">
+                      <div class="
+                          font-heading
+                          text-[64px]
+                          font-heading-weight
+                          leading-none
+                          lg:text-[88px]
+                        ">
+                        02
+                      </div>
+                      <h3 class="font-heading text-h3 lg:text-h3-desktop">Extensively Test</h3>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="prose text-body-xs lg:text-body-small">
+                      <p>
+                        We prioritize quality and consistency in every step of our process. All strains go through a
+                        multi-stage testing process emulating the human nutritional to ensure they meet the highest
+                        standards of purity, potency, efficacy, and safety.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="splide__slide group/text-item item-yellow">
+                <div class="
+                    flex
+                    h-full
+                    flex-col
+                    justify-between
+                    gap-9
+                    rounded-2xl
+                    border-2
+                    border-white
+                    bg-white
+                    px-6
+                    py-9
+                    text-june-dark
+                    group-[&.item-dark]/text-item:border-base-accent
+                    group-[&.item-yellow]/text-item:border-base-accent
+                    group-[&.item-dark]/text-item:bg-transparent
+                    group-[&.item-yellow]/text-item:bg-base-accent
+                    group-[&.item-dark]/text-item:text-base-accent
+                    group-[&.item-yellow]/text-item:text-june-dark
+                    lg:gap-18
+                    lg:p-9
+                  ">
+                  <div>
+                    <div class="flex items-center gap-5">
+                      <div class="
+                          font-heading
+                          text-[64px]
+                          font-heading-weight
+                          leading-none
+                          lg:text-[88px]
+                        ">
+                        03
+                      </div>
+                      <h3 class="font-heading text-h3 lg:text-h3-desktop">Validate Efficacy</h3>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="prose text-body-xs lg:text-body-small">
+                      <p>
+                        All our products undergo substantial use “in the field” to ensure they do what they say on the
+                        pack. All strains are biofermented and shown to survive the trip to your lower gut. And our
+                        unique shelf-stable format means they’re live and viable throughout the entire shelf life, not
+                        just from the date of manufacture.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="splide__slide group/text-item">
+                <div class="
+                    flex
+                    h-full
+                    flex-col
+                    justify-between
+                    gap-9
+                    rounded-2xl
+                    border-2
+                    border-white
+                    bg-white
+                    px-6
+                    py-9
+                    text-june-dark
+                    group-[&.item-dark]/text-item:border-base-accent
+                    group-[&.item-yellow]/text-item:border-base-accent
+                    group-[&.item-dark]/text-item:bg-transparent
+                    group-[&.item-yellow]/text-item:bg-base-accent
+                    group-[&.item-dark]/text-item:text-base-accent
+                    group-[&.item-yellow]/text-item:text-june-dark
+                    lg:gap-18
+                    lg:p-9
+                  ">
+                  <div>
+                    <div class="flex items-center gap-5">
+                      <div class="
+                          font-heading
+                          text-[64px]
+                          font-heading-weight
+                          leading-none
+                          lg:text-[88px]
+                        ">
+                        01
+                      </div>
+                      <h3 class="font-heading text-h3 lg:text-h3-desktop">Identify Key Strains</h3>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="prose text-body-xs lg:text-body-small">
+                      <p>
+                        Our team of experts thoroughly researches different strains to identify those with the most
+                        beneficial effects on performance. We carefully select the strains that have a proven ability to
+                        improve digestion, nutrient absorption, wellness, and immune function.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="splide__slide group/text-item item-dark">
+                <div class="
+                    flex
+                    h-full
+                    flex-col
+                    justify-between
+                    gap-9
+                    rounded-2xl
+                    border-2
+                    border-white
+                    bg-white
+                    px-6
+                    py-9
+                    text-june-dark
+                    group-[&.item-dark]/text-item:border-base-accent
+                    group-[&.item-yellow]/text-item:border-base-accent
+                    group-[&.item-dark]/text-item:bg-transparent
+                    group-[&.item-yellow]/text-item:bg-base-accent
+                    group-[&.item-dark]/text-item:text-base-accent
+                    group-[&.item-yellow]/text-item:text-june-dark
+                    lg:gap-18
+                    lg:p-9
+                  ">
+                  <div>
+                    <div class="flex items-center gap-5">
+                      <div class="
+                          font-heading
+                          text-[64px]
+                          font-heading-weight
+                          leading-none
+                          lg:text-[88px]
+                        ">
+                        02
+                      </div>
+                      <h3 class="font-heading text-h3 lg:text-h3-desktop">Extensively Test</h3>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="prose text-body-xs lg:text-body-small">
+                      <p>
+                        We prioritize quality and consistency in every step of our process. All strains go through a
+                        multi-stage testing process emulating the human nutritional to ensure they meet the highest
+                        standards of purity, potency, efficacy, and safety.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="splide__slide group/text-item item-yellow">
+                <div class="
+                    flex
+                    h-full
+                    flex-col
+                    justify-between
+                    gap-9
+                    rounded-2xl
+                    border-2
+                    border-white
+                    bg-white
+                    px-6
+                    py-9
+                    text-june-dark
+                    group-[&.item-dark]/text-item:border-base-accent
+                    group-[&.item-yellow]/text-item:border-base-accent
+                    group-[&.item-dark]/text-item:bg-transparent
+                    group-[&.item-yellow]/text-item:bg-base-accent
+                    group-[&.item-dark]/text-item:text-base-accent
+                    group-[&.item-yellow]/text-item:text-june-dark
+                    lg:gap-18
+                    lg:p-9
+                  ">
+                  <div>
+                    <div class="flex items-center gap-5">
+                      <div class="
+                          font-heading
+                          text-[64px]
+                          font-heading-weight
+                          leading-none
+                          lg:text-[88px]
+                        ">
+                        03
+                      </div>
+                      <h3 class="font-heading text-h3 lg:text-h3-desktop">Validate Efficacy</h3>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="prose text-body-xs lg:text-body-small">
+                      <p>
+                        All our products undergo substantial use “in the field” to ensure they do what they say on the
+                        pack. All strains are biofermented and shown to survive the trip to your lower gut. And our
+                        unique shelf-stable format means they’re live and viable throughout the entire shelf life, not
+                        just from the date of manufacture.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {%- comment -%} progress bar for gallery {%- endcomment -%}
+        <div
+          class="splide__progress splide__progress--white splide__progress--alt hidden md:block"
+          aria-hidden="true"
+        >
+          <div class="splide__progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="pt-9 md:px-10 md:py-10 lg:px-20 lg:pb-20">
+        <div class="
+            grid
+            gap-9
+            md:grid-cols-2
+            md:place-items-center
+            md:gap-10
+            xl:gap-20
+          ">
+          <div class="px-6 md:px-0">
+            <div class="mb-10 text-center last:mb-0 md:mb-9 md:text-left">
+              <div class="
+                  mb-4
+                  text-caps-s
+                  uppercase
+                  text-base-accent
+                  last:mb-0
+                  md:mb-6
+                  lg:text-h6
+                ">
+                our certifications
+              </div>
+
+              <h2 class="
+                  mb-6
+                  font-heading
+                  text-h2
+                  last:mb-0
+                  md:mb-9
+                  lg:text-h2-desktop
+                ">
+                Tested. Tasty.
+              </h2>
+
+              <div class="
+                  prose
+                  mb-6
+                  text-body-xs
+                  last:mb-0
+                  md:mb-9
+                  lg:text-body-small
+                ">
+                <p>
+                  As leaders in the field of infant formulas, we believe in the power of science and innovation, combined
+                  with the wisdom of nature, to create the most effective infant formulas for athletes and active
+                  individuals.
+                </p>
+              </div>
+            </div>
+
+            <div class="
+                mb-9
+                grid
+                grid-cols-2
+                gap-9
+                text-base-accent
+                last:mb-12
+                lg:grid-cols-5
+                lg:place-items-start
+                lg:justify-items-center
+                lg:gap-4
+              ">
+              <div class="flex flex-col items-center gap-4 text-center">
+                <div class="flex h-12 w-12 items-center justify-center">
+                  {%
+                    render 'image',
+                    asset_img_url: true,
+                    class: 'w-full h-full object-contain',
+                    src: 'img-placeholder.png',
+                    m: '48x48',
+                    crop: 'center',
+                    alt: 'Placeholder image',
+                    lazyload: true,
+                    fetchpriority: 'low'
+                  %}
+                </div>
+                <div class="px-2 font-heading text-caps-s uppercase lg:px-0">quality assured</div>
+              </div>
+              <div class="flex flex-col items-center gap-4 text-center">
+                <div class="flex h-12 w-12 items-center justify-center">
+                  {%
+                    render 'image',
+                    asset_img_url: true,
+                    class: 'w-full h-full object-contain',
+                    src: 'img-placeholder.png',
+                    m: '48x48',
+                    crop: 'center',
+                    alt: 'Placeholder image',
+                    lazyload: true,
+                    fetchpriority: 'low'
+                  %}
+                </div>
+                <div class="px-2 font-heading text-caps-s uppercase lg:px-0">
+                  cgmp
+                  <br>
+                  certified
+                </div>
+              </div>
+              <div class="flex flex-col items-center gap-4 text-center">
+                <div class="flex h-12 w-12 items-center justify-center">
+                  {%
+                    render 'image',
+                    asset_img_url: true,
+                    class: 'w-full h-full object-contain',
+                    src: 'img-placeholder.png',
+                    m: '48x48',
+                    crop: 'center',
+                    alt: 'Placeholder image',
+                    lazyload: true,
+                    fetchpriority: 'low'
+                  %}
+                </div>
+                <div class="px-2 font-heading text-caps-s uppercase lg:px-0">
+                  science
+                  <br>
+                  backed
+                </div>
+              </div>
+              <div class="flex flex-col items-center gap-4 text-center">
+                <div class="flex h-12 w-12 items-center justify-center">
+                  {%
+                    render 'image',
+                    asset_img_url: true,
+                    class: 'w-full h-full object-contain',
+                    src: 'img-placeholder.png',
+                    m: '48x48',
+                    crop: 'center',
+                    alt: 'Placeholder image',
+                    lazyload: true,
+                    fetchpriority: 'low'
+                  %}
+                </div>
+                <div class="px-2 font-heading text-caps-s uppercase lg:px-0">
+                  all-natural
+                  <br>
+                  flavors
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="overflow-hidden rounded-b-2xl md:rounded-2xl">
+            {%
+              render 'image',
+              asset_img_url: true,
+              src: 'img-placeholder.png',
+              m: '366x375',
+              d: '600x717',
+              crop: 'center',
+              alt: 'Placeholder image',
+              lazyload: true,
+              fetchpriority: 'low'
+            %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

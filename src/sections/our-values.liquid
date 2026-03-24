@@ -1,0 +1,235 @@
+<section class="overflow-hidden py-9 lg:py-10">
+  <div class="container max-w-screen-3xl xl:px-20">
+    <div class="
+        mb-9
+        flex
+        flex-col
+        gap-6
+        border-t
+        border-june-dark
+        pt-16
+        text-center
+        lg:mb-0
+        lg:flex-row
+        lg:items-end
+        lg:justify-between
+        lg:gap-10
+        lg:pb-10
+        lg:pt-20
+        lg:text-left
+      ">
+      <div class="lg:w-6/12">
+        {% if section.settings.subtitle != blank %}
+          <div class="
+              mb-4
+              text-caps-s
+              uppercase
+              last:mb-0
+              lg:mb-6
+              lg:font-heading
+              lg:text-h6
+            ">
+            {{ section.settings.subtitle }}
+          </div>
+        {% endif %}
+        {% if section.settings.title != blank %}
+          <h2 class="
+              mb-4
+              font-heading
+              text-h2
+              last:mb-0
+              lg:text-h1-desktop
+            ">
+            {{ section.settings.title }}
+          </h2>
+        {% endif %}
+      </div>
+      {% if section.settings.text != blank %}
+        <div class="prose text-body-xs lg:w-2/5 lg:text-body-small">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="
+        flex
+        flex-col
+        gap-9
+        lg:gap-10
+        lg:pb-20
+        lg:pt-10
+        xl:flex-row
+      ">
+      {% if section.blocks.size > 0 %}
+        <div class="grid gap-4 md:grid-cols-3 md:flex-row lg:gap-6">
+          {% for block in section.blocks %}
+            <div
+              class="
+                {{ block.settings.bg_color }}
+                flex
+                gap-6
+                rounded-2xl
+                bg-june-5
+                px-6
+                py-9
+                md:min-h-90
+                md:flex-col
+                md:justify-between
+                md:p-9
+                [&.item-dark]:bg-june-dark
+                [&.item-dark]:text-base-accent
+                [&.item-yellow]:bg-base-accent
+              "
+              {{ block.shopify_attributes }}
+            >
+              {% if block.settings.image != blank %}
+                <div class="
+                    flex
+                    h-12
+                    w-12
+                    items-center
+                    justify-center
+                    max-md:flex-shrink-0
+                    md:h-16
+                    md:w-16
+                  ">
+                  {%
+                    render 'image',
+                    src: block.settings.image,
+                    m: '48x48',
+                    d: '64x64',
+                    crop: 'center',
+                    lazyload: true,
+                    fetchpriority: 'low',
+                  %}
+                </div>
+              {% endif %}
+              {% if block.settings.title != blank or block.settings.richtext != blank %}
+                <div>
+                  {% if block.settings.title != blank %}
+                    <h3 class="mb-6 font-heading text-h3 lg:text-h3-desktop">{{ block.settings.title }}</h3>
+                  {% endif %}
+                  {% if block.settings.richtext != blank %}
+                    <div class="prose text-body-xs lg:text-body-small">
+                      {{ block.settings.richtext }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if section.settings.link != blank and section.settings.btn_text != blank %}
+        <div class="text-center xl:w-29 xl:shrink-0 xl:self-center">
+          <a
+            href="{{ section.settings.link }}"
+            class="
+              group/link
+              inline-flex
+              items-center
+              gap-5
+              text-h6
+              uppercase
+              xl:flex-col-reverse
+            "
+          >
+            <span>{{ section.settings.btn_text }}</span>
+            <span class="relative h-9 w-9 shrink-0 xl:h-16 xl:w-16">
+              {%- render 'icon', icon: 'arrow-right-circle', class: 'h-full w-full transition-opacity duration-300 ease-in-out group-hover/link:opacity-0' -%}
+              {%- render 'icon', icon: 'arrow-right-circle-filled', class: 'absolute left-0 top-0 h-full w-full opacity-0 transition-opacity duration-300 ease-in-out group-hover/link:opacity-100' -%}
+            </span>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our Values",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "subtitle",
+      "default": "Our Values"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Guided by Science"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We believe in innovation, quality, and the power of science to improve lives. Guiding our pursuit for the world’s best infant formulas are a set of key values and principles which inform every decision we make.</p>"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text",
+      "default": "Learn more"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "content",
+      "type": "image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Quality and Efficacy"
+        },
+        {
+          "type": "richtext",
+          "id": "richtext",
+          "label": "Text",
+          "default": "<p>We understand the unique needs of athletic individuals and design our products accordingly.</p>"
+        },
+        {
+          "type": "select",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "",
+          "options": [
+            {
+              "value": "item-yellow",
+              "label": "Yellow"
+            },
+            {
+              "value": "item-dark",
+              "label": "Dark"
+            },
+            {
+              "value": "",
+              "label": "Gray"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our values",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

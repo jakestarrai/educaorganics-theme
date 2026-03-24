@@ -1,0 +1,98 @@
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "{{ shop.name }}",
+    {% if section.settings.logo %}
+      "logo": "https:{{ section.settings.logo | image_url: width: section.settings.logo.width }}",
+    {% endif %}
+    "sameAs": [
+      "{{ settings.social_twitter_link }}",
+      "{{ settings.social_facebook_link }}",
+      "{{ settings.social_pinterest_link }}",
+      "{{ settings.social_instagram_link }}",
+      "{{ settings.social_tumblr_link }}",
+      "{{ settings.social_snapchat_link }}",
+      "{{ settings.social_youtube_link }}",
+      "{{ settings.social_vimeo_link }}"
+    ],
+    "url": "{{ shop.url }}{{ page.url }}"
+  }
+</script>
+
+{% if template.name == 'index' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "{{ shop.name }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ shop.url }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "url": "{{ shop.url }}{{ page.url }}"
+    }
+  </script>
+{% endif %}
+
+{% if template.name contains "product" and settings.enable_draft_product_schema %}
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": "{{ product.title | escape }}",
+      "url": "{{ shop.url }}{{ product.url }}",
+      {% if product.featured_image %}
+        "image": [
+          "https:{{ product.featured_image.src | image_url: width: product.featured_image.width }}"
+        ],
+      {% endif %}
+      "description": "{{ product.description | strip_html | escape }}",
+      {% if current_variant.sku != blank %}
+        "sku": "{{ current_variant.sku }}",
+      {% endif %}
+      "brand": {
+        "@type": "Thing",
+        "name": "{{ product.vendor | escape }}"
+      },
+      {% if product.variants %}
+        "offers": [
+          {% for variant in product.variants %}
+            {
+              "@type" : "Offer",
+              "availability" : "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+              "price" : "{{ variant.price | divided_by: 100.00 }}",
+              "priceCurrency" : "{{ shop.currency }}",
+              "url" : "{{ shop.url }}{{ variant.url }}",
+              "itemOffered" :
+              {
+                "@type" : "Product",
+                {% if variant.image %}
+                  "image": "http:{{ variant.image.src | image_url: width: variant.image.width }}",
+                {% endif %}
+                {% if variant.title != blank %}
+                  "name" : "{{ variant.title | escape }}",
+                {% endif %}
+                {% if variant.sku != blank %}
+                  "sku": "{{ variant.sku }}",
+                {% endif %}
+                {% if variant.weight != blank %}
+                  "weight": {
+                    "@type": "QuantitativeValue",
+                    {% if variant.weight_unit != blank %}
+                      "unitCode": "{{ variant.weight_unit }}",
+                    {% endif %}
+                    "value": "{{ variant.weight | weight_with_unit: variant.weight_unit }}"
+                  },
+                {% endif %}
+                "url": "{{ shop.url }}{{ variant.url }}"
+              }
+            }{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ]
+      {% endif %}
+    }
+  </script>
+{% endif %}
