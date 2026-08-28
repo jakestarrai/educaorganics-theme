@@ -204,7 +204,7 @@
                 >
                   {% for item in product.metafields.product.wellness_support.value %}
                     <li class="flex max-w-[30%] items-center">
-                      {% render 'icon': icon: 'checkmark-circle', class: 'mr-2 h-6 w-6 shrink-0' %}
+                      {% render 'icon', icon: 'checkmark-circle', class: 'mr-2 h-6 w-6 shrink-0' %}
                       {{ item }}
                     </li>
                   {% endfor %}
@@ -362,7 +362,7 @@
                       uppercase
                     ">
                     <div>
-                      {% render 'icon': icon: 'box', class: '' %}
+                      {% render 'icon', icon: 'box', class: '' %}
                     </div>
                     <div>{{ 'products.product.free_shipping_text' | t: price: target_price }}</div>
                   </div>
@@ -741,3 +741,18 @@
   media="print"
   onload="this.media='all'"
 >
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon': icon: 'checkmark-circle', class: 'mr-2 h-6 w-6 shrink-0'
+    %}"
+  to: "{% render 'icon', icon: 'checkmark-circle', class: 'mr-2 h-6 w-6 shrink-0'
+    %}"
+  position: 7537..7614
+- from: "{% render 'icon': icon: 'box', class: '' %}"
+  to: "{% render 'icon', icon: 'box', class: '' %}"
+  position: 14040..14083
+{% endcomment %}

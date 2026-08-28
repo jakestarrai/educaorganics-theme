@@ -29,7 +29,7 @@
               <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
               {{ product.title }}
             </li>
-          {%- when 'collection' and collection.handle -%}
+          {%- when 'collection' -%}
             {%- if current_tags -%}
               <li class="mr-2 last:mr-0">
                 <span class="-mt-1 mr-2 inline-block align-middle text-base-body">/</span>
@@ -87,3 +87,13 @@
     </div>
   </nav>
 {%- endunless -%}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- when 'collection' and collection.handle -%}"
+  to: "{%- when 'collection' -%}"
+  position: 1423..1448
+{% endcomment %}
